@@ -34,10 +34,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
-      <div className="border border-gray-250 m-5 pt-5 pl-5 pr-5 pb-10">
-        <Navbar />
-        {children}
-      </div>
+        <div className="border border-gray-400 m-5 pt-5 pl-5 pr-5 pb-10">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
