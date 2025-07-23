@@ -5,6 +5,48 @@
   --foreground: #171717;
 }
 
+@layer utilities {
+  .h1 {
+    @apply text-stone-700 text-4xl md:text-8xl lg:text-[250px] leading-none p-0;
+  }
+  .p {
+    @apply text-stone-700;
+  }
+  .h2 {
+    @apply text-white text-2xl md:text-4xl lg:text-6xl leading-none p-0;
+  }
+
+  .input {
+    @apply border border-gray-400 p-2 w-full text-stone-700;
+  }
+}
+
+.main-content-bg {
+  background-image: url('/assets/white-noisy-background.jpg');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 400px 400px;
+}
+
+.color-noisy-bg {
+  background-image: url('/assets/color-noisy.jpg');
+  background-repeat: repeat-x;
+  background-size: cover;
+}
+
+.input, textarea.input {
+  background-image: url('/assets/white-noisy-background.jpg') !important;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 400px 400px;
+}
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 .inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

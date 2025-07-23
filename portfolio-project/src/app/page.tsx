@@ -2,38 +2,25 @@ import Image from "next/image";
 import Navbar from "./components/navbar";
 export default function Home() {
   return (
-    <>
-      <div className="flex flex-row items-end justify-baseline pl-4 mt-4">
-          <h1 className='h1 -mb-12.5'>HELLO.</h1>
+    <div className="">
+      <div className="flex flex-row items-stretch justify-between mt-4">
+          <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1>
+          <h1 className='h1 -mb-12.5'>I AM.</h1>
       </div>
-      <div className="mt-5 flex items-center justify-center relative">
-        <img className='w-380'
+      <div className="mt-10 flex items-center justify-center relative">
+        <img className='w-400'
         src='/assets/bg.jpg'
         alt='Capitol building of Madison, WI'
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="text-white text-8xl font-bold drop-shadow-lg">MICHAEL FISKEY</h1>
-          <h1 className="text-white text-8xl font-bold drop-shadow-lg">MICHAEL FISKEY</h1>
-          <h1 className="text-white text-8xl font-bold drop-shadow-lg">MICHAEL FISKEY</h1>
+          <h1 className="text-white text-8xl font-bold drop-shadow-lg">MICHAEL FISKEY</h1>   
         </div>
+      </div>
+      <div>
+        <h1 className="h1 ml-4">THIS IS MY PORTFOLIO.</h1>
       </div>
 
-      <div className="mt-30 flex flex-row">
-        <Image
-          src='/assets/me.jpeg'
-          alt='Description of image'
-          width={600}
-          height={600}
-          className='shadow-lg'
-        />
-        <div className="flex flex-col items-center h-full w-full">
-          <h1 className="text-gray-800 text-[100px] leading-none p-0">WHO AM I?</h1>
-          <p>I just told you...</p>
-        </div>
+      
       </div>
-      <div className='flex flex-col justify-center m-10 items-center'>
-        <h1 className="text-gray-800 text-[100px]">This is where I grew up...</h1>
-      </div> 
-      </>
   );
 }

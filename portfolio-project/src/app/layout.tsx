@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
-        <div className="border border-gray-400 m-5 pt-5 pl-5 pr-5 pb-10">
+        <div className="m-10 pt-5 pl-5 pr-5 pb-10">
           <Navbar />
           {children}
         </div>
