@@ -13,11 +13,19 @@ const Page = () => {
                         <p>this is some more text to test out what im trying to do</p>
                     </div>
                 </div>
-                <div className="mr-70 ml-70 text-white flex flex-col justify-center mt-10 border border-gray-700 color-noisy-bg rounded-sm">
-                    <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm">
+                <div className="mr-70 ml-70 text-white flex flex-col justify-center mt-10 border border-gray-700 rounded-sm relative overflow-hidden">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover z-0"
+                        src="/assets/gradient_contact.mp4"
+                    />
+                    <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm relative z-10 bg-opacity-80">
                         <h2 className="h2 text-white text-center">Contact Form</h2>
                     </div>
-                    <div className="m-15 flex flex-col justify-center gap-5">
+                    <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
                         <div className="flex flex-row gap-20 justify-center items-center ">
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
