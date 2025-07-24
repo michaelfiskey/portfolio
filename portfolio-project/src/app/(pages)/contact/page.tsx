@@ -54,6 +54,9 @@ const Page = () => {
                             <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Message</p></label>
                             <textarea className="input h-[150px] mt-auto resize-none" />
                         </div>
+                        <div className='flex flex-col w-full'>
+                            <button className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 transition-colors duration-200">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>

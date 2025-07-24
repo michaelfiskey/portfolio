@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
+  const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const frameCount = 120;
 
@@ -18,7 +19,7 @@ export default function Home() {
     const images: HTMLImageElement[] = [];
     const pinkGradient = { frame: 0 };
 
-    // moving gradient logic 
+    // scrolling gradient logic 
     function render() {
       if (!canvas || !context) return;
       const idx = Math.floor(pinkGradient.frame);
@@ -30,7 +31,7 @@ export default function Home() {
     }
 
     if (canvas) {
-      canvas.width = 1920;
+      canvas.width = 1500;
       canvas.height = 1080;
     }
 
@@ -52,6 +53,61 @@ export default function Home() {
         scrub: 0.5
       }
     });
+    if (canvas) {
+      const widthProxy = { w: 1500 };
+      gsap.to(widthProxy, {
+        w: 1980,
+        ease: 'none',
+        onUpdate: () => {
+          canvas.width = widthProxy.w;
+          render();
+        },
+        scrollTrigger: {
+          trigger: page,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+    gsap.to(canvasRef.current, {
+      y: -150,
+      scrollTrigger: {
+        trigger: page,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    const portfolioH1s = gsap.utils.toArray<HTMLElement>('.portfolio-h1');
+    const hingeH1 = portfolioHingeRef.current;
+    const normalH1s = portfolioH1s.slice(0, -1);
+
+    if (normalH1s.length && hingeH1) {
+      const totalH1s = portfolioH1s.length;
+      const scrollLength = 200 * totalH1s;
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: normalH1s[0],
+          start: 'top center',
+          end: '+=' + scrollLength,
+          scrub: true,
+          toggleActions: 'play none none reverse',
+        }
+      });
+      tl.fromTo(normalH1s,
+        { opacity: 0, y: 80 },
+        { opacity: 1, y: 0, duration: 1, stagger: { amount: 1 } },
+        0
+      );
+      const hingeDelay = 1 + (400 / scrollLength);
+      tl.fromTo(hingeH1,
+        { opacity: 0, rotateZ: -80, transformOrigin: 'left top' },
+        { opacity: 1, rotateZ: 0, duration: 0.5, ease: 'back.out(1.7)' },
+        hingeDelay
+      );
+    }
 
     // page fade-in effect
     gsap.fromTo(page, {
@@ -76,8 +132,11 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h1 className="h1 ml-4">THIS IS MY PORTFOLIO.</h1>
-        
+        <h1 className="h1 ml-4 portfolio-h1">THIS IS MY</h1>
+        <h1 className="h1 ml-4 portfolio-h1">&lt;Developer/&gt;</h1>
+        <h1 className="h1 ml-4 portfolio-h1">Social Media<span></span>&copy;</h1>
+        <h1 className="h1 ml-4 portfolio-h1">Music&#9835;</h1>
+        <h1 className="h1 ml-4 mb-50 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
       </div>
       <div className="h-[300px]">
       </div>

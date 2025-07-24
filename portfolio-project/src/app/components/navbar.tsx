@@ -29,14 +29,20 @@ const Navbar = () => {
                 <li>
                     <Link href="/">home</Link>
                 </li>
-                <li>
-                    <Link href="/dev-and-data">&lt;dev &amp; data /&gt;</Link>
+                <li className="group">
+                <Link href="/dev-and-data">
+                    &lt;dev &amp; data /&gt;<span className="opacity-0 ml-1 inline-block group-hover:animate-pulse">_</span>
+                </Link>
                 </li>
-                <li>
-                    <Link href="/social-media">social media &copy;</Link>
+                <li className="group">
+                    <Link 
+                        href="/social-media">social media <span className='inline-block group-hover:animate-spin'>&copy;</span>
+                    </Link>
                 </li>
-                <li>
-                    <Link href="/music">music &#9835;</Link>
+                <li className="group">
+                    <Link href="/music">
+                        music <span className="inline-block group-hover:animate-bounce">&#9835;</span>
+                    </Link>
                 </li>
                 <li>
                     <Link href="/contact">contact</Link>
