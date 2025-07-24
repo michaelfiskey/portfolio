@@ -121,7 +121,7 @@ export default function Home() {
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
-      <div className="flex flex-row items-stretch justify-between mt-4">
+      <div className="flex flex-row items-stretch justify-between mt-8">
           <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1>
           <h1 className='h1 -mb-12.5'>I AM.</h1>
       </div>
