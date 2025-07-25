@@ -1,7 +1,9 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from '@emailjs/browser'
 
 const Page = () => {
+    const formRef = useRef<HTMLFormElement>(null)
     const [firstName, setFirstName] = useState({
         value: "",
         isTouched: false,
@@ -16,7 +18,6 @@ const Page = () => {
         value: "",
         isTouched: false,
         isValid: true,
-        errorMessage: <li className="text-red-500">Email is required!</li>
     });
     const [phone, setPhone] = useState("");
     const [company, setCompany] = useState("");
@@ -28,17 +29,44 @@ const Page = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!firstName) {
-            
+        if (!firstName.value) {alert("Please include your first name!"); return}
+        if (!lastName.value) {alert("Please include your last name!"); return}
+        if (!email.value) {
+            alert("Please include an email address!");
+            return;
         }
+        if (!validateEmail(email.value)) {
+            alert("Email address is invalid! Please include a valid email address!");
+            return;
+        }
+        if (!message.value) {alert("Please include a message!"); return}
+
+        sendEmail()
     }
+
+    
+
     const validateEmail = (email: string) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
-
-        console.log({ firstName, lastName, email, phone, company, message });
     };
 
+    const clearFormFields = () => {
+        setFirstName((prev) => ({...prev, value: "", isTouched: false}));
+        setLastName((prev) => ({...prev, value: "", isTouched: false}));
+        setEmail({ value: "", isTouched: false, isValid: true });
+        setPhone("");
+        setCompany("");
+        setMessage((prev) => ({...prev, value: "", isTouched: false}));
+    }
+
+
+    const sendEmail = () => {
+        if (formRef.current) {
+            emailjs.sendForm('service_kk5mlt4', 'template_1a22x66', formRef.current, {publicKey: 'mnFPSnlnhoLlrVS0U'})
+            .then(() => {console.log("Email sent successfully!"), alert('Email has been sent successfully!'), clearFormFields();}, (error) => {console.log("Failed to send email:", error.text);});
+        }
+    }
 
     return (
         <div>
@@ -53,10 +81,15 @@ const Page = () => {
                     <ul className="list-disc ml-6">
                         {firstName.isTouched && !firstName.value && firstName.errorMessage}
                         {lastName.isTouched && !lastName.value && lastName.errorMessage}
-                        {email.isTouched && !email.value && email.errorMessage}
+                        {email.isTouched && !email.value && (
+                          <li className="text-red-500">Email is required!</li>
+                        )}
+                        {email.isTouched && email.value && !email.isValid && (
+                          <li className="text-red-500">Email is invalid!</li>
+                        )}
                         {message.isTouched && !message.value && message.errorMessage}
                     </ul>
-                    <form onSubmit={handleSubmit}className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
+                    <form ref={formRef} onSubmit={handleSubmit}className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
                         <video
                             autoPlay
                             loop
@@ -72,30 +105,36 @@ const Page = () => {
                             <div className="flex flex-row gap-20 justify-center items-center ">
                                 <div className="flex flex-col w-full">
                                     <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
-                                    <input onChange={(e) => setFirstName({...firstName, value: e.target.value})} onBlur={() => setFirstName({...firstName, isTouched: true})}  className="input mt-auto" />
+                                    <input name='first_name' value={firstName.value} onChange={(e) => setFirstName({...firstName, value: e.target.value})} onBlur={() => setFirstName({...firstName, isTouched: true})}  className="input mt-auto" />
                                 </div>
                                 <div className="flex flex-col w-full">
                                     <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Last Name<sup className="text-red-500">*</sup></p></label>
-                                    <input onChange={(e) => setLastName({...lastName, value: e.target.value})} onBlur={() => setLastName({...lastName, isTouched: true})} className="input mt-auto" />
+                                    <input name='last_name' value={lastName.value} onChange={(e) => setLastName({...lastName, value: e.target.value})} onBlur={() => setLastName({...lastName, isTouched: true})} className="input mt-auto" />
                                 </div>
                             </div>
                             <div className="flex flex-row gap-20 justify-center items-center">
                                 <div className="flex flex-col w-full">
                                     <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
-                                    <input onChange={(e) => setEmail({...email, value: e.target.value})} onBlur={() => setEmail({...email, isTouched: true})} className="input mt-auto" />
+                                    <input
+                                      name='email'
+                                      value={email.value}
+                                      onChange={(e) => { setEmail(prev => ({...prev, value: e.target.value, isValid: validateEmail(e.target.value) })); }}
+                                      onBlur={() => setEmail(prev => ({ ...prev, isTouched: true }))}
+                                      className="input mt-auto"
+                                    />
                                 </div>
                                 <div className="flex flex-col w-full">
                                     <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Phone</p></label>
-                                    <input onChange={(e) => setPhone(e.target.value)} className="input mt-auto" />
+                                    <input name='phone_number' value={phone} onChange={(e) => setPhone(e.target.value)} className="input mt-auto" />
                                 </div>
                                 <div className="flex flex-col w-full">
                                     <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Company</p></label>
-                                    <input onChange={(e) => setCompany(e.target.value)} className="input mt-auto" />
+                                    <input name='company' value={company} onChange={(e) => setCompany(e.target.value)} className="input mt-auto" />
                                 </div>
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Message</p></label>
-                                <textarea onChange={(e) => setMessage({...message, value: e.target.value})} onBlur={() => setMessage({...message, isTouched: true})} className="input h-[150px] mt-auto resize-none" />
+                                <textarea name='message' value={message.value} onChange={(e) => setMessage({...message, value: e.target.value})} onBlur={() => setMessage({...message, isTouched: true})} className="input h-[150px] mt-auto resize-none" />
                             </div>
                             <div className='flex flex-col w-full'>
                                 <button className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Submit</button>
