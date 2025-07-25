@@ -133,9 +133,9 @@ export default function Home() {
       </div>
       <div>
         <h1 className="h1 ml-4 portfolio-h1">THIS IS MY</h1>
-        <h1 className="h1 ml-4 portfolio-h1">&lt;Developer/&gt;</h1>
-        <h1 className="h1 ml-4 portfolio-h1">Social Media<span></span>&copy;</h1>
-        <h1 className="h1 ml-4 portfolio-h1">Music&#9835;</h1>
+        <h1 className="h1 ml-4 portfolio-h1">&lt;Developer/&gt;<span className="opacity-0 animate-pulse inline-block">_</span></h1>
+        <h1 className="h1 ml-4 portfolio-h1">Social Media<span className="animate-spin inline-block">&copy;</span></h1>
+        <h1 className="h1 ml-4 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
         <h1 className="h1 ml-4 mb-50 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
       </div>
       <div className="h-[300px]">
