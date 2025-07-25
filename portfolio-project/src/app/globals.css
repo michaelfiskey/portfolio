@@ -17,7 +17,7 @@
   }
 
   .input {
-    @apply border border-gray-400 p-2 w-full text-stone-700;
+    @apply border border-gray-400 p-2 text-stone-700;
   }
 }
 

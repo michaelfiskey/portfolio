@@ -10,7 +10,7 @@ export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const frameCount = 120;
+  const frameCount = 240;
 
   useGSAP(() => {
     const canvas = canvasRef.current;
@@ -32,7 +32,7 @@ export default function Home() {
 
     if (canvas) {
       canvas.width = 1500;
-      canvas.height = 1080;
+      canvas.height = 2000;
     }
 
     const currentFrame = (index: number) => ('/assets/gradient_sequences/pink/gradient_' + String(index).padStart(5, '0') + '.jpg');
