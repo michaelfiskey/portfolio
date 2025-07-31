@@ -7,6 +7,9 @@ import re
 def scrape(url: str) -> pd.DataFrame:
     
     response = requests.get(url)
+    if response.status_code != 200:
+        raise ValueError(f"Failed to fetch data from {url}. Status code: {response.status_code}")
+    
     html = response.text
 
     name_matches = re.findall(r"PeopleNames\[(\d+)\] = '([^']+)';", html)
