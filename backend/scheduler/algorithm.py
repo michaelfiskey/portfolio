@@ -1,6 +1,5 @@
-from typing import Optional
 import pandas as pd
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 from when2meet_scraper import scrape
 pd.set_option('future.no_silent_downcasting', True)
 
@@ -60,15 +59,17 @@ def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60
 
     while (window_start < end) and (end - window_start) >= timedelta(minutes=meeting_window):
         window_end = window_start + timedelta(minutes=meeting_window)
-        names = []
-        for name in schedule.columns[1:]:
-            if schedule.loc[(schedule['date'] >= window_start) & (schedule['date'] < window_end), name].all():
-                names.append(name)
+        available = schedule.loc[(schedule['date'] >= window_start) & (schedule['date'] < window_end), schedule.columns[1:]].all(axis=0)
+
+        names = available[available].index.tolist()
+
         if len(names) in schedule_tracker:
             schedule_tracker[len(names)].append({'start': window_start, 'end': window_end, 'names': names})
         else:
             schedule_tracker[len(names)] = [{'start': window_start, 'end': window_end, 'names': names}]
+
         window_start += timedelta(minutes=15)
+
     if not schedule_tracker or max(schedule_tracker.keys()) == 0:
         return 'NO SCHEDULES FOUND'
     return schedule_tracker[max(schedule_tracker.keys())]
