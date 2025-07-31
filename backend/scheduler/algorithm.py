@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
-from when2meet_scraper import scrape
+from .when2meet_scraper import scrape
 pd.set_option('future.no_silent_downcasting', True)
 
 def get_max_duration(when2meet_schedule: pd.DataFrame) -> int:
@@ -76,7 +76,8 @@ def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60
 
 
 def main():
-    recording = scrape('https://www.when2meet.com/?27497701-jRmJk')
+    #recording = scrape('https://www.when2meet.com/?27497701-jRmJk')
+    gjab = scrape('https://www.when2meet.com/?31396259-pgupV')
     #recording_small = scrape('https://www.when2meet.com/?31297823-f1ISk')
 
     #svp = {'Judas' : {'T1' : ['gallop', 'jump'], 'T2': ['skip']}}
@@ -86,8 +87,8 @@ def main():
 
     #when2meet_schedule = assign_song_part('skip', 'judas', 't3', recording_small)
     #when2meet_schedule_2 = assign_song_part('gallop', 'blue', 't2', when2meet_schedule)
-    print(recording.head(30))
-    print(optimal_schedules(recording, 15))
+    #print(optimal_schedules(recording, 15))
+    print(optimal_schedules(gjab, 240))
 
 if __name__ == '__main__':
     main()
