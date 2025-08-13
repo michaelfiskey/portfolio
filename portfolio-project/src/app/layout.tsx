@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
+import { AuthProvider } from "./components/AuthContext";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
         <div className="m-10 pt-5 pl-5 pr-5 pb-10">
+          
           <Navbar />
           {children}
         </div>
