@@ -100,7 +100,7 @@ const Page = () => {
                         )}
                         {message.isTouched && !message.value && message.errorMessage}
                     </ul>
-                    <form ref={formRef} onSubmit={handleSubmit}className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
+                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
                         <video
                             autoPlay
                             loop

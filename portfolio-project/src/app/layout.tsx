@@ -35,11 +35,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
-        <div className="m-10 pt-5 pl-5 pr-5 pb-10">
-          
-          <Navbar />
-          {children}
-        </div>
+        <AuthProvider>
+          <div className="m-10 pt-5 pl-5 pr-5 pb-10">
+            <Navbar />
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

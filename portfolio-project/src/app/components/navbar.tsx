@@ -1,12 +1,15 @@
 'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 const Navbar = () => {
     const [time, setTime] = useState(
         new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     );
     const [showColon, setShowColon] = useState(true);
+    const { isLoggedIn } = useAuth();
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -27,7 +30,7 @@ const Navbar = () => {
             </p>
             <ul className='flex flex-row justify-end gap-10 mr-10'>
                 <li>
-                    <Link href="/">home</Link>
+                    <Link href="/">home.</Link>
                 </li>
                 <li className="group">
                 <Link href="/dev-and-data">
@@ -45,10 +48,10 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/contact">contact</Link>
+                    <Link href="/contact">contact.</Link>
                 </li>
                 <li>
-                    {}
+                    {isLoggedIn ? <Link href="/logout">logout.</Link> : <Link href="/login">login.</Link>}
                 </li>
             </ul>
         </div>
