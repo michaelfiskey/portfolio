@@ -72,23 +72,11 @@ def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60
 
     if not schedule_tracker or max(schedule_tracker.keys()) == 0:
         return 'NO SCHEDULES FOUND'
-    return schedule_tracker[max(schedule_tracker.keys())]
+    return start, end, schedule_tracker[max(schedule_tracker.keys())]
 
 
 def main():
-    #recording = scrape('https://www.when2meet.com/?27497701-jRmJk')
-    gjab = scrape('https://www.when2meet.com/?31396259-pgupV')
-    #recording_small = scrape('https://www.when2meet.com/?31297823-f1ISk')
-
-    #svp = {'Judas' : {'T1' : ['gallop', 'jump'], 'T2': ['skip']}}
-
-    #optimal_recording_schedule(recording_small, songs=svp, recording_window=240)
-    #print(recording_small)
-
-    #when2meet_schedule = assign_song_part('skip', 'judas', 't3', recording_small)
-    #when2meet_schedule_2 = assign_song_part('gallop', 'blue', 't2', when2meet_schedule)
-    #print(optimal_schedules(recording, 15))
-    print(optimal_schedules(gjab, 240))
+    pass
 
 if __name__ == '__main__':
     main()

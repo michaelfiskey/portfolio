@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import scrape_view
+from .views import find_schedules
 
 urlpatterns = [
-    path('scrape/', scrape_view, name='scrape'),
+    path('find-schedules/', find_schedules, name='schedules'),
 ]

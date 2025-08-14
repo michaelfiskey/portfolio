@@ -9,9 +9,14 @@ def scrape(url: str) -> pd.DataFrame:
     response = requests.get(url)
     if response.status_code != 200:
         raise ValueError(f"Failed to fetch data from {url}. Status code: {response.status_code}")
-    
+
     html = response.text
 
+    title_match = re.search(r'<title>(.*?)<\/title>', html)
+    if title_match:
+        title = title_match.group(1).replace(' - When2meet', '').strip()
+    else:
+        title = None
     name_matches = re.findall(r"PeopleNames\[(\d+)\] = '([^']+)';", html)
     id_matches = re.findall(r"PeopleIDs\[(\d+)\] = (\d+);", html)
     time_of_slot_matches = re.findall(r'TimeOfSlot\[(\d+)\]\s*=\s*(\d+);', html)
@@ -31,17 +36,14 @@ def scrape(url: str) -> pd.DataFrame:
         else:
             available_at_slot_dict[slot].append(name)
 
-    all_unique_people = sorted({person for people in available_at_slot_dict.values() for person in people})
-    # Build a list of (date, name) pairs for all available slots
     rows = [
         {'name': name, 'date': date}
         for date, people in available_at_slot_dict.items()
         for name in people
     ]
 
-    # Create the DataFrame with two columns: 'date' and 'name'
     when2meet_schedule = pd.DataFrame(rows, columns=['name', 'date'])
     when2meet_schedule.sort_values(by=['date', 'name'], inplace=True)
     when2meet_schedule.reset_index(drop=True, inplace=True)
     
-    return when2meet_schedule
+    return title, when2meet_schedule

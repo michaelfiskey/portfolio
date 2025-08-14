@@ -136,7 +136,18 @@ export default function Home() {
         <h1 className="h1 ml-4 portfolio-h1">&lt;Developer/&gt;<span className="opacity-0 animate-pulse inline-block">_</span></h1>
         <h1 className="h1 ml-4 portfolio-h1">Social Media<span className="animate-spin inline-block">&copy;</span></h1>
         <h1 className="h1 ml-4 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
-        <h1 className="h1 ml-4 mb-50 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
+        <h1 className="h1 ml-4 mb-10 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
+      </div>
+      <div className="flex flex-row border-t border-b border-stone-700 overflow-x-auto whitespace-nowrap">
+        <div>
+          <h1 className="h1">ESSENTIALS:</h1>
+          <h3 className="h3">About me</h3>
+          <p>Hello! I'm Michael. I am a data analyst and aspiring junior web developer.</p>
+        </div>
+        <div>
+          <h1 className="h1">WHAT YOU WILL FIND HERE</h1>
+          <p>To be honest, im not really sure. I'm just doing this to test the layout of my website. So far, I don't think I'm a fan of how I'm designing this...</p>
+        </div>
       </div>
       <div className="h-[300px]">
       </div>

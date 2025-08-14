@@ -5,6 +5,7 @@
   --foreground: #171717;
 }
 
+
 @layer utilities {
   .h1 {
     @apply text-stone-700 text-2xl sm:text-4xl md:text-8xl lg:text-[150px] xl:text-[200px] 2xl:text-[250px] leading-none p-0;
