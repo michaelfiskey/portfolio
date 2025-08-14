@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useRef, useState } from 'react'; 
-import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
+import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective, EventSettingsModel } from '@syncfusion/ej2-react-schedule';
 
 // syncfusion schedule styling
 import '@syncfusion/ej2-base/styles/material.css';
