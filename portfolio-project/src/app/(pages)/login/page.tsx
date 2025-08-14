@@ -9,8 +9,20 @@ const Page = () => {
     const [password, setPassword] = useState('');
     const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const response = await fetch('http://localhost:5000/api/auth/sign-up', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                username,
+                password
+            })
+        })
+        const data = await response.json()
         setIsLoggedIn(true);
     }
 
