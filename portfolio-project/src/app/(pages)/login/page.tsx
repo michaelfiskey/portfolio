@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 import { useAuth } from '../../components/AuthContext';
+import Link from 'next/link';
 
 const Page = () => {
     const formRef = useRef<HTMLFormElement>(null);
@@ -31,7 +32,7 @@ const Page = () => {
         <div>
             <div className='mt-10 flex flex-row items-center justify-center'>
                 <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[500px]">
-                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
+                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 relative overflow-hidden">
                         <video
                             autoPlay
                             loop
@@ -40,7 +41,7 @@ const Page = () => {
                             className="absolute inset-0 w-full h-full object-cover z-0"
                             src="/assets/gradient_contact.mp4"
                         />
-                        <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm relative z-10 bg-opacity-80">
+                        <div className="bg-stone-700 w-full items-center justify-center p-1 relative z-10 bg-opacity-80">
                             <h2 className="h2 text-white text-center">Login.</h2>
                         </div>
                         <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
@@ -55,6 +56,9 @@ const Page = () => {
                             <div className='flex flex-col w-full'>
                                 <button type='submit' className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Login!</button>
                             </div>
+                            <p className='text-center text-white'>Don't have an account?<br/>
+                                <Link href='/sign-up'><u>Sign up here!</u></Link>
+                            </p>
                         </div>
                     </form>
                 </div>

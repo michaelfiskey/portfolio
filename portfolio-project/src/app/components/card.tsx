@@ -1,15 +1,16 @@
 interface CardProps {
-    projectTitle: string,
-    projectDescription: string
+    title: string,
+    description?: string,
+    imageSrc?: string
 }
 
 const Card = (props: CardProps) => {
     return (
-        <div className="h-[300px] max-w-[400px] border border-stone-700">
-            <h2 className="h3">{props.projectTitle}</h2>
-            <div className="pl-5 pr-5">
-                <p>{props.projectDescription}</p>
-            </div>
+        
+        <div className="flex flex-col w-[250px]">
+                <img className='w-[250px] h-[250px]'src={props.imageSrc}/>
+                <h3>{props.title}</h3>
+                <p>{props.description}</p>
         </div>
     )
 }

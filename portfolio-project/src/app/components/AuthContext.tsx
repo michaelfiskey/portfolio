@@ -1,5 +1,5 @@
 'use client';
-import {useState, useEffect, useContext, createContext, Dispatch, SetStateAction, ReactNode} from 'react';
+import {useState, useContext, createContext, Dispatch, SetStateAction, ReactNode} from 'react';
 
 interface AuthContextType {
     authUser: any;
