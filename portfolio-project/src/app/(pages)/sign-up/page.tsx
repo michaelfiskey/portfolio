@@ -7,10 +7,22 @@ const Page = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('')
     const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            setErrorMessage("PASSWORDS DO NOT MATCH!")
+            console.log('error!')
+            return
+        }
+        else {
+            console.log('success!')
+            return
+        }
+
         const response = await fetch('http://localhost:5000/api/auth/sign-up', {
             method: 'POST',
             headers: {
@@ -41,26 +53,40 @@ const Page = () => {
                             src="/assets/gradient_contact.mp4"
                         />
                         <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm relative z-10 bg-opacity-80">
-                            <h2 className="h2 text-white text-center">Login.</h2>
+                            <h2 className="h2 text-white text-center">SIGN UP.</h2>
                         </div>
                         <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='username' name='username' className="input mt-auto w-full"/>
+                                <input placeholder='username' name='username' className="input mt-auto w-full" onChange={(e) => {setUsername(e.target.value)}}/>
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
+                                <input
+                                    placeholder='john-doe@example.com'
+                                    name='email'
+                                    className="input mt-auto w-full"
+                                    onChange={(e) => {setEmail(e.target.value)}}
+                                />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='password' name='password' className="input mt-auto w-full"/>
+                                <input placeholder='password' name='password' className="input mt-auto w-full" onChange={(e) => {setPassword(e.target.value)}}/>
+                            </div>
+                            <div className="flex flex-col w-full">
+                                <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
+                                <input placeholder='password' name='password' className="input mt-auto w-full" onChange={(e) => {setConfirmPassword(e.target.value)}}/>
                             </div>
                             <div className='flex flex-col w-full'>
                                 <button type='submit' className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Login!</button>
                             </div>
+                            <p className='text-red-500 text-center'>{errorMessage}</p>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </>
+        </>
     )
 
 }

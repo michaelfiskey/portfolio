@@ -31,7 +31,7 @@ export default function Home() {
     }
 
     if (canvas) {
-      canvas.width = 1500;
+      canvas.width = 2000;
       canvas.height = 2000;
     }
 
@@ -53,23 +53,6 @@ export default function Home() {
         scrub: 0.5
       }
     });
-    if (canvas) {
-      const widthProxy = { w: 1500 };
-      gsap.to(widthProxy, {
-        w: 1980,
-        ease: 'none',
-        onUpdate: () => {
-          canvas.width = widthProxy.w;
-          render();
-        },
-        scrollTrigger: {
-          trigger: page,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    }
     gsap.to(canvasRef.current, {
       y: -150,
       scrollTrigger: {
