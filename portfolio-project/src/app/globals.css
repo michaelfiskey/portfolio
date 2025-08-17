@@ -20,6 +20,9 @@
   .input {
     @apply border border-gray-400 p-2 text-stone-700;
   }
+  .button {
+    @apply p-3 bg-stone-700 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
 }
 
 .main-content-bg {

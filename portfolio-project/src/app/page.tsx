@@ -8,7 +8,7 @@ import { useAuth } from './components/AuthContext';
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { authUser, isLoggedIn} = useAuth();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
@@ -103,24 +103,21 @@ export default function Home() {
       duration: 2
     });
 
-  }, [isMobile]);
+  }, [isMobile, authUser]);
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
-      {isLoggedIn ? 
-      <div className="mt-8">
-        <h1 className='h1 -mb-12.5 ml-4'>HELLO</h1>
-        <div className="flex justify-between items-baseline">
-          <h1 className='h1 -mb-12.5 ml-4'>{'person.'}</h1>
+      {isLoggedIn ? (
+        <div className="mt-8 ml-4">
+          <h1 className='h1 -mb-12.5'>HELLO, {`${authUser.slice(0,30)}`}.</h1>
+            <h1 className='h1 mt-30 -mb-12.5'>I AM.</h1>
+        </div>
+      ) : (
+        <div className="flex flex-row items-stretch justify-between mt-8">
+          <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1> 
           <h1 className='h1 -mb-12.5'>I AM.</h1>
         </div>
-      </div>
-      :
-      <div className="flex flex-row items-stretch justify-between mt-8">
-        <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1> 
-        <h1 className='h1 -mb-12.5'>I AM.</h1>
-      </div>
-      }
+      )}
       <div className="mt-10 flex items-center justify-center relative">
         <canvas ref={canvasRef}></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">

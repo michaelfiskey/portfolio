@@ -17,7 +17,7 @@ const Page = () => {
     });
     const [errors, setErrors] = useState<string[]>([]);
     const [hasBackendError, setHasBackendError] = useState(false);
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { setAuthUser, setAuthRole, setIsLoggedIn } = useAuth();
 
     const clearFormFields = () => {
         setUsername({ value: '', isTouched: true });
@@ -85,8 +85,9 @@ const Page = () => {
                 return;
             }
             
-            console.log(data)
             setIsLoggedIn(true);
+            setAuthUser(username.value);
+            setAuthRole(data.user.role);
             router.push('/');
 
         } catch (error) {

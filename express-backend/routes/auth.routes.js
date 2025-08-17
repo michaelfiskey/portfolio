@@ -6,7 +6,6 @@ const authRouter = Router();
 
 authRouter.post('/sign-up', async (req, res) => {
     try {
-        console.log(req.body)
         const {username, email, password} = req.body;
 
         const { data: existingUsername, error: usernameError } = await supabase
@@ -54,8 +53,6 @@ authRouter.post('/login', async (req, res) => {
             .from('users')
             .select('*')
             .eq('username', username).single();
-        
-        console.log(user)
         if (!user) {return res.status(401).json({ error: "Username does not exist!"});}
         
         const isValidPassword = await bcrypt.compare(password, user.password_hash)
@@ -64,11 +61,12 @@ authRouter.post('/login', async (req, res) => {
         if (error) {return res.status(401).json({error: "An error has occured."})}
 
 
-
-        const { password_hash, ...noPassword} = user;
         res.json({
             message: 'Login success!',
-            user: noPassword
+            user: {
+                username: user.username,
+                role: user.role
+            }
         })
     } catch(error) {
         res.status(500).json({error: error.message});

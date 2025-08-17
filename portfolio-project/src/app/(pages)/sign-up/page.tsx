@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Page = () => {
     const router = useRouter();
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { isLoggedIn, setIsLoggedIn, setAuthUser} = useAuth();
     const formRef = useRef<HTMLFormElement>(null);
     const [username, setUsername] = useState({
         value:'',
@@ -128,6 +128,7 @@ const Page = () => {
                 return;
             }
             setIsLoggedIn(true);
+            setAuthUser(data.username)
             router.push('/')
 
 

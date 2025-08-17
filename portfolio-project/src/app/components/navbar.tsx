@@ -2,13 +2,15 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+    const router = useRouter();
     const [time, setTime] = useState(
         new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     );
     const [showColon, setShowColon] = useState(true);
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { isLoggedIn, setIsLoggedIn, setAuthUser, setAuthRole } = useAuth();
 
 
     useEffect(() => {
@@ -53,7 +55,12 @@ const Navbar = () => {
                 <li>
                     {isLoggedIn ? (
                         <button 
-                            onClick={() => setIsLoggedIn(false)}
+                            onClick={() => {
+                                setIsLoggedIn(false)
+                                setAuthUser(null)
+                                setAuthRole(null)
+                                router.push('/')
+                            }}
                             className="hover:cursor-pointer"
                         >
                             logout.
