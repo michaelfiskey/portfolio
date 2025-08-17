@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from '@emailjs/browser'
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -10,17 +10,14 @@ const Page = () => {
     const [firstName, setFirstName] = useState({
         value: "",
         isTouched: false,
-        errorMessage: <li className="text-red-500">First name is required!</li>
     });
     const [lastName, setLastName] = useState({
         value: "",
         isTouched: false,
-        errorMessage: <li className="text-red-500">Last name is required!</li>
     });
     const [email, setEmail] = useState({
         value: "",
         isTouched: false,
-        isValid: true,
     });
     const [countryCode, setCountryCode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -28,54 +25,97 @@ const Page = () => {
     const [message, setMessage] = useState({
         value: "",
         isTouched: false,
-        errorMessage: <li className="text-red-500">Message is required!</li>
     });
-    const [submitErrorMessage, setSubmitErrorMessage] = useState("");
+    const [errors, setErrors] = useState<string[]>([]);
     const [submitSuccessMessage, setSubmitSuccessMessage] = useState("");
 
     useGSAP(() => {
         gsap.fromTo(pageRef.current, { opacity: 0 }, { opacity: 1, duration: 1.5 });
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setSubmitSuccessMessage("");
-        if (!firstName.value) {setSubmitErrorMessage('ERROR: Please include your first name!'); return}
-        if (!lastName.value) {setSubmitErrorMessage('ERROR: Please include your last name!'); return}
-        if (!email.value) {
-            setSubmitErrorMessage("ERROR: Please include an email address!");
-            return;
-        }
-        if (!validateEmail(email.value)) {
-            setSubmitErrorMessage('ERROR: Email address is invalid! Please include a valid email address!');
-            return;
-        }
-        if (!message.value) {setSubmitErrorMessage("ERROR: Please include a message!"); return}
-
-        sendEmail()
-    }
-
-    
     const validateEmail = (email: string) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
     };
 
+    const validateForm = () => {
+        const newErrors: string[] = [];
+        
+        if (firstName.isTouched && !firstName.value.trim()) {
+            newErrors.push('First name is required');
+        }
+        
+        if (lastName.isTouched && !lastName.value.trim()) {
+            newErrors.push('Last name is required');
+        }
+        
+        if (email.isTouched) {
+            if (!email.value.trim()) {
+                newErrors.push('Email is required');
+            } else if (!validateEmail(email.value.trim())) {
+                newErrors.push('Email is invalid');
+            }
+        }
+        
+        if (message.isTouched && !message.value.trim()) {
+            newErrors.push('Message is required');
+        }
+        
+        setErrors(newErrors);
+        return newErrors.length === 0; 
+    }
+
+    const isFormValid = () => {
+        const hasAllFields = firstName.value.trim() && 
+                           lastName.value.trim() && 
+                           email.value.trim() && 
+                           message.value.trim()
+        return hasAllFields && errors.length === 0;
+    }
+
+    useEffect(() => {
+        validateForm();
+    }, [firstName, lastName, email, message]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitSuccessMessage("");
+        
+        setFirstName({...firstName, isTouched: true});
+        setLastName({...lastName, isTouched: true});
+        setEmail({...email, isTouched: true});
+        setMessage({...message, isTouched: true});
+        
+        if (!validateForm()) {
+            return;
+        }
+        
+        setErrors([]);
+        sendEmail();
+    }
+
     const clearFormFields = () => {
         setFirstName((prev) => ({...prev, value: "", isTouched: false}));
         setLastName((prev) => ({...prev, value: "", isTouched: false}));
-        setEmail({ value: "", isTouched: false, isValid: true });
+        setEmail({ value: "", isTouched: false });
         setCountryCode("");
         setPhoneNumber("");
         setCompany("");
         setMessage((prev) => ({...prev, value: "", isTouched: false}));
     }
 
-
     const sendEmail = () => {
         if (formRef.current) {
             emailjs.sendForm('service_kk5mlt4', 'template_1a22x66', formRef.current, {publicKey: 'mnFPSnlnhoLlrVS0U'})
-            .then(() => {console.log("Form Submitted Successfully!"), setSubmitSuccessMessage('Form has been submitted successfully!'), clearFormFields(), setSubmitErrorMessage("");}, (error) => {console.log("Failed to send email:", error.text);});
+            .then(() => {
+                console.log("Form Submitted Successfully!");
+                setSubmitSuccessMessage('Form has been submitted successfully!');
+                clearFormFields();
+                setErrors([]);
+            }, (error) => {
+                console.log("Failed to send email:", error.text);
+                setErrors(['Failed to send email. Please try again.']);
+            });
         }
     }
 
@@ -90,17 +130,15 @@ const Page = () => {
                 </div>
                 <div className="flex justify-center px-5">
                     <div className="w-full max-w-[1100px]">
-                        <ul className="list-disc ml-6">
-                            {firstName.isTouched && !firstName.value && firstName.errorMessage}
-                            {lastName.isTouched && !lastName.value && lastName.errorMessage}
-                            {email.isTouched && !email.value && (
-                            <li className="text-red-500">Email is required!</li>
-                            )}
-                            {email.isTouched && email.value && !email.isValid && (
-                            <li className="text-red-500">Email is invalid!</li>
-                            )}
-                            {message.isTouched && !message.value && message.errorMessage}
-                        </ul>
+                        {errors.length > 0 && (
+                        <div className="mb-4 p-4 bg-red-100 border border-red-400">
+                                <ul className="list-disc list-inside text-red-700">
+                                    {errors.map((error, index) => (
+                                        <li key={index}>{error}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                         <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 rounded-sm relative overflow-hidden">
                             <video
                                 autoPlay
@@ -117,11 +155,23 @@ const Page = () => {
                                 <div className="flex flex-row gap-20 justify-center items-center ">
                                     <div className="flex flex-col w-full">
                                         <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
-                                        <input placeholder='John' name='first_name' value={firstName.value} onChange={(e) => setFirstName({...firstName, value: e.target.value.slice(0,100)})} onBlur={() => setFirstName({...firstName, isTouched: true})}  className="input mt-auto" />
+                                        <input 
+                                        placeholder='John' 
+                                        name='first_name' 
+                                        value={firstName.value} 
+                                        onChange={(e) => setFirstName({...firstName, value: e.target.value.slice(0,100)})} 
+                                        onBlur={() => setFirstName({...firstName, isTouched: true})}  
+                                        className="input mt-auto" />
                                     </div>
                                     <div className="flex flex-col w-full">
                                         <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Last Name<sup className="text-red-500">*</sup></p></label>
-                                        <input placeholder='Doe' name='last_name' value={lastName.value} onChange={(e) => setLastName({...lastName, value: e.target.value.slice(0,100)})} onBlur={() => setLastName({...lastName, isTouched: true})} className="input mt-auto" />
+                                        <input 
+                                        placeholder='Doe' 
+                                        name='last_name' 
+                                        value={lastName.value} 
+                                        onChange={(e) => setLastName({...lastName, value: e.target.value.slice(0,100)})} 
+                                        onBlur={() => setLastName({...lastName, isTouched: true})} 
+                                        className="input mt-auto" />
                                     </div>
                                 </div>
                                 <div className="flex flex-row gap-20 justify-center items-center">
@@ -131,8 +181,8 @@ const Page = () => {
                                         placeholder='john-doe@example.com'
                                         name='email'
                                         value={email.value}
-                                        onChange={(e) => { setEmail(prev => ({...prev, value: e.target.value.slice(0,100), isValid: validateEmail(e.target.value.slice(0,100)) })); }}
-                                        onBlur={() => setEmail(prev => ({ ...prev, isTouched: true }))}
+                                        onChange={(e) => setEmail({...email, value: e.target.value.slice(0,100)})}
+                                        onBlur={() => setEmail({...email, isTouched: true})}
                                         className="input mt-auto"
                                         />
                                     </div>
@@ -167,8 +217,17 @@ const Page = () => {
                                     <textarea placeholder='I like your hair... ;)' name='message' value={message.value} onChange={(e) => setMessage({...message, value: e.target.value.slice(0,500)})} onBlur={() => setMessage({...message, isTouched: true})} className="input h-[150px] mt-auto resize-none" />
                                 </div>
                                 <div className='flex flex-col w-full'>
-                                    <button className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Submit</button>
-                                    {!submitErrorMessage ? null : <p className="text-center text-xl mt-2 text-red-500"><b><u>{submitErrorMessage}</u></b></p>}
+                                <button 
+                                type='submit' 
+                                    disabled={!isFormValid()}
+                                    className={`bebas-font text-white text-2xl p-2 rounded-md transition-colors duration-200 ${
+                                        isFormValid() 
+                                            ? 'bg-stone-700 hover:bg-stone-600 hover:cursor-pointer' 
+                                            : 'bg-stone-500 cursor-not-allowed opacity-60'
+                                    }`}
+                                >
+                                    Submit!
+                                </button>
                                     {!submitSuccessMessage ? null : <p className="text-center text-xl mt-2 text-lime-300"><b><u>{submitSuccessMessage}</u></b></p>}
                                 </div>
                             </div>

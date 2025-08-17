@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./components/AuthContext";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
@@ -20,11 +19,6 @@ const bebasNeue = Bebas_Neue({
   weight: "400", // Bebas Neue only has 400
 });
 
-export const metadata: Metadata = {
-  title: "Michael Fiskey",
-  description: "Michael Fiskey's Personal Portfolio",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,13 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Michael Fiskey</title>
+        <meta name="description" content="Michael Fiskey's Personal Portfolio" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
         <AuthProvider>
           <div className="m-10 pt-5 pl-5 pr-5 pb-10">
-            <Navbar />
-            {children}
+              <Navbar />
+              {children}
           </div>
         </AuthProvider>
       </body>

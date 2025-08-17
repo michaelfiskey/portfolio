@@ -1,38 +1,115 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 import { useAuth } from '../../components/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const Page = () => {
+    const router = useRouter();
     const formRef = useRef<HTMLFormElement>(null);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
+    const [username, setUsername] = useState({
+        value: '',
+        isTouched: false,
+    });
+    const [password, setPassword] = useState({
+        value: '',
+        isTouched: false,
+    });
+    const [errors, setErrors] = useState<string[]>([]);
+    const [hasBackendError, setHasBackendError] = useState(false);
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
+
+    const clearFormFields = () => {
+        setUsername({ value: '', isTouched: true });
+        setPassword({ value: '', isTouched: true });
+    }
+    const validateForm = () => {
+        const newErrors: string[] = [];
+        
+        if (username.isTouched && !username.value.trim()) {
+            newErrors.push('Username is required');
+        }
+        
+        if (password.isTouched && !password.value.trim()) {
+            newErrors.push('Password is required');
+        }
+        
+        setErrors(newErrors);
+        return newErrors.length === 0; 
+    }
+
+    const isFormValid = () => {
+        const hasAllFields = username.value.trim() && password.value.trim()
+        return hasAllFields && errors.length === 0;
+    }
+
+    useEffect(() => {
+        if (!hasBackendError) {
+            validateForm();
+        }
+    }, [username, password, hasBackendError]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:5000/api/auth/sign-up', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                username,
-                password
+        
+        setUsername({...username, isTouched: true});
+        setPassword({...password, isTouched: true});
+        
+        if (!validateForm()) {
+            return;
+        }
+        
+        setErrors([]);
+        setHasBackendError(false);
+
+        try {
+            const response = await fetch('http://localhost:5500/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username.value,
+                    password: password.value
+                })
             })
-        })
-        const data = await response.json()
-        setIsLoggedIn(true);
+
+            const data = await response.json()
+            
+            if (!response.ok) {
+                console.log('Login error:', data.error);
+                setHasBackendError(true);
+                setErrors([data.error || 'Login failed']);
+                setUsername({ value: '', isTouched: false });
+                setPassword({ value: '', isTouched: false });
+                return;
+            }
+            
+            console.log(data)
+            setIsLoggedIn(true);
+            router.push('/');
+
+        } catch (error) {
+            setErrors(['An internal error has occurred. Please try again.']);
+            clearFormFields()
+            setIsLoggedIn(false);
+        }
     }
 
     return (
-    <>
         <div>
             <div className='mt-10 flex flex-row items-center justify-center'>
                 <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[500px]">
-                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 relative overflow-hidden">
+                    {errors.length > 0 && (
+                        <div className="mb-4 p-4 bg-red-100 bg-opacity-80 border border-red-400">
+                            <ul className="list-disc list-inside text-red-700">
+                                {errors.map((error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-stone-700 relative overflow-hidden">
                         <video
                             autoPlay
                             loop
@@ -47,14 +124,45 @@ const Page = () => {
                         <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='username' name='username' className="input mt-auto w-full"/>
+                                <input 
+                                placeholder='username' 
+                                name='username' 
+                                value={username.value}
+                                className="input mt-auto w-full"
+                                onChange={(e) => {
+                                    setUsername({...username, value: e.target.value.slice(0,30)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setUsername({...username, isTouched: true})}
+                                />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='password' name='password' className="input mt-auto w-full"/>
+                                <input 
+                                type='password' 
+                                placeholder='password' 
+                                name='password' 
+                                value={password.value}
+                                className="input mt-auto w-full"
+                                onChange={(e) => {
+                                    setPassword({...password, value: e.target.value.slice(0,100)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setPassword({...password, isTouched: true})}
+                                />
                             </div>
                             <div className='flex flex-col w-full'>
-                                <button type='submit' className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Login!</button>
+                                <button 
+                                type='submit' 
+                                    disabled={!isFormValid()}
+                                    className={`bebas-font text-white text-2xl p-2 rounded-md transition-colors duration-200 ${
+                                        isFormValid() 
+                                            ? 'bg-stone-700 hover:bg-stone-600 hover:cursor-pointer' 
+                                            : 'bg-stone-500 cursor-not-allowed opacity-60'
+                                    }`}
+                                >
+                                    Login!
+                                </button>
                             </div>
                             <p className='text-center text-white'>Don't have an account?<br/>
                                 <Link href='/sign-up'><u>Sign up here!</u></Link>
@@ -64,7 +172,6 @@ const Page = () => {
                 </div>
             </div>
         </div>
-    </>
     )
 
 }

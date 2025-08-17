@@ -1,50 +1,157 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 import { useAuth } from '../../components/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const Page = () => {
+    const router = useRouter();
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
     const formRef = useRef<HTMLFormElement>(null);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('')
-    const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
+    const [username, setUsername] = useState({
+        value:'',
+        isTouched:false,
+    });
+    const [email, setEmail] = useState({
+        value:'',
+        isTouched:false,
+    });
+    const [password, setPassword] = useState({
+        value:'',
+        isTouched:false,
+    });
+    const [confirmPassword, setConfirmPassword] = useState({
+        value:'',
+        isTouched:false,
+    });
+    const [errors, setErrors] = useState<string[]>([]);
+    const [hasBackendError, setHasBackendError] = useState(false);
+
+    const validateEmail = (email: string) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+    
+    const validateForm = () => {
+        const newErrors: string[] = [];
+        
+        if (username.isTouched && !username.value.trim()) {
+            newErrors.push('Username is required');
+        }
+        
+        if (email.isTouched) {
+            if (!email.value.trim()) {
+                newErrors.push('Email is required');
+            } else if (!validateEmail(email.value.trim())) {
+                newErrors.push('Email is invalid');
+            }
+        }
+        
+        if (password.isTouched) {
+            if (!password.value.trim()) {
+                newErrors.push('Password is required');
+            } else {
+                if (password.value.length < 8) {
+                    newErrors.push('Password must be at least 8 characters');
+                }
+                if (!/[A-Z]/.test(password.value)) {
+                    newErrors.push('Password must contain an uppercase letter');
+                }
+                if (!/[0-9]/.test(password.value)) {
+                    newErrors.push('Password must contain a number');
+                }
+            }
+        }
+        
+        if (confirmPassword.isTouched) {
+            if (!confirmPassword.value.trim()) {
+                newErrors.push('Password confirmation is required');
+            } else if (password.value !== confirmPassword.value) {
+                newErrors.push('Passwords do not match');
+            }
+        }
+        
+        setErrors(newErrors);
+        return newErrors.length === 0; 
+    }
+
+    const isFormValid = () => {
+        const hasAllFields = username.value.trim() && 
+                           email.value.trim() && 
+                           password.value.trim() && 
+                           confirmPassword.value.trim();
+        return hasAllFields && errors.length === 0;
+    }
+
+    useEffect(() => {
+        if (!hasBackendError) {
+            validateForm();
+        }
+    }, [username, email, password, confirmPassword, hasBackendError]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            setErrorMessage("PASSWORDS DO NOT MATCH!")
-            console.log('error!')
-            return
-        }
-        else {
-            console.log('success!')
-            return
-        }
+        
+        setUsername({...username, isTouched: true});
+        setEmail({...email, isTouched: true});
+        setPassword({...password, isTouched: true});
+        setConfirmPassword({...confirmPassword, isTouched: true});
+        
+        if (!validateForm()) {return;}
+        
+        setErrors([]);
+        setHasBackendError(false);
 
-        const response = await fetch('http://localhost:5000/api/auth/sign-up', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                username,
-                password
+        try {
+            const response = await fetch('http://localhost:5500/api/auth/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    username: username.value,
+                    password: password.value
+                })
             })
-        })
-        const data = await response.json()
-        setIsLoggedIn(true);
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                console.log('Sign-up error:', data.error);
+                setHasBackendError(true);
+                setErrors([data.error || 'Registration failed']);
+                setUsername({ value: '', isTouched: false });
+                setEmail({ value: '', isTouched: false });
+                setPassword({ value: '', isTouched: false });
+                setConfirmPassword({ value: '', isTouched: false });
+                return;
+            }
+            setIsLoggedIn(true);
+            router.push('/')
+
+
+        } catch(error) {
+            setErrors(['An internal error occurred. Please try again.']);
+        }
     }
 
     return (
     <>
-        <div>
+    
+        {isLoggedIn ? <p>Already logged in!</p> : <div>
             <div className='mt-10 flex flex-row items-center justify-center'>
                 <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[500px]">
-                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-gray-700 relative overflow-hidden">
+                    {errors.length > 0 && (
+                        <div className="mb-4 p-4 bg-red-100 border border-red-400">
+                            <ul className="list-disc list-inside text-red-700">
+                                {errors.map((error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-stone-700 relative overflow-hidden">
                         <video
                             autoPlay
                             loop
@@ -59,37 +166,83 @@ const Page = () => {
                         <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='username' name='username' className="input mt-auto w-full" onChange={(e) => {setUsername(e.target.value)}}/>
+                                <input 
+                                placeholder='username' 
+                                name='username' 
+                                value={username.value}
+                                className="input mt-auto w-full" 
+                                onChange={(e) => {
+                                    setUsername({...username, value: e.target.value.slice(0,30)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setUsername({...username, isTouched: true})}
+                            />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
                                 <input
-                                    placeholder='john-doe@example.com'
-                                    name='email'
-                                    className="input mt-auto w-full"
-                                    onChange={(e) => {setEmail(e.target.value)}}
+                                placeholder='john-doe@example.com'
+                                name='email'
+                                value={email.value}
+                                className="input mt-auto w-full"
+                                onChange={(e) => {
+                                    setEmail({...email, value: e.target.value.slice(0,100)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setEmail({...email, isTouched: true})}
                                 />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='password' name='password' className="input mt-auto w-full" onChange={(e) => {setPassword(e.target.value)}}/>
+                                <input 
+                                type='password'
+                                placeholder='password' 
+                                name='password' 
+                                value={password.value}
+                                className="input mt-auto w-full" 
+                                onChange={(e) => {
+                                    setPassword({...password, value: e.target.value.slice(0,100)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setPassword({...password, isTouched: true})}
+                                />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
-                                <input placeholder='password' name='password' className="input mt-auto w-full" onChange={(e) => {setConfirmPassword(e.target.value)}}/>
+                                <input 
+                                type='password'
+                                placeholder='password' 
+                                name='confirmPassword' 
+                                value={confirmPassword.value}
+                                className="input mt-auto w-full" 
+                                onChange={(e) => {
+                                    setConfirmPassword({...confirmPassword, value: e.target.value.slice(0,100)});
+                                    if (hasBackendError) setHasBackendError(false);
+                                }}
+                                onBlur={() => setConfirmPassword({...confirmPassword, isTouched: true})}
+                                />
                             </div>
                             <div className='flex flex-col w-full'>
-                                <button type='submit' className="bebas-font bg-stone-700 text-white text-2xl p-2 rounded-md hover:bg-stone-600 hover:cursor-pointer transition-colors duration-200">Sign up!</button>
+                                <button 
+                                    type='submit' 
+                                    disabled={!isFormValid()}
+                                    className={`bebas-font text-white text-2xl p-2 rounded-md transition-colors duration-200 ${
+                                        isFormValid() 
+                                            ? 'bg-stone-700 hover:bg-stone-600 hover:cursor-pointer' 
+                                            : 'bg-stone-500 cursor-not-allowed opacity-60'
+                                    }`}
+                                >
+                                    Sign up!
+                                </button>
                             </div>
                             <p className='text-white text-center'>Already have an account? <br/>
                                 <Link href='/login'><u>Login here!</u></Link>
                             </p>
-                            <p className='text-red-500 text-center'>{errorMessage}</p>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </div>}
         </>
     )
 

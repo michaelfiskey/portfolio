@@ -4,8 +4,11 @@ import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useAuth } from './components/AuthContext';
+
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
@@ -104,10 +107,20 @@ export default function Home() {
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
-      <div className="flex flex-row items-stretch justify-between mt-8">
-          <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1>
+      {isLoggedIn ? 
+      <div className="mt-8">
+        <h1 className='h1 -mb-12.5 ml-4'>HELLO</h1>
+        <div className="flex justify-between items-baseline">
+          <h1 className='h1 -mb-12.5 ml-4'>{'person.'}</h1>
           <h1 className='h1 -mb-12.5'>I AM.</h1>
+        </div>
       </div>
+      :
+      <div className="flex flex-row items-stretch justify-between mt-8">
+        <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1> 
+        <h1 className='h1 -mb-12.5'>I AM.</h1>
+      </div>
+      }
       <div className="mt-10 flex items-center justify-center relative">
         <canvas ref={canvasRef}></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">

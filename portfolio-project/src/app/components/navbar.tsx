@@ -8,7 +8,7 @@ const Navbar = () => {
         new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     );
     const [showColon, setShowColon] = useState(true);
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
 
 
     useEffect(() => {
@@ -51,7 +51,16 @@ const Navbar = () => {
                     <Link href="/contact">contact.</Link>
                 </li>
                 <li>
-                    {isLoggedIn ? <Link href="/logout">logout.</Link> : <Link href="/login">login.</Link>}
+                    {isLoggedIn ? (
+                        <button 
+                            onClick={() => setIsLoggedIn(false)}
+                            className="hover:cursor-pointer"
+                        >
+                            logout.
+                        </button>
+                    ) : (
+                        <Link href="/login">login.</Link>
+                    )}
                 </li>
             </ul>
         </div>

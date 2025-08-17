@@ -1,9 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import { PORT } from './config/env.js';
 import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/user.routes.js';
 
 const app = express()
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use(express.json())
 
