@@ -49,7 +49,7 @@ const Page = () => {
 
     const handleSubmit = async () => {
         if (!url.value || !url.isValid) return;
-        const response = await fetch('http://localhost:8000/api/find-schedules/', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/find-schedules/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url: url.value, duration: duration })
