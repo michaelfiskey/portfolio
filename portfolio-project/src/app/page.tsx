@@ -8,7 +8,7 @@ import { useAuth } from './components/AuthContext';
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
-    const { authUser, isLoggedIn} = useAuth();
+  const { authUser, isLoggedIn} = useAuth();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
@@ -23,19 +23,11 @@ export default function Home() {
     const pinkGradient = { frame: 0 };
 
     // scrolling gradient logic 
-    function render() {
-      if (!canvas || !context) return;
-      const idx = Math.floor(pinkGradient.frame);
-      const image = images[idx];
-      if (image && image.complete) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      }
-    }
-
     if (canvas) {
-      canvas.width = 2000;
-      canvas.height = 2000;
+      const baseWidth = window.innerWidth;
+      
+      canvas.width = baseWidth;
+      canvas.height = baseWidth * 0.9;
     }
 
     const currentFrame = (index: number) => ('/assets/gradient_sequences/pink/gradient_' + String(index).padStart(5, '0') + '.jpg');
@@ -43,6 +35,16 @@ export default function Home() {
       const img = new Image();
       img.src = currentFrame(i);
       images.push(img);
+    }
+
+    function render() {
+      if (!canvas || !context) return;
+      const idx = pinkGradient.frame;
+      const image = images[idx];
+      if (image && image.complete) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      }
     }
 
     if (images[0]) images[0].onload = render;
@@ -56,8 +58,9 @@ export default function Home() {
         scrub: 0.5
       }
     });
+
     gsap.to(canvasRef.current, {
-      y: -150,
+      y: -300,
       scrollTrigger: {
         trigger: page,
         start: 'top top',
@@ -66,6 +69,7 @@ export default function Home() {
       }
     });
 
+    // scrolling h1s logic
     const portfolioH1s = gsap.utils.toArray<HTMLElement>('.portfolio-h1');
     const hingeH1 = portfolioHingeRef.current;
     const normalH1s = portfolioH1s.slice(0, -1);
@@ -119,9 +123,12 @@ export default function Home() {
         </div>
       )}
       <div className="mt-10 flex items-center justify-center relative">
-        <canvas ref={canvasRef}></canvas>
+        <canvas 
+          ref={canvasRef}
+          className="w-full"
+        ></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="text-white text-8xl font-bold drop-shadow-lg">MICHAEL FISKEY</h1>
+          <h1 className="h1 !text-white !text-8xl !font-bold !drop-shadow-lg">MICHAEL FISKEY</h1>
         </div>
       </div>
       <div>

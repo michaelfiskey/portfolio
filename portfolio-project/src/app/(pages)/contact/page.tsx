@@ -123,12 +123,12 @@ const Page = () => {
         <div ref={pageRef}>
             <div>
                 <div className="flex flex-row items-stretch justify-baseline">
-                    <div className='w-full max-w-[800px] min-w-[800px] w-flex pt-5 pl-5 pr-5 pb-10'>
+                    <div className='w-full max-w-[800px] w-flex pt-5 pl-5 pr-5 pb-10'>
                         <h1 className="h1">CONTACT.</h1>
                         <p>If you'd like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
                     </div>
                 </div>
-                <div className="flex justify-center px-5">
+                <div className="flex flex-1 justify-center items-center px-5">
                     <div className="w-full max-w-[1100px]">
                         {errors.length > 0 && (
                         <div className="mb-4 p-4 bg-red-100 border border-red-400">
@@ -149,11 +149,11 @@ const Page = () => {
                                 src="/assets/gradient_contact.mp4"
                             />
                             <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm relative z-10 bg-opacity-80">
-                                <h2 className="h2 text-white text-center">Contact Form</h2>
+                                <h2 className="h2 text-center">Contact Form</h2>
                             </div>
-                            <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
-                                <div className="flex flex-row gap-20 justify-center items-center ">
-                                    <div className="flex flex-col w-full">
+                            <div className="m-4 sm:m-8 md:m-8 lg:m-15 grid grid-cols-1 justify-center gap-3 sm:gap-4 md:gap-5 relative z-10">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
+                                    <div className="flex flex-col">
                                         <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
                                         <input 
                                         placeholder='John' 
@@ -163,7 +163,7 @@ const Page = () => {
                                         onBlur={() => setFirstName({...firstName, isTouched: true})}  
                                         className="input mt-auto" />
                                     </div>
-                                    <div className="flex flex-col w-full">
+                                    <div className="flex flex-col">
                                         <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Last Name<sup className="text-red-500">*</sup></p></label>
                                         <input 
                                         placeholder='Doe' 
@@ -174,9 +174,9 @@ const Page = () => {
                                         className="input mt-auto" />
                                     </div>
                                 </div>
-                                <div className="flex flex-row gap-20 justify-center items-center">
-                                    <div className="flex flex-col w-full">
-                                        <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
+                                    <div className="flex flex-col">
+                                        <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
                                         <input
                                         placeholder='john-doe@example.com'
                                         name='email'
@@ -186,12 +186,12 @@ const Page = () => {
                                         className="input mt-auto"
                                         />
                                     </div>
-                                    <div className="flex flex-col w-full">
-                                        <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Phone Number</p></label>
+                                    <div className="flex flex-col">
+                                        <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Phone Number</p></label>
                                         <div className="flex flex-row w-full">
                                             <input
                                             name="country_code"
-                                            className="input w-1/5"
+                                            className="input w-[55px]"
                                             placeholder="+###"
                                             value={countryCode}
                                             onChange={e => {
@@ -207,8 +207,8 @@ const Page = () => {
                                             <input placeholder='############' name='phone_number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 14))} className="input mt-auto w-full" />
                                         </div>
                                     </div>
-                                    <div className="flex flex-col w-full">
-                                        <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Company</p></label>
+                                    <div className="flex flex-col">
+                                        <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Company</p></label>
                                         <input placeholder='Example LLC' name='company' value={company} onChange={(e) => setCompany(e.target.value.slice(0,100))} className="input mt-auto" />
                                     </div>
                                 </div>

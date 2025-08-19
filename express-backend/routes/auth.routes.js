@@ -53,7 +53,7 @@ authRouter.post('/login', async (req, res) => {
             .from('users')
             .select('*')
             .eq('username', username).single();
-        if (!user) {return res.status(401).json({ error: "Username does not exist!"});}
+        if (!user) {return res.status(401).json({ error: "Username not found!"});}
         
         const isValidPassword = await bcrypt.compare(password, user.password_hash)
         if (!isValidPassword) {return res.status(401).json({error: 'Invalid password!'})}
