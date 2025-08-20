@@ -3,6 +3,7 @@ import cors from 'cors';
 import { PORT } from './config/env.js';
 import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/user.routes.js';
+import spotifyRouter from './routes/spotify.routes.js';
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', userRouter)
+app.use('/api/spotify', spotifyRouter)
 
 app.get('/', (req, res) => {
     res.send('Welcome to the API!')

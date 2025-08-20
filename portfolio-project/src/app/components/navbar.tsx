@@ -24,7 +24,7 @@ const Navbar = () => {
     const [hours, minutes] = time.split(":");
 
     return (
-        <div className='pt-7 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4 sm:gap-8 px-4 sm:px-7'>
+        <div className='relative top-0 left-0 w-full z-50 pt-7 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4 sm:gap-8 px-4 sm:px-7'>
             <p className='justify-self-center sm:justify-self-start font-[family-name:var(--font-bebas-neue)] text-2xl'>
                 {hours}
                 <span className={showColon ? "opacity-100 transition-opacity duration-200" : "opacity-0 transition-opacity duration-200"}>:</span>
@@ -32,28 +32,28 @@ const Navbar = () => {
             </p>
             <nav className='justify-self-center sm:justify-self-end'>
                 <ul className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-6 lg:gap-8 text-sm sm:text-base'>
-                    <li className="justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/">home.</Link>
                     </li>
-                    <li className="group justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="group justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/dev-and-data">
                             &lt;dev &amp; data /&gt;<span className="opacity-0 ml-1 inline-block group-hover:animate-pulse">_</span>
                         </Link>
                     </li>
-                    <li className="group justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="group justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/social-media">
                             social media <span className='inline-block group-hover:animate-spin'>&copy;</span>
                         </Link>
                     </li>
-                    <li className="group justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="group justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/music">
                             music <span className="inline-block group-hover:animate-bounce">&#9835;</span>
                         </Link>
                     </li>
-                    <li className="justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/contact">contact.</Link>
                     </li>
-                    <li className="justify-self-center hover:text-gray-300 transition-colors">
+                    <li className="justify-self-center hover:text-stone-400 transition-colors">
                         {isLoggedIn ? (
                             <button 
                                 onClick={() => {

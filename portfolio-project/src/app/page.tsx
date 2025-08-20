@@ -22,7 +22,8 @@ export default function Home() {
     const images: HTMLImageElement[] = [];
     const pinkGradient = { frame: 0 };
 
-    // scrolling gradient logic 
+    // Image sequence animation logic adapted from GSAP community forums
+    // Source: https://gsap.com/community/forums/topic/25188-airpods-image-sequence-animation-using-scrolltrigger/
     if (canvas) {
       const baseWidth = window.innerWidth;
       
@@ -99,7 +100,11 @@ export default function Home() {
       );
     }
 
+  }, [isMobile, authUser]);
+
+  useGSAP(() => {
     // page fade-in effect
+    const page = pageRef.current;
     gsap.fromTo(page, {
       opacity: 0
     }, {
@@ -107,7 +112,7 @@ export default function Home() {
       duration: 2
     });
 
-  }, [isMobile, authUser]);
+  }, [authUser])
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
@@ -125,10 +130,10 @@ export default function Home() {
       <div className="mt-10 flex items-center justify-center relative">
         <canvas 
           ref={canvasRef}
-          className="w-full"
+          className="w-full shadow-2xl"
         ></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="h1 !text-white !text-8xl !font-bold !drop-shadow-lg">MICHAEL FISKEY</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY</h1>
         </div>
       </div>
       <div>

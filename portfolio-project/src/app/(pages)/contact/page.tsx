@@ -122,8 +122,8 @@ const Page = () => {
     return (
         <div ref={pageRef}>
             <div>
-                <div className="flex flex-row items-stretch justify-baseline">
-                    <div className='w-full max-w-[800px] w-flex pt-5 pl-5 pr-5 pb-10'>
+                <div className="page-container">
+                    <div className='w-full max-w-[800px] w-flex'>
                         <h1 className="h1">CONTACT.</h1>
                         <p>If you'd like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
                     </div>
@@ -149,7 +149,7 @@ const Page = () => {
                                 src="/assets/gradient_contact.mp4"
                             />
                             <div className="bg-stone-700 w-full items-center justify-center p-1 rounded-sm relative z-10 bg-opacity-80">
-                                <h2 className="h2 text-center">Contact Form</h2>
+                                <h2 className="h2 !text-white text-center">Contact Form</h2>
                             </div>
                             <div className="m-4 sm:m-8 md:m-8 lg:m-15 grid grid-cols-1 justify-center gap-3 sm:gap-4 md:gap-5 relative z-10">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
