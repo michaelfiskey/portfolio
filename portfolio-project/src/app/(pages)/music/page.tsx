@@ -26,10 +26,31 @@ const Page = () => {
         }
     }
 
-    const handleAddProject = async (projectData: any) => {
-        console.log('Adding project:', projectData);
-        setModalView(false);
-        // Refresh the data after adding
+    const handleAddProject = async (spotifyId: string) => {
+        try {
+            console.log('Adding track:', spotifyId);
+
+            const response = await fetch('http://localhost:5500/api/spotify/add-track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ track_id: spotifyId })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to add track: ${response.status} ${errorText}`);
+            }
+
+            const data = await response.json();
+            console.log('Track added:', data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setModalView(false);
+        }
+
         await refreshTracks();
     };
 
@@ -52,9 +73,9 @@ const Page = () => {
 
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 p-8 shadow-2xl">
                 <div className="text-center mb-8">
-                    <h2 className="h2 !font-bold  mb-3">MY PROJECTS</h2>
+                    <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
                     <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                        Below is a showcase of the amazing projects I've had the privlige of being a part of and some music I've made!
+                        Below is a showcase of the amazing projects I've had the privlige of being a part of and some music I've made myself!
                     </p>
                 </div>
                 <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
@@ -69,7 +90,7 @@ const Page = () => {
                             />
                         ))}
                     </CardHolder>
-                    <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Albums.</p>
+                    <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center gap-6 items-center w-full'>
                         {albums.map((albumId, index) => (
                             <SpotifyCard
@@ -84,11 +105,11 @@ const Page = () => {
                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
                         <button onClick={() => setModalView(true)} className="px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
-                            + Add New Project
+                            + Add New Track
                         </button>
                         {modalView && (
                             <AddMusicModal
-                                title='Add New Project'
+                                title='Add New Track'
                                 isOpen={modalView}
                                 onClose={() => setModalView(false)}
                                 onSubmit={handleAddProject}

@@ -98,6 +98,7 @@ const SpotifyCard = ({
                 {modalView && (
                     <RemoveModal
                         title='Are you sure?'
+                        description={type === 'album' ? 'WARNING: Removing this album will delete all connected tracks (cannot be undone)!' : ''}
                         isOpen={modalView}
                         onClose={() => setModalView(false)}
                         onSubmit={handleRemoveProject}

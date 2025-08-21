@@ -4,6 +4,7 @@ import Modal from './Modal';
 
 type RemoveModalProps = {
     title: string,
+    description?: string,
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (data: any) => void;
@@ -11,6 +12,7 @@ type RemoveModalProps = {
 
 const RemoveModal = ({ 
     title,
+    description,
     isOpen,
     onClose,
     onSubmit
@@ -31,8 +33,7 @@ const RemoveModal = ({
             submitButtonColor='from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400'
         >
             <div className="space-y-4">
-                <div>
-                </div>
+                <p>{description}</p>
             </div>
         </Modal>
     );

@@ -4,12 +4,12 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 interface ModalProps {
+    title?: string;
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (data: any) => void;
     submitButtonText?: string;
     children?: ReactNode;
-    title?: string;
     buttonAlignment?: 'left' | 'center' | 'right';
     submitButtonColor?: string;
 }
