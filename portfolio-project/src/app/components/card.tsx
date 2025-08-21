@@ -29,7 +29,7 @@ const Card = ({ title, description, imageSrc, children }: CardProps) => {
                 scale: 1,
                 duration: 0.8,
                 ease: "back.out(1.7)",
-                delay: Math.random() * 0.3
+                delay: 0.3
             }
         );
 

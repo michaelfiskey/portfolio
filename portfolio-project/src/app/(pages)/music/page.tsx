@@ -4,11 +4,13 @@ import { useAuth } from '../../components/AuthContext';
 import CardHolder from '../../components/CardHolder';
 import { useEffect, useState } from 'react';
 import SpotifyCard from "@/app/components/SpotifyCard";
+import AddMusicModal from '../../components/AddMusicModal';
 
 const Page = () => {
     const { authRole } = useAuth();
-    const [tracks, setTracks] = useState<string[]>([])
-    const [albums, setAlbums] = useState<string[]>([])
+    const [tracks, setTracks] = useState<string[]>([]);
+    const [albums, setAlbums] = useState<string[]>([]);
+    const [modalView, setModalView] = useState(false);
 
     type SpotifyTrack = { track_id: string; album_id: string };
 
@@ -22,16 +24,23 @@ const Page = () => {
             console.log(error);
             return [];
         }
-
     }
 
+    const handleAddProject = async (projectData: any) => {
+        console.log('Adding project:', projectData);
+        setModalView(false);
+        // Refresh the data after adding
+        await refreshTracks();
+    };
+
+    const refreshTracks = async () => {
+        const trackData = await getSpotifyTracks();
+        setTracks(trackData.map((item: { track_id: string }) => item.track_id));
+        setAlbums([...new Set(trackData.map((item: {album_id: string}) => item.album_id))]);
+    };
+
     useEffect(() => {
-        const fetchTracks = async () => {
-            const trackData = await getSpotifyTracks();
-            setTracks(trackData.map((item: { track_id: string }) => item.track_id));
-            setAlbums([...new Set(trackData.map((item: {album_id: string}) => item.album_id))]);
-        }
-        fetchTracks();
+        refreshTracks();
     }, [])
     
     return (
@@ -54,7 +63,10 @@ const Page = () => {
                         {tracks.map((trackId, index) => (
                             <SpotifyCard
                                 key={trackId}
-                                spotifyUrl={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`}/>
+                                spotifyId={trackId}
+                                type='track'
+                                onRemove={refreshTracks}
+                            />
                         ))}
                     </CardHolder>
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Albums.</p>
@@ -62,15 +74,26 @@ const Page = () => {
                         {albums.map((albumId, index) => (
                             <SpotifyCard
                                 key={albumId}
-                                spotifyUrl={`https://open.spotify.com/embed/album/${albumId}?utm_source=generator&theme=0`}/>
+                                spotifyId={albumId}
+                                type='album'
+                                onRemove={refreshTracks}
+                            />
                         ))}
                     </CardHolder>
                 </div>
                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
-                        <button className="px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-full hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <button onClick={() => setModalView(true)} className="px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
                             + Add New Project
                         </button>
+                        {modalView && (
+                            <AddMusicModal
+                                title='Add New Project'
+                                isOpen={modalView}
+                                onClose={() => setModalView(false)}
+                                onSubmit={handleAddProject}
+                            />
+                        )}
                     </div>
                 )}
             </div>
