@@ -38,9 +38,7 @@ jobs:
       
       - name: Build application
         run: npm run build
-        env:
-          DISABLE_ESLINT_PLUGIN: true
-      
+
       - name: Verify build artifacts
         run: |
           if [ -d ".next" ]; then

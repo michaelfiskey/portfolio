@@ -147,11 +147,11 @@ export default function Home() {
         <div>
           <h1 className="h1">ESSENTIALS:</h1>
           <h3 className="h3">About me</h3>
-          <p>Hello! I'm Michael. I am a data analyst and aspiring junior web developer.</p>
+          <p>Hello! I&apos;m Michael. I am a data analyst and aspiring junior web developer.</p>
         </div>
         <div>
           <h1 className="h1">WHAT YOU WILL FIND HERE</h1>
-          <p>To be honest, im not really sure. I'm just doing this to test the layout of my website. So far, I don't think I'm a fan of how I'm designing this...</p>
+          <p>To be honest, I&apos;m not really sure. I&apos;m just doing this to test the layout of my website. So far, I don&apos;t think I&apos;m a fan of how I&apos;m designing this...</p>
         </div>
       </div>
       <div className="h-[300px]">
