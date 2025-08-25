@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { expect, test, vi } from 'vitest';
 import Modal from './Modal';
 
 test('renders modal when isOpen is true', () => {
@@ -33,7 +32,7 @@ test('title displays when provided', () => {
 });
 
 test('close button calls onClose fnc', () => {
-    const testOnClose = vi.fn();
+    const testOnClose = jest.fn();
 
     render(
         <Modal isOpen={true} onClose={testOnClose} onSubmit={() => {}}/>
@@ -46,7 +45,7 @@ test('close button calls onClose fnc', () => {
 });
 
 test('cancel button calls onClose', () => {
-    const testOnClose = vi.fn();
+    const testOnClose = jest.fn();
 
     render(
         <Modal isOpen={true} onClose={testOnClose} onSubmit={() => {}}/>
@@ -59,7 +58,7 @@ test('cancel button calls onClose', () => {
 });
 
 test('out of modal click calls onClose', () => {
-    const testOnClose = vi.fn();
+    const testOnClose = jest.fn();
 
     render(
         <Modal isOpen={true} onClose={testOnClose} onSubmit={() => {}}/>
@@ -72,7 +71,7 @@ test('out of modal click calls onClose', () => {
 });
 
 test('submit button calls onSubmit', () => {
-    const testOnSubmit = vi.fn();
+    const testOnSubmit = jest.fn();
 
     render(
         <Modal isOpen={true} onClose={() => {}} onSubmit={testOnSubmit}/>
