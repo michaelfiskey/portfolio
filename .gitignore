@@ -13,3 +13,4 @@ db.sqlite3
 
 # VSCode settings (optional)
 .vscode/
+node_modules

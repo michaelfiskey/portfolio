@@ -11,6 +11,7 @@ type SpotifyCardProps = {
     width?: string;
     height?: string;
     title?: string;
+    theme?: boolean;
     onRemove?: () => Promise<void>;
 };
 
@@ -20,11 +21,13 @@ const SpotifyCard = ({
     width = "100%", 
     height = "352",
     title = "",
+    theme = false,
     onRemove
 }: SpotifyCardProps) => {
     const { authRole } = useAuth();
     const [modalView, setModalView] = useState(false);
-    const spotifyUrl = `https://open.spotify.com/embed/${type}/${spotifyId}?utm_source=generator&theme=0`
+    const themeQuery = theme ? '&theme=0' : '';
+    const spotifyUrl = `https://open.spotify.com/embed/${type}/${spotifyId}?utm_source=generator${themeQuery}`
     
     const removeSpotifyAlbum = async () => {
         try {
@@ -34,7 +37,6 @@ const SpotifyCard = ({
 
             const data = await response.json();
 
-            console.log(data)
             return;
 
         } catch (error) {
@@ -51,7 +53,6 @@ const SpotifyCard = ({
 
             const data = await response.json();
 
-            console.log(data)
             return;
 
         } catch (error) {

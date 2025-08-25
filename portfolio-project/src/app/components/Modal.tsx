@@ -1,3 +1,4 @@
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import gsap from 'gsap';
@@ -16,15 +17,15 @@ interface ModalProps {
 
 const Modal = ({ title, isOpen, onClose, onSubmit, submitButtonText='Submit', children, buttonAlignment='right', submitButtonColor='from-red-400 to-rose-300 hover:from-red-500 hover:to-rose-400' }: ModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null);
-    const overlayRef = useRef<HTMLDivElement>(null);
+    const backgroundRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
 
     useGSAP(() => {
-        const overlay = overlayRef.current;
+        const background = backgroundRef.current;
         const modal = modalRef.current;
-        if (!modal || !overlayRef) return;
+        if (!modal || !backgroundRef) return;
 
-        gsap.fromTo(overlay, 
+        gsap.fromTo(background, 
             {
                 opacity: 0,
             },
@@ -58,7 +59,8 @@ const Modal = ({ title, isOpen, onClose, onSubmit, submitButtonText='Submit', ch
 
     return createPortal(
         <div 
-            ref={overlayRef}
+            data-testid='background'
+            ref={backgroundRef}
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]"
             onClick={onClose}
         >
@@ -83,7 +85,7 @@ const Modal = ({ title, isOpen, onClose, onSubmit, submitButtonText='Submit', ch
                 <div className={`flex gap-2 ${
                     buttonAlignment === 'center' ? 'justify-center' : 
                     buttonAlignment === 'right' ? 'justify-end' : 
-                    'justify-end' // default
+                    'justify-end' 
                 }`}>
                     <button 
                         onClick={onClose}

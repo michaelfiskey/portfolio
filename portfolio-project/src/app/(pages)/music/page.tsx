@@ -1,16 +1,16 @@
 'use client';
 import React from "react";
-import { useAuth } from '../../components/AuthContext';
-import CardHolder from '../../components/CardHolder';
+import { useAuth } from '@/app/components/AuthContext';
+import CardHolder from '@/app/components/CardHolder';
 import { useEffect, useState } from 'react';
 import SpotifyCard from "@/app/components/SpotifyCard";
-import AddMusicModal from '../../components/AddMusicModal';
-
+import Modal from "@/app/components/Modal";
 const Page = () => {
     const { authRole } = useAuth();
     const [tracks, setTracks] = useState<string[]>([]);
     const [albums, setAlbums] = useState<string[]>([]);
     const [modalView, setModalView] = useState(false);
+    const [spotifyId, setSpotifyId] = useState('');
 
     type SpotifyTrack = { track_id: string; album_id: string };
 
@@ -18,16 +18,21 @@ const Page = () => {
         try {
             const response = await fetch('http://localhost:5500/api/spotify/track-ids')
             const data = await response.json();
-            console.log(data)
             return data as SpotifyTrack[];
+
         } catch (error) {
             console.log(error);
             return [];
         }
     }
 
-    const handleAddProject = async (spotifyId: string) => {
+    const handleAddProject = async () => {
         try {
+            if (!spotifyId.trim()) {
+                alert('Please enter a Spotify Id!');
+                return;
+            }
+
             console.log('Adding track:', spotifyId);
 
             const response = await fetch('http://localhost:5500/api/spotify/add-track', {
@@ -49,6 +54,7 @@ const Page = () => {
             console.error(error);
         } finally {
             setModalView(false);
+            setSpotifyId('');
         }
 
         await refreshTracks();
@@ -87,6 +93,7 @@ const Page = () => {
                                 spotifyId={trackId}
                                 type='track'
                                 onRemove={refreshTracks}
+                                theme={true}
                             />
                         ))}
                     </CardHolder>
@@ -98,6 +105,7 @@ const Page = () => {
                                 spotifyId={albumId}
                                 type='album'
                                 onRemove={refreshTracks}
+                                theme={true}
                             />
                         ))}
                     </CardHolder>
@@ -107,13 +115,34 @@ const Page = () => {
                         <button onClick={() => setModalView(true)} className="px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
                             + Add New Track
                         </button>
-                        {modalView && (
-                            <AddMusicModal
+                        {modalView && (<>
+                            <Modal
                                 title='Add New Track'
                                 isOpen={modalView}
-                                onClose={() => setModalView(false)}
+                                onClose={() => {setModalView(false); setSpotifyId('')}}
                                 onSubmit={handleAddProject}
-                            />
+                            >
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Spotify ID
+                                        </label>
+                                        <input
+                                            type="url"
+                                            value={spotifyId}
+                                            onChange={(e) => setSpotifyId(e.target.value)}
+                                            placeholder="3qpSOmkUobfgpaRXhqc8zT"
+                                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            Paste the Spotify ID for the track you want to add. If there is an associated album with the track, it will be added automatically.
+                                        </p>
+                                    </div>
+                                </div>
+                            </Modal>
+                            </>
+                            
+                            
                         )}
                     </div>
                 )}
