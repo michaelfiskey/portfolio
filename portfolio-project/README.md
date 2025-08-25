@@ -1,7 +1,5 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<!-- CI Pipeline Test Comment - Testing automated workflow -->
-
 ## Getting Started
 
 First, run the development server:
