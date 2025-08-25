@@ -132,7 +132,7 @@ const Page = () => {
             router.push('/')
 
 
-        } catch(error) {
+        } catch {
             setErrors(['An internal error occurred. Please try again.']);
         }
     }

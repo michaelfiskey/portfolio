@@ -2,10 +2,10 @@
 import {useState, useContext, createContext, Dispatch, SetStateAction, ReactNode} from 'react';
 
 interface AuthContextType {
-    authUser: any;
-    setAuthUser: Dispatch<SetStateAction<any>>;
-    authRole: any;
-    setAuthRole: Dispatch<SetStateAction<any>>;
+    authUser: string | null;
+    setAuthUser: Dispatch<SetStateAction<string | null>>;
+    authRole: string | null;
+    setAuthRole: Dispatch<SetStateAction<string | null>>;
     isLoggedIn: boolean;
     setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
@@ -13,8 +13,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({children}: { children: ReactNode }) => {
-	const [authUser, setAuthUser] = useState(null);
-    const [authRole, setAuthRole] = useState(null)
+	const [authUser, setAuthUser] = useState<string | null>(null);
+    const [authRole, setAuthRole] = useState<string | null>(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const value = {

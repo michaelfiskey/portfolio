@@ -8,7 +8,7 @@ interface ModalProps {
     title?: string;
     isOpen: boolean;
     onClose: () => void;
-    onSubmit: (data: any) => void;
+    onSubmit: (data?: FormData | Record<string, unknown>) => void;
     submitButtonText?: string;
     children?: ReactNode;
     buttonAlignment?: 'left' | 'center' | 'right';

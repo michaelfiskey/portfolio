@@ -118,7 +118,7 @@ export default function Home() {
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
       {isLoggedIn ? (
         <div className="mt-8 ml-4">
-          <h1 className='h1 -mb-12.5'>HELLO, {`${authUser.slice(0,30)}`}.</h1>
+          <h1 className='h1 -mb-12.5'>HELLO, {`${authUser?.slice(0,30) || 'USER'}`}.</h1>
             <h1 className='h1 mt-30 -mb-12.5'>I AM.</h1>
         </div>
       ) : (

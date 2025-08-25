@@ -90,7 +90,7 @@ const Page = () => {
             setAuthRole(data.user.role);
             router.push('/');
 
-        } catch (error) {
+        } catch {
             setErrors(['An internal error has occurred. Please try again.']);
             clearFormFields()
             setIsLoggedIn(false);
@@ -165,7 +165,7 @@ const Page = () => {
                                     Login!
                                 </button>
                             </div>
-                            <p className='text-center text-white'>Don't have an account?<br/>
+                            <p className='text-center text-white'>Don&apos;t have an account?<br/>
                                 <Link href='/sign-up'><u>Sign up here!</u></Link>
                             </p>
                         </div>

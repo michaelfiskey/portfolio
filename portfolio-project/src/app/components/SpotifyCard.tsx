@@ -35,7 +35,7 @@ const SpotifyCard = ({
                 { method: 'DELETE' }
             )
 
-            const data = await response.json();
+            await response.json();
 
             return;
 
@@ -51,7 +51,7 @@ const SpotifyCard = ({
                 { method: 'DELETE' }
             )
 
-            const data = await response.json();
+            await response.json();
 
             return;
 

@@ -81,13 +81,13 @@ const Page = () => {
                 <div className="text-center mb-8">
                     <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
                     <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                        Below is a showcase of the amazing projects I've had the privlige of being a part of and some music I've made myself!
+                        Below is a showcase of the amazing projects I&apos;ve had the privlige of being a part of and some music I&apos;ve made myself!
                     </p>
                 </div>
                 <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Tracks.</p>
                     <CardHolder className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center gap-6 items-center w-full mb-7'>
-                        {tracks.map((trackId, index) => (
+                        {tracks.map((trackId) => (
                             <SpotifyCard
                                 key={trackId}
                                 spotifyId={trackId}
@@ -99,7 +99,7 @@ const Page = () => {
                     </CardHolder>
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center gap-6 items-center w-full'>
-                        {albums.map((albumId, index) => (
+                        {albums.map((albumId) => (
                             <SpotifyCard
                                 key={albumId}
                                 spotifyId={albumId}

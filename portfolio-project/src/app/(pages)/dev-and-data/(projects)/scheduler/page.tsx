@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { useRef, useState } from 'react'; 
-import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective, EventSettingsModel } from '@syncfusion/ej2-react-schedule';
+import { useState } from 'react'; 
+import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 
 // syncfusion schedule styling
 import '@syncfusion/ej2-base/styles/material.css';
@@ -17,30 +17,29 @@ import '@syncfusion/ej2-react-schedule/styles/material.css';
 
 type ScheduleResponse = {
     title?: string
-    schedules?: any[]; 
+    schedules?: ScheduleEvent[]; 
     start?: string
     end?: string
 };
 
-type Event = {
-    startDate?: Date
-    endDate?: Date
-    subject?: string
-}
+type ScheduleEvent = {
+    id?: string;
+    title: string;
+    start: string;
+    end: string;
+    color?: string;
+    names?: string[];
+};
 
 const Page = () => {
     const [data, setData] = useState<ScheduleResponse | null>(null);
-    const [events, setEvents] = useState<any[]>([]);
+    const [events, setEvents] = useState<ScheduleEvent[]>([]);
     const [duration, setDuration] = useState(15)
     const [url, setUrl] = useState({
         value: '',
         isTouched: false,
         isValid: true,
     });
-
-    const colors = [
-        '#FF6B6B', '#4ECDC4', '#FFD93D', '#1A535C', '#FF9F1C', '#5F4B8B', '#FFB7B2', '#6A4C93'
-    ];
 
     const handleUrlValidation = (url: string) => {
         const regex = /^(https:\/\/)?(www\.)?when2meet\.com\/\?[\w-]+$/;
@@ -56,7 +55,7 @@ const Page = () => {
         });
         const data = await response.json();
         setData(data)
-        setEvents(data.schedules ? data.schedules.map((item: any, idx: number) => (
+        setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
             {  Id: idx, 
                Subject: data.title,
                StartTime: new Date(item.start),

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from './Modal';
 
 type RemoveModalProps = {
@@ -7,7 +7,7 @@ type RemoveModalProps = {
     description?: string,
     isOpen: boolean;
     onClose: () => void;
-    onSubmit: (data: any) => void;
+    onSubmit: () => void;
 };
 
 const RemoveModal = ({ 
@@ -19,7 +19,7 @@ const RemoveModal = ({
 }: RemoveModalProps) => {
 
     const handleSubmit = () => {
-        onSubmit({});
+        onSubmit();
     };
 
     return (

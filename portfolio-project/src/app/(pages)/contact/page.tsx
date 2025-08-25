@@ -123,9 +123,9 @@ const Page = () => {
         <div ref={pageRef}>
             <div>
                 <div className="page-container">
-                    <div className='w-full max-w-[800px] w-flex'>
+                    <div className="w-full max-w-[800px] w-flex">
                         <h1 className="h1">CONTACT.</h1>
-                        <p>If you'd like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
+                        <p>If you&apos;d like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
                     </div>
                 </div>
                 <div className="flex flex-1 justify-center items-center px-5">

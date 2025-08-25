@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import React from 'react';
 
 const Page = () => {
     return (
