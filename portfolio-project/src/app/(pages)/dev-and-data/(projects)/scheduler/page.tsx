@@ -35,6 +35,7 @@ const Page = () => {
     const [data, setData] = useState<ScheduleResponse | null>(null);
     const [events, setEvents] = useState<ScheduleEvent[]>([]);
     const [duration, setDuration] = useState(15)
+    const [urlError, setUrlError] = useState('');
     const [url, setUrl] = useState({
         value: '',
         isTouched: false,
@@ -42,29 +43,52 @@ const Page = () => {
     });
 
     const handleUrlValidation = (url: string) => {
-        const regex = /^(https:\/\/)?(www\.)?when2meet\.com\/\?[\w-]+$/;
-        return regex.test(url);
+        try {
+            const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+            const urlObj = new URL(fullUrl);
+            return urlObj.hostname.includes('when2meet.com');
+            
+        } catch {
+            return false;
+        }
     }
 
     const handleSubmit = async () => {
-        if (!url.value || !url.isValid) return;
-        const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/find-schedules/`, {
+        try {
+            if (!url.value || !url.isValid) return;
+
+            const fullUrl = url.value.startsWith('http') ? url.value : `https://${url}`
+            const urlObj = new URL(fullUrl)
+            const scheduleId = urlObj.search.slice(1)
+            const formattedUrl = `https://www.when2meet.com/?${scheduleId}`
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/find-schedules/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: url.value, duration: duration })
-        });
-        const data = await response.json();
-        setData(data)
-        setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
-            {  Id: idx, 
-               Subject: data.title,
-               StartTime: new Date(item.start),
-               EndTime: new Date(item.end),
-               IsAllDay: false,
-            }
-        )): [])
+            body: JSON.stringify({ url: formattedUrl, duration: duration })
+            });
 
-        console.log(data)
+            const data = await response.json();
+            
+            if (!response.ok) {
+                setUrlError(data.error)
+                return;
+            }
+
+            setData(data)
+            setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
+                {  Id: idx, 
+                Subject: data.title,
+                StartTime: new Date(item.start),
+                EndTime: new Date(item.end),
+                IsAllDay: false,
+                }
+            )): [])
+
+            console.log(data)
+        } catch {
+
+        }
     };
 
     return (    
@@ -75,11 +99,16 @@ const Page = () => {
                 <div className='flex flex-row w-full justify-between gap-2'>
                     <input
                         onChange={(e) => {
+                            const inputValue = e.target.value.slice(0, 100);
+                            const isValid = handleUrlValidation(inputValue);
+                            
                             setUrl(prev => ({
                                 ...prev,
-                                value: e.target.value.slice(0, 100),
-                                isValid: handleUrlValidation(e.target.value.slice(0, 100))
+                                value: inputValue,
+                                isValid: isValid
                             }))
+
+                            isValid ? setUrlError('') : setUrlError('Invalid URL!')
                         }}
                         onBlur={() => { setUrl(prev => ({ ...prev, isTouched: true })) }}
                         placeholder=" https://when2meet.com/example"
@@ -107,7 +136,7 @@ const Page = () => {
                     </button>
                 </div>
             </div>
-            {url.isTouched && !url.value ? <p className='mt-3 text-red-500'>URL is required!</p> : (url.isTouched && !url.isValid ? <p className='mt-3 text-red-500'>Invalid URL format!</p> : null)}
+            {url.isTouched && (!url.value || url.isValid) ? <p className='mt-3 text-red-500'>{urlError}</p> : (url.isTouched && !url.isValid ? <p className='mt-3 text-red-500'>Invalid URL format!</p> : null)}
             <div>
                 <ScheduleComponent
                 eventSettings={{dataSource: events}}

@@ -22,6 +22,9 @@ def find_schedules(request):
                 if isinstance(window.get(key), (pd.Timestamp, datetime)):
                     window[key] = window.get(key).isoformat()
         return Response({'title': title, 'start': start, 'end': end, 'schedules': schedules})
+    except IndexError as e:
+        print ("SCRAPE ERROR:", e)
+        return Response({'error' : 'Error: Schedule invalid. Are you sure you inputted the correct url?'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     except Exception as e:
         print("SCRAPE ERROR:", e)
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
