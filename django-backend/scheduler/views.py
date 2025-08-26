@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
-from .when2meet_scraper import scrape
+from .scraper import scrape
 from .algorithm import optimal_schedules
 from rest_framework.decorators import api_view, permission_classes
 from datetime import datetime

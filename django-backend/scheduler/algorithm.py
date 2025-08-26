@@ -1,15 +1,15 @@
 import pandas as pd
 from datetime import datetime, timedelta
-from .when2meet_scraper import scrape
+
 pd.set_option('future.no_silent_downcasting', True)
 
-def get_max_duration(when2meet_schedule: pd.DataFrame) -> int:
+def get_max_duration(schedule: pd.DataFrame) -> int:
     today = datetime.today().date()
     
-    start_date = when2meet_schedule['date'].iloc[0].date()
-    start_time = when2meet_schedule['date'].iloc[0].time()
-    end_date = (when2meet_schedule['date'].iloc[-1] + timedelta(minutes=15)).date()
-    end_time = (when2meet_schedule['date'].iloc[-1] + timedelta(minutes=15)).time()
+    start_date = schedule['date'].iloc[0].date()
+    start_time = schedule['date'].iloc[0].time()
+    end_date = (schedule['date'].iloc[-1] + timedelta(minutes=15)).date()
+    end_time = (schedule['date'].iloc[-1] + timedelta(minutes=15)).time()
 
     if end_time < start_time:
         time_difference = (datetime.combine(today + timedelta(days=1), end_time) - 
@@ -22,25 +22,17 @@ def get_max_duration(when2meet_schedule: pd.DataFrame) -> int:
     
     return days * hours_per_day
 
-def assign_song_part(name: str, song: str, part: str, when2meet_schedule: pd.DataFrame):
-    df = pd.DataFrame([{'name' : name, song : True, f'{song}_part' : part}])
-    new_when2meet_schedule = when2meet_schedule.merge(df, how='outer', on='name')
-    new_when2meet_schedule[song].fillna(False, inplace=True)
-    print(df.head())
-    new_when2meet_schedule.to_csv('test1.csv')
-    return new_when2meet_schedule
-
-def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60):
+def optimal_schedules(schedule: pd.DataFrame = None, meeting_window=60):
     if meeting_window < 15:
         raise ValueError(f'A meeting window must be at least 15 minutes!')
-    max_duration = get_max_duration(when2meet_schedule)
+    max_duration = get_max_duration(schedule)
     if meeting_window > max_duration:
         raise ValueError(f'Meeting window has exceeded the schedule! Please choose a smaller meeting window less than {max_duration} minutes.')
     if meeting_window % 15 != 0:
         raise ValueError(f'A meeting window must be an increment of 15 minutes!')
     
-    when2meet_schedule['available'] = True
-    pivot = when2meet_schedule.pivot_table(
+    schedule['available'] = True
+    pivot = schedule.pivot_table(
         index='date',
         columns='name',
         values='available',
@@ -53,13 +45,13 @@ def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60
     date_range = pd.date_range(start=start, end=end, freq='15min')
     empty_schedule = pd.DataFrame({'date': date_range})
 
-    schedule = empty_schedule.join(pivot, on='date', how='left').fillna(False).infer_objects(copy=False)
+    full_schedule = empty_schedule.join(pivot, on='date', how='left').fillna(False).infer_objects(copy=False)
     
     schedule_tracker = {}
 
     while (window_start < end) and (end - window_start) >= timedelta(minutes=meeting_window):
         window_end = window_start + timedelta(minutes=meeting_window)
-        available = schedule.loc[(schedule['date'] >= window_start) & (schedule['date'] < window_end), schedule.columns[1:]].all(axis=0)
+        available = full_schedule.loc[(full_schedule['date'] >= window_start) & (full_schedule['date'] < window_end), full_schedule.columns[1:]].all(axis=0)
 
         names = available[available].index.tolist()
 
@@ -73,7 +65,6 @@ def optimal_schedules(when2meet_schedule: pd.DataFrame = None, meeting_window=60
     if not schedule_tracker or max(schedule_tracker.keys()) == 0:
         return 'NO SCHEDULES FOUND'
     return start, end, schedule_tracker[max(schedule_tracker.keys())]
-
 
 def main():
     pass
