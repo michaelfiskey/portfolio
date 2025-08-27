@@ -1,48 +1,44 @@
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict, List, Tuple
 import pandas as pd
 import requests
 import re
+import pdb
 
-def scrape(url: str) -> pd.DataFrame:
+def parse(html: str) -> Tuple[str, pd.DataFrame]:
     """
-    Scrapes raw html from a When2MeetURL and parses and sorts availiblity data into a Pandas DataFrame object.
+    Parses the raw html of a When2Meet schedule and sorts availiblity data into a Pandas DataFrame object.
 
-    Args:
-        url (str): When2MeetURL
+        Args:
+            html (str): Raw When2Meet HTML
 
         Returns:
             tuple: A tuple containing (title, DataFrame) where:
-                - title (str): The meeting title from the page
-                - DataFrame: Pandas DataFrame with columns ['name', 'date']
-                
-        Raises:
-            ValueError: If the HTTP request fails or returns non-200 status
-            
-        Example:
-            >>> title, df = scrape("https://when2meet.com/12345")
-            >>> print(title)
-            "Team Meeting"
-            >>> print(df.head())
+            - title (str): The meeting title from the page
+            - DataFrame: Pandas DataFrame with columns ['name', 'date']           
     """
-    
-    response = requests.get(url)
-    if response.status_code != 200:
-        raise ValueError(f"Failed to fetch data from {url}. Status code: {response.status_code}")
-
-    html = response.text
 
     # regex matching
-    title_match = re.search(r'<title>(.*?)<\/title>', html)
-    if title_match:
-        title = title_match.group(1).replace(' - When2meet', '').strip()
-    else:
-        title = None
+    title_match = re.search(r'<title>(.+?)<\/title>', html)
     name_matches = re.findall(r"PeopleNames\[(\d+)\] = '([^']+)';", html)
     id_matches = re.findall(r"PeopleIDs\[(\d+)\] = (\d+);", html)
     time_of_slot_matches = re.findall(r'TimeOfSlot\[(\d+)\]\s*=\s*(\d+);', html)
     available_at_slot_matches = re.findall(r'AvailableAtSlot\[(\d+)\].push\((\d+)\);', html)
 
+    if (len(name_matches) < 1 or len(id_matches) < 1):
+        raise ValueError('No participant names or IDs found in the provided When2Meet HTML.')
+    if (len(time_of_slot_matches) < 1):
+        raise ValueError('No valid timeslots found in the provided When2Meet HTML.')
+    
+    if title_match: title = title_match.group(1).replace(' - When2meet', '').strip()
+    else: 
+        start_date = datetime.fromtimestamp(int(time_of_slot_matches[0][1])).date()
+        end_date = datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1][1])).date()
+        title = f'New Schedule ({start_date} - {end_date})' if (start_date < end_date) else f'New Schedule ({start_date})'
+        
+    if (not available_at_slot_matches):
+        return title, pd.DataFrame({})
+    
     # convert matching lists into dictionaries to prep to convert data into a Pandas DataFrame object
     names_dict = {int(index): name for index, name in name_matches}
     ids_dict = {int(index): int(id) for index, id in id_matches}
@@ -69,3 +65,23 @@ def scrape(url: str) -> pd.DataFrame:
     schedule.reset_index(drop=True, inplace=True)
     
     return title, schedule
+    
+def scrape(url: str) -> pd.DataFrame:
+    '''
+    Scrapes a raw When2Meet schedule html and parses availibility data.
+
+        Raises:
+            ValueError: If the HTTP request fails or returns non-200 status
+
+        Returns:
+            tuple: A tuple containing (title, DataFrame) where:
+            - title (str): The meeting title from the page
+            - DataFrame: Pandas DataFrame with columns ['name', 'date']     
+    '''
+
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise ValueError(f"Failed to fetch data from {url}. Status code: {response.status_code}")
+    html = response.text
+    return parse(html)
+
