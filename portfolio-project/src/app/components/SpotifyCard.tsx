@@ -8,6 +8,7 @@ import RemoveModal from './RemoveModal';
 type SpotifyCardProps = {
     spotifyId: string;
     type: 'track' | 'album';
+    category?: 'personal' | 'favorite';
     width?: string;
     height?: string;
     title?: string;
@@ -18,6 +19,7 @@ type SpotifyCardProps = {
 const SpotifyCard = ({ 
     spotifyId, 
     type,
+    category,
     width = "100%", 
     height = "352",
     title = "",

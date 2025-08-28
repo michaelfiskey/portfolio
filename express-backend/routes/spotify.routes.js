@@ -19,7 +19,6 @@ spotifyRouter.get('/track-ids', async (req, res) => {
     }
 });
 
-
 spotifyRouter.delete('/track/:track_id', async (req, res) => {
     try {
         const { track_id } = req.params;
@@ -69,7 +68,7 @@ spotifyRouter.delete('/album/:album_id', async (req, res) => {
 });
 
 spotifyRouter.post('/add-track', async (req, res) => {
-    const { track_id } = req.body;
+    const { track_id, track_category } = req.body;
     if (!track_id) {
         return res.status(400).json({ error: 'track id is required' });
     }
@@ -96,7 +95,7 @@ spotifyRouter.post('/add-track', async (req, res) => {
         const { data, error } = await supabase
             .from('spotify_tracks')
             .insert([
-                { track_id, track_name, album_id, album_name, artist_id, artist_name, release_year }
+                { track_id, track_name, album_id, album_name, artist_id, artist_name, release_year, track_category }
             ])
             .select();
         if (error) throw error;
