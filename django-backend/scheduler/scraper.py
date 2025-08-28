@@ -58,9 +58,9 @@ def parse(html: str) -> Tuple[str, pd.DataFrame]:
     rows = []
     for date, people in available_at_slot_dict.items():
         for name in people:
-            rows.append({'name': name, 'date' : date})
+            rows.append({'date': date, 'name' : name})
 
-    schedule = pd.DataFrame(rows, columns=['name', 'date'])
+    schedule = pd.DataFrame(rows, columns=['date', 'name'])
     schedule.sort_values(by=['date', 'name'], inplace=True)
     schedule.reset_index(drop=True, inplace=True)
     
