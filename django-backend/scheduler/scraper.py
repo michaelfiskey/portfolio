@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Tuple
 import pandas as pd
 import requests
@@ -32,8 +32,8 @@ def parse(html: str) -> Tuple[str, pd.DataFrame]:
     
     if title_match: title = title_match.group(1).replace(' - When2meet', '').strip()
     else: 
-        start_date = datetime.fromtimestamp(int(time_of_slot_matches[0][1])).date()
-        end_date = datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1][1])).date()
+        start_date = datetime.fromtimestamp(int(time_of_slot_matches[0][1]), tz=timezone.utc).date()
+        end_date = datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1][1]), tz=timezone.utc).date()
         title = f'New Schedule ({start_date} - {end_date})' if (start_date < end_date) else f'New Schedule ({start_date})'
         
     if (not available_at_slot_matches):
@@ -43,7 +43,7 @@ def parse(html: str) -> Tuple[str, pd.DataFrame]:
     names_dict = {int(index): name for index, name in name_matches}
     ids_dict = {int(index): int(id) for index, id in id_matches}
     id_name_dict = {ids_dict[i]: names_dict[i] for i in names_dict if i in ids_dict}
-    time_of_slot_dict = {int(index) : datetime.fromtimestamp(int(time)) for index, time in time_of_slot_matches}
+    time_of_slot_dict = {int(index) : datetime.fromtimestamp(int(time), tz=timezone.utc) for index, time in time_of_slot_matches}
     available_at_slot_dict: Dict[int, List[str]] = {}
 
     for index, person_id in available_at_slot_matches:

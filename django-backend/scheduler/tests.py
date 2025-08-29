@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .scraper import scrape, parse
 from .algorithm import optimal_schedules, get_schedule_length
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 
 
@@ -42,9 +42,9 @@ class ScraperTests(TestCase):
         self.assertEqual(title2, 'Test2 Meeting')
 
         # Test that title is changed to:
-        # 'New Schedule (datetime.fromtimestamp(int(time_of_slot_matches[0])).date() - datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1])).date())'
+        # 'New Schedule (datetime.fromtimestamp(int(time_of_slot_matches[0], tz=timezone.utc)).date() - datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches, tz=timezone.utc) - 1])).date())'
         # IFF title match is not found AND
-        # datetime.fromtimestamp(int(time_of_slot_matches[0])).date() < datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1])).date()
+        # datetime.fromtimestamp(int(time_of_slot_matches[0], tz=timezone.utc)).date() < datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches, tz=timezone.utc) - 1])).date()
         timestamp1 = 1731427200
         timestamp2 = 1731827200
         timestamp3 = 1732427200
@@ -59,12 +59,12 @@ class ScraperTests(TestCase):
         AvailableAtSlot[0].push(112941342);
         '''
         title3, schedule = parse(html3)
-        self.assertEqual(title3, f'New Schedule ({datetime.fromtimestamp(timestamp1).date()} - {datetime.fromtimestamp(timestamp3).date()})')
+        self.assertEqual(title3, f'New Schedule ({datetime.fromtimestamp(timestamp1, tz=timezone.utc).date()} - {datetime.fromtimestamp(timestamp3, tz=timezone.utc).date()})')
 
         # Test that title is changed to:
-        # 'New Schedule (datetime.fromtimestamp(int(time_of_slot_matches[0])).date())'
+        # 'New Schedule (datetime.fromtimestamp(int(time_of_slot_matches[0], tz=timezone.utc)).date())'
         # IFF title match is not found AND 
-        # datetime.fromtimestamp(int(time_of_slot_matches[0])).date() >= datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches) - 1])).date()
+        # datetime.fromtimestamp(int(time_of_slot_matches[0], tz=timezone.utc)).date() >= datetime.fromtimestamp(int(time_of_slot_matches[len(time_of_slot_matches, tz=timezone.utc) - 1])).date()
         timestamp1 = 1731427200
         
         html4 = f'''
@@ -75,7 +75,7 @@ class ScraperTests(TestCase):
         AvailableAtSlot[0].push(112941342);
         '''
         title4, schedule = parse(html4)
-        self.assertEqual(title4, f'New Schedule ({datetime.fromtimestamp(timestamp1).date()})')
+        self.assertEqual(title4, f'New Schedule ({datetime.fromtimestamp(timestamp1, tz=timezone.utc).date()})')
         
     
     #Test missing regex matches before the Dataframe construction process.
@@ -133,7 +133,7 @@ class ScraperTests(TestCase):
     # Test basic dataframe structure on one person and one datetime
     def test_basic_dataframe_structure(self):
         timestamp = 1731427200
-        datetime_from_timestamp = datetime.fromtimestamp(timestamp)
+        datetime_from_timestamp = datetime.fromtimestamp(timestamp, tz=timezone.utc)
 
         html = f'''
         <title>Test Meeting - When2meet</title>
@@ -153,8 +153,8 @@ class ScraperTests(TestCase):
     def test_dataframe_structure_multiple(self):
         start_timestamp = 1731427200
         end_timestamp = start_timestamp + 200000
-        datetime_from_start_timestamp = datetime.fromtimestamp(start_timestamp)
-        datetime_from_end_timestamp = datetime.fromtimestamp(end_timestamp)
+        datetime_from_start_timestamp = datetime.fromtimestamp(start_timestamp, tz=timezone.utc)
+        datetime_from_end_timestamp = datetime.fromtimestamp(end_timestamp, tz=timezone.utc)
 
         html = f'''
         <title>Test Meeting - When2meet</title>
@@ -184,18 +184,20 @@ class ScraperTests(TestCase):
         self.assertEqual(schedule.iloc[-1]['name'], 'Jordan')
 
 class AlgorithmTests(TestCase):
-    non_empty_schedule_placeholder = schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731452400), datetime.fromtimestamp(1731725100)], 'name' : ['Aidan', 'Erick']})
+    non_empty_schedule_placeholder = schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731452400, tz=timezone.utc), datetime.fromtimestamp(1731725100, tz=timezone.utc)], 'name' : ['Aidan', 'Erick']})
     empty_schedule_placeholder = pd.DataFrame({})
 
     # Test get_schedule_length() from 2024-11-12 5PM to 2024-11-15 1AM (minus 15 minutes)
     def test_get_schedule_length_end_time_less_than_start_time(self):
-        schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731452400), datetime.fromtimestamp(1731653100)], 'name' : ['Aidan', 'Erick']})
+        schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731430800, tz=timezone.utc), datetime.fromtimestamp(1731631500, tz=timezone.utc)], 'name' : ['Aidan', 'Erick']})
+        
         length = get_schedule_length(schedule)
         self.assertEqual(length, 1440)
 
     # Test get_schedule_length() from 2024-11-12 5PM to 2024-11-15 9PM (minus 15 minutes)
     def test_get_schedule_length_end_time_greater_than_start_time(self):
-        schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731452400), datetime.fromtimestamp(1731725100)], 'name' : ['Aidan', 'Erick']})
+        schedule = pd.DataFrame({'date' : [datetime.fromtimestamp(1731430800, tz=timezone.utc), datetime.fromtimestamp(1731703500, tz=timezone.utc)], 'name' : ['Aidan', 'Erick']})
+        
         length = get_schedule_length(schedule)
         self.assertEqual(length, 720)
     
