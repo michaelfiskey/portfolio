@@ -119,12 +119,11 @@ export default function Home() {
       {isLoggedIn ? (
         <div className="mt-8 ml-4">
           <h1 className='h1 -mb-12.5'>HELLO, {`${authUser?.slice(0,30) || 'USER'}`}.</h1>
-            <h1 className='h1 mt-30 -mb-12.5'>I AM.</h1>
+          <h1 className='h1 mt-30 -mb-12.5'>I AM.</h1>
         </div>
       ) : (
-        <div className="flex flex-row items-stretch justify-between mt-8">
-          <h1 className='h1 -mb-12.5 ml-4'>HELLO.</h1> 
-          <h1 className='h1 -mb-12.5'>I AM.</h1>
+        <div className="flex flex- items-stretch justify-between mt-8">
+          <h1 className='h1 -mb-12.5 ml-4'>HELLO. I AM.</h1> 
         </div>
       )}
       <div className="mt-10 flex items-center justify-center relative">
@@ -133,7 +132,7 @@ export default function Home() {
           className="w-full shadow-2xl"
         ></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY.</h1>
         </div>
       </div>
       <div>

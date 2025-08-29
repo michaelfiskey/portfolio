@@ -48,9 +48,7 @@ const Page = () => {
             const urlObj = new URL(fullUrl);
             return urlObj.hostname.includes('when2meet.com');
             
-        } catch {
-            return false;
-        }
+        } catch { return false; }
     }
 
     const handleSubmit = async () => {
@@ -149,18 +147,6 @@ const Page = () => {
                     </ViewsDirective>
                     <Inject services={[Day, Week, Month]}/>
                 </ScheduleComponent>
-            </div>
-            <div>
-              {data && data.start && data.end && Array.isArray(data.schedules) ? data.schedules.map((item, idx) => (
-                <div key={idx} className="mb-4 p-2 border-b border-stone-300">
-                  <div>
-                    <strong>Start:</strong> {item.start} <strong>End:</strong> {item.end}
-                  </div>
-                  <div>
-                    <strong>Names:</strong> {Array.isArray(item.names) ? item.names.join(', ') : ''}
-                  </div>
-                </div>
-              )): <p>ERROR DISPLAYING VALUES</p>}
             </div>
         </div>
     )

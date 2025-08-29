@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,8 +81,12 @@ WSGI_APPLICATION = 'django_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'your_supabase_db_name'),
+        'USER': os.environ.get('POSTGRES_USER', 'your_supabase_user'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'your_supabase_password'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'your_supabase_host'),
+        'PORT': os.environ.get('POSTGRES_PORT', '6543'),  # or your Supabase port
     }
 }
 
