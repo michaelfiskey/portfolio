@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useState } from 'react'; 
+import { useState, useCallback } from 'react'; 
 import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 
 // syncfusion schedule styling
@@ -42,14 +42,14 @@ const Page = () => {
         isValid: true,
     });
 
-    const handleUrlValidation = (url: string) => {
+    const handleUrlValidation = useCallback((url: string) => {
         try {
             const fullUrl = url.startsWith('http') ? url : `https://${url}`;
             const urlObj = new URL(fullUrl);
             return urlObj.hostname.includes('when2meet.com');
             
         } catch { return false; }
-    }
+    }, [])
 
     const handleSubmit = async () => {
         try {
@@ -106,7 +106,7 @@ const Page = () => {
                                 isValid: isValid
                             }))
 
-                            isValid ? setUrlError('') : setUrlError('Invalid URL!')
+                            if (isValid) { setUrlError('') } else{ setUrlError('Invalid URL!') }
                         }}
                         onBlur={() => { setUrl(prev => ({ ...prev, isTouched: true })) }}
                         placeholder=" https://when2meet.com/example"

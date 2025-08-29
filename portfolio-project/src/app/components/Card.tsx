@@ -2,6 +2,7 @@
 import React, { useRef, ReactNode } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 type CardProps = {
     title?: string;
@@ -72,7 +73,7 @@ const Card = ({ title, description, imageSrc, children }: CardProps) => {
                 </>
             ) : (
                 <>
-                    {imageSrc && <img src={imageSrc} alt={title || ''} className="rounded-lg" />}
+                    {imageSrc && <Image src={imageSrc} alt={title || ''} className="rounded-lg" />}
                     {title && <h3 className="text-lg font-semibold text-stone-800">{title}</h3>}
                     {description && <p className="text-stone-600">{description}</p>}
                 </>

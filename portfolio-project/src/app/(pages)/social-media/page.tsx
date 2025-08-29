@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from 'next/image';
 const Page = () => {
     return (
         <div>
@@ -12,7 +12,7 @@ const Page = () => {
                     <h2 className="text-stone-700">INTRODUCTION.</h2>
                     <p>In my sophomore year of college, I became the social media manager for my university&apos;s a cappella group, and that&apos;s when I really discovered my enthusiasm for social media and marketing. This experience helped me accomplish the following...</p>
                 </div>
-                <img src='/assets/images/intro.png' 
+                <Image src='/assets/images/intro.png' 
                     alt="Social media introduction showcase"
                     height={200}
                     width={400}

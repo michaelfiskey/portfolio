@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../../components/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -32,7 +32,7 @@ const Page = () => {
         return re.test(String(email).toLowerCase());
     };
     
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         const newErrors: string[] = [];
         
         if (username.isTouched && !username.value.trim()) {
@@ -73,7 +73,7 @@ const Page = () => {
         
         setErrors(newErrors);
         return newErrors.length === 0; 
-    }
+    }, [username, password, email, confirmPassword,])
 
     const isFormValid = () => {
         const hasAllFields = username.value.trim() && 
@@ -87,7 +87,7 @@ const Page = () => {
         if (!hasBackendError) {
             validateForm();
         }
-    }, [username, email, password, confirmPassword, hasBackendError]);
+    }, [username, email, password, confirmPassword, hasBackendError, validateForm]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -1,10 +1,10 @@
 'use client';
-import React from "react";
-import { useAuth } from '@/app/components/AuthContext';
 import CardHolder from '@/app/components/CardHolder';
-import { useEffect, useState } from 'react';
 import SpotifyCard from "@/app/components/SpotifyCard";
 import Modal from "@/app/components/Modal";
+import { useEffect, useState, useCallback } from 'react';
+import { useAuth } from '@/app/components/AuthContext';
+
 const Page = () => {
     const { authRole } = useAuth();
     const [tracks, setTracks] = useState<{ 
@@ -18,7 +18,7 @@ const Page = () => {
 
     type SpotifyTrack = { track_id: string; album_id: string; track_category: string };
 
-    const getSpotifyTracks = async (): Promise<SpotifyTrack[]> => {
+    const getSpotifyTracks = useCallback(async (): Promise<SpotifyTrack[]> => {
         try {
             const response = await fetch('http://localhost:5500/api/spotify/track-ids')
             const data = await response.json();
@@ -28,7 +28,7 @@ const Page = () => {
             console.log(error);
             return [];
         }
-    }
+    }, [])
 
     const handleAddProject = async (trackCategory: string) => {
         try {
@@ -64,7 +64,7 @@ const Page = () => {
         await refreshTracks();
     };
 
-    const refreshTracks = async () => {
+    const refreshTracks = useCallback( async () => {
         const trackData = await getSpotifyTracks();
         setTracks(
           trackData.map((track: { track_id: string; track_category: string }) => ({
@@ -81,11 +81,9 @@ const Page = () => {
                 ).values()
             )
         );
-    };
+    },[getSpotifyTracks]);
 
-    useEffect(() => {
-        refreshTracks();
-    }, [])
+    useEffect(() => {refreshTracks();}, [refreshTracks])
     
     return (
         <div className="page-container">

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import emailjs from '@emailjs/browser'
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -33,12 +33,12 @@ const Page = () => {
         gsap.fromTo(pageRef.current, { opacity: 0 }, { opacity: 1, duration: 1.5 });
     });
 
-    const validateEmail = (email: string) => {
+    const validateEmail = useCallback((email: string) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
-    };
+    },[]);
 
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         const newErrors: string[] = [];
         
         if (firstName.isTouched && !firstName.value.trim()) {
@@ -63,7 +63,7 @@ const Page = () => {
         
         setErrors(newErrors);
         return newErrors.length === 0; 
-    }
+    }, [firstName, lastName, email, message, validateEmail])
 
     const isFormValid = () => {
         const hasAllFields = firstName.value.trim() && 
@@ -75,7 +75,7 @@ const Page = () => {
 
     useEffect(() => {
         validateForm();
-    }, [firstName, lastName, email, message]);
+    }, [firstName, lastName, email, message, validateForm]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
