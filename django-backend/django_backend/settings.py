@@ -79,15 +79,20 @@ WSGI_APPLICATION = 'django_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+'''default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.environ.get('POSTGRES_DB', 'your_supabase_db_name'),
+    'USER': os.environ.get('POSTGRES_USER', 'your_supabase_user'),
+    'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'your_supabase_password'),
+    'HOST': os.environ.get('POSTGRES_HOST', 'your_supabase_host'),
+    'PORT': os.environ.get('POSTGRES_PORT', '6543'),  # or your Supabase port
+}'''
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'your_supabase_db_name'),
-        'USER': os.environ.get('POSTGRES_USER', 'your_supabase_user'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'your_supabase_password'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'your_supabase_host'),
-        'PORT': os.environ.get('POSTGRES_PORT', '6543'),  # or your Supabase port
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+
 }
 
 

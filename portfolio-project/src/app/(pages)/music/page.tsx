@@ -89,7 +89,7 @@ const Page = () => {
         <div className="page-container">
             <div className="mb-12">
                 <h1 className="h1 ">MUSIC.</h1>
-                <div className="w-16 h-1 bg-gradient-to-r from-pink-400 to-rose-300 ml-5 mt-2"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
             </div>
 
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 p-8 shadow-2xl">
