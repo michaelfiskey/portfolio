@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -8,14 +8,18 @@ import { useAuth } from './components/AuthContext';
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
+
   const { authUser, isLoggedIn} = useAuth();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const frameCount = 240;
+  const scrollRowRef = useRef<HTMLDivElement>(null);
+
 
   useGSAP(() => {
+
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     const page = pageRef.current;
@@ -111,8 +115,21 @@ export default function Home() {
       opacity: 1,
       duration: 2
     });
-
   }, [authUser])
+
+  useGSAP(() => {
+    const row = scrollRowRef.current;
+    if (!row) return;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    if (maxScroll <= 0) return;
+    gsap.to(row, {
+      scrollLeft: maxScroll,
+      duration: 10,
+      ease: 'none',
+      repeat: -1,
+      yoyo: true
+    });
+  }, []);
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
@@ -142,21 +159,49 @@ export default function Home() {
         <h1 className="h1 ml-4 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
         <h1 className="h1 ml-4 mb-10 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
       </div>
-      <div className="flex flex-row border-t border-b border-stone-700 overflow-x-auto whitespace-nowrap">
-        <div>
-          <h1 className="h1">ESSENTIALS:</h1>
-          <h3 className="h3">About me</h3>
-          <p>Hello! I&apos;m Michael. I am a data analyst and aspiring junior web developer.</p>
-        </div>
-        <div>
-          <h1 className="h1">WHAT YOU WILL FIND HERE</h1>
-          <p>To be honest, I&apos;m not really sure. I&apos;m just doing this to test the layout of my website. So far, I don&apos;t think I&apos;m a fan of how I&apos;m designing this...</p>
-        </div>
+      <div ref={scrollRowRef} className="scroll-row flex flex-row  overflow-x-auto whitespace-nowrap px-5 py-10 mx-[-60] min-h-[300px] items-center gap-10">
+        <img 
+        className="h-55"
+        src="/assets/images/js.png" 
+        alt="JavaScript logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/next-js.svg" 
+        alt="NextJS logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/express-js.png" 
+        alt="ExpressJS logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/html5.png" 
+        alt="HTML5 logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/css.png" 
+        alt="CSS logo" />
+        <img 
+        className="h-45"
+        src="/assets/images/tailwind.png" 
+        alt="TailwindCSS logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/python.png" 
+        alt="Python logo" />
+        <img 
+        className="h-35"
+        src="/assets/images/django-logo.png" 
+        alt="Django logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/postgresql-logo.png" 
+        alt="PostgreSQL logo" />
+        <img 
+        className="h-55"
+        src="/assets/images/git-logo.png" 
+        alt="Git logo" />
       </div>
-      <div className="h-[300px]">
-      </div>
-
-      
-      </div>
+      <div className="h-[300px]"/>
+    </div>
   );
 }

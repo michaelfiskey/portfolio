@@ -86,3 +86,11 @@ body {
 .bebas-font {
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
 }
+
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+.scroll-row {
+  -ms-overflow-style: none;
+  scrollbar-width: none;    
+}
