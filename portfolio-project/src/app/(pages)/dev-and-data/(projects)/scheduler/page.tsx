@@ -3,7 +3,7 @@ import React from 'react';
 import { useState, useCallback, useEffect } from 'react'; 
 import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 import { registerLicense } from '@syncfusion/ej2-base';
-
+import Spinner from '@/app/components/spinners/Spinner';
 
 // syncfusion schedule styling
 import '@syncfusion/ej2-base/styles/material.css';
@@ -38,6 +38,7 @@ type ScheduleEvent = {
 const Page = () => {
     const [data, setData] = useState<ScheduleResponse | null>(null);
     const [events, setEvents] = useState<ScheduleEvent[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [duration, setDuration] = useState(15)
     const [urlError, setUrlError] = useState('');
     const [url, setUrl] = useState({
@@ -60,6 +61,8 @@ const Page = () => {
         try {
             if (!url.value || !url.isValid) return;
 
+            setIsLoading(true);
+
             const fullUrl = url.value.startsWith('http') ? url.value : `https://${url}`
             const urlObj = new URL(fullUrl)
             const scheduleId = urlObj.search.slice(1)
@@ -75,6 +78,7 @@ const Page = () => {
             
             if (!response.ok) {
                 setUrlError(data.error)
+                setIsLoading(false);
                 return;
             }
 
@@ -105,16 +109,16 @@ const Page = () => {
             }
 
             console.log(data)
+            setIsLoading(false);
         } catch {
-
+            setIsLoading(false);
         }
     }, [url, duration]);
 
-    useEffect(() => {}, [currentView, scheduleTitle, handleSubmit])
+    useEffect(() => {
+    }, [currentView, scheduleTitle, handleSubmit, data])
 
-
-
-            return (
+    return (
                 <div className="page-container">
                     <div className="mb-12">
                         <h1 className="h1">SCHEDULER.</h1>
@@ -124,7 +128,7 @@ const Page = () => {
                     <div className="bg-white backdrop-blur-sm p-8 shadow-2xl rounded-lg">
                         <div className="text-center mb-8">
                             <h2 className="h2 !font-bold mb-3">FIND THE BEST MEETING TIME</h2>
-                            <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-stone-600 text-lg max-w-2xl mx-auto">
                                 Paste a When2Meet schedule URL and select a duration to find the time block where the most people are available from your group.<br/>
                                 The tool finds the window where the <em>same group of people</em> is available for the entire duration.
                             </p>
@@ -171,23 +175,37 @@ const Page = () => {
                                 <p className="mt-3 text-red-500 w-full text-left">Invalid URL format!</p>
                             ) : null)}
                         </div>
-                        <div className="bg-white/80 border border-stone-200 rounded-md p-6 shadow-lg mt-8">
-                            <p className="font-bold text-xl pl-5 mb-2 text-stone-700">{scheduleTitle} options:</p>
-                            <div className="mt-4">
-                                <ScheduleComponent
-                                    eventSettings={{ dataSource: events}}
-                                    selectedDate={new Date(data?.start ?? Date.now())}
-                                    currentView={currentView}
-                                >
-                                    <ViewsDirective>
-                                        <ViewDirective option="Day" />
-                                        <ViewDirective option="Week" />
-                                        <ViewDirective option="Month" />
-                                    </ViewsDirective>
-                                    <Inject services={[Day, Week, Month]} />
-                                </ScheduleComponent>
+                        
+                        {isLoading && (<Spinner isLoading={isLoading}/>)}
+                        
+                        {!isLoading && data && 
+                        <>
+                            <div className="flex flex-col items-center justify-center bg-stone-200/80 rounded-md p-6 shadow-lg mb-8">
+                                <p className='text-stone-600 text-xl max-w-2xl mx-auto leading-relaxed'>There were <b>{data?.schedules?.length ?? 0}</b> schedules found with <b>{(data?.schedules && data.schedules[0]?.names?.length) ?? 0}</b> people available...</p>
                             </div>
-                        </div>
+                            <div className="bg-white/80 border border-stone-200 rounded-md p-6 shadow-lg mt-8">
+                                <p className="font-bold text-xl pl-5 mb-2 text-stone-700">{scheduleTitle} options:</p>
+                                <div className="mt-4">
+                                    <ScheduleComponent
+                                        eventSettings={{ dataSource: events}}
+                                        selectedDate={new Date(data?.start ?? Date.now())}
+                                        currentView={currentView}
+                                        readonly={true}
+                                        minDate={new Date(data?.start ?? Date.now())}
+                                        maxDate={new Date(data?.end ?? Date.now())}
+                                    >
+                                        <ViewsDirective>
+                                            <ViewDirective option="Day" />
+                                            <ViewDirective option="Week" />
+                                            <ViewDirective option="Month" />
+                                        </ViewsDirective>
+                                        <Inject services={[Day, Week, Month]} />
+                                    </ScheduleComponent>
+                                </div>
+                            </div>
+                        </>
+                        }
+
                     </div>
                 </div>
             );

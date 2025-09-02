@@ -4,7 +4,7 @@ import SpotifyCard from "@/app/components/SpotifyCard";
 import Modal from "@/app/components/Modal";
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/app/components/AuthContext';
-
+import ContentLoader from '@/app/components/spinners/ContentLoader';
 const Page = () => {
     const { authRole } = useAuth();
     const [tracks, setTracks] = useState<{ 
@@ -15,6 +15,7 @@ const Page = () => {
         trackCategory: string }[]>([]);   
     const [modalView, setModalView] = useState(false);
     const [spotifyId, setSpotifyId] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     type SpotifyTrack = { track_id: string; album_id: string; track_category: string };
 
@@ -32,6 +33,7 @@ const Page = () => {
 
     const handleAddProject = async (trackCategory: string) => {
         try {
+            setIsLoading(true)
             if (!spotifyId.trim()) {
                 alert('Please enter a Spotify Id!');
                 return;
@@ -54,17 +56,22 @@ const Page = () => {
 
             const data = await response.json();
             console.log('Track added:', data);
+            setIsLoading(false)
         } catch (error) {
             console.error(error);
+            setIsLoading(false)
         } finally {
             setModalView(false);
             setSpotifyId('');
+            setIsLoading(false)
         }
 
         await refreshTracks();
+        setIsLoading(false)
     };
 
     const refreshTracks = useCallback( async () => {
+        setIsLoading(true);
         const trackData = await getSpotifyTracks();
         setTracks(
           trackData.map((track: { track_id: string; track_category: string }) => ({
@@ -81,6 +88,7 @@ const Page = () => {
                 ).values()
             )
         );
+        setIsLoading(false);
     },[getSpotifyTracks]);
 
     useEffect(() => {refreshTracks();}, [refreshTracks])
@@ -102,33 +110,49 @@ const Page = () => {
                 <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Tracks.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
-                    {tracks
-                        .filter((track) => track.trackCategory === 'personal')
-                        .map((track) => (
-                        <div key={track.trackId} className="flex-1 min-w-[300px]">
-                            <SpotifyCard
-                            spotifyId={track.trackId}
-                            type="track"
-                            onRemove={refreshTracks}
-                            theme={false}
-                            />
-                        </div>
-                        ))}
+                    {isLoading ? (
+                        Array.from({ length: 3 }, (_, index) => (
+                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[300px]">
+                                <ContentLoader />
+                            </div>
+                        ))
+                    ) : (
+                        tracks
+                            .filter((track) => track.trackCategory === 'personal')
+                            .map((track) => (
+                            <div key={track.trackId} className="flex-1 min-w-[300px]">
+                                <SpotifyCard
+                                spotifyId={track.trackId}
+                                type="track"
+                                onRemove={refreshTracks}
+                                theme={false}
+                                />
+                            </div>
+                            ))
+                    )}
                     </CardHolder>
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
-                        {albums
-                        .filter((album) => album.trackCategory === 'personal')
-                        .map((album) => (
-                        <div key={album.albumId} className="flex-1 min-w-[300px]">
-                            <SpotifyCard
-                            spotifyId={album.albumId}
-                            type="album"
-                            onRemove={refreshTracks}
-                            theme={false}
-                            />
-                        </div>
-                        ))}
+                        {isLoading ? (
+                            Array.from({ length: 2 }, (_, index) => (
+                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[300px]">
+                                    <ContentLoader />
+                                </div>
+                            ))
+                        ) : (
+                            albums
+                            .filter((album) => album.trackCategory === 'personal')
+                            .map((album) => (
+                            <div key={album.albumId} className="flex-1 min-w-[300px]">
+                                <SpotifyCard
+                                spotifyId={album.albumId}
+                                type="album"
+                                onRemove={refreshTracks}
+                                theme={false}
+                                />
+                            </div>
+                            ))
+                        )}
                     </CardHolder>
                 </div>
                 {authRole === 'owner' && (
@@ -174,33 +198,49 @@ const Page = () => {
                 <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Tracks.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
-                    {tracks
-                        .filter((track) => track.trackCategory === 'favorite')
-                        .map((track) => (
-                        <div key={track.trackId} className="flex-1 min-w-[300px]">
-                            <SpotifyCard
-                            spotifyId={track.trackId}
-                            type="track"
-                            onRemove={refreshTracks}
-                            theme={false}
-                            />
-                        </div>
-                        ))}
+                    {isLoading ? (
+                        Array.from({ length: 3 }, (_, index) => (
+                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[300px]">
+                                <ContentLoader />
+                            </div>
+                        ))
+                    ) : (
+                        tracks
+                            .filter((track) => track.trackCategory === 'favorite')
+                            .map((track) => (
+                            <div key={track.trackId} className="flex-1 min-w-[300px]">
+                                <SpotifyCard
+                                spotifyId={track.trackId}
+                                type="track"
+                                onRemove={refreshTracks}
+                                theme={false}
+                                />
+                            </div>
+                            ))
+                    )}
                     </CardHolder>
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
-                        {albums
-                        .filter((album) => album.trackCategory === 'favorite')
-                        .map((album) => (
-                        <div key={album.albumId} className="flex-1 min-w-[300px]">
-                            <SpotifyCard
-                            spotifyId={album.albumId}
-                            type="album"
-                            onRemove={refreshTracks}
-                            theme={false}
-                            />
-                        </div>
-                        ))}
+                        {isLoading ? (
+                            Array.from({ length: 2 }, (_, index) => (
+                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[300px]">
+                                    <ContentLoader />
+                                </div>
+                            ))
+                        ) : (
+                            albums
+                            .filter((album) => album.trackCategory === 'favorite')
+                            .map((album) => (
+                            <div key={album.albumId} className="flex-1 min-w-[300px]">
+                                <SpotifyCard
+                                spotifyId={album.albumId}
+                                type="album"
+                                onRemove={refreshTracks}
+                                theme={false}
+                                />
+                            </div>
+                            ))
+                        )}
                     </CardHolder>
                 </div>
                                 {authRole === 'owner' && (
