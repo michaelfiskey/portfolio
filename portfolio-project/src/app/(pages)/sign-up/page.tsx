@@ -144,7 +144,7 @@ const Page = () => {
             <div className='mt-10 flex flex-row items-center justify-center'>
                 <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[500px]">
                     {errors.length > 0 && (
-                        <div className="mb-4 p-4 bg-red-100 border border-red-400">
+                        <div className="mb-4 p-4 bg-red-100 border border-red-400 rounded-sm">
                             <ul className="list-disc list-inside text-red-700">
                                 {errors.map((error, index) => (
                                     <li key={index}>{error}</li>
@@ -152,7 +152,7 @@ const Page = () => {
                             </ul>
                         </div>
                     )}
-                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-stone-700 relative overflow-hidden">
+                    <form ref={formRef} onSubmit={handleSubmit} className="text-white border border-stone-700 relative overflow-hidden rounded-sm">
                         <video
                             autoPlay
                             loop
@@ -166,12 +166,12 @@ const Page = () => {
                         </div>
                         <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 placeholder='username' 
                                 name='username' 
                                 value={username.value}
-                                className="input mt-auto w-full" 
+                                className="input mt-auto w-full rounded-b-sm" 
                                 onChange={(e) => {
                                     setUsername({...username, value: e.target.value.slice(0,30)});
                                     if (hasBackendError) setHasBackendError(false);
@@ -180,12 +180,12 @@ const Page = () => {
                             />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-auto"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-auto rounded-t-sm"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
                                 <input
                                 placeholder='john-doe@example.com'
                                 name='email'
                                 value={email.value}
-                                className="input mt-auto w-full"
+                                className="input mt-auto w-full rounded-b-sm"
                                 onChange={(e) => {
                                     setEmail({...email, value: e.target.value.slice(0,100)});
                                     if (hasBackendError) setHasBackendError(false);
@@ -194,13 +194,13 @@ const Page = () => {
                                 />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 type='password'
                                 placeholder='password' 
                                 name='password' 
                                 value={password.value}
-                                className="input mt-auto w-full" 
+                                className="input mt-auto w-full rounded-b-sm" 
                                 onChange={(e) => {
                                     setPassword({...password, value: e.target.value.slice(0,100)});
                                     if (hasBackendError) setHasBackendError(false);
@@ -209,13 +209,13 @@ const Page = () => {
                                 />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full"><p className="ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 type='password'
                                 placeholder='password' 
                                 name='confirmPassword' 
                                 value={confirmPassword.value}
-                                className="input mt-auto w-full" 
+                                className="input mt-auto w-full rounded-b-sm" 
                                 onChange={(e) => {
                                     setConfirmPassword({...confirmPassword, value: e.target.value.slice(0,100)});
                                     if (hasBackendError) setHasBackendError(false);

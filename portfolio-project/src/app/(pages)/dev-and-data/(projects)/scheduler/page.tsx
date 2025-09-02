@@ -130,7 +130,7 @@ const Page = () => {
                             <h2 className="h2 !font-bold mb-3">FIND THE BEST MEETING TIME</h2>
                             <p className="text-stone-600 text-lg max-w-2xl mx-auto">
                                 Paste a When2Meet schedule URL and select a duration to find the time block where the most people are available from your group.<br/>
-                                The tool finds the window where the <em>same group of people</em> is available for the entire duration.
+                                This tool finds windows where the <em>same group of people</em> is available for the entire duration of each window.
                             </p>
                         </div>
                         <div className="flex flex-col items-center justify-center bg-stone-200/80 rounded-md p-6 shadow-lg mb-8">
