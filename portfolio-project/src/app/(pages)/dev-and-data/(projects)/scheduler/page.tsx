@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { useState, useCallback } from 'react'; 
+import { useState, useCallback, useEffect } from 'react'; 
 import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 import { registerLicense } from '@syncfusion/ej2-base';
 
@@ -45,7 +45,8 @@ const Page = () => {
         isTouched: false,
         isValid: true,
     });
-
+    const [currentView, setCurrentView] = useState<'Day' | 'Week' | 'Month'>('Week')
+    const [scheduleTitle, setScheduleTitle] = useState<string>('Schedule');
     const handleUrlValidation = useCallback((url: string) => {
         try {
             const fullUrl = url.startsWith('http') ? url : `https://${url}`;
@@ -55,7 +56,7 @@ const Page = () => {
         } catch { return false; }
     }, [])
 
-    const handleSubmit = async () => {
+    const handleSubmit = useCallback(async () => {
         try {
             if (!url.value || !url.isValid) return;
 
@@ -80,18 +81,38 @@ const Page = () => {
             setData(data)
             setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
                 {  Id: idx, 
-                Subject: data.title,
+                Subject: `Schedule option #${idx + 1}`,
+                Description: `Attendees: (${item.names?.length})\n- ${item.names?.join('\n- ') || 'No attendees'}`,
                 StartTime: new Date(item.start),
                 EndTime: new Date(item.end),
                 IsAllDay: false,
+                IsReadonly: true,
+                CategoryColor: '#f43f5e',
                 }
             )): [])
+
+            setScheduleTitle(data.title)
+
+            const dateDiff = new Date(data.end).getTime() - new Date(data.start).getTime();
+            const daysDiff = dateDiff / (1000 * 60 * 60 * 24);
+            
+            if (daysDiff <= 1) {
+                setCurrentView('Day');
+            } else if (daysDiff <= 7) {
+                setCurrentView('Week');
+            } else {
+                setCurrentView('Month');
+            }
 
             console.log(data)
         } catch {
 
         }
-    };
+    }, [url, duration]);
+
+    useEffect(() => {}, [currentView, scheduleTitle, handleSubmit])
+
+
 
             return (
                 <div className="page-container">
@@ -127,14 +148,14 @@ const Page = () => {
                                     value={duration}
                                     onChange={(e) => setDuration(Number(e.target.value))}
                                 >
-                                    <option value={15}>15min</option>
-                                    <option value={30}>30min</option>
-                                    <option value={45}>45min</option>
-                                    <option value={60}>1h</option>
-                                    <option value={90}>1h 30min</option>
-                                    <option value={120}>2h</option>
-                                    <option value={240}>4h</option>
-                                    <option value={300}>5h</option>
+                                    <option className='text-stone-700' value={15}>15min</option>
+                                    <option className='text-stone-700' value={30}>30min</option>
+                                    <option className='text-stone-700' value={45}>45min</option>
+                                    <option className='text-stone-700' value={60}>1h</option>
+                                    <option className='text-stone-700' value={90}>1h 30min</option>
+                                    <option className='text-stone-700' value={120}>2h</option>
+                                    <option className='text-stone-700' value={240}>4h</option>
+                                    <option className='text-stone-700' value={300}>5h</option>
                                 </select>
                                 <button
                                     disabled={!url.value || !url.isValid}
@@ -151,12 +172,12 @@ const Page = () => {
                             ) : null)}
                         </div>
                         <div className="bg-white/80 border border-stone-200 rounded-md p-6 shadow-lg mt-8">
-                            <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Schedule Results</p>
+                            <p className="font-bold text-xl pl-5 mb-2 text-stone-700">{scheduleTitle} options:</p>
                             <div className="mt-4">
                                 <ScheduleComponent
-                                    eventSettings={{ dataSource: events }}
+                                    eventSettings={{ dataSource: events}}
                                     selectedDate={new Date(data?.start ?? Date.now())}
-                                    currentView="Month"
+                                    currentView={currentView}
                                 >
                                     <ViewsDirective>
                                         <ViewDirective option="Day" />
