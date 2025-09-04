@@ -40,11 +40,11 @@ const Navbar = () => {
                             &lt;dev &amp; data /&gt;<span className="opacity-0 ml-1 inline-block group-hover:animate-pulse">_</span>
                         </Link>
                     </li>
-                    <li className="group justify-self-center hover:text-stone-400 transition-colors">
+                    {/*<li className="group justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/social-media">
                             social media <span className='inline-block group-hover:animate-spin'>&copy;</span>
                         </Link>
-                    </li>
+                    </li>*/}
                     <li className="group justify-self-center hover:text-stone-400 transition-colors">
                         <Link href="/music">
                             music <span className="inline-block group-hover:animate-bounce">&#9835;</span>

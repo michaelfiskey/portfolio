@@ -2,9 +2,12 @@
 import CardHolder from '@/app/components/CardHolder';
 import SpotifyCard from "@/app/components/SpotifyCard";
 import Modal from "@/app/components/Modal";
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useAuth } from '@/app/components/AuthContext';
 import ContentLoader from '@/app/components/spinners/ContentLoader';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+
 const Page = () => {
     const { authRole } = useAuth();
     const [tracks, setTracks] = useState<{ 
@@ -16,18 +19,25 @@ const Page = () => {
     const [modalView, setModalView] = useState(false);
     const [spotifyId, setSpotifyId] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const pageRef = useRef<HTMLDivElement>(null);
 
     type SpotifyTrack = { track_id: string; album_id: string; track_category: string };
 
+    
+    useGSAP(() => {
+        // page fade-in effect
+        const page = pageRef.current;
+        gsap.fromTo(page, {
+        opacity: 0
+        }, {
+        opacity: 1,
+        duration: 2
+        });
+    });
+
     const getSpotifyTracks = useCallback(async (): Promise<SpotifyTrack[]> => {
         try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/track-ids`, 
-                {
-                    method: 'GET',
-                    headers: { 'Authorization' : `Bearer ${token}` }
-                }
-            )
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/track-ids`)
             const data = await response.json();
             return data as SpotifyTrack[];
 
@@ -102,7 +112,7 @@ const Page = () => {
     useEffect(() => {refreshTracks();}, [refreshTracks])
     
     return (
-        <div className="page-container">
+        <div ref={pageRef} className="page-container">
             <div className="mb-12">
                 <h1 className="h1 ">MUSIC.</h1>
                 <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>

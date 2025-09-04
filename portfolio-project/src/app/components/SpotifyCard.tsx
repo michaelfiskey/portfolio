@@ -79,7 +79,7 @@ const SpotifyCard = ({
 
     return (
         <div>
-            <Card title={title}>
+            <Card>
                 <iframe 
                     data-testid="embed-iframe"  
                     src={spotifyUrl}

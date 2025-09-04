@@ -2,16 +2,12 @@
 import React, { useRef, ReactNode } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Image from 'next/image';
 
 type CardProps = {
-    title?: string;
-    description?: string;
-    imageSrc?: string;
     children?: ReactNode;
 };
 
-const Card = ({ title, description, imageSrc, children }: CardProps) => {
+const Card = ({ children }: CardProps) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
@@ -66,18 +62,7 @@ const Card = ({ title, description, imageSrc, children }: CardProps) => {
 
     return (
         <div ref={cardRef} className="relative rounded-lg cursor-pointer">
-            {children ? (
-                <>
-                    {title && <h3 className="text-lg font-semibold text-stone-800 mb-2">{title}</h3>}
-                    {children}
-                </>
-            ) : (
-                <>
-                    {imageSrc && <Image src={imageSrc} alt={title || ''} className="rounded-lg" />}
-                    {title && <h3 className="text-lg font-semibold text-stone-800">{title}</h3>}
-                    {description && <p className="text-stone-600">{description}</p>}
-                </>
-            )}
+            {children}
         </div>
     );
 };

@@ -13,7 +13,6 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const portfolioHingeRef = useRef<HTMLHeadingElement>(null);
-  const isMobile = useMediaQuery({ maxWidth: 767 });
   const frameCount = 240;
   const scrollRowRef = useRef<HTMLDivElement>(null);
 
@@ -104,7 +103,7 @@ export default function Home() {
       );
     }
 
-  }, [isMobile, authUser]);
+  }, [authUser]);
 
   useGSAP(() => {
     // page fade-in effect
@@ -115,7 +114,7 @@ export default function Home() {
       opacity: 1,
       duration: 2
     });
-  }, [authUser])
+  }, [authUser]);
 
   useGSAP(() => {
     const row = scrollRowRef.current;
@@ -129,7 +128,7 @@ export default function Home() {
       repeat: -1,
       yoyo: true
     });
-  }, []);
+  });
 
   return (
     <div className="video-play-scroll-trigger opacity-0" ref={pageRef}>
