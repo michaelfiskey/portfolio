@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { supabase } from '../database/supabase.js';
 import { getSpotifyAccessToken } from '../services/spotifyService.js';
+import { authenticateToken, requireRole } from './auth.routes.js';
 
 const spotifyRouter = Router();
 
@@ -19,7 +20,7 @@ spotifyRouter.get('/track-ids', async (req, res) => {
     }
 });
 
-spotifyRouter.delete('/track/:track_id', async (req, res) => {
+spotifyRouter.delete('/track/:track_id', authenticateToken, requireRole('owner'), async (req, res) => {
     try {
         const { track_id } = req.params;
 
@@ -43,7 +44,7 @@ spotifyRouter.delete('/track/:track_id', async (req, res) => {
     }
 });
 
-spotifyRouter.delete('/album/:album_id', async (req, res) => {
+spotifyRouter.delete('/album/:album_id', authenticateToken, requireRole('owner'), async (req, res) => {
     try {
         const { album_id } = req.params;
 
@@ -67,7 +68,7 @@ spotifyRouter.delete('/album/:album_id', async (req, res) => {
     }
 });
 
-spotifyRouter.post('/add-track', async (req, res) => {
+spotifyRouter.post('/add-track', authenticateToken, requireRole('owner'), async (req, res) => {
     const { track_id, track_category } = req.body;
     if (!track_id) {
         return res.status(400).json({ error: 'track id is required' });

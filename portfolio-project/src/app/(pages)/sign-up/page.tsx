@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Page = () => {
     const router = useRouter();
-    const { isLoggedIn, setIsLoggedIn, setAuthUser} = useAuth();
+    const { isLoggedIn, setIsLoggedIn, setAuthUser, setAuthRole} = useAuth();
     const formRef = useRef<HTMLFormElement>(null);
     const [username, setUsername] = useState({
         value:'',
@@ -103,7 +103,7 @@ const Page = () => {
         setHasBackendError(false);
 
         try {
-            const response = await fetch('http://localhost:5500/api/auth/sign-up', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/auth/sign-up`, {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
@@ -128,7 +128,10 @@ const Page = () => {
                 return;
             }
             setIsLoggedIn(true);
-            setAuthUser(data.username)
+            setAuthUser(data.username);
+            setAuthUser(username.value);
+            setAuthRole(data.user.role);
+            localStorage.setItem('token', data.token)
             router.push('/')
 
 

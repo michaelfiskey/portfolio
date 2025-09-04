@@ -31,7 +31,7 @@ const SpotifyCard = ({
     
     const removeSpotifyAlbum = async () => {
         try {
-            const response = await fetch(`http://localhost:5500/api/spotify/album/${spotifyId}`, 
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/album/${spotifyId}`, 
                 { method: 'DELETE' }
             )
 
@@ -47,7 +47,7 @@ const SpotifyCard = ({
 
     const removeSpotifyTrack = async () => {
         try {
-            const response = await fetch(`http://localhost:5500/api/spotify/track/${spotifyId}`, 
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/track/${spotifyId}`, 
                 { method: 'DELETE' }
             )
 

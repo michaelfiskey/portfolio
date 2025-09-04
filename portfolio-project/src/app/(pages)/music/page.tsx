@@ -21,7 +21,13 @@ const Page = () => {
 
     const getSpotifyTracks = useCallback(async (): Promise<SpotifyTrack[]> => {
         try {
-            const response = await fetch('http://localhost:5500/api/spotify/track-ids')
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/track-ids`, 
+                {
+                    method: 'GET',
+                    headers: { 'Authorization' : `Bearer ${token}` }
+                }
+            )
             const data = await response.json();
             return data as SpotifyTrack[];
 
@@ -40,10 +46,12 @@ const Page = () => {
             }
 
             console.log('Adding track:', spotifyId);
-
-            const response = await fetch('http://localhost:5500/api/spotify/add-track', {
+            
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/add-track`, {
                 method: 'POST',
                 headers: {
+                    'Authorization' : `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ track_id: spotifyId, track_category: trackCategory})

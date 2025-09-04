@@ -17,7 +17,7 @@ import '@syncfusion/ej2-popups/styles/material.css';
 import '@syncfusion/ej2-splitbuttons/styles/material.css';
 import '@syncfusion/ej2-react-schedule/styles/material.css';
 
-registerLicense('Ngo9BigBOggjHTQxAR8/V1JEaF1cWmhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEBjUXxecXZRTmBYWEJwW0leYw==');
+registerLicense(process.env.SYNCFUSION_KEY ?? "");
 
 type ScheduleResponse = {
     title?: string

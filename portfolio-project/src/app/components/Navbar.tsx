@@ -60,6 +60,7 @@ const Navbar = () => {
                                     setIsLoggedIn(false)
                                     setAuthUser(null)
                                     setAuthRole(null)
+                                    localStorage.removeItem('token');
                                     router.push('/')
                                 }}
                                 className="hover:cursor-pointer"
