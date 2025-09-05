@@ -39,7 +39,24 @@ const contactLimiter = rateLimit({
     legacyHeaders: false,
 });
 
+// environment configuration
 dotenv.config();
+
+// global error handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    
+    if (process.env.NODE_ENV === 'production') {
+        res.status(500).json({ error: 'Internal server error' });
+    } else {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// 404 handler
+app.use('*', (req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+});
 
 app.use(helmet({
     contentSecurityPolicy: {
