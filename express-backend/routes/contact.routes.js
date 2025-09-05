@@ -23,12 +23,12 @@ const validateContactForm = [
         .withMessage('Message is required and must be less than 500 characters'),
     body('phoneNumber')
         .optional()
-        .isMobilePhone()
+        .isLength({min: 0, max:100})
         .withMessage('Please provide a valid phone number'),
     body('company')
         .optional()
         .trim()
-        .isLength({ max: 100 })
+        .isLength({ min: 0, max: 100 })
         .withMessage('Company name must be less than 100 characters')
 ];
 
