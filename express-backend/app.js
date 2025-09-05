@@ -88,5 +88,6 @@ app.get('/', (req, res) => {
     res.send('Express backend up and running!')
 })
 
-app.listen(process.env.PORT, () => {console.log(`API is running on http://localhost:${process.env.PORT}`)})
+const PORT = process.env.PORT || 5500;
+app.listen(PORT, () => {console.log(`API is running on port ${PORT}`)})
 console.log('Server Running')
