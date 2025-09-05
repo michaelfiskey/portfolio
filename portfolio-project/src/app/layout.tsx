@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./components/AuthContext";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
