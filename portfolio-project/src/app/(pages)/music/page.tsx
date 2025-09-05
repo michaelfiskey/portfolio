@@ -47,7 +47,7 @@ const Page = () => {
         }
     }, []);
 
-    const setTracksAndAlbums = (trackData: SpotifyTrack[]) => {
+    const setTracksAndAlbums = useCallback((trackData: SpotifyTrack[]) => {
         setTracks(
           trackData.map((track: { track_id: string; track_category: string }) => ({
             trackId: track.track_id,
@@ -63,7 +63,7 @@ const Page = () => {
                 ).values()
             )
         );
-    }
+    }, [])
 
     const handleAddProject = async (trackCategory: string) => {
         try {
@@ -114,7 +114,7 @@ const Page = () => {
 
         sessionStorage.setItem('spotify_tracks', JSON.stringify(trackData));
         setIsLoading(false);
-    },[getSpotifyTracks]);
+    },[getSpotifyTracks, setTracksAndAlbums]);
 
     useEffect(() => {
         const loadTracks = async () => {
@@ -135,7 +135,7 @@ const Page = () => {
         };
         
         loadTracks();
-    }, []); 
+    }, [getSpotifyTracks, setTracksAndAlbums]); 
     
     return (
         <div ref={pageRef} className="page-container">

@@ -44,36 +44,6 @@ const Page = () => {
         }
     }, [])
 
-    const refreshProjects = useCallback(async () => {
-        try {
-            setIsLoading(true);
-            const projectData = await getProjects();
-            setProjects(
-                projectData.map((project: 
-                                    { project_id: string; 
-                                    project_title: string; 
-                                    project_description: string;
-                                    project_date: Date;
-                                    project_authors?: string[],
-                                    project_path: string;
-                                    project_image_path: string;
-                                }) => ({
-                                    project_id: project.project_id,
-                                    project_title: project.project_title,
-                                    project_description: project.project_description,
-                                    project_date: project.project_date,
-                                    project_authors: project.project_authors,
-                                    project_path: project.project_path,
-                                    project_image_path: project.project_image_path
-                                }
-                            ))
-            )
-            setIsLoading(false);
-        } catch {
-            setIsLoading(false);
-        };
-    }, [getProjects]);
-
     useEffect(() => {
         const loadProjects = async () => {
             setIsLoading(true);
@@ -92,7 +62,7 @@ const Page = () => {
             }
         };
         loadProjects();
-    }, []);
+    }, [getProjects]);
 
     return (
 

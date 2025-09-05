@@ -20,7 +20,6 @@ const SpotifyCard = ({
     type,
     width = "100%", 
     height = "352",
-    title = "",
     theme = false,
     onRemove
 }: SpotifyCardProps) => {
