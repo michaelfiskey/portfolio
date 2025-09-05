@@ -71,10 +71,28 @@ const Page = () => {
             setIsLoading(false);
         } catch {
             setIsLoading(false);
-        }
-    }, [getProjects])
+        };
+    }, [getProjects]);
 
-    useEffect(() => {refreshProjects();}, [refreshProjects])
+    useEffect(() => {
+        const loadProjects = async () => {
+            setIsLoading(true);
+
+            const cachedProjects = sessionStorage.getItem('projects');
+            
+            if (cachedProjects) {
+                const projectData = JSON.parse(cachedProjects) as Project[];
+                setProjects(projectData);
+                setIsLoading(false);
+            } else {
+                const projectData = await getProjects();
+                setProjects(projectData);
+                sessionStorage.setItem('projects', JSON.stringify(projectData));
+                setIsLoading(false);
+            }
+        };
+        loadProjects();
+    }, []);
 
     return (
 

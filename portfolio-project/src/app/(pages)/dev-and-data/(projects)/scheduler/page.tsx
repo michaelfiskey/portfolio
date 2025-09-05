@@ -1,9 +1,11 @@
 "use client";
 import React from 'react';
-import { useState, useCallback, useEffect } from 'react'; 
+import { useState, useCallback, useEffect, useRef } from 'react'; 
 import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 import { registerLicense } from '@syncfusion/ej2-base';
 import Spinner from '@/app/components/spinners/Spinner';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 // syncfusion schedule styling
 import '@syncfusion/ej2-base/styles/material.css';
@@ -36,6 +38,7 @@ type ScheduleEvent = {
 };
 
 const Page = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
     const [data, setData] = useState<ScheduleResponse | null>(null);
     const [events, setEvents] = useState<ScheduleEvent[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +59,18 @@ const Page = () => {
             
         } catch { return false; }
     }, [])
+
+    
+    useGSAP(() => {
+        // page fade-in effect
+        const page = pageRef.current;
+        gsap.fromTo(page, {
+        opacity: 0
+        }, {
+        opacity: 1,
+        duration: 2
+        });
+    });
 
     const handleSubmit = useCallback(async () => {
         try {
@@ -119,7 +134,7 @@ const Page = () => {
     }, [currentView, scheduleTitle, handleSubmit, data])
 
     return (
-                <div className="page-container">
+                <div ref={pageRef} className="page-container">
                     <div className="mb-12">
                         <h1 className="h1">SCHEDULER.</h1>
                         <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>

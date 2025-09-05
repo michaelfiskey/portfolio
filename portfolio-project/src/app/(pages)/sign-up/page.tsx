@@ -127,11 +127,14 @@ const Page = () => {
                 setConfirmPassword({ value: '', isTouched: false });
                 return;
             }
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('authUser', username.value);
+            localStorage.setItem('authRole', data.user.role);
+            
             setIsLoggedIn(true);
-            setAuthUser(data.username);
             setAuthUser(username.value);
             setAuthRole(data.user.role);
-            localStorage.setItem('token', data.token)
+            
             router.push('/')
 
 

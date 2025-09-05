@@ -85,10 +85,14 @@ const Page = () => {
                 return;
             }
             
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('authUser', username.value);
+            localStorage.setItem('authRole', data.user.role);
+            
             setIsLoggedIn(true);
             setAuthUser(username.value);
             setAuthRole(data.user.role);
-            localStorage.setItem('token', data.token)
+            
             router.push('/');
 
         } catch {

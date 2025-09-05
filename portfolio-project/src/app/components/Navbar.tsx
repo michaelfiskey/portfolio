@@ -57,11 +57,16 @@ const Navbar = () => {
                         {isLoggedIn ? (
                             <button 
                                 onClick={() => {
-                                    setIsLoggedIn(false)
-                                    setAuthUser(null)
-                                    setAuthRole(null)
                                     localStorage.removeItem('token');
-                                    router.push('/')
+                                    localStorage.removeItem('isLoggedIn');
+                                    localStorage.removeItem('authUser');
+                                    localStorage.removeItem('authRole');;
+                                    
+                                    sessionStorage.clear();
+                                    setIsLoggedIn(false);
+                                    setAuthUser(null);
+                                    setAuthRole(null);
+                                    router.push('/');
                                 }}
                                 className="hover:cursor-pointer"
                             >

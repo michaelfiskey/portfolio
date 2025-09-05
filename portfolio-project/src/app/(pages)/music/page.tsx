@@ -17,7 +17,7 @@ const Page = () => {
         albumId: string; 
         trackCategory: string }[]>([]);   
     const [modalView, setModalView] = useState(false);
-    const [spotifyId, setSpotifyId] = useState('');
+    const [spotifyTrackId, setSpotifyTrackId] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const pageRef = useRef<HTMLDivElement>(null);
 
@@ -45,17 +45,35 @@ const Page = () => {
             console.log(error);
             return [];
         }
-    }, [])
+    }, []);
+
+    const setTracksAndAlbums = (trackData: SpotifyTrack[]) => {
+        setTracks(
+          trackData.map((track: { track_id: string; track_category: string }) => ({
+            trackId: track.track_id,
+            trackCategory: track.track_category,
+          }))
+        );
+        setAlbums(
+            Array.from(
+                new Map(
+                trackData
+                    .filter((track: SpotifyTrack) => track.album_id)
+                    .map((track: SpotifyTrack) => [track.album_id, { albumId: track.album_id, trackCategory: track.track_category }])
+                ).values()
+            )
+        );
+    }
 
     const handleAddProject = async (trackCategory: string) => {
         try {
             setIsLoading(true)
-            if (!spotifyId.trim()) {
+            if (!spotifyTrackId.trim()) {
                 alert('Please enter a Spotify Id!');
                 return;
             }
 
-            console.log('Adding track:', spotifyId);
+            console.log('Adding track:', spotifyTrackId);
             
             const token = localStorage.getItem('token');
             const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/add-track`, {
@@ -64,7 +82,7 @@ const Page = () => {
                     'Authorization' : `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ track_id: spotifyId, track_category: trackCategory})
+                body: JSON.stringify({ track_id: spotifyTrackId, track_category: trackCategory})
             });
 
             if (!response.ok) {
@@ -80,7 +98,7 @@ const Page = () => {
             setIsLoading(false)
         } finally {
             setModalView(false);
-            setSpotifyId('');
+            setSpotifyTrackId('');
             setIsLoading(false)
         }
 
@@ -91,25 +109,33 @@ const Page = () => {
     const refreshTracks = useCallback( async () => {
         setIsLoading(true);
         const trackData = await getSpotifyTracks();
-        setTracks(
-          trackData.map((track: { track_id: string; track_category: string }) => ({
-            trackId: track.track_id,
-            trackCategory: track.track_category,
-          }))
-        );
-        setAlbums(
-            Array.from(
-                new Map(
-                trackData
-                    .filter(track => track.album_id)
-                    .map(track => [track.album_id, { albumId: track.album_id, trackCategory: track.track_category }])
-                ).values()
-            )
-        );
+        
+        setTracksAndAlbums(trackData);
+
+        sessionStorage.setItem('spotify_tracks', JSON.stringify(trackData));
         setIsLoading(false);
     },[getSpotifyTracks]);
 
-    useEffect(() => {refreshTracks();}, [refreshTracks])
+    useEffect(() => {
+        const loadTracks = async () => {
+            setIsLoading(true);
+            
+            const cachedTracks = sessionStorage.getItem('spotify_tracks');
+            
+            if (cachedTracks) {
+                const trackData = JSON.parse(cachedTracks) as SpotifyTrack[];
+                setTracksAndAlbums(trackData);
+                setIsLoading(false);
+            } else {
+                const trackData = await getSpotifyTracks();
+                setTracksAndAlbums(trackData);
+                sessionStorage.setItem('spotify_tracks', JSON.stringify(trackData));
+                setIsLoading(false);
+            }
+        };
+        
+        loadTracks();
+    }, []); 
     
     return (
         <div ref={pageRef} className="page-container">
@@ -182,7 +208,7 @@ const Page = () => {
                             <Modal
                                 title='Add New Track'
                                 isOpen={modalView}
-                                onClose={() => {setModalView(false); setSpotifyId('')}}
+                                onClose={() => {setModalView(false); setSpotifyTrackId('')}}
                                 onSubmit={() => { handleAddProject('personal'); }}
                             >
                                 <div className="space-y-4">
@@ -192,8 +218,8 @@ const Page = () => {
                                         </label>
                                         <input
                                             type="url"
-                                            value={spotifyId}
-                                            onChange={(e) => setSpotifyId(e.target.value)}
+                                            value={spotifyTrackId}
+                                            onChange={(e) => setSpotifyTrackId(e.target.value)}
                                             placeholder="3qpSOmkUobfgpaRXhqc8zT"
                                             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
                                         />
@@ -270,7 +296,7 @@ const Page = () => {
                             <Modal
                                 title='Add New Track'
                                 isOpen={modalView}
-                                onClose={() => {setModalView(false); setSpotifyId('')}}
+                                onClose={() => {setModalView(false); setSpotifyTrackId('')}}
                                 onSubmit={() => { handleAddProject('favorite'); }}
                             >
                                 <div className="space-y-4">
@@ -280,8 +306,8 @@ const Page = () => {
                                         </label>
                                         <input
                                             type="url"
-                                            value={spotifyId}
-                                            onChange={(e) => setSpotifyId(e.target.value)}
+                                            value={spotifyTrackId}
+                                            onChange={(e) => setSpotifyTrackId(e.target.value)}
                                             placeholder="3qpSOmkUobfgpaRXhqc8zT"
                                             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
                                         />

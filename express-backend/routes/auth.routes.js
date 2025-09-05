@@ -49,6 +49,17 @@ const requireRole = (role) => {
     };
 };
 
+authRouter.get('/validate-token', authenticateToken, (req, res) => {
+    res.json({
+        message: 'Token is valid',
+        user: {
+            userId: req.user.userId,
+            username: req.user.username,
+            role: req.user.role
+        }
+    });
+});
+
 authRouter.post('/sign-up', async (req, res) => {
     try {
         const {username, email, password} = req.body;
