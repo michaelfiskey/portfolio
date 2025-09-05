@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import emailjs from '@emailjs/browser'
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -104,19 +103,41 @@ const Page = () => {
         setMessage((prev) => ({...prev, value: "", isTouched: false}));
     }
 
-    const sendEmail = () => {
-        if (formRef.current) {
-            emailjs.sendForm('service_kk5mlt4', 'template_1a22x66', formRef.current, {publicKey: 'mnFPSnlnhoLlrVS0U'})
-            .then(() => {
-                console.log("Form Submitted Successfully!");
-                setSubmitSuccessMessage('Form has been submitted successfully!');
-                clearFormFields();
-                setErrors([]);
-            }, (error) => {
-                console.log("Failed to send email:", error.text);
-                setErrors(['Failed to send email. Please try again.']);
+    const sendEmail = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/contact/send-message`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    email: email.value,
+                    phoneNumber: countryCode ? `+${countryCode} ${phoneNumber}` : phoneNumber,
+                    company: company,
+                    message: message.value,
+                })
             });
-        }
+            
+            const data = await response.json()
+            console.log('Response status:', response.status);
+            console.log('Response data:', data);
+
+            if (!response.ok) {
+                console.log('Error details:', data);
+                setErrors([data.error || 'Failed to send email']);
+                return;
+            }
+            
+            setSubmitSuccessMessage(data.message);
+            clearFormFields();
+            setErrors([]);
+
+        } catch (error) {
+            console.error('Network error:', error);
+            setErrors(['Failed to send email. Please try again later.']);
+        };
     }
 
     return (

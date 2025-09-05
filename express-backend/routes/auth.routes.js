@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import { supabase } from '../database/supabase.js';
 import jwt from 'jsonwebtoken';
+import { body, validationResult } from 'express-validator';
 const authRouter = Router();
 
 const generateToken = (user) => {
@@ -49,6 +50,45 @@ const requireRole = (role) => {
     };
 };
 
+const validateSignUp = [
+    body('username')
+        .isLength({ min: 1, max: 30 })
+        .withMessage('Username must be >1 and <30 characters')
+        .matches(/^[a-zA-Z0-9_]+$/)
+        .withMessage('Username can only contain letters, numbers, and underscores'),
+    body('email')
+        .isEmail()
+        .normalizeEmail()
+        .withMessage('Please provide a valid email'),
+    body('password')
+        .isLength({ min: 8 })
+        .withMessage('Password must be at least 8 characters')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/)
+        .withMessage('Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character (@$!%*?&)')
+];
+
+const validateLogin = [
+    body('username')
+        .notEmpty()
+        .withMessage('Username is required')
+        .trim()
+        .escape(),
+    body('password')
+        .notEmpty()
+        .withMessage('Password is required')
+];
+
+const handleValidationErrors = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            error: 'Validation failed',
+            details: errors.array()
+        });
+    }
+    next();
+};
+
 authRouter.get('/validate-token', authenticateToken, (req, res) => {
     res.json({
         message: 'Token is valid',
@@ -60,7 +100,7 @@ authRouter.get('/validate-token', authenticateToken, (req, res) => {
     });
 });
 
-authRouter.post('/sign-up', async (req, res) => {
+authRouter.post('/sign-up', validateSignUp, handleValidationErrors, async (req, res) => {
     try {
         const {username, email, password} = req.body;
 
@@ -111,7 +151,7 @@ authRouter.post('/sign-up', async (req, res) => {
 
 });
 
-authRouter.post('/login', async (req, res) => {
+authRouter.post('/login', validateLogin, handleValidationErrors, async (req, res) => {
     try {    
         const { username, password } = req.body;
         const { data: user, error } = await supabase

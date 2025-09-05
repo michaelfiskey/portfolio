@@ -60,6 +60,9 @@ const Page = () => {
                 if (!/[0-9]/.test(password.value)) {
                     newErrors.push('Password must contain a number');
                 }
+                if (!/[@$!%*?&]/.test(password.value)) {
+                    newErrors.push('Password must contain a special character (@$!%*?&)');
+                }
             }
         }
         
