@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import authRouter, { authenticateToken, requireRole } from './routes/auth.routes.js';
@@ -38,9 +37,6 @@ const contactLimiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
 });
-
-// environment configuration
-dotenv.config();
 
 // global error handling
 app.use((err, req, res, next) => {

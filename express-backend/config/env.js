@@ -1,0 +1,20 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const {
+  PORT,
+  NODE_ENV,
+  ORIGIN_URL,
+  NEXT_PUBLIC_DJANGO_URL,
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY,
+  SUPABASE_SERVICE_ROLE_KEY,
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  JWT_SECRET_KEY,
+  TOKEN_HEADER_KEY,
+  EMAIL_SERVICE,
+  EMAIL_PASS,
+  CONTACT_EMAIL
+} = process.env;
