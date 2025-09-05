@@ -30,12 +30,13 @@ export default function RootLayout({
       <head>
         <title>Michael Fiskey</title>
         <meta name="description" content="Michael Fiskey's Personal Portfolio" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
         <AuthProvider>
-          <div className="m-10 pt-5 pl-5 pr-5 pb-10">
+          <div className="m-1 sm:m-10 pt-5 pl-5 pr-5 pb-10">
               <Navbar />
               {children}
           </div>

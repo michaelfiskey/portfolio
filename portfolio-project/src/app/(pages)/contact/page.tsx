@@ -149,7 +149,7 @@ const Page = () => {
                         <p>If you&apos;d like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
                     </div>
                 </div>
-                <div className="flex flex-1 justify-center items-center px-5">
+                <div className="flex flex-1 justify-center items-center">
                     <div className="w-full max-w-[1100px]">
                         {errors.length > 0 && (
                         <div className="mb-4 p-4 bg-red-100 border border-red-400 rounded-sm">
@@ -170,9 +170,9 @@ const Page = () => {
                                 src="/assets/gradient_contact.mp4"
                             />
                             <div className="bg-stone-700 w-full items-center justify-center p-1 relative z-10 bg-opacity-80">
-                                <h2 className="h2 !text-white text-center">Contact Form</h2>
+                                <h2 className="h2 !text-white text-center">Contact Form.</h2>
                             </div>
-                            <div className="m-4 sm:m-8 md:m-8 lg:m-15 grid grid-cols-1 justify-center gap-3 sm:gap-4 md:gap-5 relative z-10">
+                            <div className="m-5 sm:m-8 md:m-8 lg:m-15 grid grid-cols-1 justify-center gap-3 sm:gap-4 md:gap-5 relative z-10">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
                                     <div className="flex flex-col ">
                                         <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>

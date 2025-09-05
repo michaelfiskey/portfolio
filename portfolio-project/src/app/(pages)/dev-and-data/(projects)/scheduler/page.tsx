@@ -140,7 +140,7 @@ const Page = () => {
                         <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
 
                     </div>
-                    <div className="bg-white backdrop-blur-sm p-8 shadow-2xl rounded-lg">
+                    <div className="bg-white backdrop-blur-sm p-3 sm:p-8 shadow-2xl rounded-lg">
                         <div className="text-center mb-8">
                             <h2 className="h2 !font-bold mb-3">FIND THE BEST MEETING TIME</h2>
                             <p className="text-stone-600 text-lg max-w-2xl mx-auto">
@@ -160,10 +160,10 @@ const Page = () => {
                                     }}
                                     onBlur={() => { setUrl(prev => ({ ...prev, isTouched: true })) }}
                                     placeholder=" https://when2meet.com/example"
-                                    className="input rounded-md flex-1 min-w-[250px]"
+                                    className="input rounded-md flex-1 min-w-[200px]"
                                 />
                                 <select
-                                    className="button !px-0 !from-stone-700 !to-stone-600 w-full max-w-[200px]"
+                                    className="button !px-0 !from-stone-700 !to-stone-600 w-full sm:max-w-[200px]"
                                     value={duration}
                                     onChange={(e) => setDuration(Number(e.target.value))}
                                 >
@@ -179,7 +179,7 @@ const Page = () => {
                                 <button
                                     disabled={!url.value || !url.isValid}
                                     onClick={handleSubmit}
-                                    className="button w-full max-w-[200px]"
+                                    className="button w-full sm:max-w-[200px]"
                                 >
                                     Go!
                                 </button>
@@ -200,7 +200,7 @@ const Page = () => {
                             </div>
                             <div className="bg-white/80 border border-stone-200 rounded-md p-6 shadow-lg mt-8">
                                 <p className="font-bold text-xl pl-5 mb-2 text-stone-700">{scheduleTitle} options:</p>
-                                <div className="mt-4">
+                                <div className="mt-4 m-[-10] sm:m-0">
                                     <ScheduleComponent
                                         eventSettings={{ dataSource: events}}
                                         selectedDate={new Date(data?.start ?? Date.now())}

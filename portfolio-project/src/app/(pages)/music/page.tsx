@@ -144,7 +144,7 @@ const Page = () => {
                 <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
             </div>
 
-            <div className="bg-white/20 backdrop-blur-sm border border-white/30 p-8 shadow-2xl">
+            <div className="bg-white/20 backdrop-blur-sm border border-white/30 pt-8 px-3 sm:p-8 shadow-2xl">
                 <div className="text-center mb-8">
                     <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
                     <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -156,7 +156,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                     {isLoading ? (
                         Array.from({ length: 3 }, (_, index) => (
-                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[300px]">
+                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[150px]">
                                 <ContentLoader />
                             </div>
                         ))
@@ -164,7 +164,7 @@ const Page = () => {
                         tracks
                             .filter((track) => track.trackCategory === 'personal')
                             .map((track) => (
-                            <div key={track.trackId} className="flex-1 min-w-[300px]">
+                            <div key={track.trackId} className="flex-1 min-w-[150px]">
                                 <SpotifyCard
                                 spotifyId={track.trackId}
                                 type="track"
@@ -179,7 +179,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
                             Array.from({ length: 2 }, (_, index) => (
-                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[300px]">
+                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[150px]">
                                     <ContentLoader />
                                 </div>
                             ))
@@ -187,7 +187,7 @@ const Page = () => {
                             albums
                             .filter((album) => album.trackCategory === 'personal')
                             .map((album) => (
-                            <div key={album.albumId} className="flex-1 min-w-[300px]">
+                            <div key={album.albumId} className="flex-1 min-w-[150px]">
                                 <SpotifyCard
                                 spotifyId={album.albumId}
                                 type="album"
@@ -244,7 +244,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                     {isLoading ? (
                         Array.from({ length: 3 }, (_, index) => (
-                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[300px]">
+                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[150px]">
                                 <ContentLoader />
                             </div>
                         ))
@@ -252,7 +252,7 @@ const Page = () => {
                         tracks
                             .filter((track) => track.trackCategory === 'favorite')
                             .map((track) => (
-                            <div key={track.trackId} className="flex-1 min-w-[300px]">
+                            <div key={track.trackId} className="flex-1 min-w-[150px]">
                                 <SpotifyCard
                                 spotifyId={track.trackId}
                                 type="track"
@@ -267,7 +267,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
                             Array.from({ length: 2 }, (_, index) => (
-                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[300px]">
+                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[150px]">
                                     <ContentLoader />
                                 </div>
                             ))
@@ -275,7 +275,7 @@ const Page = () => {
                             albums
                             .filter((album) => album.trackCategory === 'favorite')
                             .map((album) => (
-                            <div key={album.albumId} className="flex-1 min-w-[300px]">
+                            <div key={album.albumId} className="flex-1 min-w-[150px]">
                                 <SpotifyCard
                                 spotifyId={album.albumId}
                                 type="album"

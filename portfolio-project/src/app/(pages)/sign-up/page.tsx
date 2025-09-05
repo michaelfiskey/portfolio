@@ -151,7 +151,7 @@ const Page = () => {
     
         {isLoggedIn ? <p>Already logged in!</p> : <div>
             <div className='mt-10 flex flex-row items-center justify-center'>
-                <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[500px]">
+                <div className="flex flex-col justify-center mt-10 max-w-[800px] min-w-[293px] w-full">
                     {errors.length > 0 && (
                         <div className="mb-4 p-4 bg-red-100 border border-red-400 rounded-sm">
                             <ul className="list-disc list-inside text-red-700">
@@ -173,7 +173,7 @@ const Page = () => {
                         <div className="bg-stone-700 w-full items-center justify-center p-1 relative z-10 bg-opacity-80">
                             <h2 className="h2 !text-white text-center">SIGN UP.</h2>
                         </div>
-                        <div className="m-15 flex flex-col justify-center gap-5 relative z-10">
+                        <div className="m-5 sm:m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
                                 <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
                                 <input 

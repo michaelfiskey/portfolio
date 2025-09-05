@@ -42,9 +42,6 @@ const contactLimiter = rateLimit({
 // environment configuration
 dotenv.config();
 
-// trust proxy for Railway deployment
-app.set('trust proxy', 1);
-
 // global error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
