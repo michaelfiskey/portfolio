@@ -144,7 +144,7 @@ const Page = () => {
                 <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
             </div>
 
-            <div className="bg-white/20 backdrop-blur-sm border border-white/30 pt-8 px-3 sm:p-8 shadow-2xl">
+            <div className="bg-white/20 backdrop-blur-sm border border-white/30 pt-8 px-3 sm:p-8 shadow-2xl mx-[-30px] sm:m-0">
                 <div className="text-center mb-8">
                     <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
                     <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -156,7 +156,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                     {isLoading ? (
                         Array.from({ length: 3 }, (_, index) => (
-                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[150px]">
+                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[280px]">
                                 <ContentLoader />
                             </div>
                         ))
@@ -164,7 +164,7 @@ const Page = () => {
                         tracks
                             .filter((track) => track.trackCategory === 'personal')
                             .map((track) => (
-                            <div key={track.trackId} className="flex-1 min-w-[150px]">
+                            <div key={track.trackId} className="flex-1 min-w-[280px]">
                                 <SpotifyCard
                                 spotifyId={track.trackId}
                                 type="track"
@@ -179,7 +179,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
                             Array.from({ length: 2 }, (_, index) => (
-                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[150px]">
+                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[280px]">
                                     <ContentLoader />
                                 </div>
                             ))
@@ -187,7 +187,7 @@ const Page = () => {
                             albums
                             .filter((album) => album.trackCategory === 'personal')
                             .map((album) => (
-                            <div key={album.albumId} className="flex-1 min-w-[150px]">
+                            <div key={album.albumId} className="flex-1 min-w-[280px]">
                                 <SpotifyCard
                                 spotifyId={album.albumId}
                                 type="album"
@@ -201,7 +201,7 @@ const Page = () => {
                 </div>
                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
-                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
                             + Add New Track
                         </button>
                         {modalView && (<>
@@ -221,7 +221,7 @@ const Page = () => {
                                             value={spotifyTrackId}
                                             onChange={(e) => setSpotifyTrackId(e.target.value)}
                                             placeholder="3qpSOmkUobfgpaRXhqc8zT"
-                                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+                                            className="w-full p-2 border border-gray-280 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
                                         />
                                         <p className="text-xs text-gray-500 mt-1">
                                             Paste the Spotify ID for the track you want to add. If there is an associated album with the track, it will be added automatically.
@@ -244,7 +244,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                     {isLoading ? (
                         Array.from({ length: 3 }, (_, index) => (
-                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[150px]">
+                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[280px]">
                                 <ContentLoader />
                             </div>
                         ))
@@ -252,7 +252,7 @@ const Page = () => {
                         tracks
                             .filter((track) => track.trackCategory === 'favorite')
                             .map((track) => (
-                            <div key={track.trackId} className="flex-1 min-w-[150px]">
+                            <div key={track.trackId} className="flex-1 min-w-[280px]">
                                 <SpotifyCard
                                 spotifyId={track.trackId}
                                 type="track"
@@ -267,7 +267,7 @@ const Page = () => {
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
                             Array.from({ length: 2 }, (_, index) => (
-                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[150px]">
+                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[280px]">
                                     <ContentLoader />
                                 </div>
                             ))
@@ -275,7 +275,7 @@ const Page = () => {
                             albums
                             .filter((album) => album.trackCategory === 'favorite')
                             .map((album) => (
-                            <div key={album.albumId} className="flex-1 min-w-[150px]">
+                            <div key={album.albumId} className="flex-1 min-w-[280px]">
                                 <SpotifyCard
                                 spotifyId={album.albumId}
                                 type="album"
@@ -289,7 +289,7 @@ const Page = () => {
                 </div>
                                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
-                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
                             + Add New Track
                         </button>
                         {modalView && (<>
@@ -309,7 +309,7 @@ const Page = () => {
                                             value={spotifyTrackId}
                                             onChange={(e) => setSpotifyTrackId(e.target.value)}
                                             placeholder="3qpSOmkUobfgpaRXhqc8zT"
-                                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+                                            className="w-full p-2 border border-gray-280 rounded-md focus:ring-2 focus:ring-rose-500 focus:border-transparent"
                                         />
                                         <p className="text-xs text-gray-500 mt-1">
                                             Paste the Spotify ID for the track you want to add. If there is an associated album with the track, it will be added automatically.

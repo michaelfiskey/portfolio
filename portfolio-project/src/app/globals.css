@@ -14,6 +14,9 @@
   .p {
     @apply text-stone-700;
   }
+  p {
+    color: #44403c;
+  }
   .h2 {
     @apply bg-gradient-to-r from-red-400 to-rose-200 bg-clip-text text-transparent text-5xl sm:text-5xl md:text-6xl xl:text-7xl leading-none p-0;
     font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
