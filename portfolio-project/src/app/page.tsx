@@ -75,7 +75,7 @@ export default function Home() {
 
     if (normalH1s.length && hingeH1) {
       const totalH1s = portfolioH1s.length;
-      const isMobile = window.innerWidth < 768;
+      const isMobile = window.innerWidth < 500;
       const isTablet = window.innerWidth < 1024;
       
       let scrollLength;
@@ -105,7 +105,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 1, stagger: { amount: staggerAmount } },
         0
       );
-      const hingeDelay = 0.7;
+      const hingeDelay = isMobile? 0.7 : 1.2;
       tl.fromTo(hingeH1,
         { opacity: 0, rotateZ: -80, transformOrigin: 'left top' },
         { opacity: 1, rotateZ: 0, duration: 0.3, ease: 'back.out(1.3)' },
@@ -141,7 +141,7 @@ export default function Home() {
   });
 
   return (
-    <div className="mx-[-30px] sm:mx-0 opacity-0" ref={pageRef}>
+    <div className="-m-1 sm:mx-0 opacity-0" ref={pageRef}>
       {isLoggedIn ? (
         <div className="mt-8 ml-4">
           <h1 className='h1 -mb-12.5'>HELLO, {`${authUser?.slice(0,30) || 'USER'}`}.</h1>
@@ -155,7 +155,7 @@ export default function Home() {
       <div className="mt-10 flex items-center justify-center relative">
         <canvas 
           ref={canvasRef}
-          className="w-full shadow-2xl"
+          className="w-full"
         ></canvas>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY.</h1>
@@ -168,7 +168,7 @@ export default function Home() {
         <h1 className="h1 ml-4 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
         <h1 className="h1 ml-4 mb-10 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
       </div>
-      <div ref={scrollRowRef} className="scroll-row flex flex-row  overflow-x-auto whitespace-nowrap px-5 py-10 mx-[-60] items-center gap-10">
+      <div ref={scrollRowRef} className="scroll flex flex-row overflow-x-auto whitespace-nowrap px-5 py-10 items-center gap-10">
         <img 
         className="h-25 sm:h-55"
         src="/assets/images/js.png" 

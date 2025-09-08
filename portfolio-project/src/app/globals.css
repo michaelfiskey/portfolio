@@ -94,10 +94,10 @@ body {
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
 }
 
-.scroll-row::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
   display: none;
 }
-.scroll-row {
+.scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;    
 }

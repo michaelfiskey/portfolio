@@ -1,4 +1,3 @@
-"use client";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./components/AuthContext";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
@@ -36,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
       >
         <AuthProvider>
-          <div className="m-1 sm:m-10 pt-5 pl-5 pr-5 pb-10">
+          <div className="m-1 sm:m-10 pt-5 sm:pl-5 sm:pr-5 pb-10">
               <Navbar />
               {children}
           </div>
