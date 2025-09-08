@@ -175,7 +175,7 @@ const Page = () => {
                         </div>
                         <div className="m-5 sm:m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Username<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 placeholder='username' 
                                 name='username' 
@@ -189,7 +189,7 @@ const Page = () => {
                             />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-auto rounded-t-sm"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-auto rounded-t-sm"><p className="text-white ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
                                 <input
                                 placeholder='john-doe@example.com'
                                 name='email'
@@ -203,7 +203,7 @@ const Page = () => {
                                 />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Password<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 type='password'
                                 placeholder='password' 
@@ -218,7 +218,7 @@ const Page = () => {
                                 />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
+                                <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Confirm Password<sup className="text-red-500">*</sup></p></label>
                                 <input 
                                 type='password'
                                 placeholder='password' 

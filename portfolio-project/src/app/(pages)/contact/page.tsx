@@ -175,7 +175,7 @@ const Page = () => {
                             <div className="m-5 sm:m-8 md:m-8 lg:m-15 grid grid-cols-1 justify-center gap-3 sm:gap-4 md:gap-5 relative z-10">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
                                     <div className="flex flex-col ">
-                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
+                                        <label className="bg-stone-700 text-white whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">First Name<sup className="text-red-500">*</sup></p></label>
                                         <input 
                                         placeholder='John' 
                                         name='first_name' 
@@ -185,7 +185,7 @@ const Page = () => {
                                         className="input mt-auto rounded-b-sm" />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Last Name<sup className="text-red-500">*</sup></p></label>
+                                        <label className="bg-stone-700 text-white whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Last Name<sup className="text-red-500">*</sup></p></label>
                                         <input 
                                         placeholder='Doe' 
                                         name='last_name' 
@@ -197,7 +197,7 @@ const Page = () => {
                                 </div>
                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-12 lg:gap-20">
                                     <div className="flex flex-col">
-                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
+                                        <label className="bg-stone-700 text-white whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Email<sup className="text-red-500">*</sup></p></label>
                                         <input
                                         placeholder='john-doe@example.com'
                                         name='email'
@@ -208,7 +208,7 @@ const Page = () => {
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Phone Number</p></label>
+                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Phone Number</p></label>
                                         <div className="flex flex-row w-full rounded-b-sm">
                                             <input
                                             name="country_code"
@@ -229,12 +229,12 @@ const Page = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="ml-2 mt-1">Company</p></label>
+                                        <label className="bg-stone-700 whitespace-nowrap w-full rounded-t-sm"><p className="text-white ml-2 mt-1">Company</p></label>
                                         <input placeholder='Example LLC' name='company' value={company} onChange={(e) => setCompany(e.target.value.slice(0,100))} className="input mt-auto rounded-b-sm" />
                                     </div>
                                 </div>
                                 <div className="flex flex-col w-full">
-                                    <label className="bg-stone-700 whitespace-nowrap w-auto rounded-t-sm"><p className="ml-2 mt-1">Message<sup className="text-red-500">*</sup></p></label>
+                                    <label className="bg-stone-700 whitespace-nowrap w-auto rounded-t-sm"><p className="text-white ml-2 mt-1">Message<sup className="text-red-500">*</sup></p></label>
                                     <textarea placeholder='I like your hair... ;)' name='message' value={message.value} onChange={(e) => setMessage({...message, value: e.target.value.slice(0,500)})} onBlur={() => setMessage({...message, isTouched: true})} className="input h-[150px] mt-auto resize-none rounded-b-sm" />
                                 </div>
                                 <div className='flex flex-col w-full'>
