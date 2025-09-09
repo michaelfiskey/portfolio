@@ -1,8 +1,10 @@
 import { Router } from 'express';
+import { Resend } from 'resend';
 import { body, validationResult } from 'express-validator';
-import nodemailer from 'nodemailer';
 
 const contactRouter = Router();
+const resend = new Resend(process.env.RESEND_KEY);
+
 
 const validateContactForm = [
     body('firstName')
@@ -43,29 +45,15 @@ const handleValidationErrors = (req, res, next) => {
     next();
 };
 
-const createTransport = () => {
-    return nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: process.env.EMAIL_PORT,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS 
-        }
-    });
-};
 
 contactRouter.post('/send-message', validateContactForm, handleValidationErrors, async (req, res) => {
     try {
         const { firstName, lastName, email, phoneNumber, company, message } = req.body;
-        
-        const transporter = createTransport();
-        
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: process.env.CONTACT_EMAIL || process.env.EMAIL_USER,
-            replyTo: email,
-            subject: `Portfolio Contact Submission: ${firstName} ${lastName}`,
+
+        await resend.emails.send({
+            from: 'portfolio@resend.dev',
+            to: process.env.EMAIL_RECEIVER,
+            subject: `Portfolio Response: ${firstName} ${lastName}`,
             html: `
                 <p><strong>Name:</strong> ${firstName} ${lastName}</p>
                 <p><strong>Email:</strong> ${email}</p>
@@ -74,14 +62,10 @@ contactRouter.post('/send-message', validateContactForm, handleValidationErrors,
                 <p><strong>Message:</strong></p>
                 <p>${message}</p>
             `
-        };
-        
-        await transporter.sendMail(mailOptions);
-        
-        res.json({
-            message: 'Email sent successfully!'
-        });
-        
+        });  
+
+        res.status(200).json({message: 'Email sent successfully!'});
+
     } catch (error) {
         console.error('Email sending error:', error);
         res.status(500).json({
