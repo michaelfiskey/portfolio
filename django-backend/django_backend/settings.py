@@ -152,11 +152,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     os.environ.get('FRONTEND_URL', 'http://localhost:3000'),
     "http://localhost:3000",
+    "https://michaelfiskey.vercel.app",
 ]
 
+# CORS settings for API requests
 CORS_ALLOW_CREDENTIALS = True
-# test all origins for a moment
-CORS_ALLOW_ALL_ORIGINS = True  
+
 
 # Security headers
 SECURE_BROWSER_XSS_FILTER = True
