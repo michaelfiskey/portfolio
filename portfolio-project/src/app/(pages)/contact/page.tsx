@@ -144,10 +144,11 @@ const Page = () => {
         <div ref={pageRef}>
             <div>
                 <div className="page-container">
-                    <div className="w-full max-w-[800px] w-flex">
-                        <h1 className="h1">CONTACT.</h1>
-                        <p>If you&apos;d like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
-                    </div>
+            <div className="mt-3 mb-12 sm:ml-0 text-center sm:text-left">
+                <h1 className="h1 ">CONTACT.</h1>
+                <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2 mb-4"></div>
+                <p>If you&apos;d like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>
+            </div>
                 </div>
                 <div className="flex flex-1 justify-center items-center">
                     <div className="w-full max-w-[1100px]">

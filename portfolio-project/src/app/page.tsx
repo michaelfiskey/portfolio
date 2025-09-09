@@ -149,7 +149,7 @@ export default function Home() {
         </div>
       ) : (
         <div className="flex flex- items-stretch justify-between mt-8">
-          <h1 className='h1 -mb-12.5 ml-4'>HELLO. I AM.</h1> 
+          <h1 className='h1 -mb-12.5 sm:ml-4 mx-auto'>HELLO. I AM.</h1> 
         </div>
       )}
       <div className="mt-10 flex items-center justify-center relative">
@@ -161,12 +161,12 @@ export default function Home() {
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY.</h1>
         </div>
       </div>
-      <div className="mt-5">
-        <h1 className="h1 ml-4 portfolio-h1">THIS IS MY</h1>
-        <h1 className="h1 ml-4 portfolio-h1">&lt;Developer/&gt;<span className="opacity-0 animate-pulse inline-block">_</span></h1>
-        <h1 className="h1 ml-4 portfolio-h1">Social Media<span className="animate-spin inline-block">&copy;</span></h1>
-        <h1 className="h1 ml-4 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
-        <h1 className="h1 ml-4 mb-10 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
+      <div className="mt-5 mx-auto">
+        <h1 className="h1 portfolio-h1">THIS IS MY</h1>
+        <h1 className="h1 portfolio-h1">&lt;Developer/&gt;<span className="opacity-0 animate-pulse inline-block">_</span></h1>
+        <h1 className="h1 portfolio-h1">Social Media<span className="animate-spin inline-block">&copy;</span></h1>
+        <h1 className="h1 portfolio-h1">Music<span className="animate-bounce inline-block">&#9835;</span></h1>
+        <h1 className="h1 mb-10 portfolio-h1" ref={portfolioHingeRef}>Portfolio.</h1>
       </div>
       <div ref={scrollRowRef} className="scroll flex flex-row overflow-x-auto whitespace-nowrap px-5 py-10 items-center gap-10">
         <img 

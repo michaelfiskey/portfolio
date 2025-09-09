@@ -67,11 +67,11 @@ const Page = () => {
     return (
 
             <div ref={pageRef} className="page-container">
-                <div className="mb-12">
-                    <h1 className="h1">DEV & DATA.</h1>
-                    <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
+                <div className="mt-3 mb-12 sm:ml-0 text-center sm:text-left">
+                    <h1 className="h1 ">DEV & DATA.</h1>
+                    <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
                 </div>
-                <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 sm:p-8 shadow-2xl sm:m-0 m-[-30px]">
+                <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 sm:p-8 shadow-2xl sm:m-0 -m-1">
                     <div className="text-center mb-8">
                         <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
                         <p className="text-stone-600 text-lg max-w-2xl mx-auto">

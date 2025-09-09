@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { useAuth } from '../../components/AuthContext';
+import { useAuth } from '../../../components/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -125,7 +125,7 @@ const Page = () => {
                             src="/assets/gradient_contact.mp4"
                         />
                         <div className="bg-stone-700 w-full items-center justify-center p-1 relative z-10 bg-opacity-80">
-                            <h2 className="h2 !text-white text-center">Login.</h2>
+                            <h2 className="h2 !text-white text-center">Forgot Password?</h2>
                         </div>
                         <div className="m-5 sm:m-15 flex flex-col justify-center gap-5 relative z-10">
                             <div className="flex flex-col w-full">
