@@ -141,7 +141,7 @@ const Page = () => {
         <div ref={pageRef}>
             <div>
                 <div className="page-container">
-            <div className="mt-3 mb-12 sm:ml-0 text-center sm:text-left">
+            <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
                 <h1 className="h1 ">CONTACT.</h1>
                 <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2 mb-4"></div>
                 <p>If you&apos;d like to get in touch with me for any reason, feel free to reach out by filling out the form below! ^-^</p>

@@ -139,7 +139,7 @@ const Page = () => {
     
     return (
         <div ref={pageRef} className="page-container">
-            <div className="mt-3 mb-12 sm:ml-0 text-center sm:text-left">
+            <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
                 <h1 className="h1 ">MUSIC.</h1>
                 <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
             </div>
@@ -147,7 +147,7 @@ const Page = () => {
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 pt-8 px-3 sm:p-8 shadow-2xl -m-1 sm:m-0">
                 <div className="text-center mb-8">
                     <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
-                    <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-stone-600 text-lg max-w-2xl mx-auto">
                         Below is a showcase of the amazing projects I&apos;ve had the privlige of being a part of and some music I&apos;ve made myself!
                     </p>
                 </div>

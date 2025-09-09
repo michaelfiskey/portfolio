@@ -35,13 +35,13 @@ const ProjectCard = ({
         <Link href={`/dev-and-data/${projectPath}`}>
             <div>
                 <Card>
-                    <div className="flex flex-col sm:flex-row justify-between items-center bg-gradient-to-br from-stone-800 to-stone-700 border border-slate-200 rounded-2xl p-6 shadow-inner h-full w-full sm:max-h-[352px]">
+                    <div className="flex flex-col lg:flex-row justify-between items-center bg-gradient-to-br from-stone-800 to-stone-700 border border-slate-200 rounded-2xl p-6 shadow-inner h-full w-full lg:max-h-[352px]">
                         <img 
                             src={`/assets/images/project-images/${projectImagePath}`}
                             alt={projectTitle}
                             className="w-full h-full max-w-[352px] max-h-[352px] object-cover rounded-lg"
                         />
-                        <div className="mt-5 sm:mt-0 mb-4 flex flex-col justify-center items-center sm:w-1/2">
+                        <div className="mt-5 lg:mt-0 mb-4 flex flex-col justify-center items-center lg:w-1/2">
                             <h3 className='h3 !text-white'>
                                 {projectTitle}
                             </h3>

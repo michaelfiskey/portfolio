@@ -135,10 +135,9 @@ const Page = () => {
 
     return (
                 <div ref={pageRef} className="page-container">
-                    <div className="mb-12">
-                        <h1 className="h1">SCHEDULER.</h1>
-                        <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 ml-5 mt-2"></div>
-
+                    <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
+                        <h1 className="h1 ">SCHEDULER.</h1>
+                        <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
                     </div>
                     <div className="bg-white backdrop-blur-sm p-3 sm:p-8 shadow-2xl rounded-lg">
                         <div className="text-center mb-8">
