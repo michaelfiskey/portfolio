@@ -121,11 +121,8 @@ const Page = () => {
             });
             
             const data = await response.json()
-            console.log('Response status:', response.status);
-            console.log('Response data:', data);
 
             if (!response.ok) {
-                console.log('Error details:', data);
                 setErrors([data.error || 'Failed to send email']);
                 return;
             }

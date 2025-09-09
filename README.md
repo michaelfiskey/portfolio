@@ -1,2 +1,2 @@
-# portfolio
-A website displaying the work I've done!
+# Michael Fiskey Portfolio
+I built this fullstack webapplication to explore.

@@ -15,5 +15,5 @@ export const {
   JWT_SECRET_KEY,
   TOKEN_HEADER_KEY,
   RESEND_KEY,
-  EMAIL_RECEIVER
+  EMAIL_RECEIVER,
 } = process.env;
