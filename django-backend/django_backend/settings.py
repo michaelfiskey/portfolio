@@ -80,12 +80,14 @@ WSGI_APPLICATION = 'django_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'ENGINE': os.environ.get('POSTGRES_ENGINE'),
-    'NAME': os.environ.get('POSTGRES_DB'),
-    'USER': os.environ.get('POSTGRES_USER'),
-    'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-    'HOST': os.environ.get('POSTGRES_HOST'),
-    'PORT': os.environ.get('POSTGRES_PORT'),
+    'default': {
+        'ENGINE': os.environ.get('POSTGRES_ENGINE'),
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_HOST'),
+        'PORT': os.environ.get('POSTGRES_PORT'),
+    }
 }
 
 
