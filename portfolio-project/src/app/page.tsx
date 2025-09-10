@@ -23,21 +23,31 @@ export default function Home() {
     const images: HTMLImageElement[] = [];
     const pinkGradient = { frame: 0 };
 
+    const resizeCanvas = () => {
+      if (canvas) {
+        const baseWidth = window.innerWidth;
+        
+        canvas.width = baseWidth;
+        // mobile breakpoint
+        if (baseWidth < 500) { 
+          canvas.height = baseWidth * 3.0; 
+        } else if (baseWidth < 1024) { // tablet breakpoint
+          canvas.height = baseWidth * 2.0; 
+        } else {
+          canvas.height = baseWidth * 0.9; 
+        }
+        render();
+      }
+    };
+
     // Image sequence animation logic adapted from GSAP community forums
     // Source: https://gsap.com/community/forums/topic/25188-airpods-image-sequence-animation-using-scrolltrigger/
-    if (canvas) {
-      const baseWidth = window.innerWidth;
-      
-      canvas.width = baseWidth;
-      // mobile breakpoint
-      if (baseWidth < 500) { 
-        canvas.height = baseWidth * 3.0; 
-      } else if (baseWidth < 1024) { // tablet breakpoint
-        canvas.height = baseWidth * 2.0; 
-      } else {
-        canvas.height = baseWidth * 0.9; 
-      }
-    }
+    
+    resizeCanvas();
+
+    const handleResize = () => {resizeCanvas();};
+
+    window.addEventListener('resize', handleResize);
 
     const currentFrame = (index: number) => ('/assets/gradient_sequences/pink/gradient_' + String(index).padStart(5, '0') + '.jpg');
     for (let i = 0; i < frameCount; i++) {
@@ -113,6 +123,7 @@ export default function Home() {
       );
     }
 
+    return () => {window.removeEventListener('resize', handleResize);};
   }, [authUser]);
 
   useGSAP(() => {
