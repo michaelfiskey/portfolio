@@ -13,7 +13,13 @@ const Page = () => {
     const [instagramFollowerCount, setInstagramFollowerCount] = useState(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
+
     useEffect(() => {
+            // TEMP
+            setIsLoading(true);
+            setInstagramFollowerCount(31000);
+            setTiktokFollowerCount(590000)
         const socialLinks = containerRef.current?.querySelectorAll('.social-link');
 
         if (socialLinks) {
@@ -82,14 +88,14 @@ const Page = () => {
                             <a href='https://instagram.com/fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/instagram-logo.png' className="w-23 h-23"></img></a>
                         </div>
                         <p className="text-stone-600 text-lg max-w-2xl mx-auto mb-2">
-                            During my sophomore year, I became the Social Media Manager for my college's a cappella group, 
-                            and that's when I discovered my enthusiasm for content creation. 
+                            During my sophomore year, I became the Social Media Manager for my college&apos;s a cappella group, 
+                            and that&apos;s when I discovered my enthusiasm for content creation. 
                             I grew our TikTok platform from <b>300</b> to <b>{tiktokFollowerCount} </b>  
                             and Instagram to <b>{instagramFollowerCount}</b> and reaching <b>~160 million</b> total views across platforms, all in the span of 8 months.
                         </p>
                         <p className="text-stone-600 text-lg max-w-2xl mx-auto mb-5">
                             Our success has opened doors to exciting collaborations with renowned brands like 
-                            HoYoverse's Genshin Impact and Men's Wearhouse, as well as the opportunity to open 
+                            HoYoverse&apos;s Genshin Impact and Men&apos;s Wearhouse, as well as the opportunity to open 
                             for a The Kid LAROI concert!
                         </p>
                         <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
