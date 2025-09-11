@@ -154,13 +154,13 @@ const Page = () => {
                 <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Tracks.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
-                    {isLoading ? (
-                        Array.from({ length: 3 }, (_, index) => (
-                            <div key={`personal-loader-${index}`} className="flex-1 min-w-[280px]">
-                                <ContentLoader />
-                            </div>
-                        ))
-                    ) : (
+                    {isLoading ? 
+                        <div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                        </div>
+                     : (
                         tracks
                             .filter((track) => track.trackCategory === 'personal')
                             .map((track) => (
@@ -178,11 +178,10 @@ const Page = () => {
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
-                            Array.from({ length: 2 }, (_, index) => (
-                                <div key={`personal-album-loader-${index}`} className="flex-1 min-w-[280px]">
-                                    <ContentLoader />
-                                </div>
-                            ))
+                            <div>
+                                <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                                <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            </div>
                         ) : (
                             albums
                             .filter((album) => album.trackCategory === 'personal')
@@ -243,11 +242,11 @@ const Page = () => {
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Tracks.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                     {isLoading ? (
-                        Array.from({ length: 3 }, (_, index) => (
-                            <div key={`favorite-track-loader-${index}`} className="flex-1 min-w-[280px]">
-                                <ContentLoader />
-                            </div>
-                        ))
+                        <div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                        </div>
                     ) : (
                         tracks
                             .filter((track) => track.trackCategory === 'favorite')
@@ -266,11 +265,10 @@ const Page = () => {
                     <p className="font-bold text-xl pl-5 mb-2 text-stone-700">Associated Albums.</p>
                     <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                         {isLoading ? (
-                            Array.from({ length: 2 }, (_, index) => (
-                                <div key={`favorite-album-loader${index}`} className="flex-1 min-w-[280px]">
-                                    <ContentLoader />
-                                </div>
-                            ))
+                        <div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                            <div className="flex-1 min-w-[300px]"><ContentLoader /></div>
+                        </div>
                         ) : (
                             albums
                             .filter((album) => album.trackCategory === 'favorite')
