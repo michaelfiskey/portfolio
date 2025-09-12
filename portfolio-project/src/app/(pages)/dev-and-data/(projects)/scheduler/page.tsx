@@ -97,6 +97,8 @@ const Page = () => {
                 return;
             }
 
+            console.log(`start time: ${data.start}`)
+            console.log(`end time: ${data.end}`)
             setData(data)
             setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
                 {  Id: idx, 
@@ -205,8 +207,16 @@ const Page = () => {
                                         selectedDate={new Date(data?.start ?? Date.now())}
                                         currentView={currentView}
                                         readonly={true}
-                                        minDate={new Date(data?.start ?? Date.now())}
-                                        maxDate={new Date(data?.end ?? Date.now())}
+                                        minDate={(() => {
+                                            const date = new Date(data?.start ?? Date.now());
+                                            date.setDate(date.getDate() - 1);
+                                            return date;
+                                        })()}
+                                        maxDate={(() => {
+                                            const date = new Date(data?.end ?? Date.now());
+                                            date.setDate(date.getDate() + 1);
+                                            return date;
+                                        })()}
                                     >
                                         <ViewsDirective>
                                             <ViewDirective option="Day" />
