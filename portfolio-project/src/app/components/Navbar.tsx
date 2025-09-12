@@ -25,7 +25,7 @@ const Navbar = () => {
     const [hours, minutes] = time.split(":");
 
     return (
-        <div className='sticky bg-stone-700 shadow-xl top-0 w-full z-50 pt-3 pb-2 px-7'>
+        <div className='fixed bg-stone-700 shadow-xl top-0 w-full z-50 pt-3 pb-2 px-7'>
             <div className='hidden md:grid md:grid-cols-3 px-15'>
                 <p className='text-stone-100 justify-self-start font-[family-name:var(--font-bebas-neue)] text-2xl'>
                     {hours}

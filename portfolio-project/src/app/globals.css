@@ -5,10 +5,37 @@
   --foreground: #171717;
 }
 
+/* Hide scrollbar for entire website */
+html {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Hide vertical scrollbar but keep functionality */
+html::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+html {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+body {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
 
 @layer utilities {
   .h1 {
-    @apply text-stone-700 text-7xl sm:text-7xl md:text-9xl lg:text-[160px] xl:text-[180px] 2xl:text-[210px] leading-none p-0;
+    @apply text-stone-700 text-7xl sm:text-7xl md:text-9xl lg:text-[140px] xl:text-[150px] 2xl:text-[170px] leading-none p-0;
     font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
   }
   .p {

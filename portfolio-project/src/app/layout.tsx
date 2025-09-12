@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./components/AuthContext";
+import Footer from './components/Footer';
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
@@ -32,13 +33,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased min-h-screen flex flex-col`}
       >
         <AuthProvider>
           <Navbar />
-          <div className="m-1 pt-5 pb-10 sm:m-10 sm:pl-5 sm:pr-5 sm:pt-5 sm:px-5 sm:pb-10">
+          <div className="m-1 pt-20 pb-10 sm:m-10 sm:pl-5 sm:pr-5 sm:pt-20 sm:px-5 sm:pb-10 flex-grow">
               {children}
           </div>
+          <Footer/>
         </AuthProvider>
       </body>
     </html>
