@@ -10,18 +10,71 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
 
   const { authUser, isLoggedIn} = useAuth();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const pageRef = useRef<HTMLDivElement>(null);
-  const frameCount = 240;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
   const scrollRowRef = useRef<HTMLDivElement>(null);
   const techNamesRef = useRef<HTMLDivElement>(null);
   const discoverSectionRef = useRef<HTMLDivElement>(null);
   const featureCardsRef = useRef<HTMLDivElement>(null);
   const ctaSectionRef = useRef<HTMLDivElement>(null);
 
+  const frameCount = 240;
+
 
   useGSAP(() => {
+    // page fade-in effect
+    const page = pageRef.current;
+    gsap.fromTo(page, {
+      opacity: 0
+    }, {
+      opacity: 1,
+      duration: 2
+    });
+  });
 
+  useGSAP(() => {
+    // scroling name
+    const nameContainer = nameRef.current;
+    if (!nameContainer) return;
+    if (!canvasRef.current || !canvasRef.current.height) return;
+    console.log(canvasRef.current.height)
+
+    const nameElements = gsap.utils.toArray<HTMLElement>('.name');
+
+    gsap.set(nameElements, { 
+      y: 0, 
+      opacity: 0 
+    });
+    
+    gsap.set(nameElements[0], { opacity: 1 });
+
+    const nameTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: nameContainer,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: true,
+        toggleActions: 'play none none reverse',
+      }
+    });
+
+    nameElements.forEach((element, index) => {
+      if (index === 0) return;
+      
+      nameTimeline.to(element, {
+        y: index * (window.innerHeight / nameElements.length),
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      }, index * 0.4);
+    });
+  });
+
+  useGSAP(() => {
+    // scrolling gradient background
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     const images: HTMLImageElement[] = [];
@@ -29,23 +82,14 @@ export default function Home() {
 
     const resizeCanvas = () => {
       if (canvas) {
-        const baseWidth = window.innerWidth;
-        
-        canvas.width = baseWidth;
-        // mobile breakpoint
-        if (baseWidth < 500) { 
-          canvas.height = baseWidth * 3.0; 
-        } else if (baseWidth < 1024) { // tablet breakpoint
-          canvas.height = baseWidth * 2.0; 
-        } else {
-          canvas.height = baseWidth * 0.9; 
-        }
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 1.5;
         render();
       }
     };
 
-    // Image sequence animation logic adapted from GSAP community forums
-    // Source: https://gsap.com/community/forums/topic/25188-airpods-image-sequence-animation-using-scrolltrigger/
+    // image sequence animation logic adapted from GSAP community forums
+    // source: https://gsap.com/community/forums/topic/25188-airpods-image-sequence-animation-using-scrolltrigger/
     
     resizeCanvas();
 
@@ -82,113 +126,162 @@ export default function Home() {
       }
     });
 
-    // scrolling h1s logic - synchronized with horizontal scroll pace
-    const portfolioH1s = gsap.utils.toArray<HTMLElement>('.portfolio-h1');
+    // scrolling intro elements
+    const introElements = gsap.utils.toArray<HTMLElement>('.portfolio-h1');
     const scrollRow = scrollRowRef.current;
-
-    if (portfolioH1s.length && scrollRow) {
+    const introCol = introRef.current;
+    
+    if (!scrollRow || !introCol) {return};
+    
+    if (introCol && scrollRow) {
       const isMobile = window.innerWidth < 500;
       
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: portfolioH1s[0],
-          start: isMobile ? 'top 80%' : 'top bottom',
-          end: `+=${1300}`,
+          trigger: introElements[0],
+          start: isMobile ? 'top 80%' : 'top 80% center',
+          end: `+=${introCol.clientHeight}`,
           scrub: true,
           toggleActions: 'play none none reverse',
         }
       });
             
-      tl.fromTo(portfolioH1s,
-        { opacity: 0, y: isMobile ? -30 : 100 },
-        { opacity: 1, y: 0, duration: 0.3, stagger: { amount: 0.2 } },
+      tl.fromTo(introElements,
+        { opacity: 0, y: isMobile ? -30 : 80 },
+        { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
         0
       );
     }    return () => {window.removeEventListener('resize', handleResize);};
   });
 
+  
   useGSAP(() => {
+    let currentIsXL = window.innerWidth >= 1280;
+    let techScrollTriggers: ScrollTrigger[] = [];
     
-    const scrollRow = scrollRowRef.current;
-    const techNames = techNamesRef.current;
-    if (!scrollRow || !techNames) return;
-    
-    gsap.set(scrollRow, { scrollLeft: 0 });
-    
-    const maxScroll = scrollRow.scrollWidth - scrollRow.clientWidth;
-
-    const nameElements = gsap.utils.toArray<HTMLElement>('.tech-name');
-    
-    const isMobile = window.innerWidth < 500;
-    
-    const techNamesTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollRow,
-        start: isMobile ? 'top 80%' : 'top center',
-        end: `+=${maxScroll}`, 
-        scrub: true,
-        toggleActions: 'play none none reverse',
-        refreshPriority: -1,
-        invalidateOnRefresh: true,
+    const createAnimations = () => {
+      techScrollTriggers.forEach(trigger => trigger.kill());
+      techScrollTriggers = [];
+      
+      // scrolling tech stack names
+      const scrollRow = scrollRowRef.current;
+      const techNames = techNamesRef.current;
+      if (!scrollRow || !techNames) return;
+      
+      gsap.set(scrollRow, { scrollLeft: 0 });
+      
+      const maxScroll = scrollRow.scrollWidth - scrollRow.clientWidth;
+      const nameElements = gsap.utils.toArray<HTMLElement>('.tech-name');
+      const isMobile = window.innerWidth < 500;
+      const isXL = window.innerWidth >= 1280; 
+      
+      if (isXL) {
+        const techNamesTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: scrollRow,
+            start: isMobile ? 'top 80%' : 'top 80% center',
+            end: `+=${maxScroll}`, 
+            scrub: true,
+            toggleActions: 'play none none reverse',
+            refreshPriority: -1,
+            invalidateOnRefresh: true,
+          }
+        });
+        
+        if (techNamesTl.scrollTrigger) {
+          techScrollTriggers.push(techNamesTl.scrollTrigger);
+        }
+        
+        techNamesTl.fromTo(nameElements,
+          { opacity: 0, y: isMobile ? -30 : 80 },
+          { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
+          0
+        );
+      } else {
+        const techNamesTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: nameElements[0],
+            start: isMobile ? 'top 80%' : 'top center',
+            end: `+=${techNames.clientHeight}`,
+            scrub: true,
+            toggleActions: 'play none none reverse',
+          }
+        });
+        
+        if (techNamesTl.scrollTrigger) {
+          techScrollTriggers.push(techNamesTl.scrollTrigger);
+        }
+        
+        techNamesTl.fromTo(nameElements,
+          { opacity: 0, y: isMobile ? -30 : 80 },
+          { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
+          0
+        );
       }
-    });
-    
-    techNamesTl.fromTo(nameElements,
-      { opacity: 0, y: isMobile ? -30 : 80 },
-      { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
-      0
-    );
-    
-    const horizontalTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollRow,
-        start: isMobile ? "top 70%" : "top center", 
-        end: `+=${maxScroll}`, 
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        refreshPriority: -1,
-        invalidateOnRefresh: true,
+      
+      // scroll tech stack images (only for xl screens)
+      if (isXL) {
+        const horizontalTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: scrollRow,
+            start: isMobile ? "top 70%" : "top center", 
+            end: `+=${maxScroll}`, 
+            scrub: 1,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            refreshPriority: -1,
+            invalidateOnRefresh: true,
+          }
+        });
+
+        if (horizontalTl.scrollTrigger) {
+          techScrollTriggers.push(horizontalTl.scrollTrigger);
+        }
+
+        gsap.set(scrollRow.parentElement, { opacity: 0 });
+
+        horizontalTl
+        .to(scrollRow.parentElement, {
+          opacity: 1,
+          ease: "power2.out",
+          duration: 0.1
+        }, 0)
+        .to(scrollRow, {
+          scrollLeft: maxScroll,
+          ease: "none",
+          duration: 0.6
+        }, 0.2)
+        .to(scrollRow.parentElement, {
+          opacity: 0,
+          ease: "power2.out",
+          duration: 0.1
+        }, 0.8);
       }
-    });
+    };
 
-    gsap.set(scrollRow.parentElement, { opacity: 0 });
+    const handleResize = () => {
+      const newIsXL = window.innerWidth >= 1280;
+      if (newIsXL !== currentIsXL) {
+        currentIsXL = newIsXL;
+        createAnimations();
+      } else {
+        ScrollTrigger.refresh();
+      }
+    };
 
-    horizontalTl
-    .to(scrollRow.parentElement, {
-      opacity: 1,
-      ease: "power2.out",
-      duration: 0.1
-    }, 0)
-    .to(scrollRow, {
-      scrollLeft: maxScroll,
-      ease: "none",
-      duration: 0.6
-    }, 0.2)
-    .to(scrollRow.parentElement, {
-      opacity: 0,
-      ease: "power2.out",
-      duration: 0.1
-    }, 0.8);
+    createAnimations();
+    
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      techScrollTriggers.forEach(trigger => trigger.kill());
+      window.removeEventListener('resize', handleResize);
     };
   });
 
   useGSAP(() => {
-    // page fade-in effect
-    const page = pageRef.current;
-    gsap.fromTo(page, {
-      opacity: 0
-    }, {
-      opacity: 1,
-      duration: 2
-    });
-  });
-
-  useGSAP(() => {
+    // page information animation
     const discoverSection = discoverSectionRef.current;
     const featureCards = featureCardsRef.current;
     const ctaSection = ctaSectionRef.current;
@@ -266,11 +359,15 @@ export default function Home() {
           ref={canvasRef}
           className="w-full"
         ></canvas>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg">MICHAEL FISKEY.</h1>
+        <div ref={nameRef} className="absolute inset-0 flex flex-col items-center justify-start pt-[25%]">
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
         </div>
       </div>
-      <div className="mt-5 mx-auto">
+      <div ref={introRef} className="mt-5 mx-auto">
         <h1 className="h1 portfolio-h1">THIS IS MY</h1>
         <h1 className="h1 portfolio-h1">&lt;Developer/&gt;<span className="opacity-0 animate-pulse inline-block">_</span></h1>
         <h1 className="h1 portfolio-h1">Social Media<span className="animate-spin inline-block">&copy;</span></h1>
