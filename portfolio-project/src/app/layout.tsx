@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import Socialsbar from "./components/Socialsbar";
 import { AuthProvider } from "./components/AuthContext";
 import Footer from './components/Footer';
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
@@ -37,6 +38,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <Navbar />
+          <Socialsbar/>
           <div className="m-1 pt-20 pb-10 sm:m-10 sm:pl-5 sm:pr-5 sm:pt-20 sm:px-5 sm:pb-10 flex-grow">
               {children}
           </div>

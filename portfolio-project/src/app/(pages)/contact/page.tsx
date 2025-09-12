@@ -165,7 +165,7 @@ const Page = () => {
                                 muted
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover z-0"
-                                src="/assets/gradient_contact.mp4"
+                                src="/assets/gradient.mp4"
                             />
                             <div className="bg-stone-700 w-full items-center justify-center p-1 relative z-10 bg-opacity-80">
                                 <h2 className="h2 !text-white text-center">Contact Form.</h2>
