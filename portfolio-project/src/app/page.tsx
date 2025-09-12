@@ -13,7 +13,7 @@ export default function Home() {
 
   const pageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const nameRef = useRef<HTMLDivElement>(null);
+  //const nameRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const scrollRowRef = useRef<HTMLDivElement>(null);
   const techNamesRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ export default function Home() {
       duration: 2
     });
   });
-
+/*
   useGSAP(() => {
     // scroling name
     const nameContainer = nameRef.current;
@@ -72,7 +72,7 @@ export default function Home() {
       }, index * 0.4);
     });
   });
-
+*/
   useGSAP(() => {
     // scrolling gradient background
     const canvas = canvasRef.current;
@@ -359,12 +359,16 @@ export default function Home() {
           ref={canvasRef}
           className="w-full"
         ></canvas>
-        <div ref={nameRef} className="absolute inset-0 flex flex-col items-center justify-start pt-[25%]">
+        {/*<div ref={nameRef} className="absolute inset-0 flex flex-col items-center justify-start pt-[25%]">
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
+        </div>*/}
+        {/*TEMPORARY */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name center">MICHAEL FISKEY.</h1>
         </div>
       </div>
       <div ref={introRef} className="mt-5 mx-auto">
