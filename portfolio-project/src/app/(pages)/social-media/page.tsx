@@ -87,13 +87,13 @@ const Page = () => {
                             <a href='https://tiktok.com/@fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/tiktok-logo.webp' className="w-12 h-12"></img></a>
                             <a href='https://instagram.com/fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/instagram-logo.png' className="w-23 h-23"></img></a>
                         </div>
-                        <p className="text-stone-600 text-lg max-w-2xl mx-auto mb-2">
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-2">
                             During my sophomore year, I became the Social Media Manager for my college&apos;s a cappella group, 
                             and that&apos;s when I discovered my enthusiasm for content creation. 
                             I grew our TikTok platform from <b>300</b> to <b>{tiktokFollowerCount} </b>  
                             and Instagram to <b>{instagramFollowerCount}</b> and reaching <b>~160 million</b> total views across platforms, all in the span of 8 months.
                         </p>
-                        <p className="text-stone-600 text-lg max-w-2xl mx-auto mb-5">
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                             Our success has opened doors to exciting collaborations with renowned brands like 
                             HoYoverse&apos;s Genshin Impact and Men&apos;s Wearhouse, as well as the opportunity to open 
                             for a The Kid LAROI concert!
@@ -114,7 +114,7 @@ const Page = () => {
                     </div>
                     <div className="text-center mb-8">
                         <h2 className="h2 !font-bold  mb-3">TikTok</h2>
-                        <p className="text-stone-600 text-lg max-w-2xl mx-auto mb-5">
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                         I took what I learned from being a Social Media Manager and worked as a TikTok content creator for various brands. I produced <b>400+</b> short-form videos, achieving
                         <b> 1+ million</b> views on <b>10+</b> campaigns. I was also ranked top 10% of creators from July - August 2023.
                         </p>

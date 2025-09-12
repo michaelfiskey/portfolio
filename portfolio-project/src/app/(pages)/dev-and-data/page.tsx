@@ -74,7 +74,7 @@ const Page = () => {
                 <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 sm:p-8 shadow-2xl sm:m-0 -m-1">
                     <div className="text-center mb-8">
                         <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
-                        <p className="text-stone-600 text-lg max-w-2xl mx-auto">
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                         Below is a showcase of the projects I&apos;ve created!
                         </p>
                         <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
