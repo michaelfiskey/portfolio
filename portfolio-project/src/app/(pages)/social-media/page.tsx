@@ -22,8 +22,8 @@ const Page = () => {
                 const handleMouseEnter = () => {
                     if (img) {
                         gsap.to(img, {
-                            scale: 1.3,
-                            rotation: 10,
+                            scale: 1.2,
+                            rotation: 5,
                             duration: 0.3,
                             ease: "back.out(1.7)"
                         });
@@ -69,27 +69,50 @@ const Page = () => {
     return (
 
             <div ref={pageRef} className="page-container">
-                <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
+                <div className="mt-5 mb-12 md:ml-0 text-center md:text-left">
                     <h1 className="h1 ">SOCIAL MEDIA.</h1>
-                    <div className="w-16 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto sm:ml-5 mt-2"></div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto md:ml-5 mt-2"></div>
                 </div>
-                <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 sm:p-8 shadow-2xl sm:m-0 -m-1">
+                <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 md:p-8 shadow-2xl md:m-0 -m-1">
                     <div ref={containerRef} className="text-center mb-8">
-                        <h2 className="h2 !font-bold !from-pink-500 !to-rose-500 ">FUNDAMENTALLY SOUND</h2>
-                        <div className="flex flex-row justify-center items-center gap-2 mb-3 pl-5">
-                            <a href='https://tiktok.com/@fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/tiktok-logo.webp' className="w-12 h-12"></img></a>
-                            <a href='https://instagram.com/fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/instagram-logo.png' className="w-23 h-23"></img></a>
+                        <h2 className="h2 !font-bold !from-pink-500 !to-rose-500 mb-8">FUNDAMENTALLY SOUND</h2>
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8 px-4">
+                            <div className="border border-stone-200 rounded-2xl shadow-lg p-8 min-w-[280px] flex-1 max-w-[350px]">
+                                <div className="flex flex-col items-center space-y-4">
+                                    <a href='https://tiktok.com/@fsacappella' target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <img src='/assets/images/social-media-images/tiktok-logo.webp' className="w-16 h-16 md:w-20 md:h-20" alt="TikTok" />
+                                    </a>
+                                    <div className="text-center">
+                                        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent mb-2">615K</h1>
+                                        <h3 className="text-lg font-semibold text-stone-600">Followers</h3>
+                                        <p className="text-sm text-stone-500 mt-2">TikTok Platform</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="border border-stone-200 rounded-2xl shadow-lg p-8 min-w-[280px] flex-1 max-w-[350px]">
+                                <div className="flex flex-col items-center space-y-4">
+                                    <a href='https://instagram.com/fsacappella' target="_blank" rel="noopener noreferrer" className="social-link">
+                                        <img src='/assets/images/social-media-images/instagram-logo.png' className="w-16 h-16 md:w-20 md:h-20" alt="Instagram" />
+                                    </a>
+                                    <div className="text-center">
+                                        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent mb-2">33K</h1>
+                                        <h3 className="text-lg font-semibold text-stone-600">Followers</h3>
+                                        <p className="text-sm text-stone-500 mt-2">Instagram Platform</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-2">
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-2 leading-relaxed">
                             During my sophomore year, I became the Social Media Manager for my college&apos;s a cappella group, 
-                            and that&apos;s when I discovered my enthusiasm for content creation. 
-                            I grew our TikTok platform from <b>300</b> to <b>~600k</b>  
-                            and Instagram to <b>~30k</b> and reaching <b>~160M</b> total views across platforms, all in the span of 8 months.
+                            and that&apos;s when I discovered my passion for content creation. 
+                            I grew our TikTok platform from <span className="font-bold text-pink-600">300</span> to <span className="font-bold text-pink-600">615K+ </span> followers  
+                            and Instagram to <span className="font-bold text-pink-600">33K+</span>, reaching <span className="font-bold text-pink-600">160M+</span> total views across both platforms in just 8 months.
                         </p>
-                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
-                            Our success has opened doors to exciting collaborations with renowned brands like 
-                            HoYoverse&apos;s Genshin Impact and Men&apos;s Wearhouse, as well as the opportunity to open 
-                            for a The Kid LAROI concert!
+                        <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-6 leading-relaxed">
+                            Our success opened doors to exciting collaborations with renowned brands like 
+                            <b> HoYoverse&apos;s Genshin Impact</b> and <b>Men&apos;s Wearhouse</b>, as well as the opportunity to open 
+                            for a <b>The Kid LAROI</b> concert!
                         </p>
                         <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                             <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
