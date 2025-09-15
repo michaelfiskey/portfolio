@@ -49,7 +49,7 @@ const Navbar = () => {
                         </li>
                         <li className="group text-stone-100 hover:text-stone-400 transition-colors">
                             <Link href="/social-media" onClick={() => setIsMenuOpen(false)}>
-                                social media <span className="animate-spin inline-block">&copy;</span>
+                                social media <span className="group-hover:animate-spin inline-block">&copy;</span>
                             </Link>
                          </li>
                         <li className="justify-self-center text-stone-100 hover:text-stone-400 transition-colors">
@@ -101,7 +101,7 @@ const Navbar = () => {
             <nav className={`lg:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                 <ul className='pt-4 space-y-3 text-center'>
                     <li className="text-stone-100 hover:text-stone-400 transition-colors">
-                        <Link href="/" onClick={() => setIsMenuOpen(false)}>home.</Link>
+                        <Link href="/" onClick={() => setIsMenuOpen(false)}>home</Link>
                     </li>
                     <li className="group text-stone-100 hover:text-stone-400 transition-colors">
                         <Link href="/dev-and-data" onClick={() => setIsMenuOpen(false)}>
@@ -115,7 +115,7 @@ const Navbar = () => {
                     </li>
                     <li className="group text-stone-100 hover:text-stone-400 transition-colors">
                         <Link href="/social-media" onClick={() => setIsMenuOpen(false)}>
-                            social media <span className="animate-spin inline-block">&copy;</span>
+                            social media <span className="group-hover:animate-spin inline-block">&copy;</span>
                         </Link>
                     </li>
                     <li className="text-stone-100 hover:text-stone-400 transition-colors">
