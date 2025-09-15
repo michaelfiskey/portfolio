@@ -5,7 +5,7 @@ dotenv.config();
 export const {
   PORT,
   NODE_ENV,
-  ORIGIN_URL,
+  ORIGIN_URLS,
   NEXT_PUBLIC_DJANGO_URL,
   SUPABASE_URL,
   SUPABASE_ANON_KEY,

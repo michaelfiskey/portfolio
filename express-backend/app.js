@@ -65,7 +65,7 @@ app.use(helmet({
 app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(cors({
-    origin: process.env.ORIGIN_URL,
+    origin: process.env.ORIGIN_URLS ? process.env.ORIGIN_URLS.split(',').map(url => url.trim()) : [],
     credentials: true
 }));
 
