@@ -48,7 +48,7 @@ const ProjectCard = ({
                             <p className="text-white text-center text-lg line-clamp-4 mb-4">
                                 {projectDescription}
                             </p>
-                            <span className="bg-gradient-to-br border border-red-500 from-red-400 to-rose-300 text-stone-700 text-sm font-medium px-3 py-2 rounded-full">
+                            <span className="bg-gradient-to-br border border-blue-800 from-sky-400 to-blue-700 text-stone-700 text-sm font-medium px-3 py-2 rounded-full">
                                 <b>Created:</b> {formatDate(projectDate)}
                             </span>
                         </div>

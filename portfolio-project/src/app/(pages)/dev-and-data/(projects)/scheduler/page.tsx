@@ -139,11 +139,11 @@ const Page = () => {
                 <div ref={pageRef} className="page-container">
                     <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
                         <h1 className="h1 ">SCHEDULER.</h1>
-                        <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
+                        <div className="w-16 h-1 bg-gradient-to-r from-sky-500 to-blue-500 mx-auto sm:ml-5 mt-2"></div>
                     </div>
                     <div className="bg-white backdrop-blur-sm p-3 sm:p-8 shadow-2xl rounded-lg">
                         <div className="text-center mb-8">
-                            <h2 className="h2 !font-bold mb-3">FIND THE BEST MEETING TIME</h2>
+                            <h2 className="h2 !font-bold mb-3 !from-sky-400 !to-blue-700 ">FIND THE BEST MEETING TIME</h2>
                             <p className="text-stone-600 text-lg max-w-2xl mx-auto">
                                 Paste a When2Meet schedule URL and select a duration to find the time block where the most people are available from your group.<br/>
                                 This tool finds windows where the <em>same group of people</em> is available for the entire duration of each window.
@@ -180,7 +180,7 @@ const Page = () => {
                                 <button
                                     disabled={!url.value || !url.isValid}
                                     onClick={handleSubmit}
-                                    className="button w-full sm:max-w-[200px]"
+                                    className="button !from-sky-500 !to-blue-700 w-full sm:max-w-[200px]"
                                 >
                                     Go!
                                 </button>

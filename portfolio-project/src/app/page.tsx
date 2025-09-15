@@ -478,7 +478,7 @@ export default function Home() {
             </ul>
             <Link 
               href="/dev-and-data" 
-              className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-sm hover:from-blue-600 hover:to-blue-700 transition-all duration-300 mt-auto"
+              className="inline-block px-4 py-2 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-sm hover: hover:scale-102 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 mt-auto"
             >
               View Projects →
             </Link>
@@ -498,7 +498,7 @@ export default function Home() {
             </ul>
             <Link 
               href="/music" 
-              className="inline-block px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-sm hover:from-purple-600 hover:to-purple-700 transition-all duration-300 mt-auto"
+              className="inline-block px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white font-semibold rounded-sm hover:from-purple-600 hover:to-purple-700 hover:scale-102 transition-all duration-300 mt-auto"
             >
               Explore Music →
             </Link>
@@ -519,7 +519,7 @@ export default function Home() {
             </ul>
             <Link 
               href="/social-media" 
-              className="inline-block px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-sm hover:from-pink-600 hover:to-rose-600 transition-all duration-300 mt-auto"
+              className="inline-block px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-sm hover:from-pink-600 hover:to-rose-600 transition-all hover:scale-102 duration-300 mt-auto"
             >
               See My Work →
             </Link>

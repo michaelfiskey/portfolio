@@ -13,8 +13,6 @@ const Page = () => {
     const [instagramFollowerCount, setInstagramFollowerCount] = useState(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
-
     useEffect(() => {
             // TEMP
             setIsLoading(true);
@@ -78,11 +76,11 @@ const Page = () => {
             <div ref={pageRef} className="page-container">
                 <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
                     <h1 className="h1 ">SOCIAL MEDIA.</h1>
-                    <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto sm:ml-5 mt-2"></div>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm border border-white/30 px-3 py-8 sm:p-8 shadow-2xl sm:m-0 -m-1">
                     <div ref={containerRef} className="text-center mb-8">
-                        <h2 className="h2 !font-bold">FUNDAMENTALLY SOUND</h2>
+                        <h2 className="h2 !font-bold !from-pink-500 !to-rose-500 ">FUNDAMENTALLY SOUND</h2>
                         <div className="flex flex-row justify-center items-center gap-2 mb-3 pl-5">
                             <a href='https://tiktok.com/@fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/tiktok-logo.webp' className="w-12 h-12"></img></a>
                             <a href='https://instagram.com/fsacappella' target="_blank" rel="noopener noreferrer" className="social-link"><img src='/assets/images/social-media-images/instagram-logo.png' className="w-23 h-23"></img></a>
@@ -257,7 +255,7 @@ const Page = () => {
                         </div>
                     </div>
                     <div className="text-center mb-8">
-                        <h2 className="h2 !font-bold  mb-3">TikTok</h2>
+                        <h2 className="h2 !font-bold  !from-pink-500 !to-rose-500 mb-3">TikTok</h2>
                         <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                         I took what I learned from being a Social Media Manager and worked as a TikTok content creator for various brands. I produced <b>400+</b> short-form videos, achieving
                         <b> 1+ million</b> views on <b>10+</b> campaigns. I was also ranked top 10% of creators from July - August 2023.

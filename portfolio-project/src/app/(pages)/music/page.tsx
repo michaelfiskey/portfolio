@@ -141,12 +141,12 @@ const Page = () => {
         <div ref={pageRef} className="page-container">
             <div className="mt-5 mb-12 sm:ml-0 text-center sm:text-left">
                 <h1 className="h1 ">MUSIC.</h1>
-                <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-300 mx-auto sm:ml-5 mt-2"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-fuchsia-600 to-purple-600 mx-auto sm:ml-5 mt-2"></div>
             </div>
 
             <div className="bg-white/20 backdrop-blur-sm border border-white/30 pt-8 px-3 sm:p-8 shadow-2xl -m-1 sm:m-0">
                 <div className="text-center mb-8">
-                    <h2 className="h2 !font-bold  mb-3">PERSONAL PROJECTS</h2>
+                    <h2 className="h2 !font-bold !from-fuchsia-600 !to-purple-600 !mb-3">PERSONAL PROJECTS</h2>
                     <p className="text-stone-600 text-lg max-w-5xl mx-auto">
                         Below is a showcase of the amazing projects I&apos;ve had the privlige of being a part of and some music I&apos;ve made myself!
                     </p>
@@ -233,7 +233,7 @@ const Page = () => {
                     </div>
                 )}
                 <div className="text-center mb-8">
-                    <h2 className="h2 !font-bold  mb-3 mt-15">FAVORITES</h2>
+                    <h2 className="h2 !font-bold  !from-fuchsia-600 !to-purple-600 mb-3 mt-15">FAVORITES</h2>
                     <p className="text-stone-600 text-lg max-w-5xl mx-auto leading-relaxed">
                         Below is a showcase of my current favorite tracks and albums I like listening to!
                     </p>
