@@ -150,9 +150,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    os.environ.get('FRONTEND_URL', 'http://localhost:3000'),
-    "http://localhost:3000",
-    "https://michaelfiskey.vercel.app",
+    *os.environ.get('FRONTEND_URLS').split(',')
 ]
 
 # CORS settings for API requests
