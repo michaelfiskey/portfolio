@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -10,6 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
 
   const { authUser, isLoggedIn} = useAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const pageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
