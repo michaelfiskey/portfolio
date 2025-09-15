@@ -9,15 +9,10 @@ import gsap from "gsap";
 const Page = () => {
     const pageRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [tiktokFollowerCount, setTiktokFollowerCount] = useState(0);
-    const [instagramFollowerCount, setInstagramFollowerCount] = useState(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-            // TEMP
             setIsLoading(true);
-            setInstagramFollowerCount(31000);
-            setTiktokFollowerCount(590000)
         const socialLinks = containerRef.current?.querySelectorAll('.social-link');
 
         if (socialLinks) {
@@ -88,8 +83,8 @@ const Page = () => {
                         <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-2">
                             During my sophomore year, I became the Social Media Manager for my college&apos;s a cappella group, 
                             and that&apos;s when I discovered my enthusiasm for content creation. 
-                            I grew our TikTok platform from <b>300</b> to <b>{tiktokFollowerCount} </b>  
-                            and Instagram to <b>{instagramFollowerCount}</b> and reaching <b>~160 million</b> total views across platforms, all in the span of 8 months.
+                            I grew our TikTok platform from <b>300</b> to <b>~600k</b>  
+                            and Instagram to <b>~30k</b> and reaching <b>~160M</b> total views across platforms, all in the span of 8 months.
                         </p>
                         <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                             Our success has opened doors to exciting collaborations with renowned brands like 
