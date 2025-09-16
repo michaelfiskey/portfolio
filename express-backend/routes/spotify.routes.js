@@ -20,7 +20,7 @@ spotifyRouter.get('/track-ids', async (req, res) => {
 
 spotifyRouter.delete('/track/:track_id', authenticateToken, requireRole('owner'), async (req, res) => {
     try {
-        const { track_id } = req.params.track_id;
+        const { track_id } = req.params;
 
         const deleteRequest = await pool.query(
             'DELETE FROM spotify_tracks WHERE track_id = $1 RETURNING track_id, track_name, album_id, artist_id, artist_name, release_year, track_category, created_at',
@@ -40,7 +40,7 @@ spotifyRouter.delete('/track/:track_id', authenticateToken, requireRole('owner')
 
 spotifyRouter.delete('/album/:album_id', authenticateToken, requireRole('owner'), async (req, res) => {
     try {
-        const { album_id } = req.params.album_id;
+        const { album_id } = req.params;
 
         const deleteRequest = await pool.query(
             'DELETE FROM spotify_tracks WHERE album_id = $1 RETURNING track_id, track_name, album_id, artist_id, artist_name, release_year, track_category, created_at',

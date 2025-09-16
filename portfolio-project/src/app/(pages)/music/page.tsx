@@ -16,7 +16,8 @@ const Page = () => {
     const [albums, setAlbums] = useState<{ 
         albumId: string; 
         trackCategory: string }[]>([]);   
-    const [modalView, setModalView] = useState(false);
+    const [personalModalView, setPersonalModalView] = useState(false);
+    const [favoritesModalView, setFavoritesModalView] = useState(false);
     const [spotifyTrackId, setSpotifyTrackId] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const pageRef = useRef<HTMLDivElement>(null);
@@ -97,7 +98,8 @@ const Page = () => {
             console.error(error);
             setIsLoading(false)
         } finally {
-            setModalView(false);
+            setPersonalModalView(false);
+            setFavoritesModalView(false);
             setSpotifyTrackId('');
             setIsLoading(false)
         }
@@ -200,14 +202,14 @@ const Page = () => {
                 </div>
                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
-                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
+                        <button onClick={() => setPersonalModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
                             + Add New Track
                         </button>
-                        {modalView && (<>
+                        {personalModalView && (<>
                             <Modal
                                 title='Add New Track'
-                                isOpen={modalView}
-                                onClose={() => {setModalView(false); setSpotifyTrackId('')}}
+                                isOpen={personalModalView}
+                                onClose={() => {setPersonalModalView(false); setSpotifyTrackId('')}}
                                 onSubmit={() => { handleAddProject('personal'); }}
                             >
                                 <div className="space-y-4">
@@ -287,14 +289,14 @@ const Page = () => {
                 </div>
                                 {authRole === 'owner' && (
                     <div className="text-center mt-8">
-                        <button onClick={() => setModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
+                        <button onClick={() => setFavoritesModalView(true)} className="mb-7 px-6 py-3 bg-gradient-to-r from-red-400 to-rose-300 text-white font-semibold rounded-sm hover:from-red-500 hover:to-rose-400 transform hover:scale-105 transition-all duration-280 shadow-lg">
                             + Add New Track
                         </button>
-                        {modalView && (<>
+                        {favoritesModalView && (<>
                             <Modal
                                 title='Add New Track'
-                                isOpen={modalView}
-                                onClose={() => {setModalView(false); setSpotifyTrackId('')}}
+                                isOpen={favoritesModalView}
+                                onClose={() => {setFavoritesModalView(false); setSpotifyTrackId('')}}
                                 onSubmit={() => { handleAddProject('favorite'); }}
                             >
                                 <div className="space-y-4">
