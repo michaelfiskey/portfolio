@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { supabase } from '../database/supabase.js';
+import { pool } from '../database/railwaydb.js';
 import jwt from 'jsonwebtoken';
 import { body, validationResult } from 'express-validator';
 const authRouter = Router();
@@ -104,44 +104,41 @@ authRouter.post('/sign-up', validateSignUp, handleValidationErrors, async (req, 
     try {
         const {username, email, password} = req.body;
 
-        const { data: existingUsername, error: usernameError } = await supabase
-            .from('users')
-            .select('username')
-            .eq('username', username)
-            .single();
+        const usernameCheck = await pool.query(
+            'SELECT username FROM users WHERE username = $1', 
+            [username]
+        );
 
-        if (existingUsername) {
+        if (usernameCheck.rows.length > 0) {
             return res.status(409).json({error: 'Username is already taken'});
-        };
+        }
 
-        const { data: existingEmail, error: emailError } = await supabase
-            .from('users')
-            .select('email')
-            .eq('email', email)
-            .single();
+        const emailCheck = await pool.query(
+            'SELECT email FROM users WHERE email = $1', 
+            [email]
+        );
 
-        if (existingEmail) {
+        if (emailCheck.rows.length > 0) {
             return res.status(409).json({error: 'Email is already registered'});
-        };
+        }
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const { data, error } = await supabase
-            .from('users')
-            .insert({email, username, password_hash: hashedPassword})
-            .select();
-        if (error) throw error;
+        const result = await pool.query(
+            'INSERT INTO users (email, username, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, role, created_at',
+            [email, username, hashedPassword]
+        );
+        
+        const user = result.rows[0];
 
-        const {password_hash, ...userNoPassword} = data[0];
-
-        const token = generateToken(userNoPassword);
+        const token = generateToken(user);
 
         res.status(201).json({
             message: 'Login success!',
             token: token,
             user: {
-                username: userNoPassword.username,
-                role: userNoPassword.role
+                username: user.username,
+                role: user.role
             }
         });
     }
@@ -154,16 +151,20 @@ authRouter.post('/sign-up', validateSignUp, handleValidationErrors, async (req, 
 authRouter.post('/login', validateLogin, handleValidationErrors, async (req, res) => {
     try {    
         const { username, password } = req.body;
-        const { data: user, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('username', username).single();
-        if (!user) {return res.status(401).json({ error: "Username not found!"});}
+        
+        const result = await pool.query(
+            'SELECT * FROM users WHERE username = $1', 
+            [username]
+        );
+        
+        if (result.rows.length === 0) {
+            return res.status(401).json({ error: "Username not found!"});
+        }
+        
+        const user = result.rows[0];
         
         const isValidPassword = await bcrypt.compare(password, user.password_hash)
         if (!isValidPassword) {return res.status(401).json({error: 'Invalid password!'})}
-
-        if (error) {return res.status(401).json({error: "An error has occured."})}
 
         const {password_hash, ...userNoPassword} = user;
         const token = generateToken(userNoPassword);

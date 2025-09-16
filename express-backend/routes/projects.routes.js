@@ -1,23 +1,17 @@
 import { Router } from 'express';
-import { supabase } from '../database/supabase.js';
+import { pool } from '../database/railwaydb.js';
 
 const projectRouter = Router();
 
 projectRouter.get('/', async (req, res) => {
     try {
-        const { data, error } = await supabase
-            .from('dev_and_data_projects')
-            .select('*');
+        const result = await pool.query('SELECT * FROM dev_and_data_projects');
+        const projects = result.rows;
         
-        if (error) throw error;
-        
-        console.log(data)
-        res.json(data);
+        res.json(projects);
 
     } catch (error) {
         res.status(500).json({ error: error.message });
     };
 });
-
-
 export default projectRouter;
