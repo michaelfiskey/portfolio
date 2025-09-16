@@ -52,7 +52,7 @@ const SpotifyCard = ({
     const removeSpotifyTrack = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/album/${spotifyId}`, 
+            const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_URL}/spotify/track/${spotifyId}`, 
                 { method: 'DELETE', 
                   headers: {
                     'Authorization' : `Bearer ${token}`,
