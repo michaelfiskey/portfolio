@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { supabase } from '../database/supabase.js';
 import { pool } from '../database/railwaydb.js';
 import bcrypt from 'bcrypt';
 

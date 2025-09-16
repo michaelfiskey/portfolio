@@ -79,9 +79,8 @@ PORT=12345
 ```
 PORT=5500
 ORIGIN_URL=http://localhost:3000
-SUPABASE_URL=supabase-url.com
-SUPABASE_ANON_KEY=anon-key
-SUPABASE_SERVICE_ROLE_KEY=service-role-key
+DATABASE_URL=your-private-database-url-for-production
+DATABASE_PUBLIC_URL=your-public-database-url-for-development
 SPOTIFY_CLIENT_ID=client-id
 SPOTIFY_CLIENT_SECRET=secret-id
 JWT_SECRET_KEY=jwt-secret-key
