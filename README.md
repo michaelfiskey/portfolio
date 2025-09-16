@@ -2,7 +2,7 @@
 
 A fullstack web application built with Next.js, Django, and Express.js.
 
-**Frontend:** [https://michaelfiskey.vercel.app](https://michaelfiskey.vercel.app)  
+**Frontend:** [https://www.michaelfiskey.com](https://www.michaelfiskey.com)  
 
 ## Tech Stack
 
