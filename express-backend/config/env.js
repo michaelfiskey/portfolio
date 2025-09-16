@@ -16,4 +16,6 @@ export const {
   TOKEN_HEADER_KEY,
   RESEND_KEY,
   EMAIL_RECEIVER,
+  DATABASE_URL,
+  DATABASE_PUBLIC_URL
 } = process.env;

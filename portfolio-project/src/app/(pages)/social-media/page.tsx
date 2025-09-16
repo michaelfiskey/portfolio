@@ -128,141 +128,49 @@ const Page = () => {
                                             className="tiktok-embed flex-1" 
                                             cite="https://www.tiktok.com/@fsacappella/video/7189829641840889131" 
                                             data-video-id="7189829641840889131" 
-                                            style={{ maxWidth: 605, minWidth: 325 }}> 
+                                            style={{ maxWidth: 350, minWidth: 350, minHeight: 600, maxHeight: 600 }}>
                                             <section> 
                                                 <a target="_blank" title="@fsacappella" href="https://www.tiktok.com/@fsacappella?refer=embed">@fsacappella</a> pitch perfect riff off irl with @pitchesandnotes 🤭 
-                                                <a title="pitchperfect" target="_blank" href="https://www.tiktok.com/tag/pitchperfect?refer=embed">#pitchperfect</a> 
-                                                <a title="riffoff" target="_blank" href="https://www.tiktok.com/tag/riffoff?refer=embed">#riffoff</a> 
-                                                <a title="fsacappella" target="_blank" href="https://www.tiktok.com/tag/fsacappella?refer=embed">#fsacappella</a> 
-                                                <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> 
-                                                <a title="foryou" target="_blank" href="https://www.tiktok.com/tag/foryou?refer=embed">#foryou</a> 
-                                                <a title="foryoupage" target="_blank" href="https://www.tiktok.com/tag/foryoupage?refer=embed">#foryoupage</a> 
-                                                <a title="acappella" target="_blank" href="https://www.tiktok.com/tag/acappella?refer=embed">#acappella</a> 
-                                                <a title="beatbox" target="_blank" href="https://www.tiktok.com/tag/beatbox?refer=embed">#beatbox</a> 
-                                                <a title="uwmadison" target="_blank" href="https://www.tiktok.com/tag/uwmadison?refer=embed">#uwmadison</a> 
-                                                <a title="uw" target="_blank" href="https://www.tiktok.com/tag/uw?refer=embed">#uw</a> 
-                                                <a title="madison" target="_blank" href="https://www.tiktok.com/tag/madison?refer=embed">#madison</a> 
-                                                <a title="wisconsin" target="_blank" href="https://www.tiktok.com/tag/wisconsin?refer=embed">#wisconsin</a> 
-                                                <a title="icca" target="_blank" href="https://www.tiktok.com/tag/icca?refer=embed">#icca</a> 
-                                                <a title="sing" target="_blank" href="https://www.tiktok.com/tag/sing?refer=embed">#sing</a> 
-                                                <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> 
-                                                <a title="music" target="_blank" href="https://www.tiktok.com/tag/music?refer=embed">#music</a> 
                                                 <a target="_blank" title="♬ Flashlight - From &#34;Pitch Perfect 2&#34; Soundtrack - Jessie J" href="https://www.tiktok.com/music/Flashlight-From-Pitch-Perfect-2-Soundtrack-6935862050258159618?refer=embed">♬ Flashlight - From &#34;Pitch Perfect 2&#34; Soundtrack - Jessie J</a> 
                                             </section> 
-                                        </blockquote> 
-                                        <script async src="https://www.tiktok.com/embed.js"></script>
-                                        
+                                        </blockquote>                                         
                                         <blockquote 
                                             className="tiktok-embed" 
                                             cite="https://www.tiktok.com/@fsacappella/video/7226207962421841195" 
                                             data-video-id="7226207962421841195" 
-                                            style={{ maxWidth: 605, minWidth: 325 }}>
+                                            style={{ maxWidth: 350, minWidth: 350, minHeight: 600, maxHeight: 600 }}>
                                             <section> 
                                                 <a target="_blank" title="@fsacappella" href="https://www.tiktok.com/@fsacappella?refer=embed">@fsacappella</a> paper buckles go hard 🔥 @edmondx 
-                                                <a title="voiceeffects" target="_blank" href="https://www.tiktok.com/tag/voiceeffects?refer=embed">#voiceeffects</a> 
-                                                <a title="fsacappella" target="_blank" href="https://www.tiktok.com/tag/fsacappella?refer=embed">#fsacappella</a> 
-                                                <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> 
-                                                <a title="foryou" target="_blank" href="https://www.tiktok.com/tag/foryou?refer=embed">#foryou</a> 
-                                                <a title="foryoupage" target="_blank" href="https://www.tiktok.com/tag/foryoupage?refer=embed">#foryoupage</a> 
-                                                <a title="acappella" target="_blank" href="https://www.tiktok.com/tag/acappella?refer=embed">#acappella</a> 
-                                                <a title="beatbox" target="_blank" href="https://www.tiktok.com/tag/beatbox?refer=embed">#beatbox</a> 
-                                                <a title="uwmadison" target="_blank" href="https://www.tiktok.com/tag/uwmadison?refer=embed">#uwmadison</a> 
-                                                <a title="uw" target="_blank" href="https://www.tiktok.com/tag/uw?refer=embed">#uw</a> 
-                                                <a title="madison" target="_blank" href="https://www.tiktok.com/tag/madison?refer=embed">#madison</a> 
-                                                <a title="wisconsin" target="_blank" href="https://www.tiktok.com/tag/wisconsin?refer=embed">#wisconsin</a> 
-                                                <a title="pitchperfect" target="_blank" href="https://www.tiktok.com/tag/pitchperfect?refer=embed">#pitchperfect</a> 
-                                                <a title="icca" target="_blank" href="https://www.tiktok.com/tag/icca?refer=embed">#icca</a> 
-                                                <a title="sing" target="_blank" href="https://www.tiktok.com/tag/sing?refer=embed">#sing</a> 
-                                                <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> 
-                                                <a title="music" target="_blank" href="https://www.tiktok.com/tag/music?refer=embed">#music</a> 
-                                                <a title="12bucklemyshoe" target="_blank" href="https://www.tiktok.com/tag/12bucklemyshoe?refer=embed">#12bucklemyshoe</a> 
-                                                <a title="bucklemyshoe" target="_blank" href="https://www.tiktok.com/tag/bucklemyshoe?refer=embed">#bucklemyshoe</a> 
                                                 <a target="_blank" title="♬ original sound - edmondx" href="https://www.tiktok.com/music/original-sound-7222028724672432942?refer=embed">♬ original sound - edmondx</a> 
                                             </section> 
-                                        </blockquote> 
-                                        <script async src="https://www.tiktok.com/embed.js"></script>
-                                        
+                                        </blockquote>                                         
                                         <blockquote 
                                             className="tiktok-embed" 
                                             cite="https://www.tiktok.com/@fsacappella/video/7176864808942193966" 
                                             data-video-id="7176864808942193966" 
-                                            style={{ maxWidth: 605, minWidth: 325 }}>
+                                            style={{ maxWidth: 350, minWidth: 350, minHeight: 600, maxHeight: 600 }}>
                                             <section> 
                                                 <a target="_blank" title="@fsacappella" href="https://www.tiktok.com/@fsacappella?refer=embed">@fsacappella</a> aca-broke his back 
-                                                <a title="sturdy" target="_blank" href="https://www.tiktok.com/tag/sturdy?refer=embed">#sturdy</a> 
-                                                <a title="hotdawg" target="_blank" href="https://www.tiktok.com/tag/hotdawg?refer=embed">#hotdawg</a>  
-                                                <a title="fsacappella" target="_blank" href="https://www.tiktok.com/tag/fsacappella?refer=embed">#fsacappella</a> 
-                                                <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> 
-                                                <a title="foryou" target="_blank" href="https://www.tiktok.com/tag/foryou?refer=embed">#foryou</a> 
-                                                <a title="foryoupage" target="_blank" href="https://www.tiktok.com/tag/foryoupage?refer=embed">#foryoupage</a> 
-                                                <a title="acappella" target="_blank" href="https://www.tiktok.com/tag/acappella?refer=embed">#acappella</a> 
-                                                <a title="beatbox" target="_blank" href="https://www.tiktok.com/tag/beatbox?refer=embed">#beatbox</a> 
-                                                <a title="uwmadison" target="_blank" href="https://www.tiktok.com/tag/uwmadison?refer=embed">#uwmadison</a> 
-                                                <a title="uw" target="_blank" href="https://www.tiktok.com/tag/uw?refer=embed">#uw</a> 
-                                                <a title="madison" target="_blank" href="https://www.tiktok.com/tag/madison?refer=embed">#madison</a> 
-                                                <a title="wisconsin" target="_blank" href="https://www.tiktok.com/tag/wisconsin?refer=embed">#wisconsin</a> 
-                                                <a title="pitchperfect" target="_blank" href="https://www.tiktok.com/tag/pitchperfect?refer=embed">#pitchperfect</a> 
-                                                <a title="icca" target="_blank" href="https://www.tiktok.com/tag/icca?refer=embed">#icca</a> 
-                                                <a title="sing" target="_blank" href="https://www.tiktok.com/tag/sing?refer=embed">#sing</a> 
-                                                <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> 
-                                                <a title="music" target="_blank" href="https://www.tiktok.com/tag/music?refer=embed">#music</a> 
                                                 <a target="_blank" title="♬ HOTDAWG - Take45" href="https://www.tiktok.com/music/HOTDAWG-7162198290975427374?refer=embed">♬ HOTDAWG - Take45</a> 
                                             </section> 
-                                        </blockquote> 
-                                        <script async src="https://www.tiktok.com/embed.js"></script>
-                                        
+                                        </blockquote>
                                         <blockquote 
                                             className="tiktok-embed" 
                                             cite="https://www.tiktok.com/@fsacappella/video/7219517118755228971" 
                                             data-video-id="7219517118755228971" 
-                                            style={{ maxWidth: 605, minWidth: 325 }}>
+                                            style={{ maxWidth: 350, minWidth: 350, minHeight: 600, maxHeight: 600 }}>
                                             <section> 
                                                 <a target="_blank" title="@fsacappella" href="https://www.tiktok.com/@fsacappella?refer=embed">@fsacappella</a> Thank you so much for the opportunity!  
-                                                <a title="bleed4youtour" target="_blank" href="https://www.tiktok.com/tag/bleed4youtour?refer=embed">#bleed4youtour</a> 
-                                                <a title="thekidlaroi" target="_blank" href="https://www.tiktok.com/tag/thekidlaroi?refer=embed">#thekidlaroi</a> 
-                                                <a title="fsacappella" target="_blank" href="https://www.tiktok.com/tag/fsacappella?refer=embed">#fsacappella</a> 
-                                                <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> 
-                                                <a title="foryou" target="_blank" href="https://www.tiktok.com/tag/foryou?refer=embed">#foryou</a> 
-                                                <a title="foryoupage" target="_blank" href="https://www.tiktok.com/tag/foryoupage?refer=embed">#foryoupage</a> 
-                                                <a title="acappella" target="_blank" href="https://www.tiktok.com/tag/acappella?refer=embed">#acappella</a> 
-                                                <a title="beatbox" target="_blank" href="https://www.tiktok.com/tag/beatbox?refer=embed">#beatbox</a> 
-                                                <a title="uwmadison" target="_blank" href="https://www.tiktok.com/tag/uwmadison?refer=embed">#uwmadison</a> 
-                                                <a title="uw" target="_blank" href="https://www.tiktok.com/tag/uw?refer=embed">#uw</a> 
-                                                <a title="madison" target="_blank" href="https://www.tiktok.com/tag/madison?refer=embed">#madison</a> 
-                                                <a title="wisconsin" target="_blank" href="https://www.tiktok.com/tag/wisconsin?refer=embed">#wisconsin</a> 
-                                                <a title="pitchperfect" target="_blank" href="https://www.tiktok.com/tag/pitchperfect?refer=embed">#pitchperfect</a> 
-                                                <a title="icca" target="_blank" href="https://www.tiktok.com/tag/icca?refer=embed">#icca</a> 
-                                                <a title="sing" target="_blank" href="https://www.tiktok.com/tag/sing?refer=embed">#sing</a> 
-                                                <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> 
-                                                <a title="music" target="_blank" href="https://www.tiktok.com/tag/music?refer=embed">#music</a> 
                                                 <a target="_blank" title="♬ LOVE AGAIN - The Kid LAROI" href="https://www.tiktok.com/music/LOVE-AGAIN-7191887368537393153?refer=embed">♬ LOVE AGAIN - The Kid LAROI</a> 
                                             </section> 
-                                        </blockquote> 
-                                        <script async src="https://www.tiktok.com/embed.js"></script>
-                                        
+                                        </blockquote>                                         
                                         <blockquote 
                                             className="tiktok-embed" 
                                             cite="https://www.tiktok.com/@fsacappella/video/7195043011745598766" 
                                             data-video-id="7195043011745598766" 
-                                            style={{ maxWidth: 605, minWidth: 325 }}>
+                                            style={{ maxWidth: 350, minWidth: 350, minHeight: 600, maxHeight: 600 }}>
                                             <section> 
                                                 <a target="_blank" title="@fsacappella" href="https://www.tiktok.com/@fsacappella?refer=embed">@fsacappella</a> i dont wanna taco bout it 😔🌮 
-                                                <a title="tacotuesday" target="_blank" href="https://www.tiktok.com/tag/tacotuesday?refer=embed">#tacotuesday</a> 
-                                                <a title="fsacappella" target="_blank" href="https://www.tiktok.com/tag/fsacappella?refer=embed">#fsacappella</a> 
-                                                <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> 
-                                                <a title="foryou" target="_blank" href="https://www.tiktok.com/tag/foryou?refer=embed">#foryou</a> 
-                                                <a title="foryoupage" target="_blank" href="https://www.tiktok.com/tag/foryoupage?refer=embed">#foryoupage</a> 
-                                                <a title="acappella" target="_blank" href="https://www.tiktok.com/tag/acappella?refer=embed">#acappella</a> 
-                                                <a title="beatbox" target="_blank" href="https://www.tiktok.com/tag/beatbox?refer=embed">#beatbox</a> 
-                                                <a title="uwmadison" target="_blank" href="https://www.tiktok.com/tag/uwmadison?refer=embed">#uwmadison</a> 
-                                                <a title="uw" target="_blank" href="https://www.tiktok.com/tag/uw?refer=embed">#uw</a> 
-                                                <a title="madison" target="_blank" href="https://www.tiktok.com/tag/madison?refer=embed">#madison</a> 
-                                                <a title="wisconsin" target="_blank" href="https://www.tiktok.com/tag/wisconsin?refer=embed">#wisconsin</a> 
-                                                <a title="pitchperfect" target="_blank" href="https://www.tiktok.com/tag/pitchperfect?refer=embed">#pitchperfect</a> 
-                                                <a title="icca" target="_blank" href="https://www.tiktok.com/tag/icca?refer=embed">#icca</a> 
-                                                <a title="sing" target="_blank" href="https://www.tiktok.com/tag/sing?refer=embed">#sing</a> 
-                                                <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> 
-                                                <a title="music" target="_blank" href="https://www.tiktok.com/tag/music?refer=embed">#music</a> 
                                                 <a target="_blank" title="♬ Whatcha Say (Sped Up Beat) - Mr Kleb Balasa" href="https://www.tiktok.com/music/Whatcha-Say-Sped-Up-Beat-7115811196837612293?refer=embed">♬ Whatcha Say (Sped Up Beat) - Mr Kleb Balasa</a> 
                                             </section> 
                                         </blockquote> 
@@ -296,5 +204,4 @@ const Page = () => {
             </div>
     )
 }
-
 export default Page;
