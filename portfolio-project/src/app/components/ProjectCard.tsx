@@ -58,24 +58,22 @@ const ProjectCard = ({
                             </h3>
                         </div>
                     </div>
-                    <div className="block md:hidden">
-                        <div className="flex flex-col justify-between items-center bg-gradient-to-br from-stone-800 to-stone-700 border border-slate-200 rounded-2xl p-6 shadow-inner h-full w-full">
-                            <img 
-                                src={`/assets/images/project-images/${projectImagePath}`}
-                                alt={projectTitle}
-                                className="w-3/4 aspect-square object-cover object-center rounded-lg"
-                            />
-                            <div className="mt-5 mb-4 flex flex-col justify-center items-center">
-                                <h3 className='h3 !text-white text-center'>
-                                    {projectTitle}
-                                </h3>
-                                <p className="text-white text-center text-lg line-clamp-6 mb-5">
-                                    {projectDescription}
-                                </p>
-                                <span className="bg-gradient-to-br border border-red-500 from-red-400 to-rose-300 text-stone-700 text-sm font-medium px-2 py-1 rounded-full">
-                                    <b>Created:</b> {formatDate(projectDate)}
-                                </span>
-                            </div>
+                    <div className="md:hidden block relative bg-gradient-to-br from-stone-800 to-stone-700 border border-slate-200 rounded-2xl overflow-hidden shadow-inner h-[500px] w-full">
+                        <div 
+                            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                            style={{
+                                backgroundImage: `url(/assets/images/project-images/${projectImagePath})`,
+                            }}
+                        />
+                        <div className="absolute inset-0 bg-black/60" />
+                            <div className="absolute inset-0 flex flex-col justify-center items-center p-6 opacity-100 ">
+                            <h1 className='h3 !text-white text-center mb-4'>{projectTitle}</h1>
+                            <p className="text-white text-center text-lg line-clamp-10 mb-4">
+                                {projectDescription}
+                            </p>
+                            <span className="bg-gradient-to-br border border-blue-800 from-sky-400 to-blue-700 text-stone-700 text-sm font-medium px-3 py-2 rounded-full">
+                                <b>Created:</b> {formatDate(projectDate)}
+                            </span>
                         </div>
                     </div>
                 </Card>
