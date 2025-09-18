@@ -10,7 +10,7 @@ const Footer = () => {
                             Michael Fiskey
                         </h3>
                         <p className="text-stone-300 text-sm">
-                            Fullstack Developer & Data Enthusiast
+                            Data Analyst | Fullstack Developer
                         </p>
                     </div>
                     <div className="flex flex-col items-center gap-3">

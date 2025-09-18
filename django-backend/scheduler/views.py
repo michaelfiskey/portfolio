@@ -16,7 +16,10 @@ def find_schedules(request):
     try:
         title, df = scrape(url)
         start, end, schedules = optimal_schedules(df, request.data.get('duration'))
-
+        
+        if (schedules == None or len(schedules) < 1):
+            return Response({'title': title, 'start': start, 'end': end, 'schedules': schedules})
+        
         for window in schedules:
             for key in ['start', 'end']:
                 if isinstance(window.get(key), (pd.Timestamp, datetime)):

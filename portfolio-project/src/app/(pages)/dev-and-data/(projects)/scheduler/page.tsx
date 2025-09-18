@@ -97,8 +97,6 @@ const Page = () => {
                 return;
             }
 
-            console.log(`start time: ${data.start}`)
-            console.log(`end time: ${data.end}`)
             setData(data)
             setEvents(data.schedules ? data.schedules.map((item: ScheduleEvent, idx: number) => (
                 {  Id: idx, 
@@ -124,8 +122,6 @@ const Page = () => {
             } else {
                 setCurrentView('Month');
             }
-
-            console.log(data)
             setIsLoading(false);
         } catch {
             setIsLoading(false);
@@ -148,6 +144,7 @@ const Page = () => {
                                 Paste a When2Meet schedule URL and select a duration to find the time block where the most people are available from your group.<br/>
                                 This tool finds windows where the <em>same group of people</em> is available for the entire duration of each window.
                             </p>
+                            <p className='mt-3'>Example URL: <b>https://www.when2meet.com/?32439772-i82cp</b></p>
                         </div>
                         <div className="flex flex-col items-center justify-center bg-stone-200/80 rounded-md p-6 shadow-lg mb-8">
                             <label className="label mb-4 w-full text-left">when2meet url:</label>
