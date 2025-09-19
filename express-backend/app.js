@@ -8,6 +8,12 @@ import userRouter from './routes/user.routes.js';
 import projectRouter from './routes/projects.routes.js';
 import spotifyRouter from './routes/spotify.routes.js';
 import contactRouter from './routes/contact.routes.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
 const limiter = rateLimit({
@@ -38,6 +44,8 @@ const contactLimiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
 });
+
+app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
 // global error handling
 app.use((err, req, res, next) => {

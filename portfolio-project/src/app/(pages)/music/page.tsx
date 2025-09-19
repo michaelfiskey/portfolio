@@ -214,7 +214,7 @@ const Page = () => {
                             >
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
                                             Spotify ID
                                         </label>
                                         <input
@@ -301,7 +301,7 @@ const Page = () => {
                             >
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
                                             Spotify ID
                                         </label>
                                         <input

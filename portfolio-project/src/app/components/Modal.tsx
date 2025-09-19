@@ -66,7 +66,7 @@ const Modal = ({ title, isOpen, onClose, onSubmit, submitButtonText='Submit', ch
         >
             <div 
                 ref={modalRef}
-                className="bg-white rounded-sm p-6 max-w-md w-full mx-4 shadow-xl"
+                className="max-h-[90vh] overflow-y-auto bg-white rounded-sm p-6 max-w-md w-full mx-4 shadow-xl"
                 onClick={e => e.stopPropagation()}
             >
                 <div className="text-stone-700 flex justify-between items-center mb-4">
@@ -89,13 +89,13 @@ const Modal = ({ title, isOpen, onClose, onSubmit, submitButtonText='Submit', ch
                 }`}>
                     <button 
                         onClick={onClose}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-sm hover:bg-gray-400"
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-sm hover:bg-gray-400 hover:cursor-pointer"
                     >
                         Cancel
                     </button>
                     <button 
                         onClick={() => onSubmit({})}
-                        className={`px-4 py-2 bg-gradient-to-r text-white rounded-sm ${submitButtonColor} `}
+                        className={`px-4 py-2 bg-gradient-to-r text-white rounded-sm ${submitButtonColor} hover:cursor-pointer`}
                     >
                         {submitButtonText}
                     </button>

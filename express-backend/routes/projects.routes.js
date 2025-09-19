@@ -1,8 +1,24 @@
 import { Router } from 'express';
 import { pool } from '../database/railwaydb.js';
+import multer from 'multer';
+import path from 'path';
 import { authenticateToken, requireRole } from './auth.routes.js';
+import { fileURLToPath } from 'url';
 
 const projectRouter = Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../public/assets/images/project-images'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({storage});
 
 projectRouter.get('/', async (req, res) => {
     try {
@@ -36,7 +52,7 @@ projectRouter.get('/:project_id', async (req, res) => {
     };
 });
 
-projectRouter.post('/add', authenticateToken, requireRole('owner'), async (req, res) => {
+projectRouter.post('/add', authenticateToken, requireRole('owner'), upload.single('image'), async (req, res) => {
     try {
         const { project_title, project_description, 
                 project_date, project_authors, project_path, 
