@@ -7,6 +7,7 @@ const Page = () => {
     const pageRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
+    const [prediction, setPrediction] = useState<string | null>(null);
 
     useGSAP(() => {
         const page = pageRef.current;
@@ -87,24 +88,28 @@ const Page = () => {
     const handleSubmitGuess = async () => {
         try {
             const canvas = canvasRef.current;
-            if (canvas) {
-                const image = canvas.toDataURL('number-drawing/png');
-                const data = await fetch('/your-django-endpoint/', {
+            const context = canvas?.getContext('2d');
+
+            // Fill background with white if needed
+            if (context && canvas) {
+                context.globalCompositeOperation = 'destination-over';
+                context.fillStyle = '#fff';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+        
+                const image = canvas.toDataURL('image/png');
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/guess-the-number/make-guess/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ image: image })
                 });
-
-                console.log(data);
+                const result = await response.json();
+                setPrediction(result.prediction || null); 
+                clearCanvas(); 
             }
         } catch(error) {
             console.log(error);
         }
-
-
-
-
-    }
+    };
 
     return (
         <div ref={pageRef} className="page-container">
@@ -138,6 +143,11 @@ const Page = () => {
                             onClick={handleSubmitGuess}>Guess!
                         </button>
                     </div>
+                    {prediction && (
+                        <div className="mt-4 text-xl font-bold">
+                            Prediction: {prediction}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -83,7 +83,7 @@ const Page = () => {
             const scheduleId = urlObj.search.slice(1)
             const formattedUrl = `https://www.when2meet.com/?${scheduleId}`
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/find-schedules/`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/scheduler/find-schedules/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url: formattedUrl, duration: duration })
