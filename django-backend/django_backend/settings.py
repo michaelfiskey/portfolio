@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'scheduler',
+    'alcohol_life',
+    'guess_the_number',
     'corsheaders',
 ]
 
