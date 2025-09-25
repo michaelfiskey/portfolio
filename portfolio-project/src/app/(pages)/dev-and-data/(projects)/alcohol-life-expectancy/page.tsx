@@ -1,9 +1,10 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Plot from 'react-plotly.js';
 
 
 const Page = () => {
@@ -13,6 +14,58 @@ const Page = () => {
         const page = pageRef.current;
         gsap.fromTo(page, { opacity: 0 }, { opacity: 1, duration: 2 });
     });
+
+    useEffect(() => {
+        const getPlot1Data = async () => {
+            try{
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}/api/alcohol-life/get-data/`)
+                const data = await response.json()
+                
+                console.log(data)
+                
+                return data
+            }
+            catch (error) {
+            console.log('ERROR GETTING DATA')
+            }
+        }
+        getPlot1Data()
+
+    }, []);
+
+    type PlotlyBoxPlotData = {
+        country_display: string;
+        display_value: number;
+    };
+
+    interface PlotlyBoxPlotProps {
+        data: PlotlyBoxPlotData[];
+    }
+
+    const PlotlyBoxPlot: React.FC<PlotlyBoxPlotProps> = ({ data }) => {
+        // Prepare data for Plotly
+        const countries = data.map(row => row.country_display);
+        const values = data.map(row => row.display_value);
+
+        return (
+            <Plot
+            data={[
+                {
+                y: values,
+                x: countries,
+                type: 'box',
+                boxpoints: 'all',
+                }
+            ]}
+            layout={{
+                title: 'Life Expectancy by Country (A-Z)',
+                xaxis: { tickangle: 45 },
+                width: 1300,
+                height: 700,
+            }}
+            />
+        );
+    };
 
     return (
         <div ref={pageRef} className="page-container">
