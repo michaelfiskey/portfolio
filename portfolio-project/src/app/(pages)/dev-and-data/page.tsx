@@ -19,7 +19,7 @@ const Page = () => {
     const [projectDate, setProjectDate] = useState<string>('');
     const [projectPath, setProjectPath] = useState<string>('');
     const [projectImageUpload, setProjectImageUpload] = useState<File | null>(null);
-    const [projectImagePath, setProjectImagePath] = useState<string | null>(null);
+    //const [projectImagePath, setProjectImagePath] = useState<string | null>(null);
 
     useGSAP(() => {
         // page fade-in effect
@@ -88,12 +88,12 @@ const Page = () => {
         setProjectDate('');
         setProjectPath('');
         setProjectImageUpload(null);
-        setProjectImagePath('');
+        //setProjectImagePath('');
     }
 
     const handleAddProject = async () => {
         console.log('submitting!');
-        setProjectImagePath(projectImageUpload ? `/assets/images/project-images/${projectImageUpload.name}` : null);
+        //setProjectImagePath(projectImageUpload ? `/assets/images/project-images/${projectImageUpload.name}` : null);
         setIsLoading(true);
         const token = localStorage.getItem('token');
 
@@ -229,7 +229,7 @@ const Page = () => {
                                                     />
                                                     <button 
                                                         type="button"
-                                                        onClick={(e) => {e.preventDefault; setProjectImageUpload(null)}}
+                                                        onClick={(e) => {e.preventDefault(); setProjectImageUpload(null)}}
                                                         className="bg-gradient-to-br hover:cursor-pointer from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 text-white font-semibold py-2 px-3 rounded-md">
                                                         Remove
                                                     </button>

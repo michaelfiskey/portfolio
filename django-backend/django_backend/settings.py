@@ -40,10 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'scheduler',
-    'guess_the_number',
     'corsheaders',
+    'rest_framework',
+    'scheduler'
 ]
 
 MIDDLEWARE = [
