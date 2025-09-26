@@ -5,11 +5,14 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useAuth } from './components/AuthContext';
+import { usePathname } from 'next/navigation'; 
 
 gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
 
   const { authUser, isLoggedIn} = useAuth();
+  const pathname = usePathname(); 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,7 +20,6 @@ export default function Home() {
 
   const pageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  //const nameRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const scrollRowRef = useRef<HTMLDivElement>(null);
   const techNamesRef = useRef<HTMLDivElement>(null);
@@ -38,45 +40,7 @@ export default function Home() {
       duration: 2
     });
   });
-/*
-  useGSAP(() => {
-    // scroling name
-    const nameContainer = nameRef.current;
-    if (!nameContainer) return;
-    if (!canvasRef.current || !canvasRef.current.height) return;
-    console.log(canvasRef.current.height)
 
-    const nameElements = gsap.utils.toArray<HTMLElement>('.name');
-
-    gsap.set(nameElements, { 
-      y: 0, 
-      opacity: 0 
-    });
-    
-    gsap.set(nameElements[0], { opacity: 1 });
-
-    const nameTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: nameContainer,
-        start: 'top center',
-        end: 'bottom center',
-        scrub: true,
-        toggleActions: 'play none none reverse',
-      }
-    });
-
-    nameElements.forEach((element, index) => {
-      if (index === 0) return;
-      
-      nameTimeline.to(element, {
-        y: index * (window.innerHeight / nameElements.length),
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      }, index * 0.4);
-    });
-  });
-*/
   useGSAP(() => {
     // scrolling gradient background
     const canvas = canvasRef.current;
@@ -262,27 +226,23 @@ export default function Home() {
           duration: 0.1
         }, 0.8);
       }
-    };
 
-    const handleResize = () => {
-      const newIsXL = window.innerWidth >= 1280;
-      if (newIsXL !== currentIsXL) {
-        currentIsXL = newIsXL;
-        createAnimations();
-      } else {
-        ScrollTrigger.refresh();
-      }
+      ScrollTrigger.refresh();
     };
 
     createAnimations();
-    
+
+    const handleResize = () => {
+      createAnimations();
+    };
+
     window.addEventListener('resize', handleResize);
 
     return () => {
       techScrollTriggers.forEach(trigger => trigger.kill());
       window.removeEventListener('resize', handleResize);
     };
-  });
+  }, [pathname]);
 
   useGSAP(() => {
     // page information animation
@@ -363,14 +323,6 @@ export default function Home() {
           ref={canvasRef}
           className="w-full"
         ></canvas>
-        {/*<div ref={nameRef} className="absolute inset-0 flex flex-col items-center justify-start pt-[25%]">
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
-          <h1 className="h1 !text-white !font-bold !drop-shadow-lg name absolute">MICHAEL FISKEY.</h1>
-        </div>*/}
-        {/*TEMPORARY */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <h1 className="h1 !text-white !font-bold !drop-shadow-lg name center">MICHAEL FISKEY.</h1>
         </div>
