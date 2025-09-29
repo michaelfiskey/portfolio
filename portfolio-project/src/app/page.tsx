@@ -126,11 +126,11 @@ export default function Home() {
   useGSAP(() => {
     let techTimelines: gsap.core.Timeline[] = [];
 
-    const createAnimations = () => {
+    // Wait for DOM to be fully ready
+    const runAnimations = () => {
       techTimelines.forEach(tl => tl.kill());
       techTimelines = [];
 
-      // scrolling tech stack names
       const scrollRow = scrollRowRef.current;
       const techNames = techNamesRef.current;
       if (!scrollRow || !techNames) return;
@@ -220,16 +220,17 @@ export default function Home() {
       ScrollTrigger.refresh();
     };
 
-    createAnimations();
+    const timeout = setTimeout(runAnimations, 0);
 
     const handleResize = () => {
-      createAnimations();
+      runAnimations();
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
-      techTimelines.forEach(trigger => trigger.kill());
+      clearTimeout(timeout);
+      techTimelines.forEach(tl => tl.kill());
       window.removeEventListener('resize', handleResize);
     };
   }, [pathname]);
