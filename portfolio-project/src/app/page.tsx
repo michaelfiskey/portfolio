@@ -124,42 +124,38 @@ export default function Home() {
 
   
   useGSAP(() => {
-    let currentIsXL = window.innerWidth >= 1280;
-    let techScrollTriggers: ScrollTrigger[] = [];
-    
+    let techTimelines: gsap.core.Timeline[] = [];
+
     const createAnimations = () => {
-      techScrollTriggers.forEach(trigger => trigger.kill());
-      techScrollTriggers = [];
-      
+      techTimelines.forEach(tl => tl.kill());
+      techTimelines = [];
+
       // scrolling tech stack names
       const scrollRow = scrollRowRef.current;
       const techNames = techNamesRef.current;
       if (!scrollRow || !techNames) return;
-      
+
       gsap.set(scrollRow, { scrollLeft: 0 });
-      
+
       const maxScroll = scrollRow.scrollWidth - scrollRow.clientWidth;
       const nameElements = gsap.utils.toArray<HTMLElement>('.tech-name');
       const isMobile = window.innerWidth < 500;
-      const isXL = window.innerWidth >= 1280; 
-      
+      const isXL = window.innerWidth >= 1280;
+
       if (isXL) {
         const techNamesTl = gsap.timeline({
           scrollTrigger: {
             trigger: scrollRow,
             start: isMobile ? 'top 80%' : 'top 80% center',
-            end: `+=${maxScroll}`, 
+            end: `+=${maxScroll}`,
             scrub: true,
             toggleActions: 'play none none reverse',
             refreshPriority: -1,
             invalidateOnRefresh: true,
           }
         });
-        
-        if (techNamesTl.scrollTrigger) {
-          techScrollTriggers.push(techNamesTl.scrollTrigger);
-        }
-        
+        techTimelines.push(techNamesTl);
+
         techNamesTl.fromTo(nameElements,
           { opacity: 0, y: isMobile ? -30 : 80 },
           { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
@@ -175,25 +171,22 @@ export default function Home() {
             toggleActions: 'play none none reverse',
           }
         });
-        
-        if (techNamesTl.scrollTrigger) {
-          techScrollTriggers.push(techNamesTl.scrollTrigger);
-        }
-        
+        techTimelines.push(techNamesTl);
+
         techNamesTl.fromTo(nameElements,
           { opacity: 0, y: isMobile ? -30 : 80 },
           { opacity: 1, y: 0, duration: 0.05, stagger: { amount: 0.2 } },
           0
         );
       }
-      
+
       // scroll tech stack images (only for xl screens)
       if (isXL) {
         const horizontalTl = gsap.timeline({
           scrollTrigger: {
             trigger: scrollRow,
-            start: isMobile ? "top 70%" : "top center", 
-            end: `+=${maxScroll}`, 
+            start: isMobile ? "top 70%" : "top center",
+            end: `+=${maxScroll}`,
             scrub: 1,
             pin: true,
             pinSpacing: true,
@@ -202,29 +195,26 @@ export default function Home() {
             invalidateOnRefresh: true,
           }
         });
-
-        if (horizontalTl.scrollTrigger) {
-          techScrollTriggers.push(horizontalTl.scrollTrigger);
-        }
+        techTimelines.push(horizontalTl);
 
         gsap.set(scrollRow.parentElement, { opacity: 0 });
 
         horizontalTl
-        .to(scrollRow.parentElement, {
-          opacity: 1,
-          ease: "power2.out",
-          duration: 0.1
-        }, 0)
-        .to(scrollRow, {
-          scrollLeft: maxScroll,
-          ease: "none",
-          duration: 0.6
-        }, 0.2)
-        .to(scrollRow.parentElement, {
-          opacity: 0,
-          ease: "power2.out",
-          duration: 0.1
-        }, 0.8);
+          .to(scrollRow.parentElement, {
+            opacity: 1,
+            ease: "power2.out",
+            duration: 0.1
+          }, 0)
+          .to(scrollRow, {
+            scrollLeft: maxScroll,
+            ease: "none",
+            duration: 0.6
+          }, 0.2)
+          .to(scrollRow.parentElement, {
+            opacity: 0,
+            ease: "power2.out",
+            duration: 0.1
+          }, 0.8);
       }
 
       ScrollTrigger.refresh();
@@ -239,7 +229,7 @@ export default function Home() {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      techScrollTriggers.forEach(trigger => trigger.kill());
+      techTimelines.forEach(trigger => trigger.kill());
       window.removeEventListener('resize', handleResize);
     };
   }, [pathname]);
