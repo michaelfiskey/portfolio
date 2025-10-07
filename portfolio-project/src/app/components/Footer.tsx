@@ -40,30 +40,6 @@ const Footer = () => {
                                     className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity" 
                                 />
                             </a>
-                            <a 
-                                href='https://tiktok.com/@michaelfiskey' 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="group transition-transform hover:scale-110"
-                            >
-                                <img 
-                                    src='/assets/images/social-bar-images/tiktok-logo.webp' 
-                                    alt="TikTok" 
-                                    className="w-6 h-6 opacity-80 group-hover:opacity-100 transition-opacity" 
-                                />
-                            </a>
-                            <a 
-                                href='https://instagram.com/michaelfiskey' 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="group transition-transform hover:scale-110"
-                            >
-                                <img 
-                                    src='/assets/images/social-bar-images/instagram-logo.png' 
-                                    alt="Instagram" 
-                                    className="w-6 h-6 opacity-80 group-hover:opacity-100 transition-opacity" 
-                                />
-                            </a>
                         </div>
                     </div>
                     <div className="text-center md:text-right">
