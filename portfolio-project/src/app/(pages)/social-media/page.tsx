@@ -1,7 +1,7 @@
 'use client';
 import React from "react";
-import CardHolder from "@/app/components/CardHolder";
-import ContentLoader from '@/app/components/spinners/ContentLoader';
+//import CardHolder from "@/app/components/CardHolder";
+//import ContentLoader from '@/app/components/spinners/ContentLoader';
 import { useEffect, useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -9,10 +9,10 @@ import gsap from "gsap";
 const Page = () => {
     const pageRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    //const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-            setIsLoading(true);
+        //setIsLoading(true);
         const socialLinks = containerRef.current?.querySelectorAll('.social-link');
 
         if (socialLinks) {
