@@ -114,7 +114,7 @@ const Page = () => {
                             <b> HoYoverse&apos;s Genshin Impact</b> and <b>Men&apos;s Wearhouse</b>, as well as the opportunity to open 
                             for a <b>The Kid LAROI</b> concert!
                         </p>
-                        <div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
+                        {/*<div className="bg-stone-200 backdrop-blur-sm border border-stone-200 rounded-sm p-6 shadow-lg">
                             <CardHolder className="flex flex-wrap gap-6 items-stretch w-full mb-7">
                                 {isLoading ?(
                                     <div>
@@ -178,9 +178,9 @@ const Page = () => {
                                     </div>
                                 )}
                             </CardHolder>
-                        </div>
+                        </div>*/}
                     </div>
-                    <div className="text-center mb-8">
+                    {/*<div className="text-center mb-8">
                         <h2 className="h2 !font-bold  !from-pink-500 !to-rose-500 mb-3">TikTok</h2>
                         <p className="text-stone-600 text-lg max-w-5xl mx-auto mb-5">
                         I took what I learned from being a Social Media Manager and worked as a TikTok content creator for various brands. I produced <b>400+</b> short-form videos, achieving
@@ -199,7 +199,7 @@ const Page = () => {
                                 )}
                             </CardHolder>
                         </div>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
     )
