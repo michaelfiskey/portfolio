@@ -2,7 +2,7 @@
 import React from "react";
 //import CardHolder from "@/app/components/CardHolder";
 //import ContentLoader from '@/app/components/spinners/ContentLoader';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
