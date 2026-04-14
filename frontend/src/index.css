@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-h2{
+h1, h2{
   font-family: 'Marcellus', serif;
   font-size: larger;
 }
