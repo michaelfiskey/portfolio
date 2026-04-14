@@ -1,20 +1,16 @@
 
 interface CardDateRangeProps {
-    startDate: Date
-    endDate?: Date
+    startLabel: string
+    endLabel?: string
 }
 
-const formatMonthYear = (date: Date) => {
-    return `${date.toLocaleString("en-US", { month: "long" })} ${date.getFullYear()}`
-}
-
-const getDateRange = (startDate: Date, endDate?: Date) => {
-    const start = formatMonthYear(startDate)
-    const end = endDate ? formatMonthYear(endDate) : "Present"
+const getDateRange = (startLabel: string, endLabel?: string) => {
+    const start = startLabel
+    const end = endLabel ?? "Present"
     return `${start} - ${end}`
 }
 
-const CardDateRange = ({ startDate, endDate }: CardDateRangeProps) => {
-    return <span className="text-sm text-[#7a624e]">{getDateRange(startDate, endDate)}</span>
+const CardDateRange = ({ startLabel, endLabel }: CardDateRangeProps) => {
+    return <span className="text-sm text-[#7a624e]">{getDateRange(startLabel, endLabel)}</span>
 }
 export default CardDateRange;
