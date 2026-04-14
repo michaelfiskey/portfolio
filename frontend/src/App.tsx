@@ -1,6 +1,6 @@
-import ExperienceCard from "./components/card/variants/ExperienceCard"
-
+import Navbar from "./components/Navbar"
 function App() {
+    return <Navbar/>
 
 }
 
