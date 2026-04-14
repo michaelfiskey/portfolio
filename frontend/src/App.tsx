@@ -1,9 +1,7 @@
+import ExperienceCard from "./components/card/variants/ExperienceCard"
 
 function App() {
-  return (
-    <>
-    </>
-  )
+
 }
 
 export default App
