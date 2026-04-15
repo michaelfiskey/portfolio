@@ -20,7 +20,7 @@ h2 {
 }
 
 h4 {
-  font-size: 0.575rem;
+  font-size: 0.7rem;
   line-height: 1.25rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -37,16 +37,16 @@ p {
 
 ul {
   padding-left: 0;
-  margin-left: 0;
-  list-style-position: inside;
+  margin-left: 1rem;
+  list-style-position: outside;
   list-style-type: disc;
   margin-bottom: 0.5rem;
 }
 
 ol {
   padding-left: 0;
-  margin-left: 0;
-  list-style-position: inside;
+  margin-left: 1rem;
+  list-style-position: outside;
   list-style-type:lower-roman;
   margin-bottom: 0.5rem;
 }

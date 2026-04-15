@@ -3,7 +3,7 @@ interface PageContainerProps {
 }
 const PageContainer = ({ children }:PageContainerProps) => {
     return (
-        <div>{children}</div>
+        <div className="pt-45 sm:pt-20 bg-[#ede5d8]">{children}</div>
     )
 }
 export default PageContainer;

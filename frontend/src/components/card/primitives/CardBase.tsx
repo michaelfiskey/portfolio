@@ -10,7 +10,7 @@ function CardBase({ backgroundColor, borderColor, size, children }: CardBaseProp
     var sizeString = ""
     switch (size) {
         case "small":
-            sizeString = "p-2 md:p-3"
+            sizeString = "py-2 px-3"
             break
         case "medium":
             sizeString = "p-6 md:p-7"
