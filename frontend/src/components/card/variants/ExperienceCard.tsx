@@ -42,9 +42,9 @@ const ExperienceCard = ({ title, startDateLabel, endDateLabel, subTitles, paragr
                 <CardSubtitle key={`subtitle-${index}`} text={subTitle} />
             ))}
             {renderBody()}
+            {children}
             {tagTitle && <CardTagsHeader text={tagTitle}/>}
             {tags && <CardTags tags={tags}/>}
-            {children}
         </CardBase>
     )
 }

@@ -190,6 +190,38 @@ const Home = () => {
                     </ExperienceCard>
                 </VerticalCardContainer>
             </PageSection>
+            <PageSection id="experience" backgroundColor="#e8decd">
+                <div className="mb-10">
+                    <h1>Relevant Professional Experience</h1>
+                    <h2>Where I've Worked</h2>
+                </div>
+                <VerticalCardContainer>
+                    <ExperienceCard title="Wave Reaction" 
+                                startDateLabel="January 2026" 
+                                endDateLabel="Present"
+                                tagTitle="Skills"
+                                tags={["Playwright Testing", "Manual QA Testing"]}
+                    >
+                        <p><i>Software Engineer Intern</i> | May 2026 - August 2026</p>
+                        <p><i>Quality Assurance Engineer</i> | May 2026 - August 2026</p>
+                    </ExperienceCard>
+                    <ExperienceCard title="S&L Companies" 
+                                    subTitles={["Data Analyst"]} 
+                                    startDateLabel="January 2025" 
+                                    endDateLabel="December 2025"
+                                    paragraphs={[
+                                        "Created interactive dashboards with choropleth and scatter plot maps using real-time U.S. Census and Google Maps APIs data (Python, Pandas, GeoPandas, Dash).",
+                                        "Optimized coupon delivery routes for more than 115 restaurants (Python, Pandas, GeoPandas, QGIS).",
+                                        "Performed sales forecasting with seasonal and location-specific trends (Prophet).",
+                                        "Built a pipeline to process over 5,000 weekly customer and employee reviews, linking insights to a 7,000-person workforce database (Python).",
+                                        "Leveraged enterprise-level databases to build tailored reporting solutions for operational decision-making (SQL, Sigma Computing)."
+                                    ]}
+                                    tagTitle="Skills"
+                                    tags={["Python", "Excel", "Pandas", "GeoPandas", "QGIS", "SQL", "Sigma Computing", "Machine Learning", "Market Analysis"]}
+                                    listBool={[true, false]}
+                    />
+                </VerticalCardContainer>
+            </PageSection>
         </PageContainer>
     )
 }
