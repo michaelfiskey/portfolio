@@ -19,7 +19,7 @@ interface ExperienceCardProps {
 }
 const ExperienceCard = ({ title, startDateLabel, endDateLabel, subTitlePairs, paragraphs, tagTitle, tags }:ExperienceCardProps) => {
     return (
-        <CardBase>
+        <CardBase size="medium">
             <CardTitleDateHeader title={title} startDateLabel={startDateLabel} endDateLabel={endDateLabel} />
             {subTitlePairs && subTitlePairs.length > 0 && subTitlePairs.map(([subTitle, isItalic]: SubTitlePair, index) => (
                 <CardSubtitle key={`subtitle-${index}`} text={subTitle} isItalic={isItalic}/>

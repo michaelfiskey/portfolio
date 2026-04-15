@@ -1,6 +1,56 @@
 @import "tailwindcss";
 
-h1, h2{
+h1 {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8c6e4b;
+  margin-bottom: 1rem;
+  display: block
+}
+
+h2 {
   font-family: 'Marcellus', serif;
-  font-size: larger;
+  font-size: 1.2rem;
+  line-height: 0.98;
+  font-weight: 400;
+  color: #3f3025;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 0.575rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8c6e4b;
+  margin-bottom: 0.3rem;
+  display: block
+
+}
+
+p {
+  color: #5f4a3a;
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+  list-style-type: disc;
+  margin-bottom: 0.5rem;
+}
+
+ol {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+  list-style-type:lower-roman;
+  margin-bottom: 0.5rem;
+}
+
+li {
+    color: #5f4a3a;
 }
