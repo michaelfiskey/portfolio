@@ -1,9 +1,8 @@
 interface CardSubtitleProps {
-    text: string
-    isItalic?: boolean
+    text: React.ReactNode
 }
 
-function CardSubtitle({ text, isItalic=false } : CardSubtitleProps) {
-    return <h4 className="text-[#5f4a3a]">{isItalic ? <i>{text}</i> : text}</h4>
+function CardSubtitle({ text } : CardSubtitleProps) {
+    return <h3 className="text-[#5f4a3a]">{ text }</h3>
 }
 export default CardSubtitle;
