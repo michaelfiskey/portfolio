@@ -1,12 +1,12 @@
 interface PageSectionProps {
     id: string,
-    backgroundColor?: string,
+    className?: string
     children: React.ReactNode
 }
 
-const PageSection = ({ id, backgroundColor, children }: PageSectionProps) => {
+const PageSection = ({ id, className, children }: PageSectionProps) => {
     return (
-        <section id={id} className="py-24 px-10 md:px-34" style={{backgroundColor: backgroundColor ?? "#fde5d8"}}>
+        <section id={id} className={["py-24 px-10 md:px-34 bg-[#ede5d8]", className ? className : ""].join(" ")}>
                 {children}
         </section>
     )

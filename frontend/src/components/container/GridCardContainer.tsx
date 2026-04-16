@@ -4,7 +4,7 @@ interface GridCardContainerProps {
 
 const GridCardContainer = ({ children }: GridCardContainerProps) => {
     return (
-        <div className="grid sm:grid-cols-[0.95fr_1.45fr_0.95fr] gap-3 mb-7 max-w-4xl">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             { children }
         </div>
     )

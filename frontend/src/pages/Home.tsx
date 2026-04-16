@@ -12,6 +12,7 @@ import GridPageSection from "../components/page-section/variants/GridPageSection
 import PageSection from "../components/page-section/PageSection";
 import { useIsMobile } from '../hooks/useIsMobile';
 import YoutubeVideoCarousel from "../components/YoutubeVideoCarousel";
+import ProjectCard from "../components/card/variants/ProjectCard";
 
 const Home = () => {
     const isMobile = useIsMobile(1024)
@@ -84,7 +85,7 @@ const Home = () => {
                 </div>
                 {isMobile == false && profilePhotoSection}
             </GridPageSection>
-            <PageSection id="education" backgroundColor="#f1e9dc">
+            <PageSection id="education" className="bg-[#f1e9dc]!">
                 <div className="mb-10">
                     <h1>Education</h1>
                     <h2>Academic Background</h2>
@@ -190,7 +191,7 @@ const Home = () => {
                     </ExperienceCard>
                 </VerticalCardContainer>
             </PageSection>
-            <PageSection id="experience" backgroundColor="#e8decd">
+            <PageSection id="experience" className="bg-[#e8decd]">
                 <div className="mb-10">
                     <h1>Relevant Professional Experience</h1>
                     <h2>Where I've Worked</h2>
@@ -221,6 +222,33 @@ const Home = () => {
                                     listBool={[true, false]}
                     />
                 </VerticalCardContainer>
+            </PageSection>
+            <PageSection id="projects">
+                <h1>Personal Projects</h1>
+                <h2 className="pb-10">Project Categories</h2>
+                <GridCardContainer>
+                    <ProjectCard title="Fullstack Projects" 
+                                paragraphs={["Put a description here!"]} 
+                                tags={["C#", ".NET", "PostgreSQL", "AWS",
+                                    "TypeScript", "React", "Node.js", "HTML",
+                                    "TailwindCSS", "Python", "Flask"]}
+                                href='fullstack-projects'
+                    />
+                    <ProjectCard title="AI/ML Projects" 
+                                paragraphs={["Put a description here!"]} 
+                                tags={["C#", ".NET", "PostgreSQL", "AWS",
+                                    "TypeScript", "React", "Node.js", "HTML",
+                                    "TailwindCSS", "Python", "Flask"]}
+                                href='ai-ml-projects'
+                    />
+                    <ProjectCard title="Cybersecurity Projects" 
+                                paragraphs={["Put a description here!"]} 
+                                tags={["C#", ".NET", "PostgreSQL", "AWS",
+                                    "TypeScript", "React", "Node.js", "HTML",
+                                    "TailwindCSS", "Python", "Flask"]}
+                                href='/cybersecurity-projects'
+                    />
+                </GridCardContainer>
             </PageSection>
         </PageContainer>
     )

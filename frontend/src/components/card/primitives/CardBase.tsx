@@ -1,12 +1,10 @@
 interface CardBaseProps {
     className?: string
-    borderColor?: string,
-    backgroundColor?: string,
     children: React.ReactNode
     size: "small" | "medium"
 }
 
-function CardBase({ backgroundColor, borderColor, size, children }: CardBaseProps) {
+function CardBase({ className, size, children }: CardBaseProps) {
     var sizeString = ""
     switch (size) {
         case "small":
@@ -18,9 +16,7 @@ function CardBase({ backgroundColor, borderColor, size, children }: CardBaseProp
     }
     return (
         <article 
-            className={["rounded-2xl border", sizeString].join(" ")}
-            style={{ backgroundColor : backgroundColor ?? "#f8f3ea", borderColor: borderColor ?? "#d7c7af"}}
-        >
+            className={["rounded-2xl border border-[#d7c7af] bg-[#f8f3ea] ", sizeString, className].join(" ")}>
             {children}
         </article>
     )
