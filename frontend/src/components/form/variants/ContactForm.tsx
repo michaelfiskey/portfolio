@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import FormBase from "../primatives/FormBase";
 import FormField from "../primatives/FormField";
@@ -38,6 +39,7 @@ const ContactForm = () => {
 	const messageError = message.value.trim() ? "" : "Message is required.";
 
 	const [submitSuccessMessage, setSubmitSuccessMessage] = useState("");
+	const [submitErrorMessage, setSubmitErrorMessage] = useState("");
 
 	const isFormValid = !firstNameError && !lastNameError && !emailError && !messageError && !phoneError;
 
@@ -57,7 +59,35 @@ const ContactForm = () => {
 			return;
 		}
 
-		setSubmitSuccessMessage("Thanks! Your message has been submitted.");
+		sendEmail();
+	};
+	const clearFields = () => {
+		setFirstName({ value: "", isTouched: false });
+		setLastName({ value: "", isTouched: false });
+		setEmail({ value: "", isTouched: false });
+		setCountryCode("");
+		setPhoneNumber("");
+		setCompany("");
+		setMessage({ value: "", isTouched: false });
+		setSubmitErrorMessage("");
+
+	}
+
+	const sendEmail = async () => {
+		try {
+			await axios.post("http://localhost:5124/api/email/send-email", {
+				firstName: firstName.value,
+				lastName: lastName.value,
+				fromEmail: email.value,
+				phoneNumber: countryCode && phoneNumber ? `${countryCode}${phoneNumber}` : "",
+				company,
+				message: message.value,
+			});
+			clearFields();
+			setSubmitSuccessMessage("Thanks! Your message has been submitted.");
+		} catch {
+			setSubmitErrorMessage("Something went wrong. Please try again.");
+		}
 	};
 
 	return (
@@ -147,6 +177,7 @@ const ContactForm = () => {
 			<div className="mt-6 flex flex-col items-start gap-3">
 				<FormSubmitButton disabled={!isFormValid}>Send Message</FormSubmitButton>
 				{submitSuccessMessage ? <p className="text-mint-200! text-sm">{submitSuccessMessage}</p> : null}
+			{submitErrorMessage ? <p className="text-red-400 text-sm">{submitErrorMessage}</p> : null}
 			</div>
 		</FormBase>
 	);
