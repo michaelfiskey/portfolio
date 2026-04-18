@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.APi.csproj": {}
+    "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.Api.csproj": {}
   },
   "projects": {
-    "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.APi.csproj": {
+    "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.APi.csproj",
-        "projectName": "Portfolio.APi",
-        "projectPath": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.APi.csproj",
+        "projectUniqueName": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.Api.csproj",
+        "projectName": "Portfolio.Api",
+        "projectPath": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.Api.csproj",
         "packagesPath": "/Users/michaelfiskey/.nuget/packages/",
         "outputPath": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/obj/",
         "projectStyle": "PackageReference",

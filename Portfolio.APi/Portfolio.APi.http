@@ -1,6 +1,15 @@
-@Portfolio.APi_HostAddress = http://localhost:5124
+@Portfolio.Api_HostAddress = http://localhost:5124
 
-GET {{Portfolio.APi_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{Portfolio.Api_HostAddress}}/api/email/send-email
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "fromEmail": "john.doe@example.com",
+  "phoneNumber": "555-123-4567",
+  "company": "Acme Corp",
+  "message": "Hello, this is a test message."
+}
 
 ###
