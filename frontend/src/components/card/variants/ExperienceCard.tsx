@@ -1,6 +1,6 @@
 import CardBase from "../primitives/CardBase";
 import CardTitleDateHeader from "../primitives/CardTitleDateHeader";
-import Cardsubtitle from "../primitives/Cardsubtitle";
+import Cardsubtitle from "../primitives/CardSubtitle";
 import CardParagraph from "../primitives/CardParagraph";
 import CardTags from "../primitives/CardTags";
 import CardTagsHeader from "../primitives/CardTagsHeader";
