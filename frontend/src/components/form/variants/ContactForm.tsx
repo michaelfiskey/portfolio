@@ -177,7 +177,7 @@ const ContactForm = () => {
 			<div className="mt-6 flex flex-col items-start gap-3">
 				<FormSubmitButton disabled={!isFormValid}>Send Message</FormSubmitButton>
 				{submitSuccessMessage ? <p className="text-mint-200! text-sm">{submitSuccessMessage}</p> : null}
-			{submitErrorMessage ? <p className="text-red-400 text-sm">{submitErrorMessage}</p> : null}
+			{submitErrorMessage ? <p className="text-blush-400! text-sm">{submitErrorMessage}</p> : null}
 			</div>
 		</FormBase>
 	);

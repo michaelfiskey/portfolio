@@ -11,7 +11,7 @@ interface ProjectCardProps {
 const ProjectCard = ({ title, paragraphs, tags, href }: ProjectCardProps) => {
     return (
         <a href={href}>
-            <CardBase size="medium" className="hover:shadow-md hover:cursor-pointer">
+            <CardBase size="medium" className="hover:shadow-md hover:cursor-pointer hover:scale-103 transition-all">
                 <CardTitle title={title}/>
                 {paragraphs.map((paragraph, index) => (
                     <CardParagraph key={index}>{paragraph}</CardParagraph>
