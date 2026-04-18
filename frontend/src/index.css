@@ -1,11 +1,42 @@
 @import "tailwindcss";
 
+@theme {
+  /* Warm palette — light (50) to dark (975) */
+  --color-warm-50:  #f6ead7;
+  --color-warm-100: #f5f0e8;
+  --color-warm-150: #f1e9dc;
+  --color-warm-200: #e8decd;
+  --color-warm-250: #dbc8b5;
+  --color-warm-300: #d8c9bb;
+  --color-warm-350: #d7c2a3;
+  --color-warm-400: #ceb49a;
+  --color-warm-450: #b79a76;
+  --color-warm-500: #b69a7e;
+  --color-warm-600: #8f6d46;
+  --color-warm-650: #8e7a6a;
+  --color-warm-700: #8c6e4b;
+  --color-warm-750: #7f6c5e;
+  --color-warm-800: #7a5c3e;
+  --color-warm-825: #756355;
+  --color-warm-850: #5f4a3a;
+  --color-warm-875: #5e4430;
+  --color-warm-900: #4a3a34;
+  --color-warm-925: #3f3025;
+  --color-warm-950: #3b2f2f;
+  --color-warm-975: #2d231e;
+
+  /* Accent */
+  --color-blush-200: #f5b0b0;
+  --color-blush-400: #d08e8e;
+  --color-mint-200: #c5f7c3;
+}
+
 h1 {
   font-size: 0.875rem;
   line-height: 1.25rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #8c6e4b;
+  color: var(--color-warm-700);
   margin-bottom: 1rem;
   display: block
 }
@@ -15,7 +46,7 @@ h2 {
   font-size: 1.2rem;
   line-height: 0.98;
   font-weight: 400;
-  color: #3f3025;
+  color: var(--color-warm-925);
   margin-bottom: 0.75rem;
 }
 
@@ -24,14 +55,14 @@ h4 {
   line-height: 1.25rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #8c6e4b;
+  color: var(--color-warm-700);
   margin-bottom: 0.3rem;
   display: block
 
 }
 
 p {
-  color: #5f4a3a;
+  color: var(--color-warm-850);
   margin-bottom: 0.5rem;
 }
 
@@ -52,5 +83,5 @@ ol {
 }
 
 li {
-    color: #5f4a3a;
+  color: var(--color-warm-850);
 }

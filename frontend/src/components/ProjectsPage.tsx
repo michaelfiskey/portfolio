@@ -4,18 +4,18 @@ import PageSection from "./page-section/PageSection"
 
 interface ProjectsPageProps {
     title: string,
-    subTitle: string,
+    subtitle: string,
     paragraphs: React.ReactNode[]
     cards: React.ReactNode[]
 
 }
 
-const ProjectsPage = ({ title, subTitle, paragraphs, cards }: ProjectsPageProps) => {
+const ProjectsPage = ({ title, subtitle, paragraphs, cards }: ProjectsPageProps) => {
     return (
         <PageContainer>
             <PageSection id="projects">
                 <h1>{ title }</h1>
-                <h2>{ subTitle }</h2>
+                <h2>{ subtitle }</h2>
                 {paragraphs.map(paragraph => <p> { paragraph } </p>)}
                 <GridCardContainer>
                     {cards.map(card => card)}

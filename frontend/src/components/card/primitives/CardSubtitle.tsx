@@ -1,8 +1,8 @@
-interface CardSubtitleProps {
+interface CardsubtitleProps {
     text: React.ReactNode
 }
 
-function CardSubtitle({ text } : CardSubtitleProps) {
+function Cardsubtitle({ text } : CardsubtitleProps) {
     return <h3 className="text-[#5f4a3a]">{ text }</h3>
 }
-export default CardSubtitle;
+export default Cardsubtitle;

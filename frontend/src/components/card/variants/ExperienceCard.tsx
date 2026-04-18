@@ -1,6 +1,6 @@
 import CardBase from "../primitives/CardBase";
 import CardTitleDateHeader from "../primitives/CardTitleDateHeader";
-import CardSubtitle from "../primitives/CardSubtitle";
+import Cardsubtitle from "../primitives/Cardsubtitle";
 import CardParagraph from "../primitives/CardParagraph";
 import CardTags from "../primitives/CardTags";
 import CardTagsHeader from "../primitives/CardTagsHeader";
@@ -11,7 +11,7 @@ interface ExperienceCardProps {
     title: string,
     startDateLabel: string
     endDateLabel?: string,
-    subTitles?: React.ReactNode[],
+    subtitles?: React.ReactNode[],
     paragraphs?: React.ReactNode[],
     tagTitle?: string,
     tags?: string[],
@@ -19,7 +19,7 @@ interface ExperienceCardProps {
     listBool?: IsList
 
 }
-const ExperienceCard = ({ title, startDateLabel, endDateLabel, subTitles, paragraphs, tagTitle, tags, listBool, children }:ExperienceCardProps) => {
+const ExperienceCard = ({ title, startDateLabel, endDateLabel, subtitles, paragraphs, tagTitle, tags, listBool, children }:ExperienceCardProps) => {
     const renderBody = () => {
         if (!paragraphs || paragraphs.length < 0) return null;
         
@@ -38,8 +38,8 @@ const ExperienceCard = ({ title, startDateLabel, endDateLabel, subTitles, paragr
     return (
         <CardBase size="medium">
             <CardTitleDateHeader title={title} startDateLabel={startDateLabel} endDateLabel={endDateLabel} />
-            {subTitles && subTitles.length > 0 && subTitles.map((subTitle, index) => (
-                <CardSubtitle key={`subtitle-${index}`} text={subTitle} />
+            {subtitles && subtitles.length > 0 && subtitles.map((subtitle, index) => (
+                <Cardsubtitle key={`subtitle-${index}`} text={subtitle} />
             ))}
             {renderBody()}
             {children}
