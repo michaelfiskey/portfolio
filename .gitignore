@@ -1,0 +1,43 @@
+# -----------------------------------------------
+# .NET / ASP.NET Core
+# -----------------------------------------------
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.nupkg
+*.snupkg
+*.log
+
+# User secrets (never commit)
+**/appsettings.*.json
+!**/appsettings.json
+!**/appsettings.Development.json
+
+# Publish output
+publish/
+out/
+
+# -----------------------------------------------
+# macOS
+# -----------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# -----------------------------------------------
+# Docker
+# -----------------------------------------------
+# (docker-compose.yml itself should be committed)
+.docker/
+
+# -----------------------------------------------
+# Environment / secrets
+# -----------------------------------------------
+.env
+.env.*
+!.env.example
+secrets.json
