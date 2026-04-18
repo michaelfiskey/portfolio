@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Mc5oNEQ07A0=",
+  "success": true,
+  "projectFilePath": "/Users/michaelfiskey/Documents/CS PROJECTS/PORTFOLIO/Portfolio.Api/Portfolio.APi.csproj",
+  "expectedPackageFiles": [
+    "/Users/michaelfiskey/.nuget/packages/microsoft.aspnetcore.openapi/10.0.5/microsoft.aspnetcore.openapi.10.0.5.nupkg.sha512",
+    "/Users/michaelfiskey/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512",
+    "/Users/michaelfiskey/.nuget/packages/resend/0.4.0/resend.0.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

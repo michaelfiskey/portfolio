@@ -193,26 +193,26 @@ const Home = () => {
     const projectCategories = {
         sectionTitle: "Personal Projects",
         sectionSubtitle: "Project Categories",
-        sharedTags: [
-            "C#", ".NET", "PostgreSQL", "AWS",
-            "TypeScript", "React", "Node.js", "HTML",
-            "TailwindCSS", "Python", "Flask"
-        ],
         cards: [
             {
-                title: "Fullstack Projects",
-                paragraphs: ["Put a description here!"],
-                href: "fullstack-projects"
+                title: "Software Engineering",
+                paragraphs: ["Projects span full-stack development and algorithmic problem solving."],
+                href: "fullstack-projects",
+                tags: [ "C#", ".NET", "PostgreSQL", "AWS",
+                        "TypeScript", "React", "Node.js", "HTML",
+                        "TailwindCSS", "Python", "Flask" ]
             },
             {
                 title: "AI/ML Projects",
-                paragraphs: ["Put a description here!"],
-                href: "ai-ml-projects"
+                paragraphs: ["Neural networks, optimizers, and algorithms, built with and without high-level libraries, and applied work using industry tools."],
+                href: "ai-ml-projects",
+                tags: [ "Python", "Pytorch", "Sklearn" ]
             },
             {
                 title: "Cybersecurity Projects",
-                paragraphs: ["Put a description here!"],
-                href: "/cybersecurity-projects"
+                paragraphs: ["Hands-on security work built around real attack and defense scenarios using Docker-based environments."],
+                href: "/cybersecurity-projects",
+                tags: [ "Python", "Docker", "Scapy" ]
             }
         ]
     }
@@ -324,7 +324,7 @@ const Home = () => {
                         <ProjectCard key={card.title}
                                     title={card.title}
                                     paragraphs={card.paragraphs}
-                                    tags={projectCategories.sharedTags}
+                                    tags={card.tags}
                                     href={card.href}
                         />
                     ))}
