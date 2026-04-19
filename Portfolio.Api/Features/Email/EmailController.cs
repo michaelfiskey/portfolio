@@ -11,7 +11,7 @@ public class EmailController : ControllerBase
         _emailService = emailService;
     }
 
-    [HttpPost("send-email")]
+    [HttpPost("send")]
     public async Task<IActionResult> SendEmail([FromBody] SendEmailRequest request)
     {
         await _emailService.SendEmailAsync(request);

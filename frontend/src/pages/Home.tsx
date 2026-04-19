@@ -12,7 +12,7 @@ import GridPageSection from "../components/page-section/variants/GridPageSection
 import PageSection from "../components/page-section/PageSection";
 import { useIsMobile } from '../hooks/useIsMobile';
 import YoutubeVideoCarousel from "../components/YoutubeVideoCarousel";
-import ProjectCard from "../components/card/variants/ProjectCard";
+import ProjectCategoryCard from "../components/card/variants/ProjectCategoryCard";
 import ContactForm from "../components/form/variants/ContactForm";
 
 const Home = () => {
@@ -197,7 +197,7 @@ const Home = () => {
             {
                 title: "Software Engineering",
                 paragraphs: ["Projects span full-stack development and algorithmic problem solving."],
-                href: "fullstack-projects",
+                href: "swe",
                 tags: [ "C#", ".NET", "PostgreSQL", "AWS",
                         "TypeScript", "React", "Node.js", "HTML",
                         "TailwindCSS", "Python", "Flask" ]
@@ -205,13 +205,13 @@ const Home = () => {
             {
                 title: "AI/ML Projects",
                 paragraphs: ["Neural networks, optimizers, and algorithms, built with and without high-level libraries, and applied work using industry tools."],
-                href: "ai-ml-projects",
+                href: "ai-ml",
                 tags: [ "Python", "Pytorch", "Sklearn" ]
             },
             {
                 title: "Cybersecurity Projects",
                 paragraphs: ["Hands-on security work built around real attack and defense scenarios using Docker-based environments."],
-                href: "/cybersecurity-projects",
+                href: "/cs",
                 tags: [ "Python", "Docker", "Scapy" ]
             }
         ]
@@ -321,7 +321,7 @@ const Home = () => {
                 <h2 className="pb-10">{projectCategories.sectionSubtitle}</h2>
                 <GridCardContainer>
                     {projectCategories.cards.map((card) => (
-                        <ProjectCard key={card.title}
+                        <ProjectCategoryCard key={card.title}
                                     title={card.title}
                                     paragraphs={card.paragraphs}
                                     tags={card.tags}

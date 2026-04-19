@@ -1,3 +1,4 @@
+import { useNotificationContext } from "../../../context/NotificationContext";
 import axios from "axios";
 import { useState } from "react";
 import FormBase from "../primatives/FormBase";
@@ -12,6 +13,8 @@ interface TextFieldState {
 }
 
 const ContactForm = () => {
+	const { pushNotification } = useNotificationContext();
+
 	const [firstName, setFirstName] = useState<TextFieldState>({ value: "", isTouched: false });
 	const firstNameError = firstName.value.trim() ? "" : "First name is required.";
 
@@ -75,7 +78,7 @@ const ContactForm = () => {
 
 	const sendEmail = async () => {
 		try {
-			await axios.post("http://localhost:5124/api/email/send-email", {
+			await axios.post(import.meta.env.VITE_API_URL + "/email/send", {
 				firstName: firstName.value,
 				lastName: lastName.value,
 				fromEmail: email.value,
@@ -84,9 +87,15 @@ const ContactForm = () => {
 				message: message.value,
 			});
 			clearFields();
-			setSubmitSuccessMessage("Thanks! Your message has been submitted.");
-		} catch {
-			setSubmitErrorMessage("Something went wrong. Please try again.");
+			pushNotification("success", "Thanks! Your message has been submitted.");
+		} catch(error) {
+			if (axios.isAxiosError(error)) {
+				const message = error.response?.data?.message ?? error.message ?? "There was an error sending your message."
+				pushNotification("error", message)
+			}
+			else {
+				pushNotification("error", "An unexpected error occured.")
+			}
 		}
 	};
 

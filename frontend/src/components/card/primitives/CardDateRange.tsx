@@ -11,6 +11,6 @@ const getDateRange = (startLabel: string, endLabel?: string) => {
 }
 
 const CardDateRange = ({ startLabel, endLabel }: CardDateRangeProps) => {
-    return <span className="text-sm text-[#7a624e]">{getDateRange(startLabel, endLabel)}</span>
+    return <span className="text-sm text-warm-800">{getDateRange(startLabel, endLabel)}</span>
 }
 export default CardDateRange;

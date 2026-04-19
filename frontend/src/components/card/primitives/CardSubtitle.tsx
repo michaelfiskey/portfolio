@@ -3,6 +3,6 @@ interface CardsubtitleProps {
 }
 
 function Cardsubtitle({ text } : CardsubtitleProps) {
-    return <h3 className="text-[#5f4a3a]">{ text }</h3>
+    return <h3 className="text-warm-850">{ text }</h3>
 }
 export default Cardsubtitle;

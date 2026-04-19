@@ -16,7 +16,7 @@ function CardBase({ className, size, children }: CardBaseProps) {
     }
     return (
         <article 
-            className={["rounded-2xl border border-[#d7c7af] bg-[#f8f3ea] ", sizeString, className].join(" ")}>
+            className={["rounded-2xl border border-warm-300 bg-warm-100 ", sizeString, className].join(" ")}>
             {children}
         </article>
     )
