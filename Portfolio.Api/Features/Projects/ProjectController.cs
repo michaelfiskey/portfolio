@@ -1,20 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using Portfolio.Api.Features.ProjectCards;
 
-namespace Portfolio.Api.Features.ProjectCards;
+namespace Portfolio.Api.Features.Projects;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectCardController : ControllerBase
+public class ProjectController : ControllerBase
 {
-    private readonly IProjectCardService _projectCardService;
+    private readonly IProjectService _projectService;
 
-    public ProjectCardController(IProjectCardService projectCardService)
+    public ProjectController(IProjectService projectService)
     {
-        _projectCardService = projectCardService;
+        _projectService = projectService;
     }
 
-    [HttpGet("projects")]
+    [HttpGet("")]
     public async Task<IActionResult> GetProjects([FromQuery] string type)
     {
         if (string.IsNullOrWhiteSpace(type))
@@ -24,7 +23,7 @@ public class ProjectCardController : ControllerBase
 
         try
         {
-            var projects = await _projectCardService.GetProjectsByTypeAsync(type);
+            var projects = await _projectService.GetProjectsByTypeAsync(type);
             return Ok(projects);
         }
         catch (ArgumentException ex)

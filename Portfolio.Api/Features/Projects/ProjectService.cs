@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Api.Data;
 
-namespace Portfolio.Api.Features.ProjectCards;
+namespace Portfolio.Api.Features.Projects;
 
-public class ProjectCardService : IProjectCardService
+public class ProjectService : IProjectService
 {
 	private static readonly Dictionary<string, string> TypeCategoryMap = new(StringComparer.OrdinalIgnoreCase)
 	{
@@ -14,12 +14,12 @@ public class ProjectCardService : IProjectCardService
 
 	private readonly AppDbContext _dbContext;
 
-	public ProjectCardService(AppDbContext dbContext)
+	public ProjectService(AppDbContext dbContext)
 	{
 		_dbContext = dbContext;
 	}
 
-	public async Task<IReadOnlyList<ProjectCard>> GetProjectsByTypeAsync(string type)
+	public async Task<IReadOnlyList<Project>> GetProjectsByTypeAsync(string type)
 	{
 		var normalizedType = type.Trim();
 
@@ -28,7 +28,7 @@ public class ProjectCardService : IProjectCardService
 			throw new ArgumentException("Query type must be one of: swe, ai-ml, cs.", nameof(type));
 		}
 
-		return await _dbContext.ProjectCards
+		return await _dbContext.Projects
 			.AsNoTracking()
 			.Where(project => project.Category == category)
 			.OrderByDescending(project => project.CreatedAtUtc)

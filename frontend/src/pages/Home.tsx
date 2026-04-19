@@ -195,7 +195,7 @@ const Home = () => {
         sectionSubtitle: "Project Categories",
         cards: [
             {
-                title: "Software Engineering",
+                title: "Software Engineering Projects",
                 paragraphs: ["Projects span full-stack development and algorithmic problem solving."],
                 href: "swe",
                 tags: [ "C#", ".NET", "PostgreSQL", "AWS",
@@ -203,7 +203,7 @@ const Home = () => {
                         "TailwindCSS", "Python", "Flask" ]
             },
             {
-                title: "AI/ML Projects",
+                title: "Artificial Intelligence & Machine Learning Projects",
                 paragraphs: ["Neural networks, optimizers, and algorithms, built with and without high-level libraries, and applied work using industry tools."],
                 href: "ai-ml",
                 tags: [ "Python", "Pytorch", "Sklearn" ]
