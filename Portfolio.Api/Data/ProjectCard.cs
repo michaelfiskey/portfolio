@@ -7,4 +7,5 @@ public class ProjectCard : BaseEntity
     public string[] Authors { get; set; } = [];
     public string Href { get; set; } = string.Empty;
     public string[] Tags { get; set; } = [];
+    public string Category { get; set; } = string.Empty;
 }

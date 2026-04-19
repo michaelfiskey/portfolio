@@ -1,5 +1,6 @@
 using Portfolio.Api;
 using Portfolio.Api.Features.Email;
+using Portfolio.Api.Features.ProjectCards;
 using Portfolio.Api.Data;
 using Resend;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ builder.Services.Configure<ResendClientOptions>(options =>
 builder.Services.AddTransient<IResend, ResendClient>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IProjectCardService, ProjectCardService>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
