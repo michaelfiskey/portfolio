@@ -5,11 +5,11 @@ import Home from "./pages/Home"
 import SoftwareEngineering from "./pages/SoftwareEngineering"
 import { Route, Routes} from "react-router"
 import AIML from "./pages/AIML"
-import useScrollToHash from './hooks/useScrollToHash'
+import useScrollToSection from './hooks/useScrollToSection'
 
 function App() {
     
-    useScrollToHash()
+    useScrollToSection()
 
     return (
         <NotificationProvider>

@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-warm-50/92 backdrop-blur-sm shadow-sm' : 'bg-transparent'}`}>
             <div className='max-w-5xl mx-auto flex flex-col px-10 py-5 items-center mt-5 gap-y-4 md:mt-0 md:px-24 md:flex-row md:justify-between '>
-                <span className='font-[Marcellus] text-warm-925 text-lg tracking-wide whitespace-nowrap'><a href='/'>Michael Fiskey</a></span>
+                <Link to={{pathname: '/'}} className='font-[Marcellus] text-warm-925 text-lg tracking-wide whitespace-nowrap'>Michael Fiskey</Link>
                 <div className='md:flex md:items-center md:flex-1 md:ml-10'>
                     <div className='px-10 flex flex-wrap justify-center gap-x-6 gap-y-2 md:flex-nowrap md:gap-5 md:items-center md:flex-1 md:ml-10 text-sm text-warm-800 tracking-wide'>
                         <Link to={{ pathname: "/", hash: "#about"}} className="hover:text-warm-900 transition-colors">About</Link>
