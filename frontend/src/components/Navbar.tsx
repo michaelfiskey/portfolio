@@ -1,13 +1,16 @@
 
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router'
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        // background scroll effect
         const onScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', onScroll);
         return () => window.removeEventListener('scroll', onScroll)
+
     }, [])
 
     return (
@@ -16,11 +19,11 @@ const Navbar = () => {
                 <span className='font-[Marcellus] text-warm-925 text-lg tracking-wide whitespace-nowrap'><a href='/'>Michael Fiskey</a></span>
                 <div className='md:flex md:items-center md:flex-1 md:ml-10'>
                     <div className='px-10 flex flex-wrap justify-center gap-x-6 gap-y-2 md:flex-nowrap md:gap-5 md:items-center md:flex-1 md:ml-10 text-sm text-warm-800 tracking-wide'>
-                        <a href="/#about" className="hover:text-warm-900 transition-colors">About</a>
-                        <a href="/#education" className="hover:text-warm-900 transition-colors">Education</a>
-                        <a href="/#experience" className="hover:text-warm-900 transition-colors">Experience</a>
-                        <a href="/#projects" className="hover:text-warm-900 transition-colors">Projects</a>
-                        <a href="/#contact" className="hover:text-warm-900 transition-colors">Contact</a>
+                        <Link to={{ pathname: "/", hash: "#about"}} className="hover:text-warm-900 transition-colors">About</Link>
+                        <Link to={{ pathname: "/", hash: "#education"}} className="hover:text-warm-900 transition-colors">Education</Link>
+                        <Link to={{ pathname: "/", hash: "#experience"}} className="hover:text-warm-900 transition-colors">Experience</Link>
+                        <Link to={{ pathname: "/", hash: "#projects"}} className="hover:text-warm-900 transition-colors">Projects</Link>
+                        <Link to={{ pathname: "/", hash: "#contact"}} className="hover:text-warm-900 transition-colors">Contact</Link>
                     </div>
                 </div>
                 <div>

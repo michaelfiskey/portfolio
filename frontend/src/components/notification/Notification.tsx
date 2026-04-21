@@ -1,4 +1,5 @@
-import type { AppNotification, NotificationType } from "../../context/NotificationContext"
+import type { AppNotification } from "../../context/NotificationContext"
+export type NotificationType = "success" | "warning" | "error";
 
 interface NotificationProps {
     id: number,

@@ -27,7 +27,7 @@ const Home = () => {
         sectionTitle: "About Me",
         name: "Michael Fiskey (M.S.)",
         paragraphs: [
-            "I am a graduate student at the University of Wisconsin-Milwaukee, pursuing a Master's degree in Computer Science with a focus on the emerging intersections of artificial intelligence, machine learning, and cybersecurity.",
+            "I am a graduate student at the University of Wisconsin-Milwaukee, pursuing a Master's degree in Computer Science with a focus on the emerging intersection of artificial intelligence and cybersecurity.",
             "Outside of academics and coding, I am a musician with a passion for singing, as well as an avid volleyball player.",
         ],
         cards: [

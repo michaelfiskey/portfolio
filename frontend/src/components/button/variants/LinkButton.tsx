@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import ButtonBase from "../primatives/ButtonBase";
 
 type LinkButtonProps = Omit<React.ComponentProps<typeof ButtonBase>, "onClick" | "type"> & {
@@ -8,13 +9,15 @@ type LinkButtonProps = Omit<React.ComponentProps<typeof ButtonBase>, "onClick" |
 
 const LinkButton = ({ href, openInNewTab = false, children, ...buttonProps }: LinkButtonProps) => {
     
+    const navigate = useNavigate();
+
     const handleClick = () => {
         if (openInNewTab) {
             window.open(href, "_blank", "noopener,noreferrer");
             return;
         }
 
-        window.location.href = href;
+        navigate(href);
     };
 
     return (

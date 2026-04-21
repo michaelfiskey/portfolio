@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-export type NotificationType = "success" | "warning" | "error";
+import type { NotificationType } from "../components/notification/Notification"
 
 export interface AppNotification {
     id: number
