@@ -96,3 +96,7 @@ ol {
 li {
   color: var(--color-warm-850);
 }
+
+body {
+  background-color: var(--color-warm-150)
+}

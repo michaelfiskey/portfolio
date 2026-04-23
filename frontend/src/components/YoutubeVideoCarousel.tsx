@@ -20,9 +20,9 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
     const currentVideo = videoUrls[currentVideoIndex];
 
     return (
-        <div className={className ? className : "rounded-2xl border border-[#d7c2a3] bg-[#f6ead7] p-5 mb-5"}>
+        <div className={className ? className : "rounded-2xl border border-warm-350 bg-warm-50 p-5 mb-5"}>
             <div className="flex items-center justify-between gap-4 mb-4">
-                <h3 className="text-sm uppercase tracking-[0.2em] text-[#8c6e4b] mb-3">{title}</h3>
+                <h3 className="text-sm uppercase tracking-[0.2em] text-warm-700 mb-3">{title}</h3>
                 <div className="flex items-center gap-2">
                     <button
                         type="button"
@@ -53,7 +53,7 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
                 />
             </div>
 
-            <span className="mt-3 flex items-center justify-end gap-3 text-xs text-[#8c6e4b]">
+            <span className="mt-3 flex items-center justify-end gap-3 text-xs text-warm-700">
                 {currentVideoIndex + 1} / {videoUrls.length}
             </span>
         </div>

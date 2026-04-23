@@ -1,11 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import type { NotificationType } from "../components/notification/Notification"
-
-export interface AppNotification {
-    id: number
-    type: NotificationType
-    message: string
-}
+import { createContext, useContext, useRef, useState } from "react";
+import type { NotificationType, AppNotification } from "../types/notification";
 
 interface NotificationContextValue {
     notifications: AppNotification[]
@@ -13,16 +7,25 @@ interface NotificationContextValue {
     dismissNotification: (id: number) => void
 }
 
+const NOTIFICATION_TTL_MS = 4000;
+
 const NotificationContext = createContext<NotificationContextValue | undefined>(undefined);
 
 export function NotificationProvider({ children }: { children: React.ReactNode }) {
     const [notifications, setNotifications] = useState<AppNotification[]>([]);
+    const timers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
 
-    const pushNotification = (type: NotificationType, message: string) =>
-        setNotifications(prev => [...prev, { id: Date.now(), type:type, message }]);
-
-    const dismissNotification = (id: number) =>
+    const dismissNotification = (id: number) => {
+        clearTimeout(timers.current.get(id));
+        timers.current.delete(id);
         setNotifications(prev => prev.filter(e => e.id !== id));
+    };
+
+    const pushNotification = (type: NotificationType, message: string) => {
+        const id = Date.now();
+        setNotifications(prev => [...prev, { id, type, message }]);
+        timers.current.set(id, setTimeout(() => dismissNotification(id), NOTIFICATION_TTL_MS));
+    };
 
     return (
         <NotificationContext.Provider value={{ notifications, pushNotification, dismissNotification }}>

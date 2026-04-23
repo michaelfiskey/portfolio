@@ -1,11 +1,11 @@
 import { useNotificationContext } from "../../../context/NotificationContext";
-import axios from "axios";
 import { useState } from "react";
 import FormBase from "../primatives/FormBase";
 import FormField from "../primatives/FormField";
 import FormInput from "../primatives/FormInput";
 import FormSubmitButton from "../primatives/FormSubmitButton";
 import FormTextArea from "../primatives/FormTextArea";
+import { sendEmail } from "../../../services/emailservice";
 
 interface TextFieldState {
 	value: string;
@@ -62,7 +62,7 @@ const ContactForm = () => {
 			return;
 		}
 
-		sendEmail();
+		handleSendEmail();
 	};
 	const clearFields = () => {
 		setFirstName({ value: "", isTouched: false });
@@ -76,27 +76,21 @@ const ContactForm = () => {
 
 	}
 
-	const sendEmail = async () => {
-		try {
-			await axios.post(import.meta.env.VITE_API_URL + "/email/send", {
-				firstName: firstName.value,
-				lastName: lastName.value,
-				fromEmail: email.value,
-				phoneNumber: countryCode && phoneNumber ? `${countryCode}${phoneNumber}` : "",
-				company,
-				message: message.value,
-			});
-			clearFields();
-			pushNotification("success", "Thanks! Your message has been submitted.");
-		} catch(error) {
-			if (axios.isAxiosError(error)) {
-				const message = error.response?.data?.message ?? error.message ?? "There was an error sending your message."
-				pushNotification("error", message)
-			}
-			else {
-				pushNotification("error", "An unexpected error occured.")
-			}
-		}
+	const handleSendEmail = async () => {
+		sendEmail({
+			firstName: firstName.value,
+			lastName: lastName.value,
+			fromEmail: email.value,
+			phoneNumber: countryCode && phoneNumber ? `${countryCode}${phoneNumber}` : "",
+			company,
+			message: message.value,
+			}).then(() => {
+				clearFields();
+				pushNotification("success", "Thanks! Your message has been submitted.");
+			}).catch((error: unknown) => {
+				const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+                pushNotification("error", message);
+			})
 	};
 
 	return (

@@ -6,7 +6,7 @@ interface SubCardProps {
 
 const SubCard = ({ title, paragraphs }: SubCardProps) => {
     return (
-        <CardBase size="small" className="border-[#d7c2a3]! bg-[#f6ead7]!">
+        <CardBase size="small" className="border-warm-350! bg-warm-50!">
             <h4>{ title }</h4>
             {paragraphs.map(paragraph =><p> { paragraph } </p>)}
         </CardBase>

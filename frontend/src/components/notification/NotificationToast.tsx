@@ -1,18 +1,8 @@
 import { useNotificationContext } from "../../context/NotificationContext"
-import { useEffect } from 'react'
-import Notification, { notificationHeaderByType } from "./Notification"
+import Notification from "./Notification"
 
 const NotificationToast = () => {
-    const EXIST_MILLISECONDS = 4000
-
     const { notifications, dismissNotification } = useNotificationContext()
-
-    useEffect(() => {
-        if (notifications.length === 0) return
-        const latest = notifications[notifications.length - 1]
-        const timer = setTimeout(() => dismissNotification(latest.id), EXIST_MILLISECONDS)
-        return () => clearTimeout(timer)
-    }, [notifications])
 
     if (notifications.length === 0) return null
 
@@ -23,7 +13,6 @@ const NotificationToast = () => {
                     key={notification.id}
                     id={notification.id}
                     type={notification.type}
-                    header={notificationHeaderByType[notification.type]}
                     message={notification.message}
                     onDismiss={dismissNotification}
                 />
