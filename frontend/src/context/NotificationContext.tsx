@@ -7,7 +7,7 @@ interface NotificationContextValue {
     dismissNotification: (id: number) => void
 }
 
-const NOTIFICATION_TTL_MS = 4000;
+const NOTIFICATION_TTL_MS = 5000;
 
 const NotificationContext = createContext<NotificationContextValue | undefined>(undefined);
 

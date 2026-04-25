@@ -1,4 +1,4 @@
-export type NotificationType = "success" | "warning" | "error";
+export type NotificationType = "success" | "warning" | "error" | "note";
 
 export interface AppNotification {
     id: number

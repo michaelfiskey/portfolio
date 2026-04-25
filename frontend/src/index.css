@@ -75,6 +75,8 @@ h4 {
 p {
   color: var(--color-warm-850);
   margin-bottom: 0.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 ul {

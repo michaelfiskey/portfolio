@@ -37,5 +37,5 @@ export const passwordValidationError = (password: string): string => {
         ? "Password is required."
         : validatePassword(password)
             ? ""
-            : "Password must contain a lowercase and uppercase letter, 1 number, and 1 special character."
+            : "Password must contain 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character, and be at least 10 characters long."
 }

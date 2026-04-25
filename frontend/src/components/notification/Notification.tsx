@@ -29,6 +29,14 @@ const notificationConfig: Record<NotificationType, { background: string; icon: s
         buttonColor: "text-emerald-400 hover:text-emerald-700",
         header: "Success",
     },
+    note: {
+        background: "border-blue-700, bg-blue-100",
+        icon: "✎",
+        textColor: "text-blue-800!",
+        buttonColor: "text-blue-400 hover:text-blue-700",
+        header: "Note",
+
+    }
 };
 
 const Notification = ({id, type, message, onDismiss} : NotificationProps) => {
