@@ -19,7 +19,7 @@ export async function sendSignupCredentials({
     password,
 }: SendSignupParams): Promise<void> {
     try {
-        await axios.post(import.meta.env.VITE_API_URL + "/signup", {
+        await axios.post(import.meta.env.VITE_API_URL + "/auth/signup", {
             firstName,
             lastName,
             email,
@@ -37,7 +37,7 @@ export async function sendSignupCredentials({
 
 export async function sendLoginCredentials({ email, password } : SendLoginParams) : Promise<void> {
     try {
-        await axios.post(import.meta.env.VITE_API_URL + "/login", {
+        await axios.post(import.meta.env.VITE_API_URL + "/auth/login", {
             email,
             password
         })

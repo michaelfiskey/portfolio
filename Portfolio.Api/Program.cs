@@ -4,6 +4,7 @@ using Portfolio.Api.Features.Projects;
 using Portfolio.Api.Data;
 using Resend;
 using Microsoft.EntityFrameworkCore;
+using Portfolio.Api.Features.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,8 @@ builder.Services.AddTransient<IResend, ResendClient>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<PasswordHasher>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
