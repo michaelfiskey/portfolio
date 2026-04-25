@@ -6,45 +6,32 @@ import FormInput from "../primatives/FormInput";
 import FormSubmitButton from "../primatives/FormSubmitButton";
 import FormTextArea from "../primatives/FormTextArea";
 import { sendEmail } from "../../../services/emailservice";
-
-interface TextFieldState {
-	value: string;
-	isTouched: boolean;
-}
+import { emailValidationError, messageValidationError, nameValidationError } from "../../../utilities/validate";
+import type { TextFieldState } from "../formtypes";
 
 const ContactForm = () => {
 	const { pushNotification } = useNotificationContext();
 
 	const [firstName, setFirstName] = useState<TextFieldState>({ value: "", isTouched: false });
-	const firstNameError = firstName.value.trim() ? "" : "First name is required.";
+	const firstNameError = nameValidationError(firstName.value)
 
 	const [lastName, setLastName] = useState<TextFieldState>({ value: "", isTouched: false });
-	const lastNameError = lastName.value.trim() ? "" : "Last name is required.";
+	const lastNameError = nameValidationError(lastName.value)
 
 	const [email, setEmail] = useState<TextFieldState>({ value: "", isTouched: false });
-	const emailError = !email.value.trim()
-		? "Email is required."
-		: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
-			? ""
-			: "Enter a valid email address.";
+	const emailError = emailValidationError(email.value)
 
-	const [countryCode, setCountryCode] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const phoneError = !countryCode && !phoneNumber
-		? ""
-		: !countryCode || !phoneNumber
-			? "Add both country code and phone number, or leave both blank."
-			: "";
 
 	const [company, setCompany] = useState("");
 
 	const [message, setMessage] = useState<TextFieldState>({ value: "", isTouched: false });
-	const messageError = message.value.trim() ? "" : "Message is required.";
+	const messageError = messageValidationError(message.value)
 
 	const [submitSuccessMessage, setSubmitSuccessMessage] = useState("");
 	const [submitErrorMessage, setSubmitErrorMessage] = useState("");
 
-	const isFormValid = !firstNameError && !lastNameError && !emailError && !messageError && !phoneError;
+	const isFormValid = !firstNameError && !lastNameError && !emailError && !messageError
 
 	const markRequiredTouched = () => {
 		setFirstName((prev) => ({ ...prev, isTouched: true }));
@@ -68,7 +55,6 @@ const ContactForm = () => {
 		setFirstName({ value: "", isTouched: false });
 		setLastName({ value: "", isTouched: false });
 		setEmail({ value: "", isTouched: false });
-		setCountryCode("");
 		setPhoneNumber("");
 		setCompany("");
 		setMessage({ value: "", isTouched: false });
@@ -81,7 +67,7 @@ const ContactForm = () => {
 			firstName: firstName.value,
 			lastName: lastName.value,
 			fromEmail: email.value,
-			phoneNumber: countryCode && phoneNumber ? `${countryCode}${phoneNumber}` : "",
+			phoneNumber,
 			company,
 			message: message.value,
 			}).then(() => {
@@ -126,32 +112,13 @@ const ContactForm = () => {
 					/>
 				</FormField>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<FormField label="Phone Number" error={phoneError}>
-						<div className="flex gap-2">
-							<FormInput
-								placeholder="+1"
-								value={countryCode}
-								onChange={(e) => {
-									let val = e.target.value.replace(/(?!^\+)\D/g, "");
-									if (val.startsWith("+")) {
-										val = "+" + val.slice(1).replace(/\D/g, "").slice(0, 3);
-									} else if (val.length > 0) {
-										val = "+" + val.replace(/\D/g, "").slice(0, 3);
-									}
-									setCountryCode(val);
-								}}
-								className="w-20"
-								isInvalid={Boolean(phoneError)}
-							/>
-
+					<FormField label="Phone Number">
 							<FormInput
 								placeholder="5551234567"
 								value={phoneNumber}
 								onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, "").slice(0, 14))}
 								className="flex-1"
-								isInvalid={Boolean(phoneError)}
 							/>
-						</div>
 					</FormField>
 
 					<FormField label="Company">

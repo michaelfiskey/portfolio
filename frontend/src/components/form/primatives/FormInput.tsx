@@ -7,8 +7,8 @@ const FormInput = ({ isInvalid = false, className, ...props }: FormInputProps) =
     const stateClasses = isInvalid
         ? "border-blush-400 focus:ring-blush-400"
         : "border-warm-650 focus:ring-warm-500";
-
-    return <input {...props} className={[baseClasses, stateClasses, className].filter(Boolean).join(" ")} />;
+    
+    return <input  {...props} className={[baseClasses, stateClasses, className].filter(Boolean).join(" ")} />;
 };
 
 export default FormInput;
