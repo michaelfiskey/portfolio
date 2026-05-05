@@ -4,7 +4,6 @@ import SignupForm from "../components/form/variants/SignupForm";
 import PageSection from "../components/page-section/PageSection";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { useNotificationContext } from "../context/NotificationContext";
-
 const Signup = () => {
     const { pushNotification } = useNotificationContext()
 

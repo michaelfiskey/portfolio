@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
+import { useAuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
+    const { isLoggedIn, logout } = useAuthContext();
 
     useEffect(() => {
         // background scroll effect
@@ -24,7 +26,16 @@ const Navbar = () => {
                         <Link to={{ pathname: "/", hash: "#experience"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Experience</Link>
                         <Link to={{ pathname: "/", hash: "#projects"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Projects</Link>
                         <Link to={{ pathname: "/", hash: "#contact"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Contact</Link>
-                        <Link to={{ pathname: "/login"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Login</Link>
+                        {!isLoggedIn && <Link to={{ pathname: "/login"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Login</Link>}
+                        {isLoggedIn && (
+                            <button
+                                onClick={logout}
+                                className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all bg-transparent border-none cursor-pointer"
+                                style={{ background: 'none', border: 'none', padding: 0 }}
+                            >
+                                Logout
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div>

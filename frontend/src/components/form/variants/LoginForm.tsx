@@ -3,13 +3,17 @@ import FormField from "../primatives/FormField";
 import FormInput from "../primatives/FormInput";
 import FormSubmitButton from "../primatives/FormSubmitButton"
 import { emailValidationError, passwordValidationError } from "../../../utilities/validate";
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import useFormState from "../hooks/useFormState";
 import { sendLoginCredentials } from "../../../services/authservice";
 import { useNotificationContext } from "../../../context/NotificationContext";
+import { useAuthContext } from "../../../context/AuthContext";
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const { pushNotification } = useNotificationContext();
+    const { login } = useAuthContext();
+
     const { fields, setFieldValue, touchField, markRequiredTouched } = useFormState({
         email:    { value: "", isTouched: false },
         password: { value: "", isTouched: false },
@@ -28,8 +32,10 @@ const LoginForm = () => {
         sendLoginCredentials({
 			email: fields.email.value,
 			password: fields.password.value,
-		}).then(() => {
-			pushNotification("success", "You have been successfully logged in!");
+		}).then((token) => {
+            login(token);
+            pushNotification("success", "You have been successfully logged in!");
+            navigate('/');
 		}).catch((error: unknown) => {
 			const message = error instanceof Error ? error.message : "An unexpected error occurred.";
 			pushNotification("error", message);

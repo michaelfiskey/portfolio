@@ -17,5 +17,7 @@ namespace Portfolio.Api.Data
         public byte[] PasswordSalt { get; set; } = [];
         [Required]
         public string Role { get; set; } = "user";
+        public string? RefreshTokenHash { get; set; }
+        public DateTime? RefreshTokenExpiry { get; set; }
     }
 }

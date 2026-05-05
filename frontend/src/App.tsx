@@ -15,8 +15,8 @@ function App() {
     useScrollToSection()
 
     return (
-        <AuthProvider>
             <NotificationProvider>
+                <AuthProvider>
                 <div className="bg-warm-975">
                     <NotificationToast/>
                     <Navbar/>
@@ -28,8 +28,8 @@ function App() {
                         <Route path="/signup" element={<Signup/>}/>
                     </Routes>
                 </div>
+                </AuthProvider>
             </NotificationProvider>
-        </AuthProvider>
     )
 }
 

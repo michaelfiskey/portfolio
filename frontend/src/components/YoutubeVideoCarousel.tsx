@@ -28,7 +28,7 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
                         type="button"
                         onClick={handlePreviousVideo}
                         aria-label="Show previous video"
-                        className="h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
+                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
                     >
                         &lt;
                     </button>
@@ -36,7 +36,7 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
                         type="button"
                         onClick={handleNextVideo}
                         aria-label="Show next video"
-                        className="h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
+                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
                     >
                         &gt;
                     </button>

@@ -9,7 +9,7 @@ const ButtonBase = ({ children, className = "", ...buttonProps }: ButtonBaseProp
   return (
     <button
       {...buttonProps}
-      className={["px-6 py-3 rounded-full text-sm tracking-wide transition-colors hover:cursor-pointer", className ? className : "border border-[#7a5c3e] text-[#7a5c3e] hover:bg-[#e8dfd0]"].join(" ")}
+      className={["px-6 py-3 rounded-full text-sm tracking-wide transition-all hover:cursor-pointer hover:scale-103", className ? className : "border border-[#7a5c3e] text-[#7a5c3e] hover:bg-[#e8dfd0]"].join(" ")}
     >
       {children}
     </button>
