@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
-import { useIsMobile } from './useIsMobile'
 
 function useScrollToSection() {
     const { hash, pathname } = useLocation()
-    const isMobile = useIsMobile()
 
     useEffect(() => {
         if (!hash) {
@@ -14,8 +12,9 @@ function useScrollToSection() {
 
         const element = document.querySelector(hash)
         if (!element) return
-        const top = element.getBoundingClientRect().top + window.scrollY - (isMobile ? 150 : 0)
+        const navHeight = document.querySelector('nav')?.offsetHeight ?? 0
+        const top = element.getBoundingClientRect().top + window.scrollY - navHeight
         window.scrollTo({ top, behavior: 'smooth' })
-    }, [hash, pathname, isMobile])
+    }, [hash, pathname])
 }
 export default useScrollToSection;

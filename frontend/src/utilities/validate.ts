@@ -32,10 +32,16 @@ export const messageValidationError = (message: string): string => {
         : ""
 }
 
-export const passwordValidationError = (password: string): string => {
+export const passwordCreateValidationError = (password: string): string => {
     return !password.trim()
         ? "Password is required."
         : validatePassword(password)
             ? ""
             : "Password must contain 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character, and be at least 10 characters long."
+}
+
+export const passwordValidationError = (password: string): string => {
+    return !password.trim()
+        ? "Password is required."
+        : ""
 }

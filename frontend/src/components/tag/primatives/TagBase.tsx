@@ -4,7 +4,7 @@ interface TagBaseProps {
 }
 const TagBase = ({ children, className }: TagBaseProps) => {
     return (
-        <span className={["px-4 py-1.5 rounded-full text-sm", className ? className : "bg-[#dfcfb6] text-[#5e4430]"].join(" ")}>
+        <span className={["px-4 py-1.5 rounded-full text-sm", className ? className : "bg-warm-250 text-warm-875"].join(" ")}>
             {children}
         </span>
     )

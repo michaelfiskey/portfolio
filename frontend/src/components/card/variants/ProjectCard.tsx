@@ -11,9 +11,12 @@ interface ProjectCategoryCardProps {
     authors?: string[]
     tags?: string[]
 }
-const ProjectCategoryCard = ({ title, description, date, authors, tags, href }: ProjectCategoryCardProps) => {
+const ProjectCard = ({ title, description, date, authors, tags, href }: ProjectCategoryCardProps) => {
+    
+    const PROJECT_ROUTE_DIR = "/projects"
+    
     return (
-        <a href={href}>
+        <a href={ PROJECT_ROUTE_DIR + href}>
             <CardBase size="medium" className="hover:shadow-md hover:cursor-pointer hover:scale-103 transition-all">
                 <CardTitleDateHeader title={title} startDateLabel={date}/>
                 {authors && <CardSubtitle text={authors.map(author => author.trim()).join(",")}/>}
@@ -24,4 +27,4 @@ const ProjectCategoryCard = ({ title, description, date, authors, tags, href }: 
 
     )
 }
-export default ProjectCategoryCard;
+export default ProjectCard;

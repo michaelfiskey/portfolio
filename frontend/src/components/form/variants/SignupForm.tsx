@@ -2,7 +2,7 @@ import FormBase from "../primatives/FormBase";
 import FormField from "../primatives/FormField";
 import FormInput from "../primatives/FormInput";
 import FormSubmitButton from "../primatives/FormSubmitButton"
-import { emailValidationError, nameValidationError, passwordValidationError } from "../../../utilities/validate";
+import { emailValidationError, nameValidationError, passwordCreateValidationError } from "../../../utilities/validate";
 import { Link, useNavigate } from 'react-router'
 import { sendSignupCredentials } from "../../../services/authservice";
 import useFormState from "../hooks/useFormState";
@@ -24,7 +24,7 @@ const SignupForm = () => {
     const firstNameError = nameValidationError(fields.firstName.value);
     const lastNameError  = nameValidationError(fields.lastName.value);
     const emailError     = emailValidationError(fields.email.value);
-    const passwordError  = passwordValidationError(fields.password.value);
+    const passwordError  = passwordCreateValidationError(fields.password.value);
 
     const isFormValid = !firstNameError && !lastNameError && !emailError && !passwordError;
 

@@ -28,7 +28,7 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
                         type="button"
                         onClick={handlePreviousVideo}
                         aria-label="Show previous video"
-                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
+                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-warm-450 text-warm-800 hover:bg-warm-250 transition-colors"
                     >
                         &lt;
                     </button>
@@ -36,14 +36,14 @@ const YoutubeVideoCarousel = ( { title, videoUrls, className }: YoutubeVideoCaro
                         type="button"
                         onClick={handleNextVideo}
                         aria-label="Show next video"
-                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-[#b39879] text-[#6f5134] hover:bg-[#e2d3be] transition-colors"
+                        className="hover:cursor-pointer h-9 w-9 rounded-full border border-warm-450 text-warm-800 hover:bg-warm-250 transition-colors"
                     >
                         &gt;
                     </button>
                 </div>
             </div>
 
-            <div className="aspect-video overflow-hidden rounded-xl border border-[#cab393] bg-[#d5c2a8]">
+            <div className="aspect-video overflow-hidden rounded-xl border border-warm-400 bg-warm-350">
                 <iframe
                     src={`https://www.youtube.com/embed/${currentVideo}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

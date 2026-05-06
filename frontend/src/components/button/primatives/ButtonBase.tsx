@@ -7,9 +7,9 @@ type ButtonBaseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const ButtonBase = ({ children, className = "", ...buttonProps }: ButtonBaseProps) => {
   return (
-    <button
-      {...buttonProps}
-      className={["px-6 py-3 rounded-full text-sm tracking-wide transition-all hover:cursor-pointer hover:scale-103", className ? className : "border border-[#7a5c3e] text-[#7a5c3e] hover:bg-[#e8dfd0]"].join(" ")}
+      <button
+        {...buttonProps}
+        className={["px-6 py-3 rounded-full text-sm tracking-wide transition-all hover:cursor-pointer hover:scale-103", className ? className : "border border-warm-800 text-warm-800 hover:bg-warm-200"].join(" ")}
     >
       {children}
     </button>
