@@ -18,7 +18,7 @@ const ProjectCard = ({ title, description, date, authors, tags, href }: ProjectC
     return (
         <a href={ PROJECT_ROUTE_DIR + href}>
             <CardBase size="medium" className="hover:shadow-md hover:cursor-pointer hover:scale-103 transition-all">
-                <CardTitleDateHeader title={title} startDateLabel={date}/>
+                <CardTitleDateHeader title={title} date={date}/>
                 {authors && <CardSubtitle text={authors.map(author => author.trim()).join(",")}/>}
                 <CardParagraph> { description } </CardParagraph>
                 {tags && <CardTags tags={tags}/>}

@@ -1,5 +1,5 @@
 import CardBase from "../primitives/CardBase";
-import CardTitleDateHeader from "../primitives/CardTitleDateHeader";
+import CardTitleDateRangeHeader from "../primitives/CardTitleDateRangeHeader";
 import Cardsubtitle from "../primitives/CardSubtitle";
 import CardParagraph from "../primitives/CardParagraph";
 import CardTags from "../primitives/CardTags";
@@ -37,7 +37,7 @@ const ExperienceCard = ({ title, startDateLabel, endDateLabel, subtitles, paragr
 
     return (
         <CardBase size="medium">
-            <CardTitleDateHeader title={title} startDateLabel={startDateLabel} endDateLabel={endDateLabel} />
+            <CardTitleDateRangeHeader title={title} startDateLabel={startDateLabel} endDateLabel={endDateLabel} />
             {subtitles && subtitles.length > 0 && subtitles.map((subtitle, index) => (
                 <Cardsubtitle key={`subtitle-${index}`} text={subtitle} />
             ))}
