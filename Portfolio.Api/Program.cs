@@ -21,10 +21,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // setup builder services
 // CORS policy to allow frontend to communicate with API
+var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")?.Split(',')
+    ?? ["http://localhost:5173"];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
@@ -152,9 +155,14 @@ app.UseExceptionHandler(errorApp =>
 });
 
 // add features to app
-app.UseHttpsRedirection();
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+else
+{
     app.UseHsts();
+}
 
 // add extra protection middleware to headers
 app.Use(async (context, next) =>
