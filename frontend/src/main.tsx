@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router'
 import './index.css'
 import App from './App.tsx'
 
+// create refresh
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
