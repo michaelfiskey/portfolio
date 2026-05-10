@@ -29,7 +29,7 @@ const ExperienceCard = ({ title, startDateLabel, endDateLabel, subtitles, paragr
                     <ol> {paragraphs.map(paragraph => <li>{paragraph}</li>)} </ol>
                 )
             }
-            return <ul> {paragraphs.map(paragraph => <li>{paragraph}</li>)} </ul>;
+            return <ul> {paragraphs.map((paragraph, i) => <li key={i}>{paragraph}</li>)} </ul>;
         }
         return paragraphs && paragraphs.length > 0 && paragraphs.map((paragraph, index) => (
         <CardParagraph key={`paragraph-${index}`}>{paragraph}</CardParagraph>));

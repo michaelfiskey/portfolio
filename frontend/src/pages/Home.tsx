@@ -266,8 +266,10 @@ const Home = () => {
                     <h2>{ education.sectionSubtitle }</h2>
                 </div>
                 <VerticalCardContainer>
-                    {education.experienceCards.map(card => 
-                        <ExperienceCard title={card.title}
+                    {education.experienceCards.map((card, i) => 
+                        <ExperienceCard 
+                                        key={i}
+                                        title={card.title}
                                         subtitles={card.subtitles}
                                         startDateLabel={card.startDateLabel}
                                         endDateLabel={card.endDateLabel}
@@ -279,8 +281,10 @@ const Home = () => {
                 </VerticalCardContainer>
                 <h2 className="mt-10 mb-10!">{extraCurriculars.subtitle}</h2>
                 <VerticalCardContainer>
-                    {extraCurriculars.experienceCards.map(card => 
-                        <ExperienceCard title={card.title}
+                    {extraCurriculars.experienceCards.map((card, i) => 
+                        <ExperienceCard 
+                                        key={i}
+                                        title={card.title}
                                         startDateLabel={card.startDateLabel}
                                         endDateLabel={card.endDateLabel}>
                                         

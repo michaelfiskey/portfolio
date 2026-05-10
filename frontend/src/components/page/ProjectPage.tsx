@@ -1,11 +1,11 @@
 import PageContainer from "../container/PageContainer";
 import GridCardContainer from "../container/GridCardContainer";
-import { useNotificationContext } from "../../context/NotificationContext";
-import { useEffect, useState } from "react";
 import ProjectCard from "../card/variants/ProjectCard";
 import PageSection from "../page-section/PageSection";
 import { getProjects } from "../../services/projectservice";
+import { useFetch } from "../../hooks/useFetch";
 import type { Project, ProjectType } from "../../types/project";
+import CardsContentSpinner from "../spinner/CardsContentSpinner";
 
 interface ProjectPageProps {
     pageTitle: string,
@@ -16,17 +16,10 @@ interface ProjectPageProps {
 }
 
 const ProjectPage = ({ pageTitle, pageSubtitle, pageParagraphs, type, children }: ProjectPageProps) => {
-    const { pushNotification } = useNotificationContext();
-    const [projects, setProjects] = useState<Project[]>([]);
-
-    useEffect(() => {
-        getProjects({ type })
-            .then(setProjects)
-            .catch((error: unknown) => {
-                const message = error instanceof Error ? error.message : "An unexpected error occurred.";
-                pushNotification("error", message);
-            });
-    }, [type]);
+    
+    const { data: projects, isLoading, error} = useFetch<Project[]>(
+        () => getProjects({ type })
+    );
 
     return (
         <PageContainer>
@@ -36,8 +29,12 @@ const ProjectPage = ({ pageTitle, pageSubtitle, pageParagraphs, type, children }
                 {pageParagraphs && pageParagraphs.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                 ))}
+                {isLoading && <CardsContentSpinner/>}
+                {error && (<div className="flex items-center justify-center min-h-[60vh]">
+                    <p>{error}</p>
+                </div>)}
                 <GridCardContainer>
-                    {projects.map((project) => (
+                    {projects?.map((project) => (
                         <ProjectCard
                             key={project.id}
                             title={project.title}
