@@ -4,12 +4,12 @@ import { useNotificationContext } from '../context/NotificationContext';
 export function useFetch<T>(fetcher: () => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [rawError, setRawError] = useState<string | null>(null);
   const { pushNotification } = useNotificationContext();
   
   const LOAD_DATA_ERROR_MESSAGE = "There was an error loading data..."
-  
   useEffect(() => {
     let cancelled = false;
 
@@ -19,7 +19,10 @@ export function useFetch<T>(fetcher: () => Promise<T>) {
       setRawError(null);
       try {
         const result = await fetcher();
-        if (!cancelled) setData(result);
+        if (!cancelled) {
+          setData(result);
+          setIsEmpty(Array.isArray(result) ? result.length === 0 : result === null);
+        }
       } catch (err) {
         if (!cancelled) {
           setError(LOAD_DATA_ERROR_MESSAGE);
@@ -38,5 +41,5 @@ export function useFetch<T>(fetcher: () => Promise<T>) {
         if (rawError) pushNotification("error", rawError);
     }, [rawError]);
 
-  return { data, isLoading, error, rawError };
+  return { data, isLoading, isEmpty, error, rawError };
 }

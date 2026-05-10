@@ -17,7 +17,7 @@ interface ProjectPageProps {
 
 const ProjectPage = ({ pageTitle, pageSubtitle, pageParagraphs, type, children }: ProjectPageProps) => {
     
-    const { data: projects, isLoading, error} = useFetch<Project[]>(
+    const { data: projects, isLoading, error, isEmpty} = useFetch<Project[]>(
         () => getProjects({ type })
     );
 
@@ -30,6 +30,9 @@ const ProjectPage = ({ pageTitle, pageSubtitle, pageParagraphs, type, children }
                     <p key={index}>{paragraph}</p>
                 ))}
                 {isLoading && <CardsContentSpinner/>}
+                {isEmpty && (<div className="flex items-center justify-center min-h-[60vh]">
+                    <p>No data to display...</p>
+                </div>)}
                 {error && (<div className="flex items-center justify-center min-h-[60vh]">
                     <p>{error}</p>
                 </div>)}
