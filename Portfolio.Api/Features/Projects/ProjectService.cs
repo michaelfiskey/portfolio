@@ -19,7 +19,7 @@ public class ProjectService : IProjectService
 		_dbContext = dbContext;
 	}
 
-	public async Task<IReadOnlyList<Project>> GetProjectsByTypeAsync(string type)
+	public async Task<IReadOnlyList<ProjectEntity>> GetProjectsByTypeAsync(string type)
 	{
 		var normalizedType = type.Trim();
 

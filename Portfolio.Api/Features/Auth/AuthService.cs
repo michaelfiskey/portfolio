@@ -22,7 +22,7 @@ public class AuthService : IAuthService
         _authSettings = authSettings.Value;
     }
 
-    public async Task<User> LoginAsync(LoginRequest loginRequest)
+    public async Task<UserEntity> LoginAsync(LoginRequest loginRequest)
     {
         var user = await _dbContext.Users
             .Where(u => u.Email == loginRequest.Email)
@@ -39,12 +39,12 @@ public class AuthService : IAuthService
         return user;
     }
 
-    public async Task<User> SignupAsync(SignupRequest signupRequest)
+    public async Task<UserEntity> SignupAsync(SignupRequest signupRequest)
     {
         byte[] salt;
         string passwordHash = _passwordHasher.HashPassword(signupRequest.Password, out salt);
 
-        var user = new User
+        var user = new UserEntity
         {
             FirstName = signupRequest.FirstName,
             LastName = signupRequest.LastName,
@@ -54,7 +54,7 @@ public class AuthService : IAuthService
             Role = "user"
         };
 
-        User? checkUser = await _dbContext.Users
+        UserEntity? checkUser = await _dbContext.Users
             .Where(u => u.Email == signupRequest.Email)
             .FirstOrDefaultAsync();
 
@@ -66,7 +66,7 @@ public class AuthService : IAuthService
         return user;
     }
 
-    public async Task<(string accessToken, string refreshToken)> IssueTokensAsync(User user)
+    public async Task<(string accessToken, string refreshToken)> IssueTokensAsync(UserEntity user)
     {
         var accessToken = GenerateAccessToken(user);
         var (rawRefreshToken, hashedRefreshToken) = GenerateRefreshToken();
@@ -112,7 +112,7 @@ public class AuthService : IAuthService
         }
     }
 
-    private string GenerateAccessToken(User user)
+    private string GenerateAccessToken(UserEntity user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authSettings.JwtSecret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

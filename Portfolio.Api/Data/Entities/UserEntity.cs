@@ -1,10 +1,8 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace Portfolio.Api.Data
 {
-    public class User : BaseEntity
+    public class UserEntity : BaseEntity
     {
         [Required]
         public string FirstName { get; set; } = string.Empty;
