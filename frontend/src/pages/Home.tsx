@@ -23,7 +23,7 @@ const Home = () => {
         subtitle: <>Building front to back <br />solutions.</>,
     }
 
-    const about = {
+    const aboutMe = {
         sectionTitle: "About Me",
         name: "Michael Fiskey (M.S.)",
         paragraphs: [
@@ -41,6 +41,54 @@ const Home = () => {
             "TailwindCSS", "Python", "Flask", "Sklearn",
             "Pytorch", "Scapy", "Docker",
         ]
+    }
+
+    const aboutWebsite = {
+        sectionTitle : "About The Website",
+        paragraphs : [
+            "This portfolio is a production-grade fullstack application I built with React (TypeScript), C# .NET, and PostgreSQL. "
+            + "It features JWT authentication, a rate-limited REST API, email delivery via Resend, and Docker-based deployment. " 
+            + "I built it both as a learning project and as a living demonstration of the technologies I work with day-to-day.",
+            "The website also functions as an interactive resume. Feel free to look around!"
+        ]
+    }
+
+    const professionalExperience = {
+        sectionTitle: "Relevant Professional Experience",
+        sectionSubtitle: "Where I've Worked",
+        waveReaction: {
+            title: "Wave Reaction",
+            startDateLabel: "January 2026",
+            endDateLabel: "Present",
+            roleDetails: [
+                <><i>Software Engineer</i> • Internship | May 2026 - Present</>,
+                <><i>Quality Assurance Engineer</i> • Part-Time | January 2026 - May 2026</>,
+                <ul>
+                    <li>Performed manual testing across tech stack: React/React Native, Flutter, .NET Core/.NET Framework, SQL Server.</li>
+                    <li>Designed and executed test cases for new features and performed regression testing.</li>
+                    <li>Identified, documented, and tracked bugs through resolution.</li>
+                    <li>Collaborated with engineering on automated testing initiatives with Playwright.</li>
+                </ul>
+            ],
+            tagTitle: "Skills",
+            tags: ["Playwright Testing", "Manual QA Testing"]
+        },
+        slCompanies: {
+            title: "S&L Companies",
+            subtitles: ["Data Analyst • Full-Time"],
+            startDateLabel: "January 2025",
+            endDateLabel: "January 2026",
+            paragraphs: [
+                "Created interactive dashboards with choropleth and scatter plot maps using real-time U.S. Census and Google Maps APIs data (Python, Pandas, GeoPandas, Dash).",
+                "Optimized coupon delivery routes for more than 115 restaurants (Python, Pandas, GeoPandas, QGIS).",
+                "Performed sales forecasting with seasonal and location-specific trends (Prophet).",
+                "Built a pipeline to process over 5,000 weekly customer and employee reviews, linking insights to a 7,000-person workforce database (Python).",
+                "Leveraged enterprise-level databases to build tailored reporting solutions for operational decision-making (SQL, Sigma Computing)."
+            ],
+            tagTitle: "Skills",
+            tags: ["Python", "Excel", "Pandas", "GeoPandas", "QGIS", "SQL", "Sigma Computing", "Machine Learning", "Market Analysis"],
+            listBool: [true, false] as [boolean, boolean]
+        }
     }
 
     const education = {
@@ -158,38 +206,6 @@ const Home = () => {
         ]   
     }
 
-    const professionalExperience = {
-        sectionTitle: "Relevant Professional Experience",
-        sectionSubtitle: "Where I've Worked",
-        waveReaction: {
-            title: "Wave Reaction",
-            startDateLabel: "January 2026",
-            endDateLabel: "Present",
-            roleDetails: [
-                <><i>Software Engineer Intern</i> | May 2026 - August 2026</>,
-                <><i>Quality Assurance Engineer</i> | May 2026 - August 2026</>
-            ],
-            tagTitle: "Skills",
-            tags: ["Playwright Testing", "Manual QA Testing"]
-        },
-        slCompanies: {
-            title: "S&L Companies",
-            subtitles: ["Data Analyst"],
-            startDateLabel: "January 2025",
-            endDateLabel: "December 2025",
-            paragraphs: [
-                "Created interactive dashboards with choropleth and scatter plot maps using real-time U.S. Census and Google Maps APIs data (Python, Pandas, GeoPandas, Dash).",
-                "Optimized coupon delivery routes for more than 115 restaurants (Python, Pandas, GeoPandas, QGIS).",
-                "Performed sales forecasting with seasonal and location-specific trends (Prophet).",
-                "Built a pipeline to process over 5,000 weekly customer and employee reviews, linking insights to a 7,000-person workforce database (Python).",
-                "Leveraged enterprise-level databases to build tailored reporting solutions for operational decision-making (SQL, Sigma Computing)."
-            ],
-            tagTitle: "Skills",
-            tags: ["Python", "Excel", "Pandas", "GeoPandas", "QGIS", "SQL", "Sigma Computing", "Machine Learning", "Market Analysis"],
-            listBool: [true, false] as [boolean, boolean]
-        }
-    }
-
     const projectCategories = {
         sectionTitle: "Personal Projects",
         sectionSubtitle: "Project Categories",
@@ -208,16 +224,17 @@ const Home = () => {
                 href: "ai-ml",
                 tags: [ "Python", "Pytorch", "Sklearn" ]
             },
+            /*
             {
                 title: "Cybersecurity Projects",
                 paragraphs: ["Hands-on security work built around real attack and defense scenarios using Docker-based environments."],
                 href: "/cs",
                 tags: [ "Python", "Docker", "Scapy" ]
             }
+            */
         ]
     }
 
-    
     const profilePhotoSection = 
         <div className="relative min-h-120 lg:min-h-full">
             <div className="absolute inset-x-0 top-0 h-40 " />
@@ -243,24 +260,59 @@ const Home = () => {
                         <LinkButton href="/#contact">Get In Touch</LinkButton>
                         <LinkButton href="https://docs.google.com/document/d/1YkH3DPY-C7cLWiCbPGgnZUkPgUM4-wF6hh0B6oxeImo/edit?usp=sharing" openInNewTab={true} >Download Resume</LinkButton>
                     </ButtonContainer>
-                    <h1>{about.sectionTitle}</h1>
+                    <h1>{aboutMe.sectionTitle}</h1>
                     {isMobile && profilePhotoSection}
-                    <h2>{about.name}</h2>
-                    {about.paragraphs.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
+                    <h2>{aboutMe.name}</h2>
+                    {aboutMe.paragraphs.map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
                     ))}
                     <GridCardContainer>
-                        {about.cards.map((card) => (
-                            <SubCard key={card.title} title={card.title} paragraphs={card.paragraphs} />
+                        {aboutMe.cards.map((card, i) => (
+                            <SubCard key={i} title={card.title} paragraphs={card.paragraphs} />
                         ))}
                     </GridCardContainer>
                     <TagContainer className="mt-4">
-                        {about.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                        {aboutMe.tags.map((tag, i) => <Tag key={i}>{tag}</Tag>)}
                     </TagContainer>
                 </div>
                 {!isMobile && profilePhotoSection}
             </GridPageSection>
-            <PageSection id="education" className="bg-warm-150!">
+            <PageSection id="about-website" className="bg-warm-250!  drop-shadow-xl relative">
+                <div className="shadow-2x">
+                    <h1>{aboutWebsite.sectionTitle}</h1>
+                    {aboutWebsite.paragraphs.map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
+                    ))}
+                </div>
+            </PageSection>
+            <PageSection id="experience">
+                <div className="mb-10">
+                    <h1>{professionalExperience.sectionTitle}</h1>
+                    <h2>{professionalExperience.sectionSubtitle}</h2>
+                </div>
+                <VerticalCardContainer>
+                    <ExperienceCard title={professionalExperience.waveReaction.title}
+                                startDateLabel={professionalExperience.waveReaction.startDateLabel}
+                                endDateLabel={professionalExperience.waveReaction.endDateLabel}
+                                tagTitle={professionalExperience.waveReaction.tagTitle}
+                                tags={professionalExperience.waveReaction.tags}
+                    >
+                        {professionalExperience.waveReaction.roleDetails.map((role, i) => (
+                            <p key={i}>{role}</p>
+                        ))}
+                    </ExperienceCard>
+                    <ExperienceCard title={professionalExperience.slCompanies.title}
+                                    subtitles={professionalExperience.slCompanies.subtitles}
+                                    startDateLabel={professionalExperience.slCompanies.startDateLabel}
+                                    endDateLabel={professionalExperience.slCompanies.endDateLabel}
+                                    paragraphs={professionalExperience.slCompanies.paragraphs}
+                                    tagTitle={professionalExperience.slCompanies.tagTitle}
+                                    tags={professionalExperience.slCompanies.tags}
+                                    listBool={professionalExperience.slCompanies.listBool}
+                    />
+                </VerticalCardContainer>
+            </PageSection>
+            <PageSection id="education">
                 <div className="mb-10">
                     <h1>{ education.sectionTitle }</h1>
                     <h2>{ education.sectionSubtitle }</h2>
@@ -293,39 +345,12 @@ const Home = () => {
                     }
                 </VerticalCardContainer>
             </PageSection>
-            <PageSection id="experience" className="bg-warm-200">
-                <div className="mb-10">
-                    <h1>{professionalExperience.sectionTitle}</h1>
-                    <h2>{professionalExperience.sectionSubtitle}</h2>
-                </div>
-                <VerticalCardContainer>
-                    <ExperienceCard title={professionalExperience.waveReaction.title}
-                                startDateLabel={professionalExperience.waveReaction.startDateLabel}
-                                endDateLabel={professionalExperience.waveReaction.endDateLabel}
-                                tagTitle={professionalExperience.waveReaction.tagTitle}
-                                tags={professionalExperience.waveReaction.tags}
-                    >
-                        {professionalExperience.waveReaction.roleDetails.map((role, index) => (
-                            <p key={`wave-reaction-role-${index}`}>{role}</p>
-                        ))}
-                    </ExperienceCard>
-                    <ExperienceCard title={professionalExperience.slCompanies.title}
-                                    subtitles={professionalExperience.slCompanies.subtitles}
-                                    startDateLabel={professionalExperience.slCompanies.startDateLabel}
-                                    endDateLabel={professionalExperience.slCompanies.endDateLabel}
-                                    paragraphs={professionalExperience.slCompanies.paragraphs}
-                                    tagTitle={professionalExperience.slCompanies.tagTitle}
-                                    tags={professionalExperience.slCompanies.tags}
-                                    listBool={professionalExperience.slCompanies.listBool}
-                    />
-                </VerticalCardContainer>
-            </PageSection>
             <PageSection id="projects">
                 <h1>{projectCategories.sectionTitle}</h1>
                 <h2 className="pb-10">{projectCategories.sectionSubtitle}</h2>
                 <GridCardContainer>
-                    {projectCategories.cards.map((card) => (
-                        <ProjectCategoryCard key={card.title}
+                    {projectCategories.cards.map((card, i) => (
+                        <ProjectCategoryCard key={i}
                                     title={card.title}
                                     paragraphs={card.paragraphs}
                                     tags={card.tags}
