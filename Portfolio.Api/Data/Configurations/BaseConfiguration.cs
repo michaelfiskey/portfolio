@@ -9,10 +9,12 @@ public abstract class BaseConfiguration<T> : IEntityTypeConfiguration<T>
     public virtual void Configure(EntityTypeBuilder<T> builder)
     {
         builder.Property(e => e.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("gen_random_uuid()")
+            .ValueGeneratedOnAdd();
             
         builder.Property(e => e.CreatedAtUtc)
-            .HasDefaultValueSql("now()");
+            .HasDefaultValueSql("now()")
+            .ValueGeneratedOnAdd();
         
     }
 }
