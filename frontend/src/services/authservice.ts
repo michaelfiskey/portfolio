@@ -1,5 +1,7 @@
 import axios from "axios";
 import api from "./api";
+import { API_ROUTES } from "../constants/routes";
+import { ERRORS } from "../constants/errors";
 
 interface SendSignupParams {
     firstName: string;
@@ -20,33 +22,33 @@ export async function sendSignupCredentials({
     password,
 }: SendSignupParams): Promise<string> {
     try {
-        const res = await api.post("/auth/signup", { firstName, lastName, email, password });
+        const res = await api.post(API_ROUTES.AUTH.SIGNUP, { firstName, lastName, email, password });
         return res.data.accessToken;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            const message = error.response?.data?.message ?? error.message ?? "There was an error signing up.";
+            const message = error.response?.data?.message ?? error.message ?? ERRORS.AUTH.SIGNUP;
             throw new Error(message);
         }
-        throw new Error("An unexpected error occurred.");
+        throw new Error(ERRORS.UNEXPECTED);
     }
 }
 
 export async function sendLoginCredentials({ email, password }: SendLoginParams): Promise<string> {
     try {
-        const res = await api.post("/auth/login", { email, password });
+        const res = await api.post(API_ROUTES.AUTH.LOGIN, { email, password });
         return res.data.accessToken;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            const message = error.response?.data?.message ?? error.message ?? "There was an error logging in.";
+            const message = error.response?.data?.message ?? error.message ?? ERRORS.AUTH.LOGIN;
             throw new Error(message);
         }
-        throw new Error("An unexpected error occurred.");
+        throw new Error(ERRORS.UNEXPECTED);
     }
 }
 
 export async function sendRefresh(): Promise<string> {
     const res = await axios.post(
-        import.meta.env.VITE_API_URL + "/auth/refresh",
+        import.meta.env.VITE_API_URL + API_ROUTES.AUTH.REFRESH,
         {},
         { withCredentials: true }
     );
@@ -54,5 +56,5 @@ export async function sendRefresh(): Promise<string> {
 }
 
 export async function sendLogout(): Promise<void> {
-    await api.post("/auth/logout");
+    await api.post(API_ROUTES.AUTH.LOGOUT);
 }

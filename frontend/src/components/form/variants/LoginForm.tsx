@@ -8,7 +8,7 @@ import useFormState from "../hooks/useFormState";
 import { sendLoginCredentials } from "../../../services/authservice";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import { useAuthContext } from "../../../context/AuthContext";
-
+import { ERRORS } from "../../../constants/errors";
 const LoginForm = () => {
     const navigate = useNavigate();
     const { pushNotification } = useNotificationContext();
@@ -37,7 +37,7 @@ const LoginForm = () => {
             pushNotification("success", "You have been successfully logged in!");
             navigate('/');
 		}).catch((error: unknown) => {
-			const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+			const message = error instanceof Error ? error.message : ERRORS.UNEXPECTED;
 			pushNotification("error", message);
 		});
     };

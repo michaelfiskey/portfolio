@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { useAuthContext } from '../context/AuthContext';
-
+import { ROUTES } from "../constants/routes";
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const { isLoggedIn, logout } = useAuthContext();
@@ -21,12 +21,12 @@ const Navbar = () => {
                 <Link to={{pathname: '/'}} className='font-[Marcellus] text-warm-925 text-lg tracking-wide whitespace-nowrap'>Michael Fiskey</Link>
                 <div className='lg:flex lg:items-center lg:flex-1 lg:ml-10'>
                     <div className='px-10 flex flex-wrap justify-center gap-x-6 gap-y-2 lg:flex-nowrap lg:gap-5 lg:items-center lg:flex-1 lg:ml-10 text-sm text-warm-800 tracking-wide'>
-                        <Link to={{ pathname: "/", hash: "#about"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">About</Link>
-                        <Link to={{ pathname: "/", hash: "#experience"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Experience</Link>
-                        <Link to={{ pathname: "/", hash: "#education"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Education</Link>
-                        <Link to={{ pathname: "/", hash: "#projects"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Projects</Link>
-                        <Link to={{ pathname: "/", hash: "#contact"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Contact</Link>
-                        {!isLoggedIn && <Link to={{ pathname: "/login"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Login</Link>}
+                        <Link to={{ pathname: ROUTES.ROOT, hash: "#about"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">About</Link>
+                        <Link to={{ pathname: ROUTES.ROOT, hash: "#experience"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Experience</Link>
+                        <Link to={{ pathname: ROUTES.ROOT, hash: "#education"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Education</Link>
+                        <Link to={{ pathname: ROUTES.ROOT, hash: "#projects"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Projects</Link>
+                        <Link to={{ pathname: ROUTES.ROOT, hash: "#contact"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Contact</Link>
+                        {!isLoggedIn && <Link to={{ pathname: ROUTES.AUTH.LOGIN_PATH}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Login</Link>}
                         {isLoggedIn && (
                             <button
                                 onClick={logout}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getAccessToken, setAccessToken } from "../auth/authToken";
-
+import { API_ROUTES } from "../constants/routes";
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
@@ -32,7 +32,7 @@ api.interceptors.response.use(
             isRefreshing = true;
             try {
                 const res = await axios.post(
-                    import.meta.env.VITE_API_URL + "/auth/refresh",
+                    import.meta.env.VITE_API_URL + API_ROUTES.AUTH.REFRESH,
                     {},
                     { withCredentials: true }
                 );

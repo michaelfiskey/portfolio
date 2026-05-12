@@ -9,7 +9,8 @@ import AIML from "./pages/AIML"
 import useScrollToSection from './hooks/useScrollToSection'
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
-
+import DigitIdentifier from "./pages/project-pages/DigitIdentifier"
+import { ROUTES } from "./constants/routes";
 function App() {
 
     useScrollToSection()
@@ -21,11 +22,25 @@ function App() {
                     <NotificationToast/>
                     <Navbar/>
                     <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/swe" element={<SoftwareEngineering/>}/>
-                        <Route path="/ai-ml" element={<AIML/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/signup" element={<Signup/>}/>
+                        {/* NAVBAR ROUTES*/}
+                        <Route path={ROUTES.HOME} element={<Home/>}/>
+                        
+                        <Route path={ROUTES.AUTH.ROOT}>
+                            <Route path={ROUTES.AUTH.LOGIN} element={<Login/>}/>
+                            <Route path={ROUTES.AUTH.SIGNUP} element={<Signup/>}/>
+                        </Route>
+
+                        {/* PROJECT CATEGORY ROUTES */}
+                        <Route path={ROUTES.PROJECTS.CATEGORIES.ROOT}>
+                            <Route path={ROUTES.PROJECTS.CATEGORIES.SWE} element={<SoftwareEngineering/>}/>
+                            <Route path={ROUTES.PROJECTS.CATEGORIES.AI_ML} element={<AIML/>}/>
+                        </Route>
+                        
+                        {/* PROJECT ROUTES */}
+                        <Route path={ROUTES.PROJECTS.ROOT}>
+                            <Route path={ROUTES.PROJECTS.DIGIT_IDENTIFIER} element={<DigitIdentifier/>}/>
+                        </Route>
+                    
                     </Routes>
                 </div>
                 </AuthProvider>

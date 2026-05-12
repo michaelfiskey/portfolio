@@ -4,16 +4,17 @@ import LoginForm from "../components/form/variants/LoginForm";
 import PageSection from "../components/page-section/PageSection";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { useNotificationContext } from "../context/NotificationContext";
+import { NOTIFICATION_MESSAGES } from "../constants/notificationMessages";
 
 const Login = () => {
     const { pushNotification } = useNotificationContext();
     
     useEffect(() => {
         if (!localStorage.getItem(STORAGE_KEYS.HAS_VISITED_LOGIN)) {
-            pushNotification("note", "You do not need to login to view projects.")
-            localStorage.setItem(STORAGE_KEYS.HAS_VISITED_LOGIN, "true")
+            pushNotification("note", NOTIFICATION_MESSAGES.VIEW_PROJECTS);
+            localStorage.setItem(STORAGE_KEYS.HAS_VISITED_LOGIN, "true");
         }
-    }, [])
+    }, []);
     
     return (
         <PageContainer>

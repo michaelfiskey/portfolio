@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNotificationContext } from '../context/NotificationContext';
+import { ERRORS } from "../constants/errors";
 
 export function useFetch<T>(fetcher: () => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
@@ -9,7 +10,7 @@ export function useFetch<T>(fetcher: () => Promise<T>) {
   const [rawError, setRawError] = useState<string | null>(null);
   const { pushNotification } = useNotificationContext();
   
-  const LOAD_DATA_ERROR_MESSAGE = "There was an error loading data..."
+  const LOAD_DATA_ERROR_MESSAGE = ERRORS.LOAD_DATA;
   useEffect(() => {
     let cancelled = false;
 

@@ -8,7 +8,7 @@ import { sendSignupCredentials } from "../../../services/authservice";
 import useFormState from "../hooks/useFormState";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import { useAuthContext } from "../../../context/AuthContext";
-
+import { ERRORS } from "../../../constants/errors";
 const SignupForm = () => {
     const navigate = useNavigate();
     const { pushNotification } = useNotificationContext();
@@ -43,7 +43,7 @@ const SignupForm = () => {
 			pushNotification("success", "You have successfully signed up!");
             navigate('/');
 		}).catch((error: unknown) => {
-			const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+			const message = error instanceof Error ? error.message : ERRORS.UNEXPECTED;
 			pushNotification("error", message);
 		});
     };

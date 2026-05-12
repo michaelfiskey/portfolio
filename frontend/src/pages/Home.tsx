@@ -14,6 +14,7 @@ import { useIsMobile } from '../hooks/useIsMobile';
 import YoutubeVideoCarousel from "../components/YoutubeVideoCarousel";
 import ProjectCategoryCard from "../components/card/variants/ProjectCategoryCard";
 import ContactForm from "../components/form/variants/ContactForm";
+import { ROUTES } from "../constants/routes";
 
 const Home = () => {
     const isMobile = useIsMobile(1024)
@@ -213,7 +214,7 @@ const Home = () => {
             {
                 title: "Software Engineering Projects",
                 paragraphs: ["Projects span full-stack development and algorithmic problem solving."],
-                href: "swe",
+                href: ROUTES.PROJECTS.CATEGORIES.SWE_PATH,
                 tags: [ "C#", ".NET", "PostgreSQL", "AWS",
                         "TypeScript", "React", "Node.js", "HTML",
                         "TailwindCSS", "Python", "Flask" ]
@@ -221,14 +222,14 @@ const Home = () => {
             {
                 title: "Artificial Intelligence & Machine Learning Projects",
                 paragraphs: ["Neural networks, optimizers, and algorithms, built with and without high-level libraries, and applied work using industry tools."],
-                href: "ai-ml",
+                href: ROUTES.PROJECTS.CATEGORIES.AI_ML_PATH,
                 tags: [ "Python", "Pytorch", "Sklearn" ]
             },
             /*
             {
                 title: "Cybersecurity Projects",
                 paragraphs: ["Hands-on security work built around real attack and defense scenarios using Docker-based environments."],
-                href: "/cs",
+                href: ROUTES.PROJECTS.CATEGORIES.CS_PATH,
                 tags: [ "Python", "Docker", "Scapy" ]
             }
             */
@@ -256,8 +257,8 @@ const Home = () => {
                     <h1>{hero.title}</h1>
                     <h2>{hero.subtitle}</h2>
                     <ButtonContainer className="mt-4">
-                        <LinkButton href="/#projects" className="bg-warm-800 text-warm-100 hover:bg-warm-875">View Projects</LinkButton>
-                        <LinkButton href="/#contact">Get In Touch</LinkButton>
+                        <LinkButton href= {ROUTES.HOME + "#projects"} className="bg-warm-800 text-warm-100 hover:bg-warm-875">View Projects</LinkButton>
+                        <LinkButton href= {ROUTES.HOME + "#contact"}>Get In Touch</LinkButton>
                         <LinkButton href="https://docs.google.com/document/d/1YkH3DPY-C7cLWiCbPGgnZUkPgUM4-wF6hh0B6oxeImo/edit?usp=sharing" openInNewTab={true} >Download Resume</LinkButton>
                     </ButtonContainer>
                     <h1>{aboutMe.sectionTitle}</h1>
@@ -298,7 +299,7 @@ const Home = () => {
                                 tags={professionalExperience.waveReaction.tags}
                     >
                         {professionalExperience.waveReaction.roleDetails.map((role, i) => (
-                            <p key={i}>{role}</p>
+                            <div key={i}>{role}</div>
                         ))}
                     </ExperienceCard>
                     <ExperienceCard title={professionalExperience.slCompanies.title}

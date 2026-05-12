@@ -7,7 +7,7 @@ import FormTextArea from "../primatives/FormTextArea";
 import { sendEmail } from "../../../services/emailservice";
 import { emailValidationError, messageValidationError, nameValidationError } from "../../../utilities/validate";
 import useFormState from "../hooks/useFormState";
-
+import { ERRORS } from "../../../constants/errors";
 const ContactForm = () => {
 	const { pushNotification } = useNotificationContext();
 
@@ -44,7 +44,7 @@ const ContactForm = () => {
 			clearFields();
 			pushNotification("success", "Thanks! Your message has been submitted.");
 		}).catch((error: unknown) => {
-			const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+			const message = error instanceof Error ? error.message : ERRORS.UNEXPECTED;
 			pushNotification("error", message);
 		});
 	};

@@ -3,6 +3,7 @@ import CardParagraph from "../primitives/CardParagraph";
 import CardSubtitle from "../primitives/CardSubtitle";
 import CardTags from "../primitives/CardTags";
 import CardTitleDateHeader from "../primitives/CardTitleDateHeader";
+import { ROUTES } from "../../../constants/routes";
 interface ProjectCategoryCardProps {
     title: string,
     description: string
@@ -13,10 +14,8 @@ interface ProjectCategoryCardProps {
 }
 const ProjectCard = ({ title, description, date, authors, tags, href }: ProjectCategoryCardProps) => {
     
-    const PROJECT_ROUTE_DIR = "/projects"
-    
     return (
-        <a href={ PROJECT_ROUTE_DIR + href}>
+        <a href={ ROUTES.PROJECTS.ROOT + href}>
             <CardBase size="medium" className="hover:shadow-md hover:cursor-pointer hover:scale-103 transition-all">
                 <CardTitleDateHeader title={title} date={date}/>
                 {authors && <CardSubtitle text={authors.map(author => author.trim()).join(",")}/>}

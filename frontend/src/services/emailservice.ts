@@ -1,5 +1,6 @@
 	import axios from "axios";
-
+	import { API_ROUTES } from "../constants/routes";
+	import { ERRORS } from "../constants/errors";
 	interface SendEmailParams {
 		firstName: string;
 		lastName: string;
@@ -18,7 +19,7 @@
 		message,
 	}: SendEmailParams): Promise<void> {
 		try{
-			await axios.post(import.meta.env.VITE_API_URL + "/email/send", {
+			await axios.post(import.meta.env.VITE_API_URL + API_ROUTES.EMAIL.SEND, {
 			firstName,
 			lastName,
 			fromEmail,
@@ -28,10 +29,9 @@
 		});
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
-				const message = error.response?.data?.message ?? error.message ?? "There was an error retrieving projects.";
+				const message = error.response?.data?.message ?? error.message ?? ERRORS.EMAIL.SEND;
 				throw new Error(message);
 			}
-			throw new Error("An unexpected error occurred.");
+			throw new Error(ERRORS.UNEXPECTED);
     	}	
-
 	}
