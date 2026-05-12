@@ -22,8 +22,8 @@ const Navbar = () => {
                 <div className='lg:flex lg:items-center lg:flex-1 lg:ml-10'>
                     <div className='px-10 flex flex-wrap justify-center gap-x-6 gap-y-2 lg:flex-nowrap lg:gap-5 lg:items-center lg:flex-1 lg:ml-10 text-sm text-warm-800 tracking-wide'>
                         <Link to={{ pathname: "/", hash: "#about"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">About</Link>
-                        <Link to={{ pathname: "/", hash: "#education"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Education</Link>
                         <Link to={{ pathname: "/", hash: "#experience"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Experience</Link>
+                        <Link to={{ pathname: "/", hash: "#education"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Education</Link>
                         <Link to={{ pathname: "/", hash: "#projects"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Projects</Link>
                         <Link to={{ pathname: "/", hash: "#contact"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Contact</Link>
                         {!isLoggedIn && <Link to={{ pathname: "/login"}} className="hover:text-warm-900 transition-colors hover:scale-105 hover:transition-all">Login</Link>}

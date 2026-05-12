@@ -148,8 +148,8 @@ const Home = () => {
                 endDateLabel: "May 2025",
                 children:
                     <>
-                        <YoutubeVideoCarousel title="Featured Performances" videoUrls={["iCp4ryRWzTw", "sCU89QiFB-I", "urRxNOyNroU"]} className="rounded-2xl border border-warm-350 bg-warm-50 p-5 mb-5"/>
-                            <div className="rounded-2xl border border-warm-350 bg-warm-50 p-5">
+                        <YoutubeVideoCarousel title="Featured Performances" videoUrls={["iCp4ryRWzTw", "sCU89QiFB-I", "urRxNOyNroU"]} className="rounded-2xl border border-warm-350 bg-warm-50 md:p-5 p-2 mb-5"/>
+                            <div className="rounded-2xl border border-warm-350 bg-warm-50 md:p-5 p-2">
                                 <h3 className="text-sm uppercase tracking-[0.2em] text-warm-700 mb-3">Leadership Highlights</h3>
                                 <VerticalCardContainer>
                                     <ExperienceCard title="Social Media Manager" 

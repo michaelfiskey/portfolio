@@ -6,7 +6,7 @@ interface PageSectionProps {
 
 const PageSection = ({ id, className, children }: PageSectionProps) => {
     return (
-        <section id={id} className={["py-24 px-10 md:px-34 bg-warm-150", className ? className : ""].join(" ")}>
+        <section id={id} className={["py-14 px-5 md:px-34 bg-warm-150", className ? className : ""].join(" ")}>
                 {children}
         </section>
     )

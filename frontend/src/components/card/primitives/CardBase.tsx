@@ -11,7 +11,7 @@ function CardBase({ className, size, children }: CardBaseProps) {
             sizeString = "py-2 px-3"
             break
         case "medium":
-            sizeString = "p-6 md:p-7"
+            sizeString = "p-3 md:p-7"
             break
     }
     return (
