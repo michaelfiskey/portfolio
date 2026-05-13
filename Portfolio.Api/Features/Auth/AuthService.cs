@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Portfolio.Api.Constants;
 
 namespace Portfolio.Api.Features.Auth;
 
@@ -29,12 +30,12 @@ public class AuthService : IAuthService
             .FirstOrDefaultAsync();
 
         if (user == null)
-            throw new InvalidOperationException("User not found.");
+            throw new InvalidOperationException(ErrorConstants.Auth.UserNotFound);
 
         string passwordHash = _passwordHasher.HashPassword(loginRequest.Password, user.PasswordSalt);
 
         if (user.PasswordHash != passwordHash)
-            throw new InvalidOperationException("Invalid password.");
+            throw new InvalidOperationException(ErrorConstants.Auth.InvalidPassword);
 
         return user;
     }
@@ -51,7 +52,7 @@ public class AuthService : IAuthService
             Email = signupRequest.Email,
             PasswordHash = passwordHash,
             PasswordSalt = salt,
-            Role = "user"
+            Role = AuthConstants.Roles.User
         };
 
         UserEntity? checkUser = await _dbContext.Users
@@ -59,7 +60,7 @@ public class AuthService : IAuthService
             .FirstOrDefaultAsync();
 
         if (checkUser != null)
-            throw new InvalidOperationException("This user already exists!");
+            throw new InvalidOperationException(ErrorConstants.Auth.UserExists);
 
         _dbContext.Users.Add(user);
         await _dbContext.SaveChangesAsync();
@@ -87,7 +88,7 @@ public class AuthService : IAuthService
             .FirstOrDefaultAsync();
 
         if (user == null)
-            throw new InvalidOperationException("Invalid or expired refresh token.");
+            throw new InvalidOperationException(ErrorConstants.Auth.InvalidExpiredToken);
 
         var (newRawToken, newHashedToken) = GenerateRefreshToken();
         user.RefreshTokenHash = newHashedToken;
@@ -121,7 +122,7 @@ public class AuthService : IAuthService
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("role", user.Role),
+            new Claim(AuthConstants.Claims.Role, user.Role),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 

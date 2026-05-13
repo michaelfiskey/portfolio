@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Portfolio.Api.Constants;
 
 namespace Portfolio.Api.Features.Auth;
 
@@ -26,13 +27,13 @@ public class AuthController : ControllerBase
             SetRefreshTokenCookie(refreshToken);
             return Ok(new { accessToken });
         }
-        catch (InvalidOperationException)
+        catch (InvalidOperationException err)
         {
-            return Unauthorized(new { message = "Invalid email or password." });
+            return Unauthorized(new { message = err.Message ?? ErrorConstants.Auth.InvalidEmailPassword });
         }
         catch
         {
-            return StatusCode(500, "An unexpected error occurred.");
+            return StatusCode(500, ErrorConstants.Unexpected);
         }
     }
 
@@ -48,7 +49,7 @@ public class AuthController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return BadRequest(new { message = ex.Message});
         }
         catch (ArgumentException ex)
         {
@@ -56,7 +57,7 @@ public class AuthController : ControllerBase
         }
         catch
         {
-            return StatusCode(500, "An unexpected error occurred.");
+            return StatusCode(500, ErrorConstants.Unexpected);
         }
     }
 
@@ -65,7 +66,7 @@ public class AuthController : ControllerBase
     {
         var refreshToken = Request.Cookies[_authSettings.CookieName];
         if (refreshToken == null)
-            return Unauthorized(new { message = "No refresh token." });
+            return Unauthorized(new { message = ErrorConstants.Auth.NoToken});
 
         try
         {
@@ -75,11 +76,11 @@ public class AuthController : ControllerBase
         }
         catch (InvalidOperationException)
         {
-            return Unauthorized(new { message = "Invalid or expired refresh token." });
+            return Unauthorized(new { message = ErrorConstants.Auth.InvalidExpiredToken});
         }
         catch
         {
-            return StatusCode(500, "An unexpected error occurred.");
+            return StatusCode(500, ErrorConstants.Unexpected);
         }
     }
 
