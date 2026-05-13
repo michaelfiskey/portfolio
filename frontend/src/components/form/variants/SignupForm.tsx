@@ -9,6 +9,8 @@ import useFormState from "../hooks/useFormState";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import { useAuthContext } from "../../../context/AuthContext";
 import { ERRORS } from "../../../constants/errors";
+import { ROUTES } from "../../../constants/routes";
+import { NOTIFICATION_MESSAGES } from "../../../constants/notificationMessages";
 const SignupForm = () => {
     const navigate = useNavigate();
     const { pushNotification } = useNotificationContext();
@@ -40,8 +42,8 @@ const SignupForm = () => {
             password:  fields.password.value,
 		}).then((token) => {
             login(token);
-			pushNotification("success", "You have successfully signed up!");
-            navigate('/');
+			pushNotification("success", NOTIFICATION_MESSAGES.SIGNUP.SUCCESS);
+            navigate(ROUTES.HOME);
 		}).catch((error: unknown) => {
 			const message = error instanceof Error ? error.message : ERRORS.UNEXPECTED;
 			pushNotification("error", message);
@@ -92,7 +94,7 @@ const SignupForm = () => {
                         isInvalid={Boolean(fields.password.isTouched && passwordError)}
                     />
                 </FormField>
-                <p className="text-warm-50! text-center p-0!">Already have an account? <br/><Link to={{pathname: "/login"}}><u>Login here!</u></Link></p>
+                <p className="text-warm-50! text-center p-0!">Already have an account? <br/><Link to={{pathname: ROUTES.AUTH.LOGIN_PATH }}><u>Login here!</u></Link></p>
                 <FormSubmitButton disabled={!isFormValid}>Signup</FormSubmitButton>
             </div>
         </FormBase>

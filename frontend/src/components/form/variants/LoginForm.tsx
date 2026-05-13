@@ -9,6 +9,8 @@ import { sendLoginCredentials } from "../../../services/authservice";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import { useAuthContext } from "../../../context/AuthContext";
 import { ERRORS } from "../../../constants/errors";
+import { ROUTES } from "../../../constants/routes";
+import { NOTIFICATION_MESSAGES } from "../../../constants/notificationMessages";
 const LoginForm = () => {
     const navigate = useNavigate();
     const { pushNotification } = useNotificationContext();
@@ -34,8 +36,8 @@ const LoginForm = () => {
 			password: fields.password.value,
 		}).then((token) => {
             login(token);
-            pushNotification("success", "You have been successfully logged in!");
-            navigate('/');
+            pushNotification("success", NOTIFICATION_MESSAGES.LOGIN.SUCCESS);
+            navigate(ROUTES.HOME);
 		}).catch((error: unknown) => {
 			const message = error instanceof Error ? error.message : ERRORS.UNEXPECTED;
 			pushNotification("error", message);
@@ -68,7 +70,7 @@ const LoginForm = () => {
                         isInvalid={Boolean(fields.password.isTouched && passwordError)}
                     />
                 </FormField>
-                <p className="text-warm-50! text-center p-0!">Don't have an account? <br/><Link to={{pathname: "/signup"}}><u>Sign up here!</u></Link></p>
+                <p className="text-warm-50! text-center p-0!">Don't have an account? <br/><Link to={{pathname: ROUTES.AUTH.SIGNUP_PATH}}><u>Sign up here!</u></Link></p>
                 <FormSubmitButton disabled={!isFormValid}>Login</FormSubmitButton>
             </div>
         </FormBase>
