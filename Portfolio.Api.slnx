@@ -2,4 +2,5 @@
   <Folder Name="/Portfolio.Api/">
     <Project Path="Portfolio.Api/Portfolio.Api.csproj" />
   </Folder>
+  <Project Path="Portfolio.Api.UnitTests/Portfolio.Api.UnitTests.csproj" />
 </Solution>

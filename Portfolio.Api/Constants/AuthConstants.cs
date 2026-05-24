@@ -1,3 +1,4 @@
+namespace Portfolio.Api.Constants;
 public static class AuthConstants
 {
     public static class Roles

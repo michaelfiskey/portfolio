@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Api.Data;
-
+using Portfolio.Api.Constants;
 namespace Portfolio.Api.Features.Projects;
 
 public class ProjectService : IProjectService
@@ -25,7 +25,7 @@ public class ProjectService : IProjectService
 
 		if (!TypeCategoryMap.TryGetValue(normalizedType, out var category))
 		{
-			throw new ArgumentException("Query type must be one of: swe, ai-ml, cs.", nameof(type));
+			throw new ArgumentException( ErrorConstants.Projects.InvalidProjectQuery , nameof(type));
 		}
 
 		return await _dbContext.Projects

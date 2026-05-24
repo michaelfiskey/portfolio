@@ -62,8 +62,8 @@ const Home = () => {
             startDateLabel: "January 2026",
             endDateLabel: "Present",
             roleDetails: [
-                <><i>Software Engineer</i> • Internship | May 2026 - Present</>,
-                <><i>Quality Assurance Engineer</i> • Part-Time | January 2026 - May 2026</>,
+                <div><i>Software Engineer</i> • Internship | May 2026 - Present</div>,
+                <div><i>Quality Assurance Engineer</i> • Part-Time | January 2026 - May 2026</div>,
                 <ul>
                     <li>Performed manual testing across tech stack: React/React Native, Flutter, .NET Core/.NET Framework, SQL Server.</li>
                     <li>Designed and executed test cases for new features and performed regression testing.</li>

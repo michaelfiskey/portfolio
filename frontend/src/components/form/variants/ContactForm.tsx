@@ -76,7 +76,7 @@ const ContactForm = () => {
 					<FormInput
 						placeholder="john-doe@example.com"
 						value={fields.email.value}
-						onChange={(e) => setFieldValue("email", e.target.value.slice(0, 100))}
+						onChange={(e) => setFieldValue("email", e.target.value.slice(0, 200))}
 						onBlur={() => touchField("email")}
 						isInvalid={Boolean(fields.email.isTouched && emailError)}
 					/>
@@ -86,7 +86,7 @@ const ContactForm = () => {
 						<FormInput
 							placeholder="5551234567"
 							value={fields.phoneNumber}
-							onChange={(e) => setFieldValue("phoneNumber", e.target.value.replace(/\D/g, "").slice(0, 14))}
+							onChange={(e) => setFieldValue("phoneNumber", e.target.value.replace(/\D/g, "").slice(0, 20))}
 							className="flex-1"
 						/>
 					</FormField>
@@ -104,7 +104,7 @@ const ContactForm = () => {
 					<FormTextArea
 						placeholder="Tell me about your project..."
 						value={fields.message.value}
-						onChange={(e) => setFieldValue("message", e.target.value.slice(0, 500))}
+						onChange={(e) => setFieldValue("message", e.target.value.slice(0, 2000))}
 						onBlur={() => touchField("message")}
 						className="h-36"
 						isInvalid={Boolean(fields.message.isTouched && messageError)}

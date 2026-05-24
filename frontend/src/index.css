@@ -102,3 +102,10 @@ li {
 body {
   background-color: var(--color-warm-150)
 }
+
+div {
+  color: var(--color-warm-850);
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

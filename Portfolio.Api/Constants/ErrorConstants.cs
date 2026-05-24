@@ -11,4 +11,8 @@ public static class ErrorConstants
             public const string NoToken = "No refresh token.";
             public const string InvalidExpiredToken = "Token is invalid or expired.";
     }
+    public static class Projects
+    {
+        public const string InvalidProjectQuery = "Query type must be one of: swe, ai-ml, cs.";
+    }
 }
