@@ -11,10 +11,10 @@ public abstract class BaseConfiguration<T> : IEntityTypeConfiguration<T>
         builder.Property(e => e.Id)
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
-            
+
         builder.Property(e => e.CreatedAtUtc)
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd();
-        
+
     }
 }

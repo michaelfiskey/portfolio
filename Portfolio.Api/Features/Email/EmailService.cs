@@ -8,7 +8,7 @@ public class EmailService : IEmailService
 {
     private readonly IResend _resend;
     private readonly ResendSettings _settings;
-    
+
     public EmailService(IResend resend, IOptions<ResendSettings> options)
     {
         _resend = resend;

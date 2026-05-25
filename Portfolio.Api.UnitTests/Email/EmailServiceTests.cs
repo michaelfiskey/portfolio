@@ -4,6 +4,7 @@ using Portfolio.Api.Features.Email;
 using Resend;
 
 namespace Portfolio.Api.UnitTests.Email;
+
 public class EmailServiceTests
 {
     public Mock<IResend> _resend;
@@ -21,7 +22,7 @@ public class EmailServiceTests
             ResendEmailReceiver = "to@example.com"
         };
     }
-    
+
     [Fact]
     public async Task SendEmailAsync_ValidInput_CallsResend()
     {
@@ -33,7 +34,7 @@ public class EmailServiceTests
         string message = "Hello! This is a test message!";
 
         var request = new SendEmailRequest
-        { 
+        {
             FirstName = firstName,
             LastName = lastName,
             FromEmail = fromEmail,
@@ -41,7 +42,7 @@ public class EmailServiceTests
             Company = company,
             Message = message
         };
-        
+
         var service = new EmailService(_resend.Object, Options.Create(_resendSettings));
         await service.SendEmailAsync(request);
 
@@ -60,7 +61,7 @@ public class EmailServiceTests
         string message = "Hello! This is a test message!";
 
         var request = new SendEmailRequest
-        { 
+        {
             FirstName = firstName,
             LastName = lastName,
             FromEmail = fromEmail,
@@ -68,7 +69,7 @@ public class EmailServiceTests
             Company = company,
             Message = message
         };
-        
+
         EmailMessage? captured = null;
         _resend.Setup(r => r.EmailSendAsync(It.IsAny<EmailMessage>()))
             .Callback<EmailMessage, CancellationToken>((msg, _) => captured = msg)
@@ -144,9 +145,9 @@ public class EmailServiceTests
 
         var request = new SendEmailRequest
         {
-            FirstName = "Michael", 
+            FirstName = "Michael",
             LastName = "Fiskey",
-            FromEmail = "test@example.com", 
+            FromEmail = "test@example.com",
             Message = "Hello!"
         };
 

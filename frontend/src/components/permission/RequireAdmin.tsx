@@ -1,5 +1,5 @@
 import { Navigate } from "react-router"
-import { useAuthContext } from "../../context/AuthContext"
+import { useAuthContext } from "../../hooks/useAuthContext"
 
 const RequireAdmin = ({ children } : {children : React.ReactNode}) => {
     const { isAdmin } = useAuthContext();

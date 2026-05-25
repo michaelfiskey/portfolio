@@ -1,4 +1,4 @@
-import { useNotificationContext } from "../../context/NotificationContext"
+import { useNotificationContext } from "../../hooks/useNotificationContext"
 import Notification from "./Notification"
 
 const NotificationToast = () => {

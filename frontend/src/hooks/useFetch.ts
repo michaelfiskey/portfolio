@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNotificationContext } from '../context/NotificationContext';
+import { useNotificationContext } from './useNotificationContext';
 import { ERRORS } from "../constants/errors";
 
 export function useFetch<T>(fetcher: () => Promise<T>) {

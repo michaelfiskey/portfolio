@@ -5,7 +5,7 @@ interface CardBaseProps {
 }
 
 function CardBase({ className, size, children }: CardBaseProps) {
-    var sizeString = ""
+    let sizeString = ""
     switch (size) {
         case "small":
             sizeString = "py-2 px-3"

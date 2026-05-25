@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message});
+            return BadRequest(new { message = ex.Message });
         }
         catch (ArgumentException ex)
         {
@@ -66,7 +66,7 @@ public class AuthController : ControllerBase
     {
         var refreshToken = Request.Cookies[_authSettings.CookieName];
         if (refreshToken == null)
-            return Unauthorized(new { message = ErrorConstants.Auth.NoToken});
+            return Unauthorized(new { message = ErrorConstants.Auth.NoToken });
 
         try
         {
@@ -76,7 +76,7 @@ public class AuthController : ControllerBase
         }
         catch (InvalidOperationException)
         {
-            return Unauthorized(new { message = ErrorConstants.Auth.InvalidExpiredToken});
+            return Unauthorized(new { message = ErrorConstants.Auth.InvalidExpiredToken });
         }
         catch
         {

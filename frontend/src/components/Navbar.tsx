@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { ROUTES } from "../constants/routes";
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);

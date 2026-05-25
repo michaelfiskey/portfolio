@@ -1,4 +1,5 @@
 namespace Portfolio.Api.UnitTests.Projects;
+
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Api.Features.Projects;
 using Portfolio.Api.Data;
@@ -27,7 +28,7 @@ public class ProjectServiceTests
     {
         using var context = CreateInMemoryContext();
         var service = new ProjectService(context);
-        
+
         await Assert.ThrowsAsync<ArgumentException>(() =>
             service.GetProjectsByTypeAsync(""));
     }
@@ -37,7 +38,7 @@ public class ProjectServiceTests
         using var context = CreateInMemoryContext();
         context.Projects.AddRange(
             new ProjectEntity { Title = "SWE Project", Category = "swe" },
-            new ProjectEntity { Title = "AI Project", Category = "ai-ml"}
+            new ProjectEntity { Title = "AI Project", Category = "ai-ml" }
         );
         await context.SaveChangesAsync();
 
@@ -63,7 +64,7 @@ public class ProjectServiceTests
         Assert.Equal("SWE Project", result[0].Title);
     }
 
-        [Fact]
+    [Fact]
     public async Task GetProjectsByTypeAsync_ValidTypeExtraWhitespace_ReturnsMatchingProjects()
     {
         using var context = CreateInMemoryContext();

@@ -116,7 +116,7 @@ builder.Services.AddRateLimiter(options =>
                             cancellationToken);
                     };
                 });
-                
+
 // build image
 var app = builder.Build();
 
@@ -133,7 +133,7 @@ app.UseExceptionHandler(errorApp =>
     errorApp.Run(async context =>
     {
         var error = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
-        
+
         // check for db error
         static bool HasDbError(Exception? ex)
         {

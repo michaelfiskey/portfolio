@@ -1,16 +1,9 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { useNotificationContext } from "./NotificationContext";
+import { useState, useEffect } from "react";
+import { useNotificationContext } from "../hooks/useNotificationContext";
 import { setAccessToken } from "../auth/authToken";
 import { sendRefresh, sendLogout } from "../services/authservice";
 import { useNavigate } from "react-router";
-interface AuthContextValue {
-    isLoggedIn: boolean;
-    isAdmin: boolean;
-    login: (token: string) => void;
-    logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+import { AuthContext } from "./authContextInstance";
 
 function parseJwtPayload(token: string): { role?: string } | null {
     try {
@@ -37,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const logout = async () => {
         try {
             await sendLogout();
-        } catch { }
+        } catch (error) { console.error('Logout request failed: ', error) }
         setAccessToken(null);
         setIsLoggedIn(false);
         setIsAdmin(false);
@@ -45,12 +38,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         pushNotification("success", "You have been logged out.");
     };
 
-    // Attempt silent refresh on mount to restore session after page reload
     useEffect(() => {
         sendRefresh()
             .then(login)
             .catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -60,8 +51,3 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
 }
 
-export function useAuthContext() {
-    const ctx = useContext(AuthContext);
-    if (!ctx) throw new Error("useAuthContext must be used inside AuthProvider");
-    return ctx;
-}

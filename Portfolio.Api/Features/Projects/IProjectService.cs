@@ -3,5 +3,5 @@ namespace Portfolio.Api.Features.Projects;
 
 public interface IProjectService
 {
-	Task<IReadOnlyList<ProjectEntity>> GetProjectsByTypeAsync(string type);
+    Task<IReadOnlyList<ProjectEntity>> GetProjectsByTypeAsync(string type);
 }

@@ -1,4 +1,5 @@
 namespace Portfolio.Api.Features.Auth;
+
 public class SignupRequest
 {
     public string FirstName { get; set; } = string.Empty;

@@ -2,7 +2,9 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Portfolio.Api.Features.Auth;
-public class PasswordHasher {
+
+public class PasswordHasher
+{
     public string HashPassword(string password, byte[] salt)
     {
         string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(

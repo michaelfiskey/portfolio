@@ -3,7 +3,7 @@ import PageContainer from "../components/container/PageContainer";
 import LoginForm from "../components/form/variants/LoginForm";
 import PageSection from "../components/page-section/PageSection";
 import { STORAGE_KEYS } from "../constants/storageKeys";
-import { useNotificationContext } from "../context/NotificationContext";
+import { useNotificationContext } from "../hooks/useNotificationContext";
 import { NOTIFICATION_MESSAGES } from "../constants/notificationMessages";
 
 const Login = () => {

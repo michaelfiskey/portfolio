@@ -6,8 +6,8 @@ import { emailValidationError, passwordValidationError } from "../../../utilitie
 import { Link, useNavigate } from 'react-router'
 import useFormState from "../hooks/useFormState";
 import { sendLoginCredentials } from "../../../services/authservice";
-import { useNotificationContext } from "../../../context/NotificationContext";
-import { useAuthContext } from "../../../context/AuthContext";
+import { useNotificationContext } from "../../../hooks/useNotificationContext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import { ERRORS } from "../../../constants/errors";
 import { ROUTES } from "../../../constants/routes";
 import { NOTIFICATION_MESSAGES } from "../../../constants/notificationMessages";

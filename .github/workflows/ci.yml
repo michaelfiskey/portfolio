@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
 
@@ -43,6 +43,6 @@ jobs:
         with:
           dotnet-version: 10.x
 
-      - run: dotnet build Portfolio.Api/Portfolio.Api.csproj --configuration Release
       - run: dotnet format Portfolio.Api/Portfolio.Api.csproj --verify-no-changes
-      - run: dotnet test --configuration Release --no-build
+      - run: dotnet format Portfolio.Api.UnitTests/Portfolio.Api.UnitTests.csproj --verify-no-changes
+      - run: dotnet test Portfolio.Api.UnitTests/Portfolio.Api.UnitTests.csproj --configuration Release

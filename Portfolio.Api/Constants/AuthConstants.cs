@@ -1,4 +1,5 @@
 namespace Portfolio.Api.Constants;
+
 public static class AuthConstants
 {
     public static class Roles
@@ -10,7 +11,7 @@ public static class AuthConstants
     public static class Policies
     {
         public const string Admin = "admin";
-    
+
     }
 
     public static class Claims
