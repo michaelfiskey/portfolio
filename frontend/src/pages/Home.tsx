@@ -260,7 +260,7 @@ const Home = () => {
                     <ButtonContainer className="mt-4">
                         <LinkButton href= {ROUTES.HOME + "#projects"} className="bg-warm-800 text-warm-100 hover:bg-warm-875">View Projects</LinkButton>
                         <LinkButton href= {ROUTES.HOME + "#contact"}>Get In Touch</LinkButton>
-                        <LinkButton href="https://docs.google.com/document/d/1YkH3DPY-C7cLWiCbPGgnZUkPgUM4-wF6hh0B6oxeImo/edit?usp=sharing" openInNewTab={true} >Download Resume</LinkButton>
+                        <LinkButton href="https://docs.google.com/document/d/1n3z9Gb7F6CbYdRIZ0JOylYE5uHlxG6PP/edit?usp=sharing&ouid=105156960816680340168&rtpof=true&sd=true" openInNewTab={true} >Download Resume</LinkButton>
                     </ButtonContainer>
                     <h1>{aboutMe.sectionTitle}</h1>
                     {isMobile && profilePhotoSection}
