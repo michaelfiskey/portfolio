@@ -28,7 +28,9 @@ const Home = () => {
         sectionTitle: "About Me",
         name: "Michael Fiskey (M.S.)",
         paragraphs: [
-            "I am a graduate student at the University of Wisconsin-Milwaukee, pursuing a Master's degree in Computer Science with a focus on the emerging intersection of artificial intelligence and cybersecurity.",
+            "I am a passionate software engineer currently pursuing a master’s degree in artificial intelligence and cybersecurity. " + 
+            "I have developed and shipped a $10,000 full-stack SaaS marketing application that is utilized by hundreds of restaurant owners, spanning multiple franchises. " + 
+            "I have educational training and hands-on experience building ML models and simulating and defending against cyber-attacks.",
             "Outside of academics and coding, I am a musician with a passion for singing, as well as an avid volleyball player.",
         ],
         cards: [
@@ -47,10 +49,9 @@ const Home = () => {
     const aboutWebsite = {
         sectionTitle : "About The Website",
         paragraphs : [
-            "This portfolio is a production-grade fullstack application I built with React (TypeScript), C# .NET, and PostgreSQL. "
-            + "It features JWT authentication, a rate-limited REST API, email delivery via Resend, and Docker-based deployment. " 
-            + "I built it both as a learning project and as a living demonstration of the technologies I work with day-to-day.",
-            "The website also functions as an interactive resume. Feel free to look around!"
+            "I designed and deployed backend as a .NET REST API with 10+ endpoints using repository pattern, service layer architecture, dependency injection and xUnit/Moq unit testing. " + 
+            "I built 20+ React components with custom hooks and composition patterns, reducing code duplication by 60%. " + 
+            "Lastly, I implemented JWT token-based authentication with refresh token rotation, role-based access control, and protected API endpoints, following OAuth2 best practices."
         ]
     }
 
@@ -65,9 +66,9 @@ const Home = () => {
                 <div><i>Software Engineer</i> • Internship | May 2026 - Present</div>,
                 <div><i>Quality Assurance Engineer</i> • Part-Time | January 2026 - May 2026</div>,
                 <ul>
-                    <li>Performed manual testing across tech stack: React/React Native, Flutter, .NET Core/.NET Framework, SQL Server.</li>
+                    <li>Tested <b>15+</b> new features across tech stack: React/React Native, Flutter, .NET Core/.NET Framework, SQL Server.</li>
                     <li>Designed and executed test cases for new features and performed regression testing.</li>
-                    <li>Identified, documented, and tracked bugs through resolution.</li>
+                    <li>Identified, documented, and tracked <b>50+</b> bugs through resolution.</li>
                     <li>Collaborated with engineering on automated testing initiatives with Playwright.</li>
                 </ul>
             ],
@@ -80,11 +81,9 @@ const Home = () => {
             startDateLabel: "January 2025",
             endDateLabel: "January 2026",
             paragraphs: [
-                "Created interactive dashboards with choropleth and scatter plot maps using real-time U.S. Census and Google Maps APIs data (Python, Pandas, GeoPandas, Dash).",
-                "Optimized coupon delivery routes for more than 115 restaurants (Python, Pandas, GeoPandas, QGIS).",
-                "Performed sales forecasting with seasonal and location-specific trends (Prophet).",
-                "Built a pipeline to process over 5,000 weekly customer and employee reviews, linking insights to a 7,000-person workforce database (Python).",
-                "Leveraged enterprise-level databases to build tailored reporting solutions for operational decision-making (SQL, Sigma Computing)."
+                <>Optimized coupon mailing across <b>1000s</b> of carrier routes spanning <b>5</b> different states for <b>115+</b> Culver's restaurants, saving <b>$400,000</b> in excess coupon spending (Python, Pandas, GeoPandas, QGIS).</>,
+                <>Engineered a data integration application that processed <b>5000+</b> weekly customer reviews and unified them with a <b>7000</b>-person employee database using fuzzy matching (Python).</>,
+                <>Automated <b>10+</b> critical reporting workflows for operations, marketing, and accounting teams, eliminating <b>100s</b> of hours of manual work and freeing senior staff to focus on higher-value initiatives (Sigma Computing, Excel, Python, Pandas, SQL).</>
             ],
             tagTitle: "Skills",
             tags: ["Python", "Excel", "Pandas", "GeoPandas", "QGIS", "SQL", "Sigma Computing", "Machine Learning", "Market Analysis"],
@@ -157,12 +156,12 @@ const Home = () => {
                                                     startDateLabel="September 2022" 
                                                     endDateLabel="May 2023"
                                                     paragraphs={[
-                                                        <>Grew TikTok following to over <b>600,000</b>, Instagram to over <b>30,000</b>, and amassed <b>hundreds of millions of views</b> across platforms.</>,
-                                                        <>Created opportunities for the group to collaborate with notable artists and brands such as <b>The Kid Laroi</b>, HoYoverse (the creators of <b>Genshin Impact</b>), Men's Wearhouse, and Amp&Go Talent & Influencer management.</>
+                                                        <>Grew TikTok following to over <b>600,000</b>, Instagram to over <b>30,000</b>, and amassed <b>300,000,000+</b> views across platforms.</>,
+                                                        <>Coordinated opportunities with notable artists and brands such as <b>The Kid Laroi</b>, HoYoverse (the creators of <b>Genshin Impact</b>), Men's Wearhouse, and Amp&Go Talent & Influencer management.</>
                                                     ]}
                                                     listBool={[true, false]}
                                                     tagTitle="Skills"
-                                                    tags={["Project Management", "Contract Negotiation", "Marketing", "Communication"]}
+                                                    tags={["Project Management", "Contract Negotiation", "Social Media Marketing", "Communication"]}
                                     >
                                         <div className="flex justify-end items-end gap-3 text-warm-450 ml-auto">
                                             <a
@@ -193,9 +192,11 @@ const Home = () => {
                                     <ExperienceCard title="Vice President"
                                                     startDateLabel="September 2023"
                                                     endDateLabel="May 2024"
-                                                    paragraphs={["Handled public relations tasks such as gig booking, group outreach, and event planning.",
-                                                                "Partnered with leadership to shape group goals and event strategy.",
-                                                                "In charge of planning 2 week winter tour."]}
+                                                    paragraphs={[
+                                                        <>Directed operations for an International Championship of Collegiate A Cappella concert, managing <b>10</b> competing groups, <b>500+</b> audience members, ushers, and technical crew. Coordinated day-of group scheduling, housing logistics, and venue setup including sound and lighting.</>,
+                                                        <>Led two-week tour spanning <b>3</b> states, <b>12</b> schools and <b>500+</b> students; managed accommodations, travel, catering, activities, performance venues, and coordinated with school faculty.</>
+
+                                                    ]}
                                                     listBool={[true, false]}
                                                     tagTitle="Skills"
                                                     tags={["Leadership", "Management", "Event Planning"]}
