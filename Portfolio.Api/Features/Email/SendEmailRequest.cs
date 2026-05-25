@@ -4,6 +4,7 @@ namespace Portfolio.Api.Features.Email;
 
 public class SendEmailRequest
 {
+    [Required]
     [MaxLength(100)]
     public string FirstName { get; set; } = string.Empty;
     
@@ -12,8 +13,8 @@ public class SendEmailRequest
     public string LastName { get; set; } = string.Empty;
     
     [Required]
-    [MaxLength(200)]
     [EmailAddress]
+    [MaxLength(200)]
     public string FromEmail { get; set; } = string.Empty;
     
     [Phone]

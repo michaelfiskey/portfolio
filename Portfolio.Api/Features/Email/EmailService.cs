@@ -33,12 +33,12 @@ public class EmailService : IEmailService
 
     private static string BuildHtmlBody(SendEmailRequest request)
     {
-        var firstName = WebUtility.HtmlEncode(request.FirstName);
-        var lastName = WebUtility.HtmlEncode(request.LastName);
-        var fromEmail = WebUtility.HtmlEncode(request.FromEmail);
-        var phoneNumber = WebUtility.HtmlEncode(request.PhoneNumber ?? string.Empty);
-        var company = WebUtility.HtmlEncode(request.Company ?? string.Empty);
-        var message = WebUtility.HtmlEncode(request.Message);
+        var firstName = WebUtility.HtmlEncode(request.FirstName.Trim());
+        var lastName = WebUtility.HtmlEncode(request.LastName.Trim());
+        var fromEmail = WebUtility.HtmlEncode(request.FromEmail.Trim());
+        var phoneNumber = WebUtility.HtmlEncode(request.PhoneNumber?.Trim() ?? null);
+        var company = WebUtility.HtmlEncode(request.Company?.Trim() ?? string.Empty);
+        var message = WebUtility.HtmlEncode(request.Message.Trim());
 
         return $@"
             <p><strong>Name:</strong> {firstName} {lastName}</p>
