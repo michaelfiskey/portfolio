@@ -1,12 +1,20 @@
 import PageContainer from "../../components/container/PageContainer";
-import GridPageSection from "../../components/page-section/variants/GridPageSection";
+import PageSection from "../../components/page-section/PageSection";
 
 const DigitIdentifier = () => {
     return (
         <PageContainer>
-            <GridPageSection id='digit-identifier-about'>
+            <PageSection id='digit-identifier-about'>
                 <h1>Digit Identifier</h1>
-            </GridPageSection>
+                <h2>Neural Network Built From Scratch.</h2>
+                <div style={{ overflowX: "auto" }}>
+                    <iframe
+                        src="/projects/digit-identifier/nn.html"
+                        title="Digit Identifier Notebook"
+                        style={{ width: "100%", minWidth: "400px", height: "60vh", border: "none" }}
+                    />
+                </div>
+            </PageSection>
         </PageContainer>
     )
 }
