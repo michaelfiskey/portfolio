@@ -23,6 +23,7 @@ const LocalLift = () => {
             <PageSection id="local-lift-about">
                 <h1>Local Lift</h1>
                 <h2>SaaS Application for Culver's Owners and Marketing Teams</h2>
+                <img src={images.census}/>
             </PageSection>
         </PageContainer>
     )
