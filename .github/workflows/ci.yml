@@ -27,6 +27,11 @@ jobs:
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
 
+      - name: Configure PNPM Allowed Builds
+        run: |
+          pnpm config set --json allowBuilds '{"esbuild": true}'
+        working-directory: frontend
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm exec tsc --noEmit
