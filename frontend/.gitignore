@@ -25,3 +25,5 @@ dist-ssr
 
 #environmental files
 .env
+.vercel
+.env*

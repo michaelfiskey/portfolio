@@ -11,6 +11,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import DigitClassifier from "./pages/project-pages/DigitClassifier"
 import { ROUTES } from "./constants/routes";
+import LocalLift from "./pages/project-pages/LocalLift"
 function App() {
 
     useScrollToSection()
@@ -39,8 +40,8 @@ function App() {
                         {/* PROJECT ROUTES */}
                         <Route path={ROUTES.PROJECTS.ROOT}>
                             <Route path={ROUTES.PROJECTS.DIGIT_CLASSIFIER} element={<DigitClassifier/>}/>
+                            <Route path={ROUTES.PROJECTS.LOCAL_LIFT} element={<LocalLift/>}/>
                         </Route>
-                    
                     </Routes>
                 </div>
                 </AuthProvider>

@@ -7,7 +7,10 @@ export const ROUTES = {
         
         DIGIT_CLASSIFIER: "digit-classifier",
         DIGIT_CLASSIFIER_PATH: "/projects/digit-classifier",
-        
+
+        LOCAL_LIFT: "local-lift",
+        LOCAL_LIFT_PATH: "/projects/local-lift",
+
         CATEGORIES: {
             ROOT: "/project-categories",
             SWE: "swe",

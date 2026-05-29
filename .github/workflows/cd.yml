@@ -20,7 +20,7 @@ jobs:
           node-version: 22
       - run: pnpm install --frozen-lockfile
         working-directory: frontend
-      - run: pnpm exec vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - run: pnpm exec vercel --prod --cwd . --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: frontend
 
   deploy-backend:
@@ -29,6 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npx @railway/cli up --service portfolio-api
+      - run: npx @railway/cli up --service portfolio
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
