@@ -79,6 +79,11 @@ p {
   overflow-wrap: break-word;
 }
 
+a.text-link {
+  color: var(--color-warm-500);
+  text-decoration: underline;
+}
+
 ul {
   padding-left: 0;
   margin-left: 1rem;

@@ -9,7 +9,7 @@ import AIML from "./pages/AIML"
 import useScrollToSection from './hooks/useScrollToSection'
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
-import DigitIdentifier from "./pages/project-pages/DigitIdentifier"
+import DigitClassifier from "./pages/project-pages/DigitClassifier"
 import { ROUTES } from "./constants/routes";
 function App() {
 
@@ -38,7 +38,7 @@ function App() {
                         
                         {/* PROJECT ROUTES */}
                         <Route path={ROUTES.PROJECTS.ROOT}>
-                            <Route path={ROUTES.PROJECTS.DIGIT_IDENTIFIER} element={<DigitIdentifier/>}/>
+                            <Route path={ROUTES.PROJECTS.DIGIT_CLASSIFIER} element={<DigitClassifier/>}/>
                         </Route>
                     
                     </Routes>

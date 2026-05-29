@@ -5,8 +5,8 @@ export const ROUTES = {
     PROJECTS: {
         ROOT: "/projects",
         
-        DIGIT_IDENTIFIER: "digit-identifier",
-        DIGIT_IDENTIFIER_PATH: "/projects/digit-identifier",
+        DIGIT_CLASSIFIER: "digit-classifier",
+        DIGIT_CLASSIFIER_PATH: "/projects/digit-classifier",
         
         CATEGORIES: {
             ROOT: "/project-categories",

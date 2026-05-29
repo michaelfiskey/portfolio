@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 function useScrollToSection() {
-    const { hash, pathname } = useLocation()
+    const { hash, pathname, key } = useLocation()
 
     useEffect(() => {
         if (!hash) {
@@ -15,6 +15,6 @@ function useScrollToSection() {
         const navHeight = document.querySelector('nav')?.offsetHeight ?? 0
         const top = element.getBoundingClientRect().top + window.scrollY - navHeight
         window.scrollTo({ top, behavior: 'smooth' })
-    }, [hash, pathname])
+    }, [hash, pathname, key])
 }
 export default useScrollToSection;
