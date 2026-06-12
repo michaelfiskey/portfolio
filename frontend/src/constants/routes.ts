@@ -11,6 +11,9 @@ export const ROUTES = {
         LOCAL_LIFT: "local-lift",
         LOCAL_LIFT_PATH: "/projects/local-lift",
 
+        PORTFOLIO: "portfolio",
+        PORTFOLIO_PATH: "/projects/portfolio",
+
         CATEGORIES: {
             ROOT: "/project-categories",
             SWE: "swe",
