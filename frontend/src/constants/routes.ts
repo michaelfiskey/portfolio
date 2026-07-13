@@ -14,6 +14,9 @@ export const ROUTES = {
         PORTFOLIO: "portfolio",
         PORTFOLIO_PATH: "/projects/portfolio",
 
+        HAND_DJ: 'hand-dj',
+        HAND_DJ_PATH: '/projects/hand-dj',
+
         CATEGORIES: {
             ROOT: "/project-categories",
             SWE: "swe",

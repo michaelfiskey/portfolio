@@ -13,6 +13,7 @@ import DigitClassifier from "./pages/project-pages/DigitClassifier"
 import { ROUTES } from "./constants/routes";
 import LocalLift from "./pages/project-pages/LocalLift"
 import Portfolio from "./pages/project-pages/Portfolio"
+import HandDj from "./pages/project-pages/HandDj"
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
                             <Route path={ROUTES.PROJECTS.DIGIT_CLASSIFIER} element={<DigitClassifier/>}/>
                             <Route path={ROUTES.PROJECTS.LOCAL_LIFT} element={<LocalLift/>}/>
                             <Route path={ROUTES.PROJECTS.PORTFOLIO} element={<Portfolio/>}/>
+                            <Route path={ROUTES.PROJECTS.HAND_DJ} element={<HandDj/>}/>
                         </Route>
                     </Routes>
                 </div>

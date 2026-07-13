@@ -48,3 +48,9 @@ secrets.json
 CLAUDE.md
 .vercel
 .env*
+
+# -----------------------------------------------
+# WebAssembly build artifacts
+# -----------------------------------------------
+*.wasm
+*.wasm.map
