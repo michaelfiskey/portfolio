@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { useDropzone, type FileRejection } from 'react-dropzone';
-import type { Accept } from 'react-dropzone';
 
 interface FileUploadProps {
     className?: string
-    acceptedFiles?: Accept
+    acceptedFiles?: {}
     multipleFiles?: boolean
     onFileAccepted: (file: File) => void;
     onFileRejected?: (message: string) => void;
