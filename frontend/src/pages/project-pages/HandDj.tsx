@@ -10,25 +10,27 @@ import * as Tone from 'tone';
 
 import { HandLandmarker, FaceLandmarker, DrawingUtils } from "@mediapipe/tasks-vision";
 
-const SHARED_WIDTH = "w-150";
+const SHARED_WIDTH = "w-full max-w-150";
 
 const JAW_OPEN_THRESHOLD = 0.4;
 const MOUTH_SMILE_RIGHT = 0.6;
 const MOUTH_SMILE_LEFT = MOUTH_SMILE_RIGHT;
 const BROW_DOWN_RIGHT = 0.2
 const BROW_DOWN_LEFT = BROW_DOWN_RIGHT;
-const BROW_OUTER_UP_RIGHT = 0.7;
+const BROW_OUTER_UP_RIGHT = 0.4;
 const BROW_OUTER_UP_LEFT = BROW_OUTER_UP_RIGHT;
 const MIN_Y = 0
 const MAX_Y = 1
 
-const TOGGLE_COOLDOWN_MS = 1000
+const TOGGLE_COOLDOWN_MS = 2000
 
 const MIN_SEMITONES = -12
 const MAX_SEMITONES = 12
 const PAN_LEFT = -1
 const PAN_RIGHT = 1
 const GAIN_MAKEUP_MULTIPLIER = 2
+const MIN_FILTER_FREQ = 200
+const MAX_FILTER_FREQ = 20000
 
 type Handedness = "Left" | "Right" | undefined;
 type Landmark = { x: number; y: number; z: number };
@@ -37,6 +39,41 @@ type DetectedHand = {
     handedness: Handedness;
 };
 
+const description = "HandDJ is an interactive, gesture-controlled music mixing application that turns your webcam into a DJ controller." + 
+                    " Upload any song, then use natural hand and face movements to manipulate audio effects in real time." + 
+                    " The app maps your vertical hand movement to the intensity of an active effect, while the combination of your facial expression and specific use of your left or right hand determine which effect is currently engaged." + 
+                    " Raise and lower your hand to change the strength of the effect, and switch facial expressions or hands to jump between effects."
+
+const features = <>
+                    <p><b>Directions:</b></p>
+                    <ol>
+                        <li>Enable webcam use for this website.</li>
+                        <li>Upload a valid audio file.</li>
+                        <li>Start djing!</li>
+                    </ol>
+                    <p><b>How to use:</b></p>
+                    <ul>
+                        <li>Open and close mouth to pause/play.</li>
+                        <li>Smile to engage:
+                            <ul>
+                                <li>Right Hand (raise/lower): Echo. Raise your hand for stronger, more persistent echoes.</li>
+                                <li>Left Hand (raise/lower): Reverb. Raise your hand to make the track sound bigger and more distant.</li>
+                            </ul>
+                        </li>
+                        <li>Furrow your brows to engage:
+                            <ul>
+                                <li>Right Hand (raise/lower): Pan. Shifts the track between your left and right speaker/ear.</li>
+                                <li>Left Hand (raise/lower): Pitch. Shifts the track up or down in pitch by up to an octave.</li>
+                            </ul>
+                        </li>
+                        <li>Raise your outer eyebrows to engage:
+                            <ul>
+                                <li>Right Hand (raise/lower): Auto-Wah. Raise your hand for a stronger, more vocal-like wah effect.</li>
+                                <li>Left Hand (raise/lower): Lowpass Filter. Raise your hand to muffle the track by cutting more high frequencies.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </>
 const HandDj = () => {
     const [track, setTrack] = useState<File | null>(null);
     const [uploadError, setUploadError] = useState<string | null>(null);
@@ -51,6 +88,8 @@ const HandDj = () => {
     const reverbRef = useRef<Tone.Reverb | null>(null);
     const reverbMakeupGainRef = useRef<Tone.Gain | null>(null);
     const echoRef = useRef<Tone.FeedbackDelay | null >(null);
+    const filterRef = useRef<Tone.Filter | null>(null);
+    const autoWahRef = useRef<Tone.AutoWah | null>(null);
     
     const lastPausePlayToggleRef = useRef<number>(0);
 
@@ -110,9 +149,21 @@ const HandDj = () => {
 
         const echoShift = new Tone.FeedbackDelay("8n", 0);
 
+        const filter = new Tone.Filter(MAX_FILTER_FREQ, "lowpass");
+        const autoWah = new Tone.AutoWah({
+            baseFrequency: 100,
+            octaves: 6,
+            sensitivity: -30,
+            Q: 6,
+            follower: 0.1,
+            wet: 0,
+        });
+
         pitchShift.connect(reverbShift);
         reverbShift.connect(reverbMakeupGain);
-        reverbMakeupGain.connect(panner);
+        reverbMakeupGain.connect(filter);
+        filter.connect(autoWah);
+        autoWah.connect(panner);
         echoShift.connect(pitchShift);
 
         pannerRef.current = panner;
@@ -120,6 +171,8 @@ const HandDj = () => {
         reverbRef.current = reverbShift;
         reverbMakeupGainRef.current = reverbMakeupGain;
         echoRef.current = echoShift;
+        filterRef.current = filter;
+        autoWahRef.current = autoWah;
 
         return () => {
             panner.dispose();
@@ -132,8 +185,12 @@ const HandDj = () => {
             reverbMakeupGainRef.current = null;
             echoShift.dispose();
             echoRef.current = null;
+            filter.dispose();
+            filterRef.current = null;
+            autoWah.dispose();
+            autoWahRef.current = null;
         };
-    }, []);
+    }, [track]);
 
     // transport and player setup and sync
     useEffect(() => {
@@ -292,14 +349,19 @@ const HandDj = () => {
                                 }
                             } else if (facialExpressions.browOuterUpLeft > BROW_OUTER_UP_LEFT && facialExpressions.browOuterUpRight > BROW_OUTER_UP_RIGHT) {
                                 // brows up and left hand - filter
-                                console.log('brows up!');
-
+                                if (detectLeftHandOnly(leftHand, rightHand, leftPinkyY)) {
+                                    const filterFrequency = interpolate(leftPinkyY!, MIN_Y, MAX_Y, MAX_FILTER_FREQ, MIN_FILTER_FREQ);
+                                    if (filterRef.current) {
+                                        filterRef.current.frequency.value = filterFrequency;
+                                    }
                                 // brows up and right hand - autowah
-
+                                } else if (detectRightHandOnly(leftHand, rightHand, rightPinkyY)) {
+                                    const autoWahWet = 1 - Math.min(1, Math.max(0, rightPinkyY!));
+                                    if (autoWahRef.current) {
+                                        autoWahRef.current.wet.value = autoWahWet;
+                                    }
+                                }
                             } else if (facialExpressions.browDownLeft > BROW_DOWN_LEFT && facialExpressions.browDownRight > BROW_DOWN_RIGHT) {
-                                // brows down and left hand (screen position) - pitch up and down
-                                console.log("brows down!")
-
                                 if (detectLeftHandOnly(leftHand, rightHand, leftPinkyY)) {
                                     const pitch = interpolate(leftPinkyY!, MIN_Y, MAX_Y, MIN_SEMITONES, MAX_SEMITONES);
                                     if (pitchShiftRef.current) {
@@ -335,7 +397,7 @@ const HandDj = () => {
             <PageSection id="hand-dj-about">
                 <h1>Hand Dj</h1>
                 <h2>A DJ program controlled with only your hands.</h2>
-                <p>Finish this about section!</p>
+                <p>{description}</p>
             </PageSection>
             <PageSection id="hand-dj-camera">
                 <div className="flex flex-col gap-5 items-center justify-center max-w-300 mx-auto">
@@ -363,6 +425,7 @@ const HandDj = () => {
                     {track && <div>
                         </div>}
                 </div>
+                <p>{features}</p>
             </PageSection>
         </PageContainer>
     )
